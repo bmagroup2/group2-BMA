@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="547.0" prefWidth="920.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bmasec2.bmaapplication.shanin.SystemAdminDashBoardViewController">
+    <children>
+        <VBox layoutX="0.0" layoutY="0.0" prefHeight="547.0" prefWidth="920.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <children>
+                <AnchorPane prefHeight="547.0" prefWidth="920.0">
+                    <children>
+                        <Label layoutX="20.0" layoutY="20.0" text="System Admin Dashboard">
+                            <font>
+                                <Font name="System Bold" size="24.0" />
+                            </font>
+                        </Label>
+                        <Label layoutX="20.0" layoutY="70.0" text="Recent Activities">
+                            <font>
+                                <Font name="System Bold" size="16.0" />
+                            </font>
+                        </Label>
+                        <TableView layoutX="20.0" layoutY="100.0" prefHeight="200.0" prefWidth="880.0">
+                            <columns>
+                                <TableColumn prefWidth="150.0" text="Timestamp" />
+                                <TableColumn prefWidth="150.0" text="User" />
+                                <TableColumn prefWidth="580.0" text="Action" />
+                            </columns>
+                        </TableView>
+                        <Label layoutX="20.0" layoutY="320.0" text="System Overview">
+                            <font>
+                                <Font name="System Bold" size="16.0" />
+                            </font>
+                        </Label>
+                        <VBox layoutX="20.0" layoutY="350.0" prefHeight="150.0" prefWidth="880.0">
+                            <children>
+                                <Label text="Total Users: 1500" />
+                                <Label text="Active Sessions: 25" />
+                                <Label text="Pending Approvals: 10" />
+                                <Label text="System Health: Normal" />
+                            </children>
+                        </VBox>
+                    </children>
+                </AnchorPane>
+            </children>
+        </VBox>
+    </children>
+</AnchorPane>
