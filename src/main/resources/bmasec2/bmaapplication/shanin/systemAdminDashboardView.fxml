@@ -28,7 +28,7 @@
 
         <HBox alignment="CENTER_LEFT" layoutX="32.0" layoutY="100.0" prefHeight="120.0" spacing="25.0" AnchorPane.leftAnchor="32.0" AnchorPane.rightAnchor="32.0">
             <children>
-                <!-- Card 1: Total Cadets -->
+
                 <VBox alignment="CENTER_LEFT" prefHeight="120.0" prefWidth="200.0" spacing="5.0" style="-fx-background-color: #ffffff; -fx-background-radius: 10;">
                     <effect>
                         <DropShadow blurType="GAUSSIAN" height="20.0" radius="9.5" width="20.0">
@@ -60,7 +60,7 @@
                     </children>
                 </VBox>
 
-                <!-- Card 2: Total Instructors -->
+
                 <VBox alignment="CENTER_LEFT" prefHeight="120.0" prefWidth="200.0" spacing="5.0" style="-fx-background-color: #ffffff; -fx-background-radius: 10;">
                     <effect>
                         <DropShadow blurType="GAUSSIAN" height="20.0" radius="9.5" width="20.0">
