@@ -18,47 +18,29 @@
                     <content>
                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="842.0" prefWidth="243.0">
                             <children>
-                                <Button layoutX="11.0" layoutY="9.0" mnemonicParsing="false" prefHeight="55.0" prefWidth="239.0" style="visibility: true;" text="Dashboard">
-                                    <font>
-                                        <Font size="18.0" />
-                                    </font>
+                                <Button layoutX="11.0" layoutY="9.0" mnemonicParsing="false" onAction="#handleMenuClick" prefHeight="55.0" prefWidth="239.0" style="visibility: true;" text="Dashboard" userData="systemAdminDashboardView.fxml">
+                                    <font><Font size="18.0" /></font>
                                 </Button>
-                                <Button layoutX="10.0" layoutY="80.0" mnemonicParsing="false" prefHeight="55.0" prefWidth="239.0" style="visibility: true;" text="Cadet Management">
-                                    <font>
-                                        <Font size="18.0" />
-                                    </font>
+                                <Button layoutX="10.0" layoutY="80.0" mnemonicParsing="false" onAction="#handleMenuClick" prefHeight="55.0" prefWidth="239.0" style="visibility: true;" text="Cadet Management" userData="CadetManagementView.fxml">
+                                    <font><Font size="18.0" /></font>
                                 </Button>
-                                <Button layoutX="10.0" layoutY="160.0" mnemonicParsing="false" prefHeight="55.0" prefWidth="239.0" style="visibility: true;" text=" User Management">
-                                    <font>
-                                        <Font size="18.0" />
-                                    </font>
+                                <Button layoutX="10.0" layoutY="160.0" mnemonicParsing="false" onAction="#handleMenuClick" prefHeight="55.0" prefWidth="239.0" style="visibility: true;" text=" User Management" userData="UserManagementView.fxml">
+                                    <font><Font size="18.0" /></font>
                                 </Button>
-                                <Button layoutX="10.0" layoutY="234.0" mnemonicParsing="false" prefHeight="55.0" prefWidth="239.0" style="visibility: true;" text=" User Management">
-                                    <font>
-                                        <Font size="18.0" />
-                                    </font>
+
+                                <Button layoutX="10.0" layoutY="234.0" mnemonicParsing="false" onAction="#handleMenuClick" prefHeight="55.0" prefWidth="239.0" style="visibility: true;" text="Reports" userData="SystemAdminReportsView.fxml">
+                                    <font><Font size="18.0" /></font>
                                 </Button>
-                                <Button layoutX="10.0" layoutY="305.0" mnemonicParsing="false" prefHeight="55.0" prefWidth="239.0" style="visibility: true;" text="Reports">
-                                    <font>
-                                        <Font size="18.0" />
-                                    </font>
+                                <Button layoutX="10.0" layoutY="309.0" mnemonicParsing="false" onAction="#handleMenuClick" prefHeight="55.0" prefWidth="239.0" style="visibility: true;" text="System Settings" userData="SystemSettingsView.fxml">
+                                    <font><Font size="18.0" /></font>
                                 </Button>
-                                <Button layoutX="10.0" layoutY="380.0" mnemonicParsing="false" prefHeight="55.0" prefWidth="239.0" style="visibility: true;" text="System Settings">
-                                    <font>
-                                        <Font size="18.0" />
-                                    </font>
+                                <Button layoutX="10.0" layoutY="379.0" mnemonicParsing="false" onAction="#handleMenuClick" prefHeight="55.0" prefWidth="239.0" style="visibility: true;" text="Audit Logs" userData="AuditLogsView.fxml">
+                                    <font><Font size="18.0" /></font>
                                 </Button>
-                                <Button layoutX="10.0" layoutY="450.0" mnemonicParsing="false" prefHeight="55.0" prefWidth="239.0" style="visibility: true;" text="Audit Logs">
-                                    <font>
-                                        <Font size="18.0" />
-                                    </font>
+                                <Button layoutX="10.0" layoutY="448.0" mnemonicParsing="false" onAction="#handleMenuClick" prefHeight="55.0" prefWidth="239.0" style="visibility: true;" text="Profile" userData="SystemAdminProfileView.fxml">
+                                    <font><Font size="18.0" /></font>
                                 </Button>
-                                <Button layoutX="10.0" layoutY="519.0" mnemonicParsing="false" prefHeight="55.0" prefWidth="239.0" style="visibility: true;" text="Profile">
-                                    <font>
-                                        <Font size="18.0" />
-                                    </font>
-                                </Button>
-                                <Button layoutX="8.0" layoutY="698.0" mnemonicParsing="false" prefHeight="55.0" prefWidth="239.0" style="-fx-background-color: red;" text="Sign Out" textFill="WHITE">
+                                <Button layoutX="8.0" layoutY="698.0" mnemonicParsing="false" onAction="#signOutBtnOnAction" prefHeight="55.0" prefWidth="239.0" style="-fx-background-color: red;" text="Sign Out" textFill="WHITE">
                                     <font>
                                         <Font size="18.0" />
                                     </font>
@@ -493,7 +475,7 @@
         </HBox>
         <ScrollPane layoutX="273.0" layoutY="147.0" prefHeight="548.0" prefWidth="927.0">
             <content>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="547.0" prefWidth="920.0" />
+                <AnchorPane fx:id="contentArea" minHeight="0.0" minWidth="0.0" prefHeight="547.0" prefWidth="920.0" />
             </content>
         </ScrollPane>
     </children>

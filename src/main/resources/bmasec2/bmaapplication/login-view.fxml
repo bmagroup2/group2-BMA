@@ -10,7 +10,6 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bmasec2.bmaapplication.LoginViewController">
    <children>
       <Label layoutX="69.0" layoutY="32.0" text="Welcome To BMA Portal">
@@ -46,7 +45,7 @@
          </font>
       </Label>
       <ComboBox layoutX="384.0" layoutY="264.0" prefHeight="23.0" prefWidth="164.0" promptText="select" />
-      <Button layoutX="331.0" layoutY="314.0" mnemonicParsing="false" style="-fx-background-color: green;" text="Sign In" textFill="WHITE">
+      <Button layoutX="331.0" layoutY="314.0" mnemonicParsing="false" onAction="#signInBtnOnAction" style="-fx-background-color: green;" text="Sign In" textFill="WHITE">
          <font>
             <Font name="System Bold" size="23.0" />
          </font>
