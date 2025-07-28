@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="547.0" prefWidth="920.0" style="-fx-background-color: #f4f4f9;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bmasec2.bmaapplication.shanin.PublishResultViewController">
+    <children>
+
+        <Label layoutX="30.0" layoutY="25.0" text="Publish Final Results" textFill="#1a237e"><font><Font name="System Bold" size="24.0" /></font></Label>
+        <Label layoutX="30.0" layoutY="55.0" text="Confirm and publish final results to all cadet profiles." textFill="#546e7a"><font><Font size="14.0" /></font></Label>
+
+
+        <VBox layoutX="30.0" layoutY="120.0" prefWidth="400.0" spacing="15.0">
+            <children>
+                <Label text="1. Select Batch and Semester"><font><Font name="System Bold" size="14.0" /></font></Label>
+                <ComboBox prefWidth="400.0" promptText="Select Batch..." />
+                <ComboBox prefWidth="400.0" promptText="Select Semester..." />
+                <Label text="2. Final Confirmation"><font><Font name="System Bold" size="14.0" /></font></Label>
+                <TextArea editable="false" prefHeight="100.0" text="You are about to publish the final results for [Batch] - [Semester]. This action is irreversible. Please confirm before proceeding." wrapText="true" />
+                <Button mnemonicParsing="false" prefHeight="40.0" prefWidth="200.0" style="-fx-background-color: #c62828;" text="Confirm and Publish" textFill="WHITE">
+                    <font><Font name="System Bold" size="14.0" /></font>
+                </Button>
+            </children>
+        </VBox>
+    </children>
+</AnchorPane>

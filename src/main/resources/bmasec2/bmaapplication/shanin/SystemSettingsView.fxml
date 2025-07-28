@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="547.0" prefWidth="920.0" style="-fx-background-color: #f4f4f9;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bmasec2.bmaapplication.shanin.SystemSettingsViewController">
+    <children>
+
+        <Label layoutX="30.0" layoutY="25.0" text="System Settings" textFill="#1a237e">
+            <font>
+                <Font name="System Bold" size="24.0" />
+            </font>
+        </Label>
+        <Label layoutX="30.0" layoutY="55.0" text="Configure global settings for the application." textFill="#546e7a">
+            <font>
+                <Font size="14.0" />
+            </font>
+        </Label>
+
+
+        <VBox layoutX="30.0" layoutY="120.0" prefWidth="500.0" spacing="15.0">
+            <children>
+                <Label text="Application Name">
+                    <font>
+                        <Font name="System Bold" size="14.0" />
+                    </font>
+                </Label>
+                <TextField promptText="Enter application name" />
+
+                <Label text="Application Logo">
+                    <font>
+                        <Font name="System Bold" size="14.0" />
+                    </font>
+                </Label>
+                <ImageView fitHeight="80.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
+                <Button mnemonicParsing="false" text="Upload New Logo..." />
+
+                <Button mnemonicParsing="false" prefHeight="40.0" prefWidth="150.0" style="-fx-background-color: #4CAF50;" text="Save Changes" textFill="WHITE">
+                    <font>
+                        <Font name="System Bold" size="14.0" />
+                    </font>
+                </Button>
+            </children>
+        </VBox>
+    </children>
+</AnchorPane>
