@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="547.0" prefWidth="920.0" style="-fx-background-color: #f4f4f9;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bmasec2.bmaapplication.zumar.sendHealthAdvisoryViewController">
+    <children>
+        <Label layoutX="30.0" layoutY="25.0" text="Send Health Advisory" textFill="#1a237e"><font><Font name="System Bold" size="24.0" /></font></Label>
+        <Label layoutX="30.0" layoutY="55.0" text="Broadcast a health-related message to cadets." textFill="#546e7a"><font><Font size="14.0" /></font></Label>
+        <VBox layoutX="30.0" layoutY="120.0" prefWidth="600.0" spacing="10.0">
+            <children>
+                <Label text="Recipient Group"><font><Font name="System Bold" size="14.0" /></font></Label>
+                <ComboBox prefWidth="600.0" promptText="Select All Cadets or a specific batch..." />
+                <Label text="Advisory Title"><font><Font name="System Bold" size="14.0" /></font></Label>
+                <TextField promptText="e.g., Flu Season Precautions" />
+                <Label text="Message"><font><Font name="System Bold" size="14.0" /></font></Label>
+                <TextArea prefHeight="200.0" promptText="Type your advisory message here..." wrapText="true" />
+                <Button mnemonicParsing="false" prefHeight="40.0" prefWidth="200.0" style="-fx-background-color: #1a237e;" text="Broadcast Message" textFill="WHITE"><font><Font name="System Bold" size="14.0" /></font></Button>
+            </children>
+        </VBox>
+    </children>
+</AnchorPane>

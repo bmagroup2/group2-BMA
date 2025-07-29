@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="547.0" prefWidth="920.0" style="-fx-background-color: #f4f4f9;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bmasec2.bmaapplication.zumar.cadetHealthCheckupViewController">
+    <children>
+        <Label layoutX="30.0" layoutY="25.0" text="Schedule Health Checkup" textFill="#1a237e"><font><Font name="System Bold" size="24.0" /></font></Label>
+        <Label layoutX="30.0" layoutY="55.0" text="Schedule new health checkups for individuals or batches." textFill="#546e7a"><font><Font size="14.0" /></font></Label>
+        <HBox layoutX="30.0" layoutY="100.0" spacing="20.0" AnchorPane.bottomAnchor="30.0" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="30.0">
+            <children>
+                <VBox spacing="10.0" HBox.hgrow="ALWAYS">
+                    <children>
+                        <Label text="Upcoming Scheduled Checkups"><font><Font name="System Bold" size="16.0" /></font></Label>
+                        <ListView prefHeight="380.0" />
+                    </children>
+                </VBox>
+                <VBox prefWidth="350.0" spacing="10.0">
+                    <children>
+                        <Label text="Schedule New Checkup" textFill="#1a237e"><font><Font name="System Bold" size="16.0" /></font></Label>
+                        <Label text="Cadet or Batch" />
+                        <ComboBox prefWidth="350.0" promptText="Select cadet or batch..." />
+                        <Label text="Date" />
+                        <DatePicker prefWidth="350.0" />
+                        <Label text="Time (e.g., 10:30 )" />
+                        <TextField promptText="Enter time" />
+                        <Label text="Room / Location" />
+                        <TextField promptText="e.g., Medical Bay 1" />
+                        <Button mnemonicParsing="false" style="-fx-background-color: #4CAF50;" text="Save Schedule" textFill="WHITE" />
+                    </children>
+                </VBox>
+            </children>
+        </HBox>
+    </children>
+</AnchorPane>
