@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="547.0" prefWidth="920.0" style="-fx-background-color: #f4f4f9;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bmasec2.bmaapplication.afifa.MentorAssignmentViewController">
+    <children>
+
+        <Label layoutX="30.0" layoutY="25.0" text="Mentor Assignment" textFill="#1a237e"><font><Font name="System Bold" size="24.0" /></font></Label>
+        <Label layoutX="30.0" layoutY="55.0" text="Assign mentors to new cadets in your group." textFill="#546e7a"><font><Font size="14.0" /></font></Label>
+
+
+        <HBox alignment="CENTER" layoutX="30.0" layoutY="100.0" spacing="50.0" AnchorPane.bottomAnchor="30.0" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="30.0">
+
+            <VBox spacing="10.0">
+                <children>
+                    <Label text="New Cadets (No Mentor)"><font><Font name="System Bold" size="16.0" /></font></Label>
+                    <ListView prefHeight="350.0" prefWidth="300.0" />
+                </children>
+            </VBox>
+
+            <Button mnemonicParsing="false" text="Assign →" />
+            <VBox spacing="10.0">
+                <children>
+                    <Label text="Available Mentors (Senior Cadets/Supervisors)"><font><Font name="System Bold" size="16.0" /></font></Label>
+                    <ListView prefHeight="350.0" prefWidth="300.0" />
+                </children>
+            </VBox>
+        </HBox>
+    </children>
+</AnchorPane>
