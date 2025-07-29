@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="547.0" prefWidth="920.0" style="-fx-background-color: #f4f4f9;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bmasec2.bmaapplication.zumar.foodStockSummaryViewController">
+    <children>
+        <Label layoutX="30.0" layoutY="25.0" text="Food Stock Inventory" textFill="#1a237e"><font><Font name="System Bold" size="24.0" /></font></Label>
+        <Label layoutX="30.0" layoutY="55.0" text="View and manage the stock levels of all food items." textFill="#546e7a"><font><Font size="14.0" /></font></Label>
+        <HBox alignment="CENTER_LEFT" layoutX="30.0" layoutY="100.0" spacing="10.0">
+            <children>
+                <TextField prefWidth="250.0" promptText="Search by item name..." />
+                <ComboBox prefWidth="200.0" promptText="Filter by category..." />
+                <Button mnemonicParsing="false" style="-fx-background-color: #1a237e;" text="Search" textFill="WHITE" />
+            </children>
+        </HBox>
+        <TableView layoutX="30.0" layoutY="150.0" prefHeight="367.0" prefWidth="860.0" AnchorPane.bottomAnchor="30.0" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="30.0">
+            <columns>
+                <TableColumn prefWidth="350.0" text="Item Name (e.g., Rice, Chicken )" />
+                <TableColumn prefWidth="200.0" text="Category (e.g., Grains, Meat)" />
+                <TableColumn prefWidth="150.0" text="Current Stock (kg, L, units)" />
+                <TableColumn prefWidth="150.0" text="Status (In Stock, Low)" />
+            </columns>
+            <columnResizePolicy><TableView fx:constant="CONSTRAINED_RESIZE_POLICY" /></columnResizePolicy>
+        </TableView>
+    </children>
+</AnchorPane>

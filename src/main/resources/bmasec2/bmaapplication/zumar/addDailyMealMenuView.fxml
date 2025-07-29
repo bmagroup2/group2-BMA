@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="547.0" prefWidth="920.0" style="-fx-background-color: #f4f4f9;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bmasec2.bmaapplication.zumar.addDailyMealMenuViewController">
+    <children>
+        <Label layoutX="30.0" layoutY="25.0" text="Add / Update Daily Menu" textFill="#1a237e"><font><Font name="System Bold" size="24.0" /></font></Label>
+        <Label layoutX="30.0" layoutY="55.0" text="Set the menu for breakfast, lunch, and dinner for a specific date." textFill="#546e7a"><font><Font size="14.0" /></font></Label>
+        <VBox layoutX="30.0" layoutY="120.0" prefWidth="500.0" spacing="10.0">
+            <children>
+                <Label text="Select Date"><font><Font name="System Bold" size="14.0" /></font></Label>
+                <DatePicker prefWidth="500.0" />
+                <Label text="Breakfast Menu"><font><Font name="System Bold" size="14.0" /></font></Label>
+                <TextArea prefHeight="60.0" prefWidth="500.0" promptText="Enter breakfast items..." />
+                <Label text="Lunch Menu"><font><Font name="System Bold" size="14.0" /></font></Label>
+                <TextArea prefHeight="60.0" prefWidth="500.0" promptText="Enter lunch items..." />
+                <Label text="Dinner Menu"><font><Font name="System Bold" size="14.0" /></font></Label>
+                <TextArea prefHeight="60.0" prefWidth="500.0" promptText="Enter dinner items..." />
+                <Button mnemonicParsing="false" prefHeight="40.0" prefWidth="150.0" style="-fx-background-color: #4CAF50;" text="Save Menu" textFill="WHITE"><font><Font name="System Bold" size="14.0" /></font></Button>
+            </children>
+        </VBox>
+    </children>
+</AnchorPane>
