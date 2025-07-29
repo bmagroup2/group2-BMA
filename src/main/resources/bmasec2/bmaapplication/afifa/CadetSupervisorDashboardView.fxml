@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="547.0" prefWidth="920.0" style="-fx-background-color: #f4f4f9;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bmasec2.bmaapplication.afifa.CadetSupervisorDashboardViewController">
+    <children>
+
+        <Label layoutX="30.0" layoutY="25.0" text="Supervisor Dashboard" textFill="#1a237e"><font><Font name="System Bold" size="24.0" /></font></Label>
+        <Label layoutX="30.0" layoutY="55.0" text="Overview of your supervised cadets and pending tasks." textFill="#546e7a"><font><Font size="14.0" /></font></Label>
+
+
+        <HBox alignment="CENTER_LEFT" layoutX="30.0" layoutY="100.0" spacing="25.0">
+            <children>
+
+                <VBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="280.0" spacing="5.0" style="-fx-background-color: #ffffff; -fx-background-radius: 10;">
+                    <padding><Insets left="20.0" /></padding>
+                    <effect><DropShadow height="20.0" radius="9.5" width="20.0"><color><Color opacity="0.1" /></color></DropShadow></effect>
+                    <children>
+                        <Label text="Pending Leave Requests" textFill="#546e7a"><font><Font name="System Bold" size="14.0" /></font></Label>
+                        <Label text="3 Requests" textFill="#c62828"><font><Font name="System Bold" size="22.0" /></font></Label>
+                    </children>
+                </VBox>
+
+                <VBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="280.0" spacing="5.0" style="-fx-background-color: #ffffff; -fx-background-radius: 10;">
+                    <padding><Insets left="20.0" /></padding>
+                    <effect><DropShadow height="20.0" radius="9.5" width="20.0"><color><Color opacity="0.1" /></color></DropShadow></effect>
+                    <children>
+                        <Label text="Recent Attendance Issues" textFill="#546e7a"><font><Font name="System Bold" size="14.0" /></font></Label>
+                        <Label text="5 Absences Today" textFill="#FF9800"><font><Font name="System Bold" size="22.0" /></font></Label>
+                    </children>
+                </VBox>
+            </children>
+        </HBox>
+
+
+        <HBox layoutX="30.0" layoutY="225.0" spacing="25.0" AnchorPane.bottomAnchor="30.0" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="30.0">
+
+            <VBox prefWidth="450.0" spacing="10.0" style="-fx-background-color: #ffffff; -fx-background-radius: 10;">
+                <padding><Insets bottom="15.0" left="15.0" right="15.0" top="15.0" /></padding>
+                <effect><DropShadow height="20.0" radius="9.5" width="20.0"><color><Color opacity="0.1" /></color></DropShadow></effect>
+                <children>
+                    <Label text="My Cadets"><font><Font name="System Bold" size="16.0" /></font></Label>
+                    <ListView prefHeight="230.0" VBox.vgrow="ALWAYS" />
+                </children>
+            </VBox>
+            <VBox prefWidth="380.0" spacing="10.0" style="-fx-background-color: #ffffff; -fx-background-radius: 10;" HBox.hgrow="ALWAYS">
+                <padding><Insets bottom="15.0" left="15.0" right="15.0" top="15.0" /></padding>
+                <effect><DropShadow height="20.0" radius="9.5" width="20.0"><color><Color opacity="0.1" /></color></DropShadow></effect>
+                <children>
+                    <Label text="Upcoming Scheduled Drills"><font><Font name="System Bold" size="16.0" /></font></Label>
+                    <ListView prefHeight="230.0" VBox.vgrow="ALWAYS" />
+                </children>
+            </VBox>
+        </HBox>
+    </children>
+</AnchorPane>
