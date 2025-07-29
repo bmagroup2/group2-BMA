@@ -32,19 +32,19 @@
             <Font size="19.0" />
          </font>
       </Label>
-      <TextField layoutX="384.0" layoutY="165.0" />
+      <TextField fx:id="usernameTextField" layoutX="384.0" layoutY="165.0" />
       <Label layoutX="251.0" layoutY="219.0" text="password">
          <font>
             <Font size="19.0" />
          </font>
       </Label>
-      <PasswordField layoutX="384.0" layoutY="218.0" />
+      <PasswordField fx:id="passwordTextField" layoutX="384.0" layoutY="218.0" />
       <Label layoutX="251.0" layoutY="265.0" text="Role">
          <font>
             <Font size="19.0" />
          </font>
       </Label>
-      <ComboBox layoutX="384.0" layoutY="264.0" prefHeight="23.0" prefWidth="164.0" promptText="select" />
+      <ComboBox fx:id="roleComboBox" layoutX="384.0" layoutY="264.0" prefHeight="23.0" prefWidth="164.0" promptText="select" />
       <Button layoutX="331.0" layoutY="314.0" mnemonicParsing="false" onAction="#signInBtnOnAction" style="-fx-background-color: green;" text="Sign In" textFill="WHITE">
          <font>
             <Font name="System Bold" size="23.0" />

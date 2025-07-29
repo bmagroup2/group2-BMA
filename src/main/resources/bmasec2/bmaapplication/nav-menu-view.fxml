@@ -18,418 +18,383 @@
                     <content>
                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="842.0" prefWidth="243.0">
                             <children>
-                                <Button layoutX="11.0" layoutY="9.0" mnemonicParsing="false" onAction="#handleMenuClick" prefHeight="55.0" prefWidth="239.0" style="visibility: true;" text="Dashboard" userData="systemAdminDashboardView.fxml">
-                                    <font><Font size="18.0" /></font>
-                                </Button>
-                                <Button layoutX="10.0" layoutY="80.0" mnemonicParsing="false" onAction="#handleMenuClick" prefHeight="55.0" prefWidth="239.0" style="visibility: true;" text="Cadet Management" userData="CadetManagementView.fxml">
-                                    <font><Font size="18.0" /></font>
-                                </Button>
-                                <Button layoutX="10.0" layoutY="160.0" mnemonicParsing="false" onAction="#handleMenuClick" prefHeight="55.0" prefWidth="239.0" style="visibility: true;" text=" User Management" userData="UserManagementView.fxml">
-                                    <font><Font size="18.0" /></font>
-                                </Button>
-
-                                <Button layoutX="10.0" layoutY="234.0" mnemonicParsing="false" onAction="#handleMenuClick" prefHeight="55.0" prefWidth="239.0" style="visibility: true;" text="Reports" userData="SystemAdminReportsView.fxml">
-                                    <font><Font size="18.0" /></font>
-                                </Button>
-                                <Button layoutX="10.0" layoutY="309.0" mnemonicParsing="false" onAction="#handleMenuClick" prefHeight="55.0" prefWidth="239.0" style="visibility: true;" text="System Settings" userData="SystemSettingsView.fxml">
-                                    <font><Font size="18.0" /></font>
-                                </Button>
-                                <Button layoutX="10.0" layoutY="379.0" mnemonicParsing="false" onAction="#handleMenuClick" prefHeight="55.0" prefWidth="239.0" style="visibility: true;" text="Audit Logs" userData="AuditLogsView.fxml">
-                                    <font><Font size="18.0" /></font>
-                                </Button>
-                                <Button layoutX="10.0" layoutY="448.0" mnemonicParsing="false" onAction="#handleMenuClick" prefHeight="55.0" prefWidth="239.0" style="visibility: true;" text="Profile" userData="SystemAdminProfileView.fxml">
-                                    <font><Font size="18.0" /></font>
-                                </Button>
+                        <VBox fx:id="messOfficerMenu" alignment="CENTER" prefHeight="548.0" prefWidth="264.0">
+                           <children>
+                              <Button fx:id="messODashboardBtn" mnemonicParsing="false" onAction="#handleMenuClick" prefHeight="55.0" prefWidth="239.0" style="visibility: true;" text="Dashboard">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Button>
+                              <Button fx:id="messOAddMenuBtn" mnemonicParsing="false" onAction="#handleMenuClick" prefHeight="55.0" prefWidth="239.0" style="visibility: true;" text="Add Menu">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Button>
+                              <Button fx:id="messOMealAttendenceBtn" mnemonicParsing="false" onAction="#handleMenuClick" prefHeight="55.0" prefWidth="239.0" style="visibility: true;" text="Meal Attendance">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Button>
+                              <Button fx:id="messOSpecialRequestBtn" mnemonicParsing="false" onAction="#handleMenuClick" prefHeight="55.0" prefWidth="239.0" style="visibility: true;" text="Special Requests">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Button>
+                              <Button fx:id="messOFoodReportsBtn" mnemonicParsing="false" onAction="#handleMenuClick" prefHeight="55.0" prefWidth="239.0" style="visibility: true;" text="Food Report">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Button>
+                              <Button fx:id="messOStaffDutyRoasterBtn" mnemonicParsing="false" onAction="#handleMenuClick" prefHeight="55.0" prefWidth="239.0" style="visibility: true;" text="Staff Duty Roster">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Button>
+                              <Button fx:id="messOFoodInventoryBtn" mnemonicParsing="false" onAction="#handleMenuClick" prefHeight="55.0" prefWidth="239.0" style="visibility: true;" text="Food Inventory">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Button>
+                              <Button fx:id="messONotifyCadetsBtn" mnemonicParsing="false" onAction="#handleMenuClick" prefHeight="55.0" prefWidth="239.0" style="visibility: true;" text="Notify Cadets">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Button>
+                              <Button fx:id="messOMealFeedbackBtn" mnemonicParsing="false" onAction="#handleMenuClick" prefHeight="55.0" prefWidth="239.0" style="visibility: true;" text="Meal Feedback">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Button>
+                           </children>
+                        </VBox>
+                        <VBox fx:id="medicalOfficerMenu" alignment="CENTER" prefHeight="548.0" prefWidth="264.0">
+                           <children>
+                              <Button fx:id="moDashboardBtn" mnemonicParsing="false" onAction="#handleMenuClick" prefHeight="55.0" prefWidth="239.0" style="visibility: true;" text="Dashboard">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Button>
+                              <Button fx:id="moAddMedicalRecordBtn" mnemonicParsing="false" onAction="#handleMenuClick" prefHeight="55.0" prefWidth="239.0" style="visibility: true;" text="Add Medical Record">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Button>
+                              <Button fx:id="moVaccinationUpdateBtn" mnemonicParsing="false" onAction="#handleMenuClick" prefHeight="55.0" prefWidth="239.0" style="visibility: true;" text="Vaccination Update">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Button>
+                              <Button fx:id="moMedicalHistoryBtn" mnemonicParsing="false" onAction="#handleMenuClick" prefHeight="55.0" prefWidth="239.0" style="visibility: true;" text="Medical History">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Button>
+                              <Button fx:id="moMedicalReportsBtn" mnemonicParsing="false" onAction="#handleMenuClick" prefHeight="55.0" prefWidth="239.0" style="visibility: true;" text="Medical Reports">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Button>
+                              <Button fx:id="moEmergencyCaseLogBtn" mnemonicParsing="false" onAction="#handleMenuClick" prefHeight="55.0" prefWidth="239.0" style="visibility: true;" text="Emergency Case Log">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Button>
+                              <Button fx:id="moScheduleCheckupBtn" mnemonicParsing="false" onAction="#handleMenuClick" prefHeight="55.0" prefWidth="239.0" style="visibility: true;" text="Schedule Checkup">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Button>
+                              <Button fx:id="moPendingCasesBtn" mnemonicParsing="false" onAction="#handleMenuClick" prefHeight="55.0" prefWidth="239.0" style="visibility: true;" text="Pending Cases">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Button>
+                              <Button fx:id="moHealthAdvisoryBtn" mnemonicParsing="false" onAction="#handleMenuClick" prefHeight="55.0" prefWidth="239.0" style="visibility: true;" text="Health Advisory">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Button>
+                           </children>
+                        </VBox>
+                        <VBox fx:id="logisticsOfficerMenu" alignment="CENTER" prefHeight="548.0" prefWidth="257.0">
+                           <children>
+                              <Button fx:id="loDashboardBtn" mnemonicParsing="false" onAction="#handleMenuClick" prefHeight="55.0" prefWidth="239.0" style="visibility: true;" text="Dashboard">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Button>
+                              <Button fx:id="loAddInventoryBtn" mnemonicParsing="false" onAction="#handleMenuClick" prefHeight="55.0" prefWidth="239.0" style="visibility: true;" text="Add Inventory">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Button>
+                              <Button fx:id="loManageInventoryBtn" mnemonicParsing="false" onAction="#handleMenuClick" prefHeight="55.0" prefWidth="239.0" style="visibility: true;" text="Manage Inventory">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Button>
+                              <Button fx:id="loInventorySummaryBtn" mnemonicParsing="false" onAction="#handleMenuClick" prefHeight="55.0" prefWidth="239.0" style="visibility: true;" text="Inventory Summary">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Button>
+                              <Button fx:id="loIssueItemBtn" mnemonicParsing="false" onAction="#handleMenuClick" prefHeight="55.0" prefWidth="239.0" style="visibility: true;" text="Issue Items">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Button>
+                              <Button fx:id="loMonthlyReportsBtn" mnemonicParsing="false" onAction="#handleMenuClick" prefHeight="55.0" prefWidth="239.0" style="visibility: true;" text="Monthly Report">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Button>
+                              <Button fx:id="loReStockRequestBtn" mnemonicParsing="false" onAction="#handleMenuClick" prefHeight="55.0" prefWidth="239.0" style="visibility: true;" text="Restock Requests">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Button>
+                              <Button fx:id="loDamageOrReturnLogBtn" mnemonicParsing="false" onAction="#handleMenuClick" prefHeight="55.0" prefWidth="239.0" style="visibility: true;" text="Damaged/Return Log">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Button>
+                              <Button fx:id="loNotifyCommandantBtn" mnemonicParsing="false" onAction="#handleMenuClick" prefHeight="55.0" prefWidth="239.0" style="visibility: true;" text="Notify Commandant">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Button>
+                           </children>
+                        </VBox>
+                        <VBox fx:id="trainingInstructorMenu" alignment="CENTER" prefHeight="548.0" prefWidth="258.0">
+                           <children>
+                              <Button fx:id="tiDashboardBtn" mnemonicParsing="false" onAction="#handleMenuClick" prefHeight="55.0" prefWidth="239.0" style="visibility: true;" text="Dashboard">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Button>
+                              <Button fx:id="tiTakeAttendenceBtn" mnemonicParsing="false" onAction="#handleMenuClick" prefHeight="55.0" prefWidth="239.0" style="visibility: true;" text="Take Attendance">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Button>
+                              <Button fx:id="tiUploadMaterialsBtn" mnemonicParsing="false" onAction="#handleMenuClick" prefHeight="55.0" prefWidth="239.0" style="visibility: true;" text="Upload Materials">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Button>
+                              <Button fx:id="tiScheduleTrainingBtn" mnemonicParsing="false" onAction="#handleMenuClick" prefHeight="55.0" prefWidth="239.0" style="visibility: true;" text="Schedule Training">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Button>
+                              <Button fx:id="tiViewFeedBacksBtn" mnemonicParsing="false" onAction="#handleMenuClick" prefHeight="55.0" prefWidth="239.0" style="visibility: true;" text="View Feedback">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Button>
+                              <Button fx:id="tiSubmitEvulationsBtn" mnemonicParsing="false" onAction="#handleMenuClick" prefHeight="55.0" prefWidth="239.0" style="visibility: true;" text="Submit Evaluation">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Button>
+                              <Button fx:id="tiTrainingHistoryBtn" mnemonicParsing="false" onAction="#handleMenuClick" prefHeight="55.0" prefWidth="239.0" style="visibility: true;" text="Training History">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Button>
+                              <Button fx:id="tiAbsenceReasonBtn" mnemonicParsing="false" onAction="#handleMenuClick" prefHeight="55.0" prefWidth="239.0" style="visibility: true;" text="Absence Reason">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Button>
+                              <Button fx:id="tiPostAnnouncemnetBtn" mnemonicParsing="false" onAction="#handleMenuClick" prefHeight="55.0" prefWidth="239.0" style="visibility: true;" text="Post Announcement">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Button>
+                           </children>
+                        </VBox>
+                        <VBox fx:id="cadetSupervisorMenu" alignment="CENTER" prefHeight="554.0" prefWidth="264.0">
+                           <children>
+                              <Button fx:id="csDashboardBtn" mnemonicParsing="false" onAction="#handleMenuClick" prefHeight="55.0" prefWidth="239.0" style="visibility: true;" text="Dashboard">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Button>
+                              <Button fx:id="csLeaveRequestBtn" mnemonicParsing="false" onAction="#handleMenuClick" prefHeight="55.0" prefWidth="239.0" style="visibility: true;" text="Leave Requests">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Button>
+                              <Button fx:id="csAttendenceMonitorBtn" mnemonicParsing="false" onAction="#handleMenuClick" prefHeight="55.0" prefWidth="239.0" style="visibility: true;" text="Attendance Monitor">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Button>
+                              <Button fx:id="csSubmitPerformanceBtn" mnemonicParsing="false" onAction="#handleMenuClick" prefHeight="55.0" prefWidth="239.0" style="visibility: true;" text="Submit Performance Report">
+                                 <font>
+                                    <Font size="15.0" />
+                                 </font>
+                              </Button>
+                              <Button fx:id="csDrillSchedulerBtn" mnemonicParsing="false" onAction="#handleMenuClick" prefHeight="61.0" prefWidth="239.0" style="visibility: true;" text="Drill Scheduler">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Button>
+                              <Button fx:id="csCadetHealthReportsBtn" mnemonicParsing="false" onAction="#handleMenuClick" prefHeight="55.0" prefWidth="239.0" style="visibility: true;" text="Cadet Health Reports">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Button>
+                              <Button fx:id="csMonitorAssignmentBtn" mnemonicParsing="false" onAction="#handleMenuClick" prefHeight="55.0" prefWidth="239.0" style="visibility: true;" text="Mentor Assignment">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Button>
+                              <Button fx:id="csGroupAssignmentBtn" mnemonicParsing="false" onAction="#handleMenuClick" prefHeight="55.0" prefWidth="239.0" style="visibility: true;" text="Group Announcement">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Button>
+                              <Button fx:id="csEventParticipationBtn" mnemonicParsing="false" onAction="#handleMenuClick" prefHeight="55.0" prefWidth="239.0" style="visibility: true;" text="Event Participation">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Button>
+                           </children>
+                        </VBox>
+                        <VBox fx:id="cadetMenu" alignment="CENTER" prefHeight="554.0" prefWidth="264.0">
+                           <children>
+                              <Button fx:id="cadetDashboardBtn" mnemonicParsing="false" onAction="#handleMenuClick" prefHeight="55.0" prefWidth="239.0" style="visibility: true;" text="Dashboard">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Button>
+                              <Button fx:id="cadetMyInstructorBtn" mnemonicParsing="false" onAction="#handleMenuClick" prefHeight="55.0" prefWidth="239.0" style="visibility: true;" text="My Instructors">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Button>
+                              <Button fx:id="cadetViewRoutineBtn" mnemonicParsing="false" onAction="#handleMenuClick" prefHeight="55.0" prefWidth="239.0" style="visibility: true;" text="View Routine">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Button>
+                              <Button fx:id="cadetMarkAttendenceBtn" mnemonicParsing="false" onAction="#handleMenuClick" prefHeight="55.0" prefWidth="239.0" style="visibility: true;" text="Mark Attendance">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Button>
+                              <Button fx:id="cadetLeaveRequestBtn" mnemonicParsing="false" onAction="#handleMenuClick" prefHeight="55.0" prefWidth="239.0" style="visibility: true;" text="Leave Request">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Button>
+                              <Button fx:id="cadetSubmitProgressReportBtn" mnemonicParsing="false" onAction="#handleMenuClick" prefHeight="55.0" prefWidth="239.0" style="visibility: true;" text="Submit Progress Report">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Button>
+                              <Button fx:id="cadetRegisterForTraningBtn" mnemonicParsing="false" onAction="#handleMenuClick" prefHeight="55.0" prefWidth="239.0" style="visibility: true;" text="Register for Training">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Button>
+                              <Button fx:id="cadetPerformanceEvolationBtn" mnemonicParsing="false" onAction="#handleMenuClick" prefHeight="55.0" prefWidth="239.0" style="visibility: true;" text="Performance Evaluation">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Button>
+                           </children>
+                        </VBox>
+                        <VBox fx:id="commandantMenu" alignment="CENTER" prefHeight="554.0" prefWidth="256.0">
+                           <children>
+                              <Button fx:id="commandantDashboardBtn" mnemonicParsing="false" onAction="#handleMenuClick" prefHeight="55.0" prefWidth="239.0" style="visibility: true;" text="Dashboard" userData="shanin/CommandantDashboardView.fxml">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Button>
+                              <Button fx:id="commandantUnitReportsBtn" mnemonicParsing="false" onAction="#handleMenuClick" prefHeight="55.0" prefWidth="239.0" style="visibility: true;" text="Unit Reports" userData="shanin/UnitReportsView.fxml">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Button>
+                              <Button fx:id="commandantFinalEvolationBtn" mnemonicParsing="false" onAction="#handleMenuClick" prefHeight="55.0" prefWidth="239.0" style="visibility: true;" text="Final Evaluation" userData="shanin/FinalEvolationView.fxml">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Button>
+                              <Button fx:id="commandantInstructorAssignmentBtn" mnemonicParsing="false" onAction="#handleMenuClick" prefHeight="55.0" prefWidth="239.0" style="visibility: true;" text="Instructor Assignment" userData="shanin/InstructorAssignmentView.fxml">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Button>
+                              <Button fx:id="commandantCadetRankingBtn" mnemonicParsing="false" onAction="#handleMenuClick" prefHeight="55.0" prefWidth="239.0" style="visibility: true;" text="Cadet Rankings" userData="shanin/CadetRankingView.fxml">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Button>
+                              <Button fx:id="commandantAnnouncementApprovalBtn" mnemonicParsing="false" onAction="#handleMenuClick" prefHeight="55.0" prefWidth="239.0" style="visibility: true;" text="Announcement Approval" userData="shanin/AnnouncementView.fxml">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Button>
+                              <Button fx:id="commandantMissionEventsBtn" mnemonicParsing="false" onAction="#handleMenuClick" prefHeight="55.0" prefWidth="239.0" style="visibility: true;" text="Mission Events" userData="shanin/MissionEventsView.fxml">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Button>
+                              <Button fx:id="commandantInstructorPerformanceBtn" mnemonicParsing="false" onAction="#handleMenuClick" prefHeight="55.0" prefWidth="239.0" style="visibility: true;" text="Instructor Performance" userData="shanin/InstructorPerformanceView.fxml">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Button>
+                           </children>
+                        </VBox>
+                        <VBox fx:id="systemAdminMenu" alignment="CENTER" prefHeight="538.0" prefWidth="253.0">
+                           <children>
+                              <Button fx:id="systemAdminDashBoardBtn" mnemonicParsing="false" onAction="#handleMenuClick" prefHeight="55.0" prefWidth="239.0" style="visibility: true;" text="Dashboard" userData="shanin/systemAdminDashboardView.fxml">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Button>
+                              <Button fx:id="systemAdminCadetManagementBtn" mnemonicParsing="false" onAction="#handleMenuClick" prefHeight="55.0" prefWidth="239.0" style="visibility: true;" text="Cadet Management" userData="shanin/CadetManagementView.fxml">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Button>
+                              <Button fx:id="systemAdminUserManagementBtn" mnemonicParsing="false" onAction="#handleMenuClick" prefHeight="55.0" prefWidth="239.0" style="visibility: true;" text=" User Management" userData="shanin/UserManagementView.fxml">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Button>
+                              <Button fx:id="systemAdminReportsBtn" mnemonicParsing="false" onAction="#handleMenuClick" prefHeight="55.0" prefWidth="239.0" style="visibility: true;" text="Reports" userData="shanin/SystemAdminReportsView.fxml">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Button>
+                              <Button fx:id="systemAdminSystemSettingsBtn" mnemonicParsing="false" onAction="#handleMenuClick" prefHeight="55.0" prefWidth="239.0" style="visibility: true;" text="System Settings" userData="shanin/SystemSettingsView.fxml">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Button>
+                              <Button fx:id="systemAdminAuditLogsBtn" mnemonicParsing="false" onAction="#handleMenuClick" prefHeight="55.0" prefWidth="239.0" style="visibility: true;" text="Audit Logs" userData="shanin/AuditLogsView.fxml">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Button>
+                              <Button fx:id="systemAdminProfileBtn" mnemonicParsing="false" onAction="#handleMenuClick" prefHeight="55.0" prefWidth="239.0" style="visibility: true;" text="Profile" userData="shanin/SystemAdminProfileView.fxml">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Button>
+                           </children>
+                        </VBox>
                                 <Button layoutX="8.0" layoutY="698.0" mnemonicParsing="false" onAction="#signOutBtnOnAction" prefHeight="55.0" prefWidth="239.0" style="-fx-background-color: red;" text="Sign Out" textFill="WHITE">
                                     <font>
                                         <Font size="18.0" />
                                     </font>
                                 </Button>
-                        <Button layoutX="12.0" layoutY="24.0" mnemonicParsing="false" prefHeight="55.0" prefWidth="239.0" style="visibility: false;" text="Dashboard">
-                           <font>
-                              <Font size="18.0" />
-                           </font>
-                        </Button>
-                                <Button layoutX="10.0" layoutY="105.0" mnemonicParsing="false" prefHeight="55.0" prefWidth="239.0" style="visibility: false;" text="Unit Reports">
-                                    <font>
-                                        <Font size="18.0" />
-                                    </font>
-                                </Button>
-                                <Button layoutX="10.0" layoutY="185.0" mnemonicParsing="false" prefHeight="55.0" prefWidth="239.0" style="visibility: false;" text="Final Evaluation">
-                                    <font>
-                                        <Font size="18.0" />
-                                    </font>
-                                </Button>
-                                <Button layoutX="10.0" layoutY="259.0" mnemonicParsing="false" prefHeight="55.0" prefWidth="239.0" style="visibility: false;" text="Instructor Assignment">
-                                    <font>
-                                        <Font size="18.0" />
-                                    </font>
-                                </Button>
-                                <Button layoutX="10.0" layoutY="330.0" mnemonicParsing="false" prefHeight="55.0" prefWidth="239.0" style="visibility: false;" text="Cadet Rankings">
-                                    <font>
-                                        <Font size="18.0" />
-                                    </font>
-                                </Button>
-                                <Button layoutX="10.0" layoutY="405.0" mnemonicParsing="false" prefHeight="55.0" prefWidth="239.0" style="visibility: false;" text="Announcement Approval">
-                                    <font>
-                                        <Font size="18.0" />
-                                    </font>
-                                </Button>
-                                <Button layoutX="10.0" layoutY="475.0" mnemonicParsing="false" prefHeight="55.0" prefWidth="239.0" style="visibility: false;" text="Mission Events">
-                                    <font>
-                                        <Font size="18.0" />
-                                    </font>
-                                </Button>
-                                <Button layoutX="10.0" layoutY="544.0" mnemonicParsing="false" prefHeight="55.0" prefWidth="239.0" style="visibility: false;" text="Instructor Performance">
-                                    <font>
-                                        <Font size="18.0" />
-                                    </font>
-                                </Button>
-                                <Button layoutX="9.0" layoutY="34.0" mnemonicParsing="false" prefHeight="55.0" prefWidth="239.0" style="visibility: false;" text="Dashboard">
-                                    <font>
-                                        <Font size="18.0" />
-                                    </font>
-                                </Button>
-                                <Button layoutX="7.0" layoutY="115.0" mnemonicParsing="false" prefHeight="55.0" prefWidth="239.0" style="visibility: false;" text="My Instructors">
-                                    <font>
-                                        <Font size="18.0" />
-                                    </font>
-                                </Button>
-                                <Button layoutX="7.0" layoutY="195.0" mnemonicParsing="false" prefHeight="55.0" prefWidth="239.0" style="visibility: false;" text="View Routine">
-                                    <font>
-                                        <Font size="18.0" />
-                                    </font>
-                                </Button>
-                                <Button layoutX="7.0" layoutY="269.0" mnemonicParsing="false" prefHeight="55.0" prefWidth="239.0" style="visibility: false;" text="Mark Attendance">
-                                    <font>
-                                        <Font size="18.0" />
-                                    </font>
-                                </Button>
-                                <Button layoutX="7.0" layoutY="340.0" mnemonicParsing="false" prefHeight="55.0" prefWidth="239.0" style="visibility: false;" text="Leave Request">
-                                    <font>
-                                        <Font size="18.0" />
-                                    </font>
-                                </Button>
-                                <Button layoutX="7.0" layoutY="415.0" mnemonicParsing="false" prefHeight="55.0" prefWidth="239.0" style="visibility: false;" text="Submit Progress Report">
-                                    <font>
-                                        <Font size="18.0" />
-                                    </font>
-                                </Button>
-                                <Button layoutX="7.0" layoutY="485.0" mnemonicParsing="false" prefHeight="55.0" prefWidth="239.0" style="visibility: false;" text="Register for Training">
-                                    <font>
-                                        <Font size="18.0" />
-                                    </font>
-                                </Button>
-                                <Button layoutX="7.0" layoutY="554.0" mnemonicParsing="false" prefHeight="55.0" prefWidth="239.0" style="visibility: false;" text="Performance Evaluation">
-                                    <font>
-                                        <Font size="18.0" />
-                                    </font>
-                                </Button>
-                        <Button layoutX="21.0" layoutY="34.0" mnemonicParsing="false" prefHeight="55.0" prefWidth="239.0" style="visibility: false;" text="Dashboard">
-                           <font>
-                              <Font size="18.0" />
-                           </font>
-                        </Button>
-                        <Button layoutX="20.0" layoutY="105.0" mnemonicParsing="false" prefHeight="55.0" prefWidth="239.0" style="visibility: false;" text="Cadet Management">
-                           <font>
-                              <Font size="18.0" />
-                           </font>
-                        </Button>
-                        <Button layoutX="20.0" layoutY="185.0" mnemonicParsing="false" prefHeight="55.0" prefWidth="239.0" style="visibility: false;" text=" User Management">
-                           <font>
-                              <Font size="18.0" />
-                           </font>
-                        </Button>
-                        <Button layoutX="20.0" layoutY="259.0" mnemonicParsing="false" prefHeight="55.0" prefWidth="239.0" style="visibility: false;" text=" User Management">
-                           <font>
-                              <Font size="18.0" />
-                           </font>
-                        </Button>
-                        <Button layoutX="20.0" layoutY="330.0" mnemonicParsing="false" prefHeight="55.0" prefWidth="239.0" style="visibility: false;" text="Reports">
-                           <font>
-                              <Font size="18.0" />
-                           </font>
-                        </Button>
-                        <Button layoutX="20.0" layoutY="405.0" mnemonicParsing="false" prefHeight="55.0" prefWidth="239.0" style="visibility: false;" text="System Settings">
-                           <font>
-                              <Font size="18.0" />
-                           </font>
-                        </Button>
-                        <Button layoutX="20.0" layoutY="475.0" mnemonicParsing="false" prefHeight="55.0" prefWidth="239.0" style="visibility: false;" text="Audit Logs">
-                           <font>
-                              <Font size="18.0" />
-                           </font>
-                        </Button>
-                        <Button layoutX="20.0" layoutY="544.0" mnemonicParsing="false" prefHeight="55.0" prefWidth="239.0" style="visibility: false;" text="Profile">
-                           <font>
-                              <Font size="18.0" />
-                           </font>
-                        </Button>
-                        <Button layoutX="19.0" layoutY="44.0" mnemonicParsing="false" prefHeight="55.0" prefWidth="239.0" style="visibility: false;" text="Dashboard">
-                           <font>
-                              <Font size="18.0" />
-                           </font>
-                        </Button>
-                        <Button layoutX="17.0" layoutY="125.0" mnemonicParsing="false" prefHeight="55.0" prefWidth="239.0" style="visibility: false;" text="My Instructors">
-                           <font>
-                              <Font size="18.0" />
-                           </font>
-                        </Button>
-                        <Button layoutX="17.0" layoutY="205.0" mnemonicParsing="false" prefHeight="55.0" prefWidth="239.0" style="visibility: false;" text="View Routine">
-                           <font>
-                              <Font size="18.0" />
-                           </font>
-                        </Button>
-                        <Button layoutX="17.0" layoutY="279.0" mnemonicParsing="false" prefHeight="55.0" prefWidth="239.0" style="visibility: false;" text="Mark Attendance">
-                           <font>
-                              <Font size="18.0" />
-                           </font>
-                        </Button>
-                        <Button layoutX="17.0" layoutY="350.0" mnemonicParsing="false" prefHeight="55.0" prefWidth="239.0" style="visibility: false;" text="Leave Request">
-                           <font>
-                              <Font size="18.0" />
-                           </font>
-                        </Button>
-                        <Button layoutX="17.0" layoutY="425.0" mnemonicParsing="false" prefHeight="55.0" prefWidth="239.0" style="visibility: false;" text="Submit Progress Report">
-                           <font>
-                              <Font size="18.0" />
-                           </font>
-                        </Button>
-                        <Button layoutX="17.0" layoutY="495.0" mnemonicParsing="false" prefHeight="55.0" prefWidth="239.0" style="visibility: false;" text="Register for Training">
-                           <font>
-                              <Font size="18.0" />
-                           </font>
-                        </Button>
-                        <Button layoutX="17.0" layoutY="564.0" mnemonicParsing="false" prefHeight="55.0" prefWidth="239.0" style="visibility: false;" text="Performance Evaluation">
-                           <font>
-                              <Font size="18.0" />
-                           </font>
-                        </Button>
-                        <Button layoutX="10.0" layoutY="12.0" mnemonicParsing="false" prefHeight="55.0" prefWidth="239.0" style="visibility: false;" text="Dashboard">
-                           <font>
-                              <Font size="18.0" />
-                           </font>
-                        </Button>
-                        <Button layoutX="8.0" layoutY="93.0" mnemonicParsing="false" prefHeight="55.0" prefWidth="239.0" style="visibility: false;" text="Leave Requests">
-                           <font>
-                              <Font size="18.0" />
-                           </font>
-                        </Button>
-                        <Button layoutX="8.0" layoutY="173.0" mnemonicParsing="false" prefHeight="55.0" prefWidth="239.0" style="visibility: false;" text="Attendance Monitor">
-                           <font>
-                              <Font size="18.0" />
-                           </font>
-                        </Button>
-                        <Button layoutX="8.0" layoutY="247.0" mnemonicParsing="false" prefHeight="55.0" prefWidth="239.0" style="visibility: false;" text="Submit Performance Report">
-                           <font>
-                              <Font size="18.0" />
-                           </font>
-                        </Button>
-                        <Button layoutX="8.0" layoutY="318.0" mnemonicParsing="false" prefHeight="55.0" prefWidth="239.0" style="visibility: false;" text="Drill Scheduler">
-                           <font>
-                              <Font size="18.0" />
-                           </font>
-                        </Button>
-                        <Button layoutX="8.0" layoutY="393.0" mnemonicParsing="false" prefHeight="55.0" prefWidth="239.0" style="visibility: false;" text="Cadet Health Reports">
-                           <font>
-                              <Font size="18.0" />
-                           </font>
-                        </Button>
-                        <Button layoutX="8.0" layoutY="463.0" mnemonicParsing="false" prefHeight="55.0" prefWidth="239.0" style="visibility: false;" text="Mentor Assignment">
-                           <font>
-                              <Font size="18.0" />
-                           </font>
-                        </Button>
-                        <Button layoutX="8.0" layoutY="532.0" mnemonicParsing="false" prefHeight="55.0" prefWidth="239.0" style="visibility: false;" text="Group Announcement">
-                           <font>
-                              <Font size="18.0" />
-                           </font>
-                        </Button>
-                        <Button layoutX="10.0" layoutY="602.0" mnemonicParsing="false" prefHeight="55.0" prefWidth="239.0" style="visibility: false;" text="Event Participation">
-                           <font>
-                              <Font size="18.0" />
-                           </font>
-                        </Button>
-                        <Button layoutX="8.0" layoutY="11.0" mnemonicParsing="false" prefHeight="55.0" prefWidth="239.0" style="visibility: false;" text="Dashboard">
-                           <font>
-                              <Font size="18.0" />
-                           </font>
-                        </Button>
-                        <Button layoutX="6.0" layoutY="92.0" mnemonicParsing="false" prefHeight="55.0" prefWidth="239.0" style="visibility: false;" text="Take Attendance">
-                           <font>
-                              <Font size="18.0" />
-                           </font>
-                        </Button>
-                        <Button layoutX="6.0" layoutY="172.0" mnemonicParsing="false" prefHeight="55.0" prefWidth="239.0" style="visibility: false;" text="Upload Materials">
-                           <font>
-                              <Font size="18.0" />
-                           </font>
-                        </Button>
-                        <Button layoutX="6.0" layoutY="246.0" mnemonicParsing="false" prefHeight="55.0" prefWidth="239.0" style="visibility: false;" text="Schedule Training">
-                           <font>
-                              <Font size="18.0" />
-                           </font>
-                        </Button>
-                        <Button layoutX="6.0" layoutY="317.0" mnemonicParsing="false" prefHeight="55.0" prefWidth="239.0" style="visibility: false;" text="View Feedback">
-                           <font>
-                              <Font size="18.0" />
-                           </font>
-                        </Button>
-                        <Button layoutX="6.0" layoutY="392.0" mnemonicParsing="false" prefHeight="55.0" prefWidth="239.0" style="visibility: false;" text="Submit Evaluation">
-                           <font>
-                              <Font size="18.0" />
-                           </font>
-                        </Button>
-                        <Button layoutX="6.0" layoutY="462.0" mnemonicParsing="false" prefHeight="55.0" prefWidth="239.0" style="visibility: false;" text="Training History">
-                           <font>
-                              <Font size="18.0" />
-                           </font>
-                        </Button>
-                        <Button layoutX="6.0" layoutY="531.0" mnemonicParsing="false" prefHeight="55.0" prefWidth="239.0" style="visibility: false;" text="Absence Reason">
-                           <font>
-                              <Font size="18.0" />
-                           </font>
-                        </Button>
-                        <Button layoutX="8.0" layoutY="601.0" mnemonicParsing="false" prefHeight="55.0" prefWidth="239.0" style="visibility: false;" text="Post Announcement">
-                           <font>
-                              <Font size="18.0" />
-                           </font>
-                        </Button>
-                        <Button layoutX="10.0" layoutY="8.0" mnemonicParsing="false" prefHeight="55.0" prefWidth="239.0" style="visibility: false;" text="Dashboard">
-                           <font>
-                              <Font size="18.0" />
-                           </font>
-                        </Button>
-                        <Button layoutX="8.0" layoutY="89.0" mnemonicParsing="false" prefHeight="55.0" prefWidth="239.0" style="visibility: false;" text="Add Inventory">
-                           <font>
-                              <Font size="18.0" />
-                           </font>
-                        </Button>
-                        <Button layoutX="8.0" layoutY="169.0" mnemonicParsing="false" prefHeight="55.0" prefWidth="239.0" style="visibility: false;" text="Manage Inventory">
-                           <font>
-                              <Font size="18.0" />
-                           </font>
-                        </Button>
-                        <Button layoutX="8.0" layoutY="243.0" mnemonicParsing="false" prefHeight="55.0" prefWidth="239.0" style="visibility: false;" text="Inventory Summary">
-                           <font>
-                              <Font size="18.0" />
-                           </font>
-                        </Button>
-                        <Button layoutX="8.0" layoutY="314.0" mnemonicParsing="false" prefHeight="55.0" prefWidth="239.0" style="visibility: false;" text="Issue Items">
-                           <font>
-                              <Font size="18.0" />
-                           </font>
-                        </Button>
-                        <Button layoutX="8.0" layoutY="389.0" mnemonicParsing="false" prefHeight="55.0" prefWidth="239.0" style="visibility: false;" text="Monthly Report">
-                           <font>
-                              <Font size="18.0" />
-                           </font>
-                        </Button>
-                        <Button layoutX="8.0" layoutY="459.0" mnemonicParsing="false" prefHeight="55.0" prefWidth="239.0" style="visibility: false;" text="Restock Requests">
-                           <font>
-                              <Font size="18.0" />
-                           </font>
-                        </Button>
-                        <Button layoutX="8.0" layoutY="528.0" mnemonicParsing="false" prefHeight="55.0" prefWidth="239.0" style="visibility: false;" text="Damaged/Return Log">
-                           <font>
-                              <Font size="18.0" />
-                           </font>
-                        </Button>
-                        <Button layoutX="10.0" layoutY="598.0" mnemonicParsing="false" prefHeight="55.0" prefWidth="239.0" style="visibility: false;" text="Notify Commandant">
-                           <font>
-                              <Font size="18.0" />
-                           </font>
-                        </Button>
-                        <Button layoutX="10.0" layoutY="8.0" mnemonicParsing="false" prefHeight="55.0" prefWidth="239.0" style="visibility: false;" text="Dashboard">
-                           <font>
-                              <Font size="18.0" />
-                           </font>
-                        </Button>
-                        <Button layoutX="8.0" layoutY="89.0" mnemonicParsing="false" prefHeight="55.0" prefWidth="239.0" style="visibility: false;" text="Add Medical Record">
-                           <font>
-                              <Font size="18.0" />
-                           </font>
-                        </Button>
-                        <Button layoutX="8.0" layoutY="169.0" mnemonicParsing="false" prefHeight="55.0" prefWidth="239.0" style="visibility: false;" text="Vaccination Update">
-                           <font>
-                              <Font size="18.0" />
-                           </font>
-                        </Button>
-                        <Button layoutX="8.0" layoutY="243.0" mnemonicParsing="false" prefHeight="55.0" prefWidth="239.0" style="visibility: false;" text="Medical History">
-                           <font>
-                              <Font size="18.0" />
-                           </font>
-                        </Button>
-                        <Button layoutX="8.0" layoutY="314.0" mnemonicParsing="false" prefHeight="55.0" prefWidth="239.0" style="visibility: false;" text="Medical Reports">
-                           <font>
-                              <Font size="18.0" />
-                           </font>
-                        </Button>
-                        <Button layoutX="8.0" layoutY="389.0" mnemonicParsing="false" prefHeight="55.0" prefWidth="239.0" style="visibility: false;" text="Emergency Case Log">
-                           <font>
-                              <Font size="18.0" />
-                           </font>
-                        </Button>
-                        <Button layoutX="8.0" layoutY="459.0" mnemonicParsing="false" prefHeight="55.0" prefWidth="239.0" style="visibility: false;" text="Schedule Checkup">
-                           <font>
-                              <Font size="18.0" />
-                           </font>
-                        </Button>
-                        <Button layoutX="8.0" layoutY="528.0" mnemonicParsing="false" prefHeight="55.0" prefWidth="239.0" style="visibility: false;" text="Pending Cases">
-                           <font>
-                              <Font size="18.0" />
-                           </font>
-                        </Button>
-                        <Button layoutX="10.0" layoutY="598.0" mnemonicParsing="false" prefHeight="55.0" prefWidth="239.0" style="visibility: false;" text="Health Advisory">
-                           <font>
-                              <Font size="18.0" />
-                           </font>
-                        </Button>
-                        <Button layoutX="11.0" layoutY="7.0" mnemonicParsing="false" prefHeight="55.0" prefWidth="239.0" style="visibility: false;" text="Dashboard">
-                           <font>
-                              <Font size="18.0" />
-                           </font>
-                        </Button>
-                        <Button layoutX="9.0" layoutY="88.0" mnemonicParsing="false" prefHeight="55.0" prefWidth="239.0" style="visibility: false;" text="Add Menu">
-                           <font>
-                              <Font size="18.0" />
-                           </font>
-                        </Button>
-                        <Button layoutX="9.0" layoutY="168.0" mnemonicParsing="false" prefHeight="55.0" prefWidth="239.0" style="visibility: false;" text="Meal Attendance">
-                           <font>
-                              <Font size="18.0" />
-                           </font>
-                        </Button>
-                        <Button layoutX="9.0" layoutY="242.0" mnemonicParsing="false" prefHeight="55.0" prefWidth="239.0" style="visibility: false;" text="Special Requests">
-                           <font>
-                              <Font size="18.0" />
-                           </font>
-                        </Button>
-                        <Button layoutX="9.0" layoutY="313.0" mnemonicParsing="false" prefHeight="55.0" prefWidth="239.0" style="visibility: false;" text="Food Report">
-                           <font>
-                              <Font size="18.0" />
-                           </font>
-                        </Button>
-                        <Button layoutX="9.0" layoutY="388.0" mnemonicParsing="false" prefHeight="55.0" prefWidth="239.0" style="visibility: false;" text="Staff Duty Roster">
-                           <font>
-                              <Font size="18.0" />
-                           </font>
-                        </Button>
-                        <Button layoutX="9.0" layoutY="458.0" mnemonicParsing="false" prefHeight="55.0" prefWidth="239.0" style="visibility: false;" text="Food Inventory">
-                           <font>
-                              <Font size="18.0" />
-                           </font>
-                        </Button>
-                        <Button layoutX="9.0" layoutY="527.0" mnemonicParsing="false" prefHeight="55.0" prefWidth="239.0" style="visibility: false;" text="Notify Cadets">
-                           <font>
-                              <Font size="18.0" />
-                           </font>
-                        </Button>
-                        <Button layoutX="11.0" layoutY="597.0" mnemonicParsing="false" prefHeight="55.0" prefWidth="239.0" style="visibility: false;" text="Meal Feedback">
-                           <font>
-                              <Font size="18.0" />
-                           </font>
-                        </Button>
                             </children>
                         </AnchorPane>
                     </content>
@@ -459,12 +424,12 @@
                                 <Font size="23.0" />
                             </font>
                         </Label>
-                        <Label layoutX="483.0" layoutY="45.0" prefHeight="22.0" prefWidth="311.0" text="Page Name">
+                        <Label fx:id="pageNameLabel" layoutX="483.0" layoutY="45.0" prefHeight="22.0" prefWidth="311.0" text="Page Name">
                             <font>
                                 <Font size="20.0" />
                             </font>
                         </Label>
-                        <Label layoutX="758.0" layoutY="43.0" prefHeight="25.0" prefWidth="233.0" text="Shamsad Shanin">
+                        <Label fx:id="userNameLabel" layoutX="758.0" layoutY="43.0" prefHeight="25.0" prefWidth="233.0" text="Shamsad Shanin">
                             <font>
                                 <Font size="21.0" />
                             </font>
