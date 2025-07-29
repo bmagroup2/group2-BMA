@@ -1,14 +1,61 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="bmasec2.bmaapplication.afifa.CadetDashboardViewController"
-            prefHeight="400.0" prefWidth="600.0">
+<AnchorPane prefHeight="547.0" prefWidth="920.0" style="-fx-background-color: #f4f4f9;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bmasec2.bmaapplication.afifa.CadetDashboardViewController">
+    <children>
 
+        <Label layoutX="30.0" layoutY="25.0" text="Cadet Dashboard" textFill="#1a237e"><font><Font name="System Bold" size="24.0" /></font></Label>
+        <Label layoutX="30.0" layoutY="55.0" text="Welcome, Cadet. Here is your summary for today." textFill="#546e7a"><font><Font size="14.0" /></font></Label>
+
+
+        <HBox alignment="CENTER_LEFT" layoutX="30.0" layoutY="100.0" spacing="25.0">
+            <children>
+
+                <VBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="280.0" spacing="5.0" style="-fx-background-color: #ffffff; -fx-background-radius: 10;">
+                    <padding><Insets left="20.0" /></padding>
+                    <effect><DropShadow height="20.0" radius="9.5" width="20.0"><color><Color opacity="0.1" /></color></DropShadow></effect>
+                    <children>
+                        <Label text="Next Scheduled Activity" textFill="#546e7a"><font><Font name="System Bold" size="14.0" /></font></Label>
+                        <Label text="14:00 - Drill Practice" textFill="#1a237e"><font><Font name="System Bold" size="22.0" /></font></Label>
+                    </children>
+                </VBox>
+                <VBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="280.0" spacing="5.0" style="-fx-background-color: #ffffff; -fx-background-radius: 10;">
+                    <padding><Insets left="20.0" /></padding>
+                    <effect><DropShadow height="20.0" radius="9.5" width="20.0"><color><Color opacity="0.1" /></color></DropShadow></effect>
+                    <children>
+                        <Label text="Pending Progress Reports" textFill="#546e7a"><font><Font name="System Bold" size="14.0" /></font></Label>
+                        <Label text="1 Due this week" textFill="#c62828"><font><Font name="System Bold" size="22.0" /></font></Label>
+                    </children>
+                </VBox>
+            </children>
+        </HBox>
+
+        <HBox layoutX="30.0" layoutY="225.0" spacing="25.0" AnchorPane.bottomAnchor="30.0" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="30.0">
+            <VBox prefWidth="450.0" spacing="10.0" style="-fx-background-color: #ffffff; -fx-background-radius: 10;">
+                <padding><Insets bottom="15.0" left="15.0" right="15.0" top="15.0" /></padding>
+                <effect><DropShadow height="20.0" radius="9.5" width="20.0"><color><Color opacity="0.1" /></color></DropShadow></effect>
+                <children>
+                    <Label text="Today's Routine"><font><Font name="System Bold" size="16.0" /></font></Label>
+                    <ListView prefHeight="230.0" VBox.vgrow="ALWAYS" />
+                </children>
+            </VBox>
+            <VBox prefWidth="380.0" spacing="10.0" style="-fx-background-color: #ffffff; -fx-background-radius: 10;" HBox.hgrow="ALWAYS">
+                <padding><Insets bottom="15.0" left="15.0" right="15.0" top="15.0" /></padding>
+                <effect><DropShadow height="20.0" radius="9.5" width="20.0"><color><Color opacity="0.1" /></color></DropShadow></effect>
+                <children>
+                    <Label text="Recent Announcements"><font><Font name="System Bold" size="16.0" /></font></Label>
+                    <ListView prefHeight="230.0" VBox.vgrow="ALWAYS" />
+                </children>
+            </VBox>
+        </HBox>
+    </children>
 </AnchorPane>
