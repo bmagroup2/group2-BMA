@@ -10,26 +10,26 @@
 <?import javafx.scene.paint.Color?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="547.0" prefWidth="920.0" style="-fx-background-color: #f4f4f9;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bmasec2.bmaapplication.fatema.TrainingInstructorDashboardViewController">
+<AnchorPane prefHeight="547.0" prefWidth="920.0" style="-fx-background-color: #f4f4f9;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bmasec2.bmaapplication.fatema.logisticOfficerDashboardViewController">
     <children>
-        <Label layoutX="30.0" layoutY="25.0" text="Instructor Dashboard" textFill="#1a237e"><font><Font name="System Bold" size="24.0" /></font></Label>
-        <Label layoutX="30.0" layoutY="55.0" text="Your schedule and upcoming training sessions." textFill="#546e7a"><font><Font size="14.0" /></font></Label>
+        <Label layoutX="30.0" layoutY="25.0" text="Logistics Dashboard" textFill="#1a237e"><font><Font name="System Bold" size="24.0" /></font></Label>
+        <Label layoutX="30.0" layoutY="55.0" text="Overview of inventory and logistics operations." textFill="#546e7a"><font><Font size="14.0" /></font></Label>
         <HBox layoutX="30.0" layoutY="100.0" spacing="25.0">
             <children>
-                <VBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="350.0" spacing="5.0" style="-fx-background-color: #ffffff; -fx-background-radius: 10;">
+                <VBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="280.0" spacing="5.0" style="-fx-background-color: #ffffff; -fx-background-radius: 10;">
                     <padding><Insets left="20.0" /></padding>
                     <effect><DropShadow height="20.0" radius="9.5" width="20.0"><color><Color opacity="0.1" /></color></DropShadow></effect>
                     <children>
-                        <Label text="Next Session" textFill="#546e7a"><font><Font name="System Bold" size="14.0" /></font></Label>
-                        <Label text="10:00 - Marksmanship (Batch A )" textFill="#1a237e"><font><Font name="System Bold" size="20.0" /></font></Label>
+                        <Label text="Items with Low Stock" textFill="#546e7a"><font><Font name="System Bold" size="14.0" /></font></Label>
+                        <Label text="12 Items" textFill="#c62828"><font><Font name="System Bold" size="22.0" /></font></Label>
                     </children>
                 </VBox>
-                <VBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="350.0" spacing="5.0" style="-fx-background-color: #ffffff; -fx-background-radius: 10;">
+                <VBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="280.0" spacing="5.0" style="-fx-background-color: #ffffff; -fx-background-radius: 10;">
                     <padding><Insets left="20.0" /></padding>
                     <effect><DropShadow height="20.0" radius="9.5" width="20.0"><color><Color opacity="0.1" /></color></DropShadow></effect>
                     <children>
-                        <Label text="Attendance Status" textFill="#546e7a"><font><Font name="System Bold" size="14.0" /></font></Label>
-                        <Label text="Pending for 09:00 Session" textFill="#c62828"><font><Font name="System Bold" size="22.0" /></font></Label>
+                        <Label text="Pending Restock Requests" textFill="#546e7a"><font><Font name="System Bold" size="14.0" /></font></Label>
+                        <Label text="4 Requests" textFill="#FF9800"><font><Font name="System Bold" size="22.0" /></font></Label>
                     </children>
                 </VBox>
             </children>
@@ -38,7 +38,7 @@
             <padding><Insets bottom="15.0" left="15.0" right="15.0" top="15.0" /></padding>
             <effect><DropShadow height="20.0" radius="9.5" width="20.0"><color><Color opacity="0.1" /></color></DropShadow></effect>
             <children>
-                <Label text="Today's Scheduled Sessions"><font><Font name="System Bold" size="16.0" /></font></Label>
+                <Label text="Recent Inventory Activity"><font><Font name="System Bold" size="16.0" /></font></Label>
                 <ListView prefHeight="230.0" VBox.vgrow="ALWAYS" />
             </children>
         </VBox>

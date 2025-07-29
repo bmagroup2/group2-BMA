@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="547.0" prefWidth="920.0" style="-fx-background-color: #f4f4f9;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bmasec2.bmaapplication.fatema.updateMaterialsviewConroller">
+    <children>
+        <Label layoutX="30.0" layoutY="25.0" text="Upload Training Materials" textFill="#1a237e"><font><Font name="System Bold" size="24.0" /></font></Label>
+        <Label layoutX="30.0" layoutY="55.0" text="Upload documents or presentations for your cadets." textFill="#546e7a"><font><Font size="14.0" /></font></Label>
+        <VBox layoutX="30.0" layoutY="120.0" prefWidth="500.0" spacing="10.0">
+            <children>
+                <Label text="Training Topic / Session"><font><Font name="System Bold" size="14.0" /></font></Label>
+                <ComboBox prefWidth="500.0" promptText="Select the relevant session..." />
+                <Label text="Target Batch"><font><Font name="System Bold" size="14.0" /></font></Label>
+                <ComboBox prefWidth="500.0" promptText="Select the target batch..." />
+                <Label text="Select File"><font><Font name="System Bold" size="14.0" /></font></Label>
+                <HBox spacing="10.0">
+                    <children>
+                        <TextField editable="false" prefWidth="350.0" promptText="No file selected" />
+                        <Button mnemonicParsing="false" text="Browse..." />
+                    </children>
+                </HBox>
+                <Button mnemonicParsing="false" prefHeight="40.0" prefWidth="180.0" style="-fx-background-color: #4CAF50;" text="Upload Material" textFill="WHITE"><font><Font name="System Bold" size="14.0" /></font></Button>
+            </children>
+        </VBox>
+    </children>
+</AnchorPane>
