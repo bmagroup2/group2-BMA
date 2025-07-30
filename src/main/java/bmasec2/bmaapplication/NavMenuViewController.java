@@ -24,7 +24,7 @@ public class NavMenuViewController {
     @FXML
     private Label userNameLabel;
     @FXML
-    private Label pageTitleLabel1;
+    private Label pageNameLabel;
 
     @FXML private VBox systemAdminMenu;
     @FXML private VBox commandantMenu;
@@ -120,8 +120,8 @@ public class NavMenuViewController {
 
 
     public void setPageTitle(String title) {
-        if (pageTitleLabel1 != null) {
-            pageTitleLabel1.setText(title);
+        if (pageNameLabel != null) {
+            pageNameLabel.setText(title);
         } else {
             System.err.println("Error: pageTitleLabel1 is null. Check FXML file for fx:id='pageTitleLabel1'.");
         }
