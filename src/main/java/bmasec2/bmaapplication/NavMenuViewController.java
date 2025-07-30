@@ -80,7 +80,7 @@ public class NavMenuViewController {
                 break;
             case "Logistic Officer":
                 logisticsOfficerMenu.setVisible(true);
-                loadView("fatema/logisticsOfficerDashboardView.fxml", "Dashboard");
+                loadView("fatema/logisticOfficerDashboardView.fxml", "Dashboard");
                 break;
             case "Medical Officer":
                 medicalOfficerMenu.setVisible(true);

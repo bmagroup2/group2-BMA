@@ -20,47 +20,47 @@
                             <children>
                         <VBox fx:id="messOfficerMenu" alignment="CENTER" prefHeight="548.0" prefWidth="264.0">
                            <children>
-                              <Button fx:id="messODashboardBtn" mnemonicParsing="false" onAction="#handleMenuClick" prefHeight="55.0" prefWidth="239.0" style="visibility: true;" text="Dashboard">
+                              <Button  mnemonicParsing="false" onAction="#handleMenuClick" prefHeight="55.0" prefWidth="239.0" style="visibility: true;" text="Dashboard" userData="zumar/messOfficerDashboardView.fxml">
                                  <font>
                                     <Font size="18.0" />
                                  </font>
                               </Button>
-                              <Button fx:id="messOAddMenuBtn" mnemonicParsing="false" onAction="#handleMenuClick" prefHeight="55.0" prefWidth="239.0" style="visibility: true;" text="Add Menu">
+                              <Button  mnemonicParsing="false" onAction="#handleMenuClick" prefHeight="55.0" prefWidth="239.0" style="visibility: true;" text="Add Menu" userData="zumar/addDailyMealMenuView.fxml">
                                  <font>
                                     <Font size="18.0" />
                                  </font>
                               </Button>
-                              <Button fx:id="messOMealAttendenceBtn" mnemonicParsing="false" onAction="#handleMenuClick" prefHeight="55.0" prefWidth="239.0" style="visibility: true;" text="Meal Attendance">
+                              <Button  mnemonicParsing="false" onAction="#handleMenuClick" prefHeight="55.0" prefWidth="239.0" style="visibility: true;" text="Meal Attendance" userData="zumar/mealAttendanceView.fxml">
                                  <font>
                                     <Font size="18.0" />
                                  </font>
                               </Button>
-                              <Button fx:id="messOSpecialRequestBtn" mnemonicParsing="false" onAction="#handleMenuClick" prefHeight="55.0" prefWidth="239.0" style="visibility: true;" text="Special Requests">
+                              <Button  mnemonicParsing="false" onAction="#handleMenuClick" prefHeight="55.0" prefWidth="239.0" style="visibility: true;" text="Special Requests" userData="zumar/specialMealRecordRequestsView.fxml">
                                  <font>
                                     <Font size="18.0" />
                                  </font>
                               </Button>
-                              <Button fx:id="messOFoodReportsBtn" mnemonicParsing="false" onAction="#handleMenuClick" prefHeight="55.0" prefWidth="239.0" style="visibility: true;" text="Food Report">
+                              <Button  mnemonicParsing="false" onAction="#handleMenuClick" prefHeight="55.0" prefWidth="239.0" style="visibility: true;" text="Food Report" userData="zumar/monthlyFoodUsageReportView.fxml">
                                  <font>
                                     <Font size="18.0" />
                                  </font>
                               </Button>
-                              <Button fx:id="messOStaffDutyRoasterBtn" mnemonicParsing="false" onAction="#handleMenuClick" prefHeight="55.0" prefWidth="239.0" style="visibility: true;" text="Staff Duty Roster">
+                              <Button  mnemonicParsing="false" onAction="#handleMenuClick" prefHeight="55.0" prefWidth="239.0" style="visibility: true;" text="Staff Duty Roster" userData="zumar/messStaffDutyRosterView.fxml">
                                  <font>
                                     <Font size="18.0" />
                                  </font>
                               </Button>
-                              <Button fx:id="messOFoodInventoryBtn" mnemonicParsing="false" onAction="#handleMenuClick" prefHeight="55.0" prefWidth="239.0" style="visibility: true;" text="Food Inventory">
+                              <Button  mnemonicParsing="false" onAction="#handleMenuClick" prefHeight="55.0" prefWidth="239.0" style="visibility: true;" text="Food Inventory" userData="zumar/foodStockSummaryView.fxml">
                                  <font>
                                     <Font size="18.0" />
                                  </font>
                               </Button>
-                              <Button fx:id="messONotifyCadetsBtn" mnemonicParsing="false" onAction="#handleMenuClick" prefHeight="55.0" prefWidth="239.0" style="visibility: true;" text="Notify Cadets">
+                              <Button  mnemonicParsing="false" onAction="#handleMenuClick" prefHeight="55.0" prefWidth="239.0" style="visibility: true;" text="Notify Cadets" userData="zumar/notifyCadetsAboutMenuUpdatesView.fxml">
                                  <font>
                                     <Font size="18.0" />
                                  </font>
                               </Button>
-                              <Button fx:id="messOMealFeedbackBtn" mnemonicParsing="false" onAction="#handleMenuClick" prefHeight="55.0" prefWidth="239.0" style="visibility: true;" text="Meal Feedback">
+                              <Button  mnemonicParsing="false" onAction="#handleMenuClick" prefHeight="55.0" prefWidth="239.0" style="visibility: true;" text="Meal Feedback" userData="zumar/recordFeedbackonMealsView.fxml">
                                  <font>
                                     <Font size="18.0" />
                                  </font>
@@ -69,47 +69,47 @@
                         </VBox>
                         <VBox fx:id="medicalOfficerMenu" alignment="CENTER" prefHeight="548.0" prefWidth="264.0">
                            <children>
-                              <Button fx:id="moDashboardBtn" mnemonicParsing="false" onAction="#handleMenuClick" prefHeight="55.0" prefWidth="239.0" style="visibility: true;" text="Dashboard">
+                              <Button  mnemonicParsing="false" onAction="#handleMenuClick" prefHeight="55.0" prefWidth="239.0" style="visibility: true;" text="Dashboard" userData="zumar/medicalOfficerDashboardView.fxml">
                                  <font>
                                     <Font size="18.0" />
                                  </font>
                               </Button>
-                              <Button fx:id="moAddMedicalRecordBtn" mnemonicParsing="false" onAction="#handleMenuClick" prefHeight="55.0" prefWidth="239.0" style="visibility: true;" text="Add Medical Record">
+                              <Button  mnemonicParsing="false" onAction="#handleMenuClick" prefHeight="55.0" prefWidth="239.0" style="visibility: true;" text="Add Medical Record" userData="zumar/addMedicalRecordView.fxml">
                                  <font>
                                     <Font size="18.0" />
                                  </font>
                               </Button>
-                              <Button fx:id="moVaccinationUpdateBtn" mnemonicParsing="false" onAction="#handleMenuClick" prefHeight="55.0" prefWidth="239.0" style="visibility: true;" text="Vaccination Update">
+                              <Button  mnemonicParsing="false" onAction="#handleMenuClick" prefHeight="55.0" prefWidth="239.0" style="visibility: true;" text="Vaccination Update" userData="zumar/updateVaccinationStatusView.fxml">
                                  <font>
                                     <Font size="18.0" />
                                  </font>
                               </Button>
-                              <Button fx:id="moMedicalHistoryBtn" mnemonicParsing="false" onAction="#handleMenuClick" prefHeight="55.0" prefWidth="239.0" style="visibility: true;" text="Medical History">
+                              <Button  mnemonicParsing="false" onAction="#handleMenuClick" prefHeight="55.0" prefWidth="239.0" style="visibility: true;" text="Medical History" userData="zumar/cadetHealthHistoryView.fxml">
                                  <font>
                                     <Font size="18.0" />
                                  </font>
                               </Button>
-                              <Button fx:id="moMedicalReportsBtn" mnemonicParsing="false" onAction="#handleMenuClick" prefHeight="55.0" prefWidth="239.0" style="visibility: true;" text="Medical Reports">
+                              <Button  mnemonicParsing="false" onAction="#handleMenuClick" prefHeight="55.0" prefWidth="239.0" style="visibility: true;" text="Medical Reports" userData="zumar/monthlyMedicalReportView.fxml">
                                  <font>
                                     <Font size="18.0" />
                                  </font>
                               </Button>
-                              <Button fx:id="moEmergencyCaseLogBtn" mnemonicParsing="false" onAction="#handleMenuClick" prefHeight="55.0" prefWidth="239.0" style="visibility: true;" text="Emergency Case Log">
+                              <Button  mnemonicParsing="false" onAction="#handleMenuClick" prefHeight="55.0" prefWidth="239.0" style="visibility: true;" text="Emergency Case Log" userData="zumar/emergencyMedicalRecordCasesView.fxml">
                                  <font>
                                     <Font size="18.0" />
                                  </font>
                               </Button>
-                              <Button fx:id="moScheduleCheckupBtn" mnemonicParsing="false" onAction="#handleMenuClick" prefHeight="55.0" prefWidth="239.0" style="visibility: true;" text="Schedule Checkup">
+                              <Button  mnemonicParsing="false" onAction="#handleMenuClick" prefHeight="55.0" prefWidth="239.0" style="visibility: true;" text="Schedule Checkup" userData="zumar/cadetHealthCheckupView.fxml">
                                  <font>
                                     <Font size="18.0" />
                                  </font>
                               </Button>
-                              <Button fx:id="moPendingCasesBtn" mnemonicParsing="false" onAction="#handleMenuClick" prefHeight="55.0" prefWidth="239.0" style="visibility: true;" text="Pending Cases">
+                              <Button mnemonicParsing="false" onAction="#handleMenuClick" prefHeight="55.0" prefWidth="239.0" style="visibility: true;" text="Pending Cases" userData="zumar/pendingCasesView.fxml">
                                  <font>
                                     <Font size="18.0" />
                                  </font>
                               </Button>
-                              <Button fx:id="moHealthAdvisoryBtn" mnemonicParsing="false" onAction="#handleMenuClick" prefHeight="55.0" prefWidth="239.0" style="visibility: true;" text="Health Advisory">
+                              <Button  mnemonicParsing="false" onAction="#handleMenuClick" prefHeight="55.0" prefWidth="239.0" style="visibility: true;" text="Health Advisory" userData="zumar/sendHealthAdvisoryView.fxml">
                                  <font>
                                     <Font size="18.0" />
                                  </font>
@@ -118,47 +118,47 @@
                         </VBox>
                         <VBox fx:id="logisticsOfficerMenu" alignment="CENTER" prefHeight="548.0" prefWidth="257.0">
                            <children>
-                              <Button fx:id="loDashboardBtn" mnemonicParsing="false" onAction="#handleMenuClick" prefHeight="55.0" prefWidth="239.0" style="visibility: true;" text="Dashboard">
+                              <Button  mnemonicParsing="false" onAction="#handleMenuClick" prefHeight="55.0" prefWidth="239.0" style="visibility: true;" text="Dashboard" userData="fatema/logisticOfficerDashboardView.fxml">
                                  <font>
                                     <Font size="18.0" />
                                  </font>
                               </Button>
-                              <Button fx:id="loAddInventoryBtn" mnemonicParsing="false" onAction="#handleMenuClick" prefHeight="55.0" prefWidth="239.0" style="visibility: true;" text="Add Inventory">
+                              <Button  mnemonicParsing="false" onAction="#handleMenuClick" prefHeight="55.0" prefWidth="239.0" style="visibility: true;" text="Add Inventory" userData="fatema/addInventoryView.fxml">
                                  <font>
                                     <Font size="18.0" />
                                  </font>
                               </Button>
-                              <Button fx:id="loManageInventoryBtn" mnemonicParsing="false" onAction="#handleMenuClick" prefHeight="55.0" prefWidth="239.0" style="visibility: true;" text="Manage Inventory">
+                              <Button  mnemonicParsing="false" onAction="#handleMenuClick" prefHeight="55.0" prefWidth="239.0" style="visibility: true;" text="Manage Inventory" userData="fatema/manageInventoryView.fxml">
                                  <font>
                                     <Font size="18.0" />
                                  </font>
                               </Button>
-                              <Button fx:id="loInventorySummaryBtn" mnemonicParsing="false" onAction="#handleMenuClick" prefHeight="55.0" prefWidth="239.0" style="visibility: true;" text="Inventory Summary">
+                              <Button  mnemonicParsing="false" onAction="#handleMenuClick" prefHeight="55.0" prefWidth="239.0" style="visibility: true;" text="Inventory Summary" userData="fatema/inventorySummaryView.fxml">
                                  <font>
                                     <Font size="18.0" />
                                  </font>
                               </Button>
-                              <Button fx:id="loIssueItemBtn" mnemonicParsing="false" onAction="#handleMenuClick" prefHeight="55.0" prefWidth="239.0" style="visibility: true;" text="Issue Items">
+                              <Button  mnemonicParsing="false" onAction="#handleMenuClick" prefHeight="55.0" prefWidth="239.0" style="visibility: true;" text="Issue Items" userData="fatema/issueItemsView.fxml">
                                  <font>
                                     <Font size="18.0" />
                                  </font>
                               </Button>
-                              <Button fx:id="loMonthlyReportsBtn" mnemonicParsing="false" onAction="#handleMenuClick" prefHeight="55.0" prefWidth="239.0" style="visibility: true;" text="Monthly Report">
+                              <Button  mnemonicParsing="false" onAction="#handleMenuClick" prefHeight="55.0" prefWidth="239.0" style="visibility: true;" text="Monthly Report" userData="fatema/monthlyLogisticsReportView.fxml">
                                  <font>
                                     <Font size="18.0" />
                                  </font>
                               </Button>
-                              <Button fx:id="loReStockRequestBtn" mnemonicParsing="false" onAction="#handleMenuClick" prefHeight="55.0" prefWidth="239.0" style="visibility: true;" text="Restock Requests">
+                              <Button  mnemonicParsing="false" onAction="#handleMenuClick" prefHeight="55.0" prefWidth="239.0" style="visibility: true;" text="Restock Requests" userData="fatema/restockRequestView.fxml">
                                  <font>
                                     <Font size="18.0" />
                                  </font>
                               </Button>
-                              <Button fx:id="loDamageOrReturnLogBtn" mnemonicParsing="false" onAction="#handleMenuClick" prefHeight="55.0" prefWidth="239.0" style="visibility: true;" text="Damaged/Return Log">
+                              <Button  mnemonicParsing="false" onAction="#handleMenuClick" prefHeight="55.0" prefWidth="239.0" style="visibility: true;" text="Damaged/Return Log" userData="fatema/returnLog.fxml">
                                  <font>
                                     <Font size="18.0" />
                                  </font>
                               </Button>
-                              <Button fx:id="loNotifyCommandantBtn" mnemonicParsing="false" onAction="#handleMenuClick" prefHeight="55.0" prefWidth="239.0" style="visibility: true;" text="Notify Commandant">
+                              <Button  mnemonicParsing="false" onAction="#handleMenuClick" prefHeight="55.0" prefWidth="239.0" style="visibility: true;" text="Notify Commandant" userData="fatema/notifyCommandantView.fxml">
                                  <font>
                                     <Font size="18.0" />
                                  </font>
@@ -167,47 +167,47 @@
                         </VBox>
                         <VBox fx:id="trainingInstructorMenu" alignment="CENTER" prefHeight="548.0" prefWidth="258.0">
                            <children>
-                              <Button fx:id="tiDashboardBtn" mnemonicParsing="false" onAction="#handleMenuClick" prefHeight="55.0" prefWidth="239.0" style="visibility: true;" text="Dashboard">
+                              <Button  mnemonicParsing="false" onAction="#handleMenuClick" prefHeight="55.0" prefWidth="239.0" style="visibility: true;" text="Dashboard" userData="fatema/trainingInstructorDashboardView.fxml">
                                  <font>
                                     <Font size="18.0" />
                                  </font>
                               </Button>
-                              <Button fx:id="tiTakeAttendenceBtn" mnemonicParsing="false" onAction="#handleMenuClick" prefHeight="55.0" prefWidth="239.0" style="visibility: true;" text="Take Attendance">
+                              <Button  mnemonicParsing="false" onAction="#handleMenuClick" prefHeight="55.0" prefWidth="239.0" style="visibility: true;" text="Take Attendance" userData="fatema/takeAttendanceview.fxml">
                                  <font>
                                     <Font size="18.0" />
                                  </font>
                               </Button>
-                              <Button fx:id="tiUploadMaterialsBtn" mnemonicParsing="false" onAction="#handleMenuClick" prefHeight="55.0" prefWidth="239.0" style="visibility: true;" text="Upload Materials">
+                              <Button  mnemonicParsing="false" onAction="#handleMenuClick" prefHeight="55.0" prefWidth="239.0" style="visibility: true;" text="Upload Materials" userData="fatema/updateMatrialsview.fxml">
                                  <font>
                                     <Font size="18.0" />
                                  </font>
                               </Button>
-                              <Button fx:id="tiScheduleTrainingBtn" mnemonicParsing="false" onAction="#handleMenuClick" prefHeight="55.0" prefWidth="239.0" style="visibility: true;" text="Schedule Training">
+                              <Button  mnemonicParsing="false" onAction="#handleMenuClick" prefHeight="55.0" prefWidth="239.0" style="visibility: true;" text="Schedule Training" userData="fatema/scheduleTrainingView.fxml">
                                  <font>
                                     <Font size="18.0" />
                                  </font>
                               </Button>
-                              <Button fx:id="tiViewFeedBacksBtn" mnemonicParsing="false" onAction="#handleMenuClick" prefHeight="55.0" prefWidth="239.0" style="visibility: true;" text="View Feedback">
+                              <Button  mnemonicParsing="false" onAction="#handleMenuClick" prefHeight="55.0" prefWidth="239.0" style="visibility: true;" text="View Feedback" userData="fatema/viewFeedbackView.fxml">
                                  <font>
                                     <Font size="18.0" />
                                  </font>
                               </Button>
-                              <Button fx:id="tiSubmitEvulationsBtn" mnemonicParsing="false" onAction="#handleMenuClick" prefHeight="55.0" prefWidth="239.0" style="visibility: true;" text="Submit Evaluation">
+                              <Button  mnemonicParsing="false" onAction="#handleMenuClick" prefHeight="55.0" prefWidth="239.0" style="visibility: true;" text="Submit Evaluation" userData="fatema/submitEvaluationView.fxml">
                                  <font>
                                     <Font size="18.0" />
                                  </font>
                               </Button>
-                              <Button fx:id="tiTrainingHistoryBtn" mnemonicParsing="false" onAction="#handleMenuClick" prefHeight="55.0" prefWidth="239.0" style="visibility: true;" text="Training History">
+                              <Button  mnemonicParsing="false" onAction="#handleMenuClick" prefHeight="55.0" prefWidth="239.0" style="visibility: true;" text="Training History" userData="fatema/trainingHistoryView.fxml">
                                  <font>
                                     <Font size="18.0" />
                                  </font>
                               </Button>
-                              <Button fx:id="tiAbsenceReasonBtn" mnemonicParsing="false" onAction="#handleMenuClick" prefHeight="55.0" prefWidth="239.0" style="visibility: true;" text="Absence Reason">
+                              <Button  mnemonicParsing="false" onAction="#handleMenuClick" prefHeight="55.0" prefWidth="239.0" style="visibility: true;" text="Absence Reason" userData="fatema/markAbsenceReasonView.fxml">
                                  <font>
                                     <Font size="18.0" />
                                  </font>
                               </Button>
-                              <Button fx:id="tiPostAnnouncemnetBtn" mnemonicParsing="false" onAction="#handleMenuClick" prefHeight="55.0" prefWidth="239.0" style="visibility: true;" text="Post Announcement">
+                              <Button  mnemonicParsing="false" onAction="#handleMenuClick" prefHeight="55.0" prefWidth="239.0" style="visibility: true;" text="Post Announcement" userData="fatema/postAnnouncement.fxml">
                                  <font>
                                     <Font size="18.0" />
                                  </font>
@@ -216,47 +216,47 @@
                         </VBox>
                         <VBox fx:id="cadetSupervisorMenu" alignment="CENTER" prefHeight="554.0" prefWidth="264.0">
                            <children>
-                              <Button fx:id="csDashboardBtn" mnemonicParsing="false" onAction="#handleMenuClick" prefHeight="55.0" prefWidth="239.0" style="visibility: true;" text="Dashboard">
+                              <Button  mnemonicParsing="false" onAction="#handleMenuClick" prefHeight="55.0" prefWidth="239.0" style="visibility: true;" text="Dashboard" userData="afifa/CadetSupervisorDashboardView.fxml">
                                  <font>
                                     <Font size="18.0" />
                                  </font>
                               </Button>
-                              <Button fx:id="csLeaveRequestBtn" mnemonicParsing="false" onAction="#handleMenuClick" prefHeight="55.0" prefWidth="239.0" style="visibility: true;" text="Leave Requests">
+                              <Button  mnemonicParsing="false" onAction="#handleMenuClick" prefHeight="55.0" prefWidth="239.0" style="visibility: true;" text="Leave Requests" userData="afifa/CSLeaveRequestsView.fxml">
                                  <font>
                                     <Font size="18.0" />
                                  </font>
                               </Button>
-                              <Button fx:id="csAttendenceMonitorBtn" mnemonicParsing="false" onAction="#handleMenuClick" prefHeight="55.0" prefWidth="239.0" style="visibility: true;" text="Attendance Monitor">
+                              <Button  mnemonicParsing="false" onAction="#handleMenuClick" prefHeight="55.0" prefWidth="239.0" style="visibility: true;" text="Attendance Monitor" userData="afifa/AttendanceMonitorView.fxml">
                                  <font>
                                     <Font size="18.0" />
                                  </font>
                               </Button>
-                              <Button fx:id="csSubmitPerformanceBtn" mnemonicParsing="false" onAction="#handleMenuClick" prefHeight="55.0" prefWidth="239.0" style="visibility: true;" text="Submit Performance Report">
+                              <Button  mnemonicParsing="false" onAction="#handleMenuClick" prefHeight="55.0" prefWidth="239.0" style="visibility: true;" text="Submit Performance Report" userData="afifa/CsSubmitPerformanceReportView.fxml">
                                  <font>
                                     <Font size="15.0" />
                                  </font>
                               </Button>
-                              <Button fx:id="csDrillSchedulerBtn" mnemonicParsing="false" onAction="#handleMenuClick" prefHeight="61.0" prefWidth="239.0" style="visibility: true;" text="Drill Scheduler">
+                              <Button  mnemonicParsing="false" onAction="#handleMenuClick" prefHeight="61.0" prefWidth="239.0" style="visibility: true;" text="Drill Scheduler" userData="afifa/DrillSchedulerView.fxml">
                                  <font>
                                     <Font size="18.0" />
                                  </font>
                               </Button>
-                              <Button fx:id="csCadetHealthReportsBtn" mnemonicParsing="false" onAction="#handleMenuClick" prefHeight="55.0" prefWidth="239.0" style="visibility: true;" text="Cadet Health Reports">
+                              <Button  mnemonicParsing="false" onAction="#handleMenuClick" prefHeight="55.0" prefWidth="239.0" style="visibility: true;" text="Cadet Health Reports" userData="afifa/CadetHealthReportsView.fxml">
                                  <font>
                                     <Font size="18.0" />
                                  </font>
                               </Button>
-                              <Button fx:id="csMonitorAssignmentBtn" mnemonicParsing="false" onAction="#handleMenuClick" prefHeight="55.0" prefWidth="239.0" style="visibility: true;" text="Mentor Assignment">
+                              <Button  mnemonicParsing="false" onAction="#handleMenuClick" prefHeight="55.0" prefWidth="239.0" style="visibility: true;" text="Mentor Assignment" userData="afifa/MentorAssignmentView.fxml">
                                  <font>
                                     <Font size="18.0" />
                                  </font>
                               </Button>
-                              <Button fx:id="csGroupAssignmentBtn" mnemonicParsing="false" onAction="#handleMenuClick" prefHeight="55.0" prefWidth="239.0" style="visibility: true;" text="Group Announcement">
+                              <Button  mnemonicParsing="false" onAction="#handleMenuClick" prefHeight="55.0" prefWidth="239.0" style="visibility: true;" text="Group Announcement" userData="afifa/GroupAnnouncementView.fxml">
                                  <font>
                                     <Font size="18.0" />
                                  </font>
                               </Button>
-                              <Button fx:id="csEventParticipationBtn" mnemonicParsing="false" onAction="#handleMenuClick" prefHeight="55.0" prefWidth="239.0" style="visibility: true;" text="Event Participation">
+                              <Button  mnemonicParsing="false" onAction="#handleMenuClick" prefHeight="55.0" prefWidth="239.0" style="visibility: true;" text="Event Participation" userData="afifa/EventParticipationView.fxml">
                                  <font>
                                     <Font size="18.0" />
                                  </font>
@@ -265,42 +265,42 @@
                         </VBox>
                         <VBox fx:id="cadetMenu" alignment="CENTER" prefHeight="554.0" prefWidth="264.0">
                            <children>
-                              <Button fx:id="cadetDashboardBtn" mnemonicParsing="false" onAction="#handleMenuClick" prefHeight="55.0" prefWidth="239.0" style="visibility: true;" text="Dashboard">
+                              <Button  mnemonicParsing="false" onAction="#handleMenuClick" prefHeight="55.0" prefWidth="239.0" style="visibility: true;" text="Dashboard" userData="afifa/cadetDashboardView.fxml">
                                  <font>
                                     <Font size="18.0" />
                                  </font>
                               </Button>
-                              <Button fx:id="cadetMyInstructorBtn" mnemonicParsing="false" onAction="#handleMenuClick" prefHeight="55.0" prefWidth="239.0" style="visibility: true;" text="My Instructors">
+                              <Button  mnemonicParsing="false" onAction="#handleMenuClick" prefHeight="55.0" prefWidth="239.0" style="visibility: true;" text="My Instructors" userData="afifa/MyInstructorsView.fxml">
                                  <font>
                                     <Font size="18.0" />
                                  </font>
                               </Button>
-                              <Button fx:id="cadetViewRoutineBtn" mnemonicParsing="false" onAction="#handleMenuClick" prefHeight="55.0" prefWidth="239.0" style="visibility: true;" text="View Routine">
+                              <Button  mnemonicParsing="false" onAction="#handleMenuClick" prefHeight="55.0" prefWidth="239.0" style="visibility: true;" text="View Routine" userData="afifa/ViewRoutineView.fxml">
                                  <font>
                                     <Font size="18.0" />
                                  </font>
                               </Button>
-                              <Button fx:id="cadetMarkAttendenceBtn" mnemonicParsing="false" onAction="#handleMenuClick" prefHeight="55.0" prefWidth="239.0" style="visibility: true;" text="Mark Attendance">
+                              <Button  mnemonicParsing="false" onAction="#handleMenuClick" prefHeight="55.0" prefWidth="239.0" style="visibility: true;" text="Mark Attendance" userData="afifa/MarkAttendanceView.fxml">
                                  <font>
                                     <Font size="18.0" />
                                  </font>
                               </Button>
-                              <Button fx:id="cadetLeaveRequestBtn" mnemonicParsing="false" onAction="#handleMenuClick" prefHeight="55.0" prefWidth="239.0" style="visibility: true;" text="Leave Request">
+                              <Button  mnemonicParsing="false" onAction="#handleMenuClick" prefHeight="55.0" prefWidth="239.0" style="visibility: true;" text="Leave Request" userData="afifa/LeaveRequestView.fxml">
                                  <font>
                                     <Font size="18.0" />
                                  </font>
                               </Button>
-                              <Button fx:id="cadetSubmitProgressReportBtn" mnemonicParsing="false" onAction="#handleMenuClick" prefHeight="55.0" prefWidth="239.0" style="visibility: true;" text="Submit Progress Report">
+                              <Button  mnemonicParsing="false" onAction="#handleMenuClick" prefHeight="55.0" prefWidth="239.0" style="visibility: true;" text="Submit Progress Report" userData="afifa/SubmitProgressReportView.fxml">
                                  <font>
                                     <Font size="18.0" />
                                  </font>
                               </Button>
-                              <Button fx:id="cadetRegisterForTraningBtn" mnemonicParsing="false" onAction="#handleMenuClick" prefHeight="55.0" prefWidth="239.0" style="visibility: true;" text="Register for Training">
+                              <Button  mnemonicParsing="false" onAction="#handleMenuClick" prefHeight="55.0" prefWidth="239.0" style="visibility: true;" text="Register for Training" userData="afifa/RegisterForTrainingView.fxml">
                                  <font>
                                     <Font size="18.0" />
                                  </font>
                               </Button>
-                              <Button fx:id="cadetPerformanceEvolationBtn" mnemonicParsing="false" onAction="#handleMenuClick" prefHeight="55.0" prefWidth="239.0" style="visibility: true;" text="Performance Evaluation">
+                              <Button  mnemonicParsing="false" onAction="#handleMenuClick" prefHeight="55.0" prefWidth="239.0" style="visibility: true;" text="Performance Evaluation" userData="afifa/PerformanceEvaluationView.fxml">
                                  <font>
                                     <Font size="18.0" />
                                  </font>
@@ -309,42 +309,42 @@
                         </VBox>
                         <VBox fx:id="commandantMenu" alignment="CENTER" prefHeight="554.0" prefWidth="256.0">
                            <children>
-                              <Button fx:id="commandantDashboardBtn" mnemonicParsing="false" onAction="#handleMenuClick" prefHeight="55.0" prefWidth="239.0" style="visibility: true;" text="Dashboard" userData="shanin/CommandantDashboardView.fxml">
+                              <Button  mnemonicParsing="false" onAction="#handleMenuClick" prefHeight="55.0" prefWidth="239.0" style="visibility: true;" text="Dashboard" userData="shanin/CommandantDashboardView.fxml">
                                  <font>
                                     <Font size="18.0" />
                                  </font>
                               </Button>
-                              <Button fx:id="commandantUnitReportsBtn" mnemonicParsing="false" onAction="#handleMenuClick" prefHeight="55.0" prefWidth="239.0" style="visibility: true;" text="Unit Reports" userData="shanin/UnitReportsView.fxml">
+                              <Button  mnemonicParsing="false" onAction="#handleMenuClick" prefHeight="55.0" prefWidth="239.0" style="visibility: true;" text="Unit Reports" userData="shanin/UnitReportsView.fxml">
                                  <font>
                                     <Font size="18.0" />
                                  </font>
                               </Button>
-                              <Button fx:id="commandantFinalEvolationBtn" mnemonicParsing="false" onAction="#handleMenuClick" prefHeight="55.0" prefWidth="239.0" style="visibility: true;" text="Final Evaluation" userData="shanin/FinalEvolationView.fxml">
+                              <Button  mnemonicParsing="false" onAction="#handleMenuClick" prefHeight="55.0" prefWidth="239.0" style="visibility: true;" text="Final Evaluation" userData="shanin/FinalEvolationView.fxml">
                                  <font>
                                     <Font size="18.0" />
                                  </font>
                               </Button>
-                              <Button fx:id="commandantInstructorAssignmentBtn" mnemonicParsing="false" onAction="#handleMenuClick" prefHeight="55.0" prefWidth="239.0" style="visibility: true;" text="Instructor Assignment" userData="shanin/InstructorAssignmentView.fxml">
+                              <Button  mnemonicParsing="false" onAction="#handleMenuClick" prefHeight="55.0" prefWidth="239.0" style="visibility: true;" text="Instructor Assignment" userData="shanin/InstructorAssignmentView.fxml">
                                  <font>
                                     <Font size="18.0" />
                                  </font>
                               </Button>
-                              <Button fx:id="commandantCadetRankingBtn" mnemonicParsing="false" onAction="#handleMenuClick" prefHeight="55.0" prefWidth="239.0" style="visibility: true;" text="Cadet Rankings" userData="shanin/CadetRankingView.fxml">
+                              <Button  mnemonicParsing="false" onAction="#handleMenuClick" prefHeight="55.0" prefWidth="239.0" style="visibility: true;" text="Cadet Rankings" userData="shanin/CadetRankingView.fxml">
                                  <font>
                                     <Font size="18.0" />
                                  </font>
                               </Button>
-                              <Button fx:id="commandantAnnouncementApprovalBtn" mnemonicParsing="false" onAction="#handleMenuClick" prefHeight="55.0" prefWidth="239.0" style="visibility: true;" text="Announcement Approval" userData="shanin/AnnouncementView.fxml">
+                              <Button  mnemonicParsing="false" onAction="#handleMenuClick" prefHeight="55.0" prefWidth="239.0" style="visibility: true;" text="Announcement Approval" userData="shanin/AnnouncementView.fxml">
                                  <font>
                                     <Font size="18.0" />
                                  </font>
                               </Button>
-                              <Button fx:id="commandantMissionEventsBtn" mnemonicParsing="false" onAction="#handleMenuClick" prefHeight="55.0" prefWidth="239.0" style="visibility: true;" text="Mission Events" userData="shanin/MissionEventsView.fxml">
+                              <Button  mnemonicParsing="false" onAction="#handleMenuClick" prefHeight="55.0" prefWidth="239.0" style="visibility: true;" text="Mission Events" userData="shanin/MissionEventsView.fxml">
                                  <font>
                                     <Font size="18.0" />
                                  </font>
                               </Button>
-                              <Button fx:id="commandantInstructorPerformanceBtn" mnemonicParsing="false" onAction="#handleMenuClick" prefHeight="55.0" prefWidth="239.0" style="visibility: true;" text="Instructor Performance" userData="shanin/InstructorPerformanceView.fxml">
+                              <Button  mnemonicParsing="false" onAction="#handleMenuClick" prefHeight="55.0" prefWidth="239.0" style="visibility: true;" text="Instructor Performance" userData="shanin/InstructorPerformanceView.fxml">
                                  <font>
                                     <Font size="18.0" />
                                  </font>
@@ -353,37 +353,37 @@
                         </VBox>
                         <VBox fx:id="systemAdminMenu" alignment="CENTER" prefHeight="538.0" prefWidth="253.0">
                            <children>
-                              <Button fx:id="systemAdminDashBoardBtn" mnemonicParsing="false" onAction="#handleMenuClick" prefHeight="55.0" prefWidth="239.0" style="visibility: true;" text="Dashboard" userData="shanin/systemAdminDashboardView.fxml">
+                              <Button  mnemonicParsing="false" onAction="#handleMenuClick" prefHeight="55.0" prefWidth="239.0" style="visibility: true;" text="Dashboard" userData="shanin/systemAdminDashboardView.fxml">
                                  <font>
                                     <Font size="18.0" />
                                  </font>
                               </Button>
-                              <Button fx:id="systemAdminCadetManagementBtn" mnemonicParsing="false" onAction="#handleMenuClick" prefHeight="55.0" prefWidth="239.0" style="visibility: true;" text="Cadet Management" userData="shanin/CadetManagementView.fxml">
+                              <Button  mnemonicParsing="false" onAction="#handleMenuClick" prefHeight="55.0" prefWidth="239.0" style="visibility: true;" text="Cadet Management" userData="shanin/CadetManagementView.fxml">
                                  <font>
                                     <Font size="18.0" />
                                  </font>
                               </Button>
-                              <Button fx:id="systemAdminUserManagementBtn" mnemonicParsing="false" onAction="#handleMenuClick" prefHeight="55.0" prefWidth="239.0" style="visibility: true;" text=" User Management" userData="shanin/UserManagementView.fxml">
+                              <Button  mnemonicParsing="false" onAction="#handleMenuClick" prefHeight="55.0" prefWidth="239.0" style="visibility: true;" text=" User Management" userData="shanin/UserManagementView.fxml">
                                  <font>
                                     <Font size="18.0" />
                                  </font>
                               </Button>
-                              <Button fx:id="systemAdminReportsBtn" mnemonicParsing="false" onAction="#handleMenuClick" prefHeight="55.0" prefWidth="239.0" style="visibility: true;" text="Reports" userData="shanin/SystemAdminReportsView.fxml">
+                              <Button  mnemonicParsing="false" onAction="#handleMenuClick" prefHeight="55.0" prefWidth="239.0" style="visibility: true;" text="Reports" userData="shanin/SystemAdminReportsView.fxml">
                                  <font>
                                     <Font size="18.0" />
                                  </font>
                               </Button>
-                              <Button fx:id="systemAdminSystemSettingsBtn" mnemonicParsing="false" onAction="#handleMenuClick" prefHeight="55.0" prefWidth="239.0" style="visibility: true;" text="System Settings" userData="shanin/SystemSettingsView.fxml">
+                              <Button  mnemonicParsing="false" onAction="#handleMenuClick" prefHeight="55.0" prefWidth="239.0" style="visibility: true;" text="System Settings" userData="shanin/SystemSettingsView.fxml">
                                  <font>
                                     <Font size="18.0" />
                                  </font>
                               </Button>
-                              <Button fx:id="systemAdminAuditLogsBtn" mnemonicParsing="false" onAction="#handleMenuClick" prefHeight="55.0" prefWidth="239.0" style="visibility: true;" text="Audit Logs" userData="shanin/AuditLogsView.fxml">
+                              <Button  mnemonicParsing="false" onAction="#handleMenuClick" prefHeight="55.0" prefWidth="239.0" style="visibility: true;" text="Audit Logs" userData="shanin/AuditLogsView.fxml">
                                  <font>
                                     <Font size="18.0" />
                                  </font>
                               </Button>
-                              <Button fx:id="systemAdminProfileBtn" mnemonicParsing="false" onAction="#handleMenuClick" prefHeight="55.0" prefWidth="239.0" style="visibility: true;" text="Profile" userData="shanin/SystemAdminProfileView.fxml">
+                              <Button  mnemonicParsing="false" onAction="#handleMenuClick" prefHeight="55.0" prefWidth="239.0" style="visibility: true;" text="Profile" userData="shanin/SystemAdminProfileView.fxml">
                                  <font>
                                     <Font size="18.0" />
                                  </font>
