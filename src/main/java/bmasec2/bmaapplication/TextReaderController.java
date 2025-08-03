@@ -2,6 +2,7 @@ package bmasec2.bmaapplication;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
@@ -42,8 +43,10 @@ public class TextReaderController
 
     @javafx.fxml.FXML
     public void backOnAction(ActionEvent actionEvent) throws IOException {
-
+        Node source = (Node) actionEvent.getSource();
+        Stage currentStage = (Stage) source.getScene().getWindow();
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("text-writer.fxml"));
+        currentStage.close();
         Scene scene = new Scene(fxmlLoader.load());
         Stage stage = new Stage();
         stage.setTitle("BMA Application");
