@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bmasec2.bmaapplication.TextWriterController">
+   <children>
+      <TextArea fx:id="textAreaType" layoutX="14.0" layoutY="14.0" prefHeight="334.0" prefWidth="579.0" />
+      <Label fx:id="labelStore" layoutX="14.0" layoutY="361.0" prefHeight="27.0" prefWidth="437.0">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Button layoutX="529.0" layoutY="356.0" mnemonicParsing="false" onAction="#saveOnAction" text="Save">
+         <font>
+            <Font size="17.0" />
+         </font>
+      </Button>
+      <Button layoutX="465.0" layoutY="356.0" mnemonicParsing="false" onAction="#clearOnAction" text="Clear">
+         <font>
+            <Font size="17.0" />
+         </font>
+      </Button>
+   </children>
+</AnchorPane>

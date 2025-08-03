@@ -1,0 +1,131 @@
+Exception in Application start method
+java.lang.reflect.InvocationTargetException
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:119)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:565)
+	at javafx.graphics/com.sun.javafx.application.LauncherImpl.launchApplicationWithArgs(LauncherImpl.java:465)
+	at javafx.graphics/com.sun.javafx.application.LauncherImpl.launchApplication(LauncherImpl.java:364)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:565)
+	at java.base/sun.launcher.LauncherHelper$FXHelper.main(LauncherHelper.java:1180)
+Caused by: java.lang.RuntimeException: Exception in Application start method
+	at javafx.graphics/com.sun.javafx.application.LauncherImpl.launchApplication1(LauncherImpl.java:901)
+	at javafx.graphics/com.sun.javafx.application.LauncherImpl.lambda$launchApplication$2(LauncherImpl.java:196)
+	at java.base/java.lang.Thread.run(Thread.java:1447)
+Caused by: javafx.fxml.LoadException: 
+/C:/OOP/group2-BMA/target/classes/bmasec2/bmaapplication/test/text-writer.fxml:12
+
+	at javafx.fxml/javafx.fxml.FXMLLoader.constructLoadException(FXMLLoader.java:2714)
+	at javafx.fxml/javafx.fxml.FXMLLoader.loadImpl(FXMLLoader.java:2692)
+	at javafx.fxml/javafx.fxml.FXMLLoader.loadImpl(FXMLLoader.java:2555)
+	at javafx.fxml/javafx.fxml.FXMLLoader.load(FXMLLoader.java:2523)
+	at bmasec2.bmaapplication/bmasec2.bmaapplication.HelloApplication.start(HelloApplication.java:14)
+	at javafx.graphics/com.sun.javafx.application.LauncherImpl.lambda$launchApplication1$9(LauncherImpl.java:847)
+	at javafx.graphics/com.sun.javafx.application.PlatformImpl.lambda$runAndWait$12(PlatformImpl.java:484)
+	at javafx.graphics/com.sun.javafx.application.PlatformImpl.lambda$runLater$10(PlatformImpl.java:457)
+	at java.base/java.security.AccessController.doPrivileged(AccessController.java:138)
+	at javafx.graphics/com.sun.javafx.application.PlatformImpl.lambda$runLater$11(PlatformImpl.java:456)
+	at javafx.graphics/com.sun.glass.ui.InvokeLaterDispatcher$Future.run(InvokeLaterDispatcher.java:96)
+	at javafx.graphics/com.sun.glass.ui.win.WinApplication._runLoop(Native Method)
+	at javafx.graphics/com.sun.glass.ui.win.WinApplication.lambda$runLoop$3(WinApplication.java:184)
+	... 1 more
+Caused by: java.lang.reflect.InaccessibleObjectException: Unable to make field private javafx.scene.control.TextArea bmasec2.bmaapplication.test.TextWriterController.textAreaType accessible: module bmasec2.bmaapplication does not "opens bmasec2.bmaapplication.test" to module javafx.fxml
+	at java.base/java.lang.reflect.AccessibleObject.throwInaccessibleObjectException(AccessibleObject.java:353)
+	at java.base/java.lang.reflect.AccessibleObject.checkCanSetAccessible(AccessibleObject.java:329)
+	at java.base/java.lang.reflect.AccessibleObject.checkCanSetAccessible(AccessibleObject.java:277)
+	at java.base/java.lang.reflect.Field.checkCanSetAccessible(Field.java:179)
+	at java.base/java.lang.reflect.Field.setAccessible(Field.java:173)
+	at javafx.fxml/javafx.fxml.FXMLLoader$ControllerAccessor.addAccessibleFields(FXMLLoader.java:3612)
+	at javafx.fxml/javafx.fxml.FXMLLoader$ControllerAccessor$1.run(FXMLLoader.java:3577)
+	at javafx.fxml/javafx.fxml.FXMLLoader$ControllerAccessor$1.run(FXMLLoader.java:3573)
+	at java.base/java.security.AccessController.doPrivileged(AccessController.java:74)
+	at javafx.fxml/javafx.fxml.FXMLLoader$ControllerAccessor.addAccessibleMembers(FXMLLoader.java:3572)
+	at javafx.fxml/javafx.fxml.FXMLLoader$ControllerAccessor.getControllerFields(FXMLLoader.java:3510)
+	at javafx.fxml/javafx.fxml.FXMLLoader.injectFields(FXMLLoader.java:1169)
+	at javafx.fxml/javafx.fxml.FXMLLoader$ValueElement.processValue(FXMLLoader.java:868)
+	at javafx.fxml/javafx.fxml.FXMLLoader$ValueElement.processStartElement(FXMLLoader.java:762)
+	at javafx.fxml/javafx.fxml.FXMLLoader.processStartElement(FXMLLoader.java:2845)
+	at javafx.fxml/javafx.fxml.FXMLLoader.loadImpl(FXMLLoader.java:2641)
+	... 12 more
+Exception running application bmasec2.bmaapplication.HelloApplication
+
+Process finished with exit code 1
+Hi
+How Are you!Exception in Application start method
+java.lang.reflect.InvocationTargetException
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:119)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:565)
+	at javafx.graphics/com.sun.javafx.application.LauncherImpl.launchApplicationWithArgs(LauncherImpl.java:465)
+	at javafx.graphics/com.sun.javafx.application.LauncherImpl.launchApplication(LauncherImpl.java:364)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:565)
+	at java.base/sun.launcher.LauncherHelper$FXHelper.main(LauncherHelper.java:1180)
+Caused by: java.lang.RuntimeException: Exception in Application start method
+	at javafx.graphics/com.sun.javafx.application.LauncherImpl.launchApplication1(LauncherImpl.java:901)
+	at javafx.graphics/com.sun.javafx.application.LauncherImpl.lambda$launchApplication$2(LauncherImpl.java:196)
+	at java.base/java.lang.Thread.run(Thread.java:1447)
+Caused by: javafx.fxml.LoadException: 
+/C:/OOP/group2-BMA/target/classes/bmasec2/bmaapplication/test/text-writer.fxml:12
+
+	at javafx.fxml/javafx.fxml.FXMLLoader.constructLoadException(FXMLLoader.java:2714)
+	at javafx.fxml/javafx.fxml.FXMLLoader.loadImpl(FXMLLoader.java:2692)
+	at javafx.fxml/javafx.fxml.FXMLLoader.loadImpl(FXMLLoader.java:2555)
+	at javafx.fxml/javafx.fxml.FXMLLoader.load(FXMLLoader.java:2523)
+	at bmasec2.bmaapplication/bmasec2.bmaapplication.HelloApplication.start(HelloApplication.java:14)
+	at javafx.graphics/com.sun.javafx.application.LauncherImpl.lambda$launchApplication1$9(LauncherImpl.java:847)
+	at javafx.graphics/com.sun.javafx.application.PlatformImpl.lambda$runAndWait$12(PlatformImpl.java:484)
+	at javafx.graphics/com.sun.javafx.application.PlatformImpl.lambda$runLater$10(PlatformImpl.java:457)
+	at java.base/java.security.AccessController.doPrivileged(AccessController.java:138)
+	at javafx.graphics/com.sun.javafx.application.PlatformImpl.lambda$runLater$11(PlatformImpl.java:456)
+	at javafx.graphics/com.sun.glass.ui.InvokeLaterDispatcher$Future.run(InvokeLaterDispatcher.java:96)
+	at javafx.graphics/com.sun.glass.ui.win.WinApplication._runLoop(Native Method)
+	at javafx.graphics/com.sun.glass.ui.win.WinApplication.lambda$runLoop$3(WinApplication.java:184)
+	... 1 more
+Caused by: java.lang.reflect.InaccessibleObjectException: Unable to make field private javafx.scene.control.TextArea bmasec2.bmaapplication.test.TextWriterController.textAreaType accessible: module bmasec2.bmaapplication does not "opens bmasec2.bmaapplication.test" to module javafx.fxml
+	at java.base/java.lang.reflect.AccessibleObject.throwInaccessibleObjectException(AccessibleObject.java:353)
+	at java.base/java.lang.reflect.AccessibleObject.checkCanSetAccessible(AccessibleObject.java:329)
+	at java.base/java.lang.reflect.AccessibleObject.checkCanSetAccessible(AccessibleObject.java:277)
+	at java.base/java.lang.reflect.Field.checkCanSetAccessible(Field.java:179)
+	at java.base/java.lang.reflect.Field.setAccessible(Field.java:173)
+	at javafx.fxml/javafx.fxml.FXMLLoader$ControllerAccessor.addAccessibleFields(FXMLLoader.java:3612)
+	at javafx.fxml/javafx.fxml.FXMLLoader$ControllerAccessor$1.run(FXMLLoader.java:3577)
+	at javafx.fxml/javafx.fxml.FXMLLoader$ControllerAccessor$1.run(FXMLLoader.java:3573)
+	at java.base/java.security.AccessController.doPrivileged(AccessController.java:74)
+	at javafx.fxml/javafx.fxml.FXMLLoader$ControllerAccessor.addAccessibleMembers(FXMLLoader.java:3572)
+	at javafx.fxml/javafx.fxml.FXMLLoader$ControllerAccessor.getControllerFields(FXMLLoader.java:3510)
+	at javafx.fxml/javafx.fxml.FXMLLoader.injectFields(FXMLLoader.java:1169)
+	at javafx.fxml/javafx.fxml.FXMLLoader$ValueElement.processValue(FXMLLoader.java:868)
+	at javafx.fxml/javafx.fxml.FXMLLoader$ValueElement.processStartElement(FXMLLoader.java:762)
+	at javafx.fxml/javafx.fxml.FXMLLoader.processStartElement(FXMLLoader.java:2845)
+	at javafx.fxml/javafx.fxml.FXMLLoader.loadImpl(FXMLLoader.java:2641)
+	... 12 more
+Exception running application bmasec2.bmaapplication.HelloApplication
+
+Process finished with exit code 1
+public class TextWriterController
+{
+    @javafx.fxml.FXML
+    private TextArea textAreaType;
+    @javafx.fxml.FXML
+    private Label labelStore;
+
+    public static final String filename = "data.txt";
+
+    @javafx.fxml.FXML
+    public void initialize() {
+    }
+
+    @javafx.fxml.FXML
+    public void saveOnAction(ActionEvent actionEvent) throws IOException {
+        try (BufferedWriter writer = new BufferedWriter(
+                new FileWriter(filename)
+        )) {
+
+            String content = textAreaType.getText();
+            writer.write(content);
+            labelStore.setText("Successfully saved to" + filename);
+
+        } catch (RuntimeException e) {
+            labelStore.setText("Something is Wrong!");
+        }
+
+    }Hii
