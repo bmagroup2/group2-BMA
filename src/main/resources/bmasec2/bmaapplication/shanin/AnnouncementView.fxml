@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="547.0" prefWidth="920.0" style="-fx-background-color: #f4f4f9;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bmasec2.bmaapplication.shanin.AnnouncementApprovalViewController">
+<AnchorPane prefHeight="547.0" prefWidth="920.0" style="-fx-background-color: #f4f4f9;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bmasec2.bmaapplication.shanin.AnnouncementApprovalViewController">
     <children>
 
         <Label layoutX="30.0" layoutY="25.0" text="Announcement Approval" textFill="#1a237e"><font><Font name="System Bold" size="24.0" /></font></Label>
@@ -21,18 +21,18 @@
             <VBox spacing="10.0" HBox.hgrow="ALWAYS">
                 <children>
                     <Label text="Pending Announcements"><font><Font name="System Bold" size="16.0" /></font></Label>
-                    <ListView prefHeight="380.0" />
+                    <ListView fx:id="pendingAnnouncementListView" prefHeight="380.0" />
                 </children>
             </VBox>
 
             <VBox prefWidth="450.0" spacing="10.0">
                 <children>
                     <Label text="Announcement Content" textFill="#1a237e"><font><Font name="System Bold" size="16.0" /></font></Label>
-                    <TextArea editable="false" prefHeight="250.0" promptText="Content of the selected announcement appears here." />
+                    <TextArea fx:id="announcementContentTextArea" editable="false" prefHeight="250.0" promptText="Content of the selected announcement appears here." />
                     <HBox alignment="CENTER_LEFT" spacing="10.0">
                         <children>
-                            <Button mnemonicParsing="false" prefWidth="100.0" style="-fx-background-color: #4CAF50;" text="Approve" textFill="WHITE" />
-                            <Button mnemonicParsing="false" prefWidth="100.0" style="-fx-background-color: #f44336;" text="Reject" textFill="WHITE" />
+                            <Button mnemonicParsing="false" onAction="#approveBtnOnAction" prefWidth="100.0" style="-fx-background-color: #4CAF50;" text="Approve" textFill="WHITE" />
+                            <Button mnemonicParsing="false" onAction="#rejectBtnOnAction" prefWidth="100.0" style="-fx-background-color: #f44336;" text="Reject" textFill="WHITE" />
                         </children>
                     </HBox>
                 </children>
