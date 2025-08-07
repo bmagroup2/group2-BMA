@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="547.0" prefWidth="920.0" style="-fx-background-color: #f4f4f9;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bmasec2.bmaapplication.afifa.CsSubmitPerformanceReportViewController">
+<AnchorPane prefHeight="547.0" prefWidth="920.0" style="-fx-background-color: #f4f4f9;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bmasec2.bmaapplication.afifa.CsSubmitPerformanceReportViewController">
     <children>
 
         <Label layoutX="30.0" layoutY="25.0" text="Submit Cadet Performance Report" textFill="#1a237e"><font><Font name="System Bold" size="24.0" /></font></Label>
@@ -17,12 +17,12 @@
         <VBox layoutX="30.0" layoutY="120.0" prefWidth="600.0" spacing="10.0">
             <children>
                 <Label text="Select Cadet"><font><Font name="System Bold" size="14.0" /></font></Label>
-                <ComboBox prefWidth="600.0" promptText="Choose a cadet from your list..." />
+                <ComboBox fx:id="performancecadetcombobox" prefWidth="600.0" promptText="Choose a cadet from your list..." />
                 <Label text="Evaluation Period"><font><Font name="System Bold" size="14.0" /></font></Label>
-                <ComboBox prefWidth="600.0" promptText="Select time period (e.g., Weekly, Monthly )..." />
+                <ComboBox fx:id="performanceevaluationcombobox" prefWidth="600.0" promptText="Select time period (e.g., Weekly, Monthly )..." />
                 <Label text="Performance Notes (Discipline, Academics, Drills)"><font><Font name="System Bold" size="14.0" /></font></Label>
-                <TextArea prefHeight="200.0" prefWidth="600.0" promptText="Provide detailed feedback on the cadet's performance..." wrapText="true" />
-                <Button mnemonicParsing="false" prefHeight="40.0" prefWidth="180.0" style="-fx-background-color: #4CAF50;" text="Submit Report" textFill="WHITE">
+                <TextArea fx:id="performancetextarea" prefHeight="200.0" prefWidth="600.0" promptText="Provide detailed feedback on the cadet's performance..." wrapText="true" />
+                <Button mnemonicParsing="false" onAction="#persubmitreportonaction" prefHeight="40.0" prefWidth="180.0" style="-fx-background-color: #4CAF50;" text="Submit Report" textFill="WHITE">
                     <font><Font name="System Bold" size="14.0" /></font>
                 </Button>
             </children>

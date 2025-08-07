@@ -6,16 +6,16 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="547.0" prefWidth="920.0" style="-fx-background-color: #f4f4f9;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bmasec2.bmaapplication.afifa.SubmitProgressReportViewController">
+<AnchorPane prefHeight="547.0" prefWidth="920.0" style="-fx-background-color: #f4f4f9;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bmasec2.bmaapplication.afifa.SubmitProgressReportViewController">
     <children>
 
         <Label layoutX="30.0" layoutY="25.0" text="Submit Weekly Progress Report" textFill="#1a237e"><font><Font name="System Bold" size="24.0" /></font></Label>
         <Label layoutX="30.0" layoutY="55.0" text="Detail your tasks completed and challenges faced this week." textFill="#546e7a"><font><Font size="14.0" /></font></Label>
 
         <Label layoutX="30.0" layoutY="110.0" text="Report for Week [Current Week]:"><font><Font name="System Bold" size="16.0" /></font></Label>
-        <TextArea layoutX="30.0" layoutY="140.0" prefHeight="300.0" prefWidth="860.0" promptText="Enter your report details here..." AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="30.0" />
+        <TextArea fx:id="submitweeklyreporttextare" layoutX="30.0" layoutY="140.0" prefHeight="300.0" prefWidth="860.0" promptText="Enter your report details here..." AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="30.0" />
 
-        <Button layoutX="30.0" layoutY="460.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="150.0" style="-fx-background-color: #4CAF50;" text="Submit Report" textFill="WHITE" AnchorPane.bottomAnchor="47.0">
+        <Button layoutX="30.0" layoutY="460.0" mnemonicParsing="false" onAction="#weeklyreportsubmitonaction" prefHeight="40.0" prefWidth="150.0" style="-fx-background-color: #4CAF50;" text="Submit Report" textFill="WHITE" AnchorPane.bottomAnchor="47.0">
             <font><Font name="System Bold" size="14.0" /></font>
         </Button>
     </children>

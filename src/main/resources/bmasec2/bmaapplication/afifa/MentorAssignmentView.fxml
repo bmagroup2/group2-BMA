@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="547.0" prefWidth="920.0" style="-fx-background-color: #f4f4f9;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bmasec2.bmaapplication.afifa.MentorAssignmentViewController">
+<AnchorPane prefHeight="547.0" prefWidth="920.0" style="-fx-background-color: #f4f4f9;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bmasec2.bmaapplication.afifa.MentorAssignmentViewController">
     <children>
 
         <Label layoutX="30.0" layoutY="25.0" text="Mentor Assignment" textFill="#1a237e"><font><Font name="System Bold" size="24.0" /></font></Label>
@@ -19,16 +19,16 @@
 
             <VBox spacing="10.0">
                 <children>
-                    <Label text="New Cadets (No Mentor)"><font><Font name="System Bold" size="16.0" /></font></Label>
-                    <ListView prefHeight="350.0" prefWidth="300.0" />
+                    <Label text="New Cadets "><font><Font name="System Bold" size="16.0" /></font></Label>
+                    <ListView fx:id="mentornewcadetlistview" prefHeight="350.0" prefWidth="300.0" />
                 </children>
             </VBox>
 
-            <Button mnemonicParsing="false" text="Assign →" />
+            <Button mnemonicParsing="false" onAction="#mentorassignonaction" text="Assign →" />
             <VBox spacing="10.0">
                 <children>
                     <Label text="Available Mentors (Senior Cadets/Supervisors)"><font><Font name="System Bold" size="16.0" /></font></Label>
-                    <ListView prefHeight="350.0" prefWidth="300.0" />
+                    <ListView fx:id="mentorslistview" prefHeight="350.0" prefWidth="300.0" />
                 </children>
             </VBox>
         </HBox>

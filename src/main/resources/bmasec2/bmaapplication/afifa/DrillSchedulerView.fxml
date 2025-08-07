@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="547.0" prefWidth="920.0" style="-fx-background-color: #f4f4f9;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bmasec2.bmaapplication.afifa.DrillSchedualerViewController">
+<AnchorPane prefHeight="547.0" prefWidth="920.0" style="-fx-background-color: #f4f4f9;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bmasec2.bmaapplication.afifa.DrillSchedualerViewController">
     <children>
 
         <Label layoutX="30.0" layoutY="25.0" text="Drill Scheduler" textFill="#1a237e"><font><Font name="System Bold" size="24.0" /></font></Label>
@@ -22,21 +22,21 @@
             <VBox spacing="10.0" HBox.hgrow="ALWAYS">
                 <children>
                     <Label text="This Week's Scheduled Drills"><font><Font name="System Bold" size="16.0" /></font></Label>
-                    <ListView prefHeight="380.0" />
+                    <ListView fx:id="drillscheduleddrillslistview" prefHeight="380.0" />
                 </children>
             </VBox>
             <VBox prefWidth="350.0" spacing="10.0">
                 <children>
                     <Label text="Schedule New Drill" textFill="#1a237e"><font><Font name="System Bold" size="16.0" /></font></Label>
                     <Label text="Cadet Group" />
-                    <ComboBox prefWidth="350.0" promptText="Select group..." />
+                    <ComboBox fx:id="drillcadetgroupcombobox" prefWidth="350.0" promptText="Select group..." />
                     <Label text="Date" />
-                    <DatePicker prefWidth="350.0" />
+                    <DatePicker fx:id="drilldatepicker" prefWidth="350.0" />
                     <Label text="Time (e.g., 14:00 )" />
-                    <TextField promptText="Enter time" />
-                    <Label text="Activity / Location" />
-                    <TextField promptText="e.g., Parade Ground Drill" />
-                    <Button mnemonicParsing="false" style="-fx-background-color: #4CAF50;" text="Save Schedule" textFill="WHITE" />
+                    <TextField fx:id="drilltimetextfield" promptText="Enter time" />
+                    <Label text="Activity" />
+                    <TextField fx:id="drillactivitytextfield" promptText="e.g., Parade Ground Drill" />
+                    <Button mnemonicParsing="false" onAction="#drillsaveschedulonaction" style="-fx-background-color: #4CAF50;" text="Save Schedule" textFill="WHITE" />
                 </children>
             </VBox>
         </HBox>
