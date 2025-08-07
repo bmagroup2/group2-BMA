@@ -30,22 +30,22 @@
                         <Font name="System Bold" size="14.0" />
                     </font>
                 </Label>
-                <ComboBox prefWidth="400.0" promptText="Choose a report..." />
+                <ComboBox fx:id="chooseAReportComboBox" prefWidth="400.0" promptText="Choose a report..." />
 
                 <Label text="2. Select Date Range">
                     <font>
                         <Font name="System Bold" size="14.0" />
                     </font>
                 </Label>
-                <DatePicker prefWidth="400.0" promptText="Start Date" />
-                <DatePicker prefWidth="400.0" promptText="End Date" />
+                <DatePicker fx:id="startDateDatePicker" prefWidth="400.0" promptText="Start Date" />
+                <DatePicker fx:id="endDateDatePicker" prefWidth="400.0" promptText="End Date" />
 
                 <Label text="3. Generate">
                     <font>
                         <Font name="System Bold" size="14.0" />
                     </font>
                 </Label>
-                <Button mnemonicParsing="false" prefHeight="40.0" prefWidth="200.0" style="-fx-background-color: #1a237e;" text="Generate &amp; View Report" textFill="WHITE">
+                <Button mnemonicParsing="false" onAction="#generateAndViewReportBtnOnAction" prefHeight="40.0" prefWidth="200.0" style="-fx-background-color: #1a237e;" text="Generate &amp; View Report" textFill="WHITE">
                     <font>
                         <Font name="System Bold" size="14.0" />
                     </font>

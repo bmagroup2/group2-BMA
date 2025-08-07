@@ -30,17 +30,17 @@
                         <Font name="System Bold" size="14.0" />
                     </font>
                 </Label>
-                <TextField promptText="Enter application name" />
+                <TextField fx:id="applicationNameTextField" promptText="Enter application name" />
 
                 <Label text="Application Logo">
                     <font>
                         <Font name="System Bold" size="14.0" />
                     </font>
                 </Label>
-                <ImageView fitHeight="80.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
-                <Button mnemonicParsing="false" text="Upload New Logo..." />
+                <ImageView fx:id="applicationLogoImageView" fitHeight="80.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
+                <Button mnemonicParsing="false" onAction="#updateNewLogoBtnOnAction" text="Upload New Logo..." />
 
-                <Button mnemonicParsing="false" prefHeight="40.0" prefWidth="150.0" style="-fx-background-color: #4CAF50;" text="Save Changes" textFill="WHITE">
+                <Button mnemonicParsing="false" onAction="#saveChangesBtnOnAction" prefHeight="40.0" prefWidth="150.0" style="-fx-background-color: #4CAF50;" text="Save Changes" textFill="WHITE">
                     <font>
                         <Font name="System Bold" size="14.0" />
                     </font>

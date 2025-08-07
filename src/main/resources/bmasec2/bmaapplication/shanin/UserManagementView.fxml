@@ -30,7 +30,7 @@
             <children>
                 <TextField fx:id="searchByNameTextfield" prefWidth="250.0" promptText="Search by Name..." />
                 <ComboBox fx:id="filterByRoleComboBox" prefWidth="150.0" promptText="Filter by Role" />
-                <Button mnemonicParsing="false" style="-fx-background-color: #1a237e;" text="Filter" textFill="WHITE" />
+                <Button mnemonicParsing="false" onAction="#filterBtnOnAction" style="-fx-background-color: #1a237e;" text="Filter" textFill="WHITE" />
                 <HBox HBox.hgrow="ALWAYS" /> <!-- Spacer -->
                 <Button mnemonicParsing="false" onAction="#addNewUserBtnOnAction" style="-fx-background-color: #4CAF50;" text="+ Add New User" textFill="WHITE" />
                 <Button mnemonicParsing="false" onAction="#deleteSelectedBtnOnAction" style="-fx-background-color: #f44336;" text="Delete Selected" textFill="WHITE" />

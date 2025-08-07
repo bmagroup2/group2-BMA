@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="547.0" prefWidth="920.0" style="-fx-background-color: #f4f4f9;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bmasec2.bmaapplication.shanin.InstructorAssignmentViewController">
+<AnchorPane prefHeight="547.0" prefWidth="920.0" style="-fx-background-color: #f4f4f9;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bmasec2.bmaapplication.shanin.InstructorAssignmentViewController">
     <children>
 
         <Label layoutX="30.0" layoutY="25.0" text="Instructor Assignment" textFill="#1a237e"><font><Font name="System Bold" size="24.0" /></font></Label>
@@ -20,16 +20,16 @@
             <VBox spacing="10.0">
                 <children>
                     <Label text="Available Instructors"><font><Font name="System Bold" size="16.0" /></font></Label>
-                    <ListView prefHeight="350.0" prefWidth="300.0" />
+                    <ListView fx:id="availableInstructorListView" prefHeight="350.0" prefWidth="300.0" />
                 </children>
             </VBox>
 
-            <Button mnemonicParsing="false" text="Assign →" />
+            <Button mnemonicParsing="false" onAction="#assignBtnOnAction" text="Assign →" />
 
             <VBox spacing="10.0">
                 <children>
                     <Label text="Cadet Batches"><font><Font name="System Bold" size="16.0" /></font></Label>
-                    <ListView prefHeight="350.0" prefWidth="300.0" />
+                    <ListView fx:id="cadetBatchesListView" prefHeight="350.0" prefWidth="300.0" />
                 </children>
             </VBox>
         </HBox>

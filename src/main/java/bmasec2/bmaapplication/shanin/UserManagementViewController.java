@@ -55,4 +55,8 @@ public class UserManagementViewController
     @javafx.fxml.FXML
     public void submitBtnOnAction(ActionEvent actionEvent) {
     }
+
+    @javafx.fxml.FXML
+    public void filterBtnOnAction(ActionEvent actionEvent) {
+    }
 }
