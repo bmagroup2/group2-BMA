@@ -1,9 +1,17 @@
 package bmasec2.bmaapplication.shanin;
 
+
+import bmasec2.bmaapplication.afifa.CadetSupervisor;
+import bmasec2.bmaapplication.fatema.LogisticOfficer;
+import bmasec2.bmaapplication.fatema.TrainingInstructor;
+import bmasec2.bmaapplication.model.AuditLog;
+
 import bmasec2.bmaapplication.system.DataPersistenceManager;
 import bmasec2.bmaapplication.User;
 import bmasec2.bmaapplication.afifa.Cadet;
 
+import bmasec2.bmaapplication.zumar.MedicalOfficer;
+import bmasec2.bmaapplication.zumar.MessOfficer;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -19,9 +27,12 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ButtonType;
 import javafx.scene.layout.Pane;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
+
+import static bmasec2.bmaapplication.LoginViewController.*;
 
 public class UserManagementViewController {
 
@@ -39,9 +50,12 @@ public class UserManagementViewController {
     @FXML private TableView<User> userListTableView;
     @FXML private TableColumn<User, String> emailColumn;
 
+    private String currentUserId;
 
     private ObservableList<User> masterUserList;
     private static final String USERS_FILE = "users.bin";
+    private static final String AUDIT_LOGS_FILE = "auditlogs.bin";
+
     @FXML
     private TextField passwordTextField;
     @FXML
@@ -56,7 +70,7 @@ public class UserManagementViewController {
         roleColumn.setCellValueFactory(new PropertyValueFactory<>("role"));
         statusColumn.setCellValueFactory(new PropertyValueFactory<>("status"));
 
-        roleComboBox.getItems().addAll("System Admin", "Commandant", "Cadet", "Cadet SuperVisor", "Training Instructor", "Logistic Officer", "Medical Officer", "Mess Officer");
+        roleComboBox.getItems().addAll("System Admin", "Commandant", "Cadet", "Cadet Supervisor", "Training Instructor", "Logistic Officer", "Medical Officer", "Mess Officer");
         filterByRoleComboBox.getItems().addAll("All", "System Admin", "Commandant", "Cadet", "Cadet SuperVisor", "Training Instructor", "Logistic Officer", "Medical Officer", "Mess Officer");
         filterByRoleComboBox.setValue("All");
         statusComboBox.getItems().addAll("Active", "Inactive");
@@ -78,7 +92,24 @@ public class UserManagementViewController {
 
         searchByNameTextfield.textProperty().addListener((obs, oldVal, newVal) -> filterUsers());
         filterByRoleComboBox.setOnAction(event -> filterUsers());
+
+        List<User> allUsers = DataPersistenceManager.loadObjects(USERS_FILE);
+        Optional<User> authenticatedUser = allUsers.stream()
+                .filter(user -> (user.getName().equalsIgnoreCase(enteredUsername) ||
+                        user.getEmail().equalsIgnoreCase(enteredUsername) ||
+                        user.getUserId().equalsIgnoreCase(enteredUsername)) &&
+                        user.getPassword().equals(enteredPassword) &&
+                        user.getRole().equals(selectedRole))
+                .findFirst();
+
+        if (authenticatedUser.isPresent()) {
+            User loggedInUser = authenticatedUser.get();
+            loggedInUser.login(enteredUsername, enteredPassword);
+            currentUserId = loggedInUser.getUserId();
+        }
     }
+
+
 
     private void loadUsers() {
         List<User> users = DataPersistenceManager.loadObjects(USERS_FILE);
@@ -88,7 +119,7 @@ public class UserManagementViewController {
     }
 
     private void saveUsers() {
-        DataPersistenceManager.saveObjects(masterUserList.stream().collect(Collectors.toList()), USERS_FILE);
+        DataPersistenceManager.saveObjects(new ArrayList<>(masterUserList), USERS_FILE);
     }
 
     private void filterUsers() {
@@ -115,7 +146,11 @@ public class UserManagementViewController {
             Alert alert = new Alert(AlertType.CONFIRMATION, "Delete " + selectedUser.getName() + "?", ButtonType.YES, ButtonType.NO);
             Optional<ButtonType> result = alert.showAndWait();
             if (result.isPresent() && result.get() == ButtonType.YES) {
+                logAction("USER_DELETED",
+                        String.format("Updated %s: %s (%s)", selectedUser.getRole(), selectedUser.getUserId(), selectedUser.getName()));
                 masterUserList.remove(selectedUser);
+
+
                 saveUsers();
                 clearFormFields();
                 filterUsers();
@@ -152,7 +187,10 @@ public class UserManagementViewController {
 
             User newUser = createUserByRole(userId, name, email, password, role);
             if (newUser != null) {
+
                 masterUserList.add(newUser);
+                logAction("USER_CREATED",
+                        String.format("Created %s: %s (%s)", role, userId, name));
                 showAlert(AlertType.INFORMATION, "User Added", "New user " + name + " added successfully.");
             } else {
                 showAlert(AlertType.ERROR, "Error", "Could not create user for role: " + role);
@@ -165,7 +203,10 @@ public class UserManagementViewController {
                 existingUser.setRole(role);
                 existingUser.setPassword(password);
                 existingUser.setStatus(status);
+                logAction("USER_UPDATED",
+                        String.format("Updated %s: %s (%s)", role, userId, name));
                 showAlert(AlertType.INFORMATION, "User Updated", "User " + name + " updated successfully.");
+
             }
         }
         saveUsers();
@@ -182,16 +223,32 @@ public class UserManagementViewController {
                 return new Commandant(userId, name, email, password, userId, "N/A");
             case "Cadet":
                 return new Cadet(userId, name, email, password, "N/A", "N/A");
-            // Add cases for other roles as their classes are implemented
-            // case "Cadet SuperVisor": return new CadetSupervisor(...);
-            // case "Training Instructor": return new TrainingInstructor(...);
-            // case "Logistic Officer": return new LogisticOfficer(...);
-            // case "Medical Officer": return new MedicalOfficer(...);
-            // case "Mess Officer": return new MessOfficer(...);
+            case "Cadet Supervisor":
+                return new CadetSupervisor(userId, name, email, password, userId, "General Department");
+            case "Training Instructor":
+                return new TrainingInstructor(userId, name, email, password, userId, "Physical Training");
+            case "Logistic Officer":
+                return new LogisticOfficer(userId, name, email, password, userId, "0123456789");
+            case "Medical Officer":
+                return new MedicalOfficer(userId, name, email, password, userId, "MED-LIC-001");
+            case "Mess Officer":
+                return new MessOfficer(userId, name, email, password, userId, "Day Shift");
             default:
                 return null;
         }
     }
+
+
+
+    private void logAction(String action, String details) {
+
+        String logId = "LOG-" + System.currentTimeMillis();
+        AuditLog log = new AuditLog(logId, currentUserId, action, details);
+        List<AuditLog> existingLogs = DataPersistenceManager.loadObjects(AUDIT_LOGS_FILE);
+        existingLogs.add(log);
+        DataPersistenceManager.saveObjects(existingLogs, AUDIT_LOGS_FILE);
+
+ }
 
     private void clearFormFields() {
         userIdTextField.setText("");

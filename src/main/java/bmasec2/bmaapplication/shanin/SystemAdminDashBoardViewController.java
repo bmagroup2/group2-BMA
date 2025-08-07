@@ -59,7 +59,6 @@ public class SystemAdminDashBoardViewController {
     }
 
     private void populateUserDistributionChart(List<User> users) {
-        // Group users by role and count them
         Map<String, Long> userCountsByRole = users.stream()
                 .collect(Collectors.groupingBy(User::getRole, Collectors.counting()));
 

@@ -96,7 +96,7 @@ public class NavMenuViewController {
 
     public void initData(User loggedInUser) {
         if (userNameLabel != null) {
-            userNameLabel.setText("Welcome, " + loggedInUser.getName());
+            userNameLabel.setText("Welcome, " + loggedInUser.getUserId());
         }
 
 

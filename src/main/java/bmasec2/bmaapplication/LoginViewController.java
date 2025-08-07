@@ -25,6 +25,10 @@ public class LoginViewController {
     @javafx.fxml.FXML
     private TextField usernameTextField;
 
+    public static String enteredUsername ;
+    public static String enteredPassword;
+    public static String selectedRole;
+
     private static final String USERS_FILE = "users.bin";
 
     @javafx.fxml.FXML
@@ -44,9 +48,9 @@ public class LoginViewController {
 
     @javafx.fxml.FXML
     public void signInBtnOnAction(ActionEvent actionEvent) throws IOException {
-        String enteredUsername = usernameTextField.getText();
-        String enteredPassword = passwordTextField.getText();
-        String selectedRole = roleComboBox.getValue();
+        enteredUsername = usernameTextField.getText();
+        enteredPassword = passwordTextField.getText();
+        selectedRole = roleComboBox.getValue();
 
         if (enteredUsername.isEmpty() || enteredPassword.isEmpty() || selectedRole == null) {
             showAlert(Alert.AlertType.ERROR, "Missing Information", "Please fill in all fields.");
@@ -57,7 +61,7 @@ public class LoginViewController {
         Optional<User> authenticatedUser = allUsers.stream()
                 .filter(user -> (user.getName().equalsIgnoreCase(enteredUsername) ||
                         user.getEmail().equalsIgnoreCase(enteredUsername) ||
-                        user.getUserId().equalsIgnoreCase(enteredUsername)) && // Also check userId
+                        user.getUserId().equalsIgnoreCase(enteredUsername)) &&
                         user.getPassword().equals(enteredPassword) &&
                         user.getRole().equals(selectedRole))
                 .findFirst();
