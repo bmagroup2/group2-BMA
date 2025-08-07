@@ -4,6 +4,8 @@
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
@@ -23,34 +25,42 @@
         </Label>
 
 
-        <VBox alignment="CENTER" layoutX="30.0" layoutY="120.0" prefHeight="247.0" prefWidth="868.0" spacing="15.0">
+        <VBox layoutX="30.0" layoutY="120.0" prefHeight="255.0" prefWidth="421.0" spacing="15.0">
             <children>
                 <Label text="1. Select Report Type">
                     <font>
                         <Font name="System Bold" size="14.0" />
                     </font>
                 </Label>
-                <ComboBox prefWidth="400.0" promptText="Choose a report..." />
+                <ComboBox fx:id="chooseAReportComboBox" prefWidth="400.0" promptText="Choose a report..." />
 
                 <Label text="2. Select Date Range">
                     <font>
                         <Font name="System Bold" size="14.0" />
                     </font>
                 </Label>
-                <DatePicker prefWidth="400.0" promptText="Start Date" />
-                <DatePicker prefWidth="400.0" promptText="End Date" />
+                <DatePicker fx:id="startDateDatePicker" prefWidth="400.0" promptText="Start Date" />
+                <DatePicker fx:id="endDateDatePicker" prefWidth="400.0" promptText="End Date" />
 
                 <Label text="3. Generate">
                     <font>
                         <Font name="System Bold" size="14.0" />
                     </font>
                 </Label>
-                <Button mnemonicParsing="false" prefHeight="40.0" prefWidth="200.0" style="-fx-background-color: #1a237e;" text="Generate &amp; View Report" textFill="WHITE">
+                <Button mnemonicParsing="false" onAction="#generateAndViewReportBtnOnAction" prefHeight="40.0" prefWidth="200.0" style="-fx-background-color: #1a237e;" text="Generate &amp; View Report" textFill="WHITE">
                     <font>
                         <Font name="System Bold" size="14.0" />
                     </font>
                 </Button>
             </children>
         </VBox>
+      <TableView fx:id="reportTableView" layoutX="9.0" layoutY="383.0" prefHeight="155.0" prefWidth="895.0">
+        <columns>
+          <TableColumn fx:id="reportIdColumn" prefWidth="75.0" text="Report Id" />
+          <TableColumn fx:id="reportTypeColumn" prefWidth="75.0" text="Report Type" />
+            <TableColumn fx:id="generatedByColumn" prefWidth="75.0" text="Generate By" />
+            <TableColumn fx:id="reportContentColumn" prefWidth="666.0" text="Report Content" />
+        </columns>
+      </TableView>
     </children>
 </AnchorPane>

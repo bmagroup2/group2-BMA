@@ -3,12 +3,13 @@ package bmasec2.bmaapplication.shanin;
 import bmasec2.bmaapplication.User;
 import bmasec2.bmaapplication.model.Report;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 
-public class Commandant extends User {
+public class Commandant extends User implements Serializable {
 
 
     private String commandantId;
@@ -50,7 +51,14 @@ public class Commandant extends User {
 
 
     public boolean createAnnouncement(String title, String message) {
-        System.out.println(this.name + " is creating an announcement: '" + title + "'");
+        System.out.println(this.name + " is creating an announcement: \'" + title + "\' ");
         return true;
     }
+
+    public String getCommandantId() { return commandantId; }
+    public void setCommandantId(String commandantId) { this.commandantId = commandantId; }
+    public Date getTenureStart() { return tenureStart; }
+    public void setTenureStart(Date tenureStart) { this.tenureStart = tenureStart; }
+    public String getContactNumber() { return contactNumber; }
+    public void setContactNumber(String contactNumber) { this.contactNumber = contactNumber; }
 }

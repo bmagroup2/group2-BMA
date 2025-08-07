@@ -1,10 +1,10 @@
 package bmasec2.bmaapplication;
 
+import bmasec2.bmaapplication.system.DataPersistenceManager;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Scene;
-
 import javafx.scene.control.Alert;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.PasswordField;
@@ -12,10 +12,12 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 
-public class LoginViewController
-{
+public class LoginViewController {
+
     @javafx.fxml.FXML
     private PasswordField passwordTextField;
     @javafx.fxml.FXML
@@ -23,68 +25,78 @@ public class LoginViewController
     @javafx.fxml.FXML
     private TextField usernameTextField;
 
+    public static String enteredUsername ;
+    public static String enteredPassword;
+    public static String selectedRole;
+
+    private static final String USERS_FILE = "users.bin";
+
     @javafx.fxml.FXML
     public void initialize() {
-        roleComboBox.getItems().addAll("System Admin", "Commandant", "Cadet", "Cadet SuperVisor", "Training Instructor", "Logistic Officer", "Medical Officer", "Mess Officer" );
+        roleComboBox.getItems().addAll("System Admin", "Commandant", "Cadet", "Cadet Supervisor", "Training Instructor", "Logistic Officer", "Medical Officer", "Mess Officer");
+
+
+        List<User> users = DataPersistenceManager.loadObjects(USERS_FILE);
+        if (users.isEmpty()) {
+
+            users.add(new bmasec2.bmaapplication.shanin.Commandant("CMD-001", "Cmdt User", "cmd@bma.com", "commandant1234", "CMD-001", "0987654321"));
+            users.add(new bmasec2.bmaapplication.afifa.Cadet("C-001", "Cadet John", "john@bma.com", "cadet1234", "Batch A", "Junior"));
+
+            DataPersistenceManager.saveObjects(users, USERS_FILE);
+        }
     }
 
     @javafx.fxml.FXML
     public void signInBtnOnAction(ActionEvent actionEvent) throws IOException {
-        String username = usernameTextField.getText();
-        String password = passwordTextField.getText();
-        String role = roleComboBox.getValue();
-        if (username.isEmpty() && password.isEmpty() && role == null ) {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Error");
-            alert.setHeaderText("Error Handling");
-            alert.setContentText("Please fillup all field");
-            alert.showAndWait();
+        enteredUsername = usernameTextField.getText();
+        enteredPassword = passwordTextField.getText();
+        selectedRole = roleComboBox.getValue();
+
+        if (enteredUsername.isEmpty() || enteredPassword.isEmpty() || selectedRole == null) {
+            showAlert(Alert.AlertType.ERROR, "Missing Information", "Please fill in all fields.");
             return;
         }
 
-        if (username.equals("admin") && Objects.equals(password, "admin1234") && Objects.equals(role, "System Admin") ||
-                username.equals("commandant") && Objects.equals(password, "commandant1234") && Objects.equals(role, "Commandant") ||
-                username.equals("cadet") && Objects.equals(password, "cadet1234") && Objects.equals(role, "Cadet") ||
-                username.equals("cadetsupervisor") && Objects.equals(password, "cadetsupervisor1234") && Objects.equals(role, "Cadet SuperVisor") ||
-                username.equals("traininginstructor") && Objects.equals(password, "traininginstructor1234") && Objects.equals(role, "Training Instructor") ||
-                username.equals("logisticofficer") && Objects.equals(password, "logisticofficer1234") && Objects.equals(role, "Logistic Officer") ||
-                username.equals("medicalofficer") && Objects.equals(password, "medicalofficer1234") && Objects.equals(role, "Medical Officer") ||
-                username.equals("messofficer") && Objects.equals(password, "messofficer1234") && Objects.equals(role, "Mess Officer")
+        List<User> allUsers = DataPersistenceManager.loadObjects(USERS_FILE);
+        Optional<User> authenticatedUser = allUsers.stream()
+                .filter(user -> (user.getName().equalsIgnoreCase(enteredUsername) ||
+                        user.getEmail().equalsIgnoreCase(enteredUsername) ||
+                        user.getUserId().equalsIgnoreCase(enteredUsername)) &&
+                        user.getPassword().equals(enteredPassword) &&
+                        user.getRole().equals(selectedRole))
+                .findFirst();
 
-
-        ) {
+        if (authenticatedUser.isPresent()) {
+            User loggedInUser = authenticatedUser.get();
+            loggedInUser.login(enteredUsername, enteredPassword);
+            DataPersistenceManager.saveObjects(allUsers, USERS_FILE);
 
             Node source = (Node) actionEvent.getSource();
             Stage loginStage = (Stage) source.getScene().getWindow();
 
-
             FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("nav-menu-view.fxml"));
             Scene scene = new Scene(fxmlLoader.load());
 
-
             NavMenuViewController controller = fxmlLoader.getController();
 
-
-            controller.initData(role, username);
-
+            controller.initData(loggedInUser);
 
             Stage newStage = new Stage();
             newStage.setTitle("BMA Application");
             newStage.setScene(scene);
             newStage.show();
 
-
             loginStage.close();
         } else {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Error");
-            alert.setHeaderText("Error Handling");
-            alert.setContentText("Please enter a valid username and password");
-            alert.showAndWait();
+            showAlert(Alert.AlertType.ERROR, "Login Failed", "Invalid username, password, or role.");
         }
+    }
 
-
-
-
+    private void showAlert(Alert.AlertType type, String title, String message) {
+        Alert alert = new Alert(type);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();
     }
 }

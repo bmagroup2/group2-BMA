@@ -2,13 +2,13 @@ package bmasec2.bmaapplication.afifa;
 
 import bmasec2.bmaapplication.User;
 
+import java.io.Serializable;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
-
-public class Cadet extends User {
+public class Cadet extends User implements Serializable {
 
     private String batch;
     private String rank;
@@ -16,9 +16,7 @@ public class Cadet extends User {
     private float performanceScore;
     private String medicalStatus;
 
-
     public Cadet(String userId, String name, String email, String password, String batch, String rank) {
-
         super(userId, name, email, "Cadet", password);
         this.batch = batch;
         this.rank = rank;
@@ -26,8 +24,6 @@ public class Cadet extends User {
         this.performanceScore = 0.0f;
         this.medicalStatus = "Fit";
     }
-
-
 
     public List<String> viewSchedule() {
         System.out.println(this.name + " is viewing their training schedule.");
@@ -58,7 +54,6 @@ public class Cadet extends User {
         System.out.println(this.name + " is viewing their performance scores.");
         return Map.of("Drill", 85.5f, "Academics", 92.0f);
     }
-
 
     public String getBatch() { return batch; }
     public void setBatch(String batch) { this.batch = batch; }

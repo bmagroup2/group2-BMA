@@ -25,15 +25,15 @@
                     <HBox alignment="CENTER_LEFT" spacing="10.0">
                         <children>
                             <Label text="Filter by Batch:"><font><Font name="System Bold" size="14.0" /></font></Label>
-                            <ComboBox prefWidth="200.0" promptText="Select Batch" />
-                     <Button mnemonicParsing="false" style="-fx-background-color: red;" text="Filter" textFill="WHITE" />
+                            <ComboBox fx:id="filterByBatchComboBox" prefWidth="200.0" promptText="Select Batch" />
+                     <Button mnemonicParsing="false" onAction="#filterBtnOnAction" style="-fx-background-color: red;" text="Filter" textFill="WHITE" />
                         </children>
                     </HBox>
-                    <TableView prefHeight="350.0">
+                    <TableView fx:id="filterByListTableView" prefHeight="350.0">
                         <columns>
-                            <TableColumn prefWidth="120.0" text="Cadet ID" />
-                            <TableColumn prefWidth="200.0" text="Cadet Name" />
-                            <TableColumn prefWidth="100.0" text="Status" />
+                            <TableColumn fx:id="cadetIdColumn" prefWidth="120.0" text="Cadet ID" />
+                            <TableColumn fx:id="cadetNameColumn" prefWidth="200.0" text="Cadet Name" />
+                            <TableColumn fx:id="statusColumn" prefWidth="100.0" text="Status" />
                         </columns>
                         <columnResizePolicy><TableView fx:constant="CONSTRAINED_RESIZE_POLICY" /></columnResizePolicy>
                     </TableView>
@@ -43,17 +43,17 @@
             <VBox prefWidth="400.0" spacing="10.0">
                 <children>
                     <Label text="Evaluation Details for" textFill="#1a237e"><font><Font name="System Bold" size="16.0" /></font></Label>
-               <Label layoutX="10.0" layoutY="10.0" text="[Cadet Name]" textFill="#1a237e">
+               <Label fx:id="cadetNameLabel" layoutX="10.0" layoutY="10.0" text="[Cadet Name]" textFill="#1a237e">
                   <font>
                      <Font name="System Bold" size="16.0" />
                   </font>
                </Label>
                     <Label text="Score Breakdown &amp; Notes:" />
-                    <TextArea editable="false" prefHeight="200.0" promptText="Instructor notes and score details appear here." />
+                    <TextArea fx:id="scoreBreakdownAndNotesTextArea" editable="false" prefHeight="200.0" promptText="Instructor notes and score details appear here." />
                     <HBox alignment="CENTER_LEFT" spacing="10.0">
                         <children>
-                            <Button mnemonicParsing="false" prefWidth="120.0" style="-fx-background-color: #4CAF50;" text="Approve" textFill="WHITE" />
-                            <Button mnemonicParsing="false" prefWidth="180.0" style="-fx-background-color: #FF9800;" text="Request Re-evaluation" textFill="WHITE" />
+                            <Button mnemonicParsing="false" onAction="#approveBtnOnAction" prefWidth="120.0" style="-fx-background-color: #4CAF50;" text="Approve" textFill="WHITE" />
+                            <Button mnemonicParsing="false" onAction="#requestReEvaluationBtnOnAction" prefWidth="180.0" style="-fx-background-color: #FF9800;" text="Request Re-evaluation" textFill="WHITE" />
                         </children>
                     </HBox>
                 </children>
