@@ -7,7 +7,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
@@ -21,81 +20,33 @@ public class NavMenuViewController {
 
     @FXML
     private AnchorPane contentArea;
+
     @FXML
     private Label userNameLabel;
     @FXML
     private Label pageNameLabel;
-
-    @FXML private VBox systemAdminMenu;
-    @FXML private VBox commandantMenu;
-    @FXML private VBox cadetMenu;
-    @FXML private VBox cadetSupervisorMenu;
-    @FXML private VBox trainingInstructorMenu;
-    @FXML private VBox logisticsOfficerMenu;
-    @FXML private VBox medicalOfficerMenu;
-    @FXML private VBox messOfficerMenu;
+    @FXML
+    private VBox messOfficerMenu;
+    @FXML
+    private VBox systemAdminMenu;
+    @FXML
+    private VBox logisticsOfficerMenu;
+    @FXML
+    private VBox commandantMenu;
+    @FXML
+    private VBox cadetSupervisorMenu;
+    @FXML
+    private VBox cadetMenu;
+    @FXML
+    private VBox trainingInstructorMenu;
+    @FXML
+    private VBox medicalOfficerMenu;
 
 
     @FXML
     public void initialize() {
 
-    }
-
-    public void initData(String role, String username) {
-
-        if (userNameLabel != null) {
-            userNameLabel.setText("Welcome, " + username);
-        }
-
-
-        systemAdminMenu.setVisible(false);
-        commandantMenu.setVisible(false);
-        cadetMenu.setVisible(false);
-        cadetSupervisorMenu.setVisible(false);
-        trainingInstructorMenu.setVisible(false);
-        logisticsOfficerMenu.setVisible(false);
-        medicalOfficerMenu.setVisible(false);
-        messOfficerMenu.setVisible(false);
-
-        switch (role) {
-            case "System Admin":
-                systemAdminMenu.setVisible(true);
-                loadView("shanin/systemAdminDashboardView.fxml", "Dashboard");
-                break;
-            case "Commandant":
-                commandantMenu.setVisible(true);
-                loadView("shanin/CommandantDashboardView.fxml", "Dashboard");
-                break;
-            case "Cadet":
-                cadetMenu.setVisible(true);
-                loadView("afifa/cadetDashboardView.fxml", "Dashboard");
-                break;
-            case "Cadet SuperVisor":
-                cadetSupervisorMenu.setVisible(true);
-                loadView("afifa/cadetSupervisorDashboardView.fxml", "Dashboard");
-                break;
-            case "Training Instructor":
-                trainingInstructorMenu.setVisible(true);
-                loadView("fatema/trainingInstructorDashboardView.fxml", "Dashboard");
-                break;
-            case "Logistic Officer":
-                logisticsOfficerMenu.setVisible(true);
-                loadView("fatema/logisticOfficerDashboardView.fxml", "Dashboard");
-                break;
-            case "Medical Officer":
-                medicalOfficerMenu.setVisible(true);
-                loadView("zumar/medicalOfficerDashboardView.fxml", "Dashboard");
-                break;
-            case "Mess Officer":
-                messOfficerMenu.setVisible(true);
-                loadView("zumar/messOfficerDashboardView.fxml", "Dashboard");
-                break;
-            default:
-
-                systemAdminMenu.setVisible(true);
-                loadView("shanin/systemAdminDashboardView.fxml", "Dashboard");
-                break;
-        }
+        loadView("shanin/systemAdminDashboardView.fxml", "Dashboard");
     }
 
 
@@ -114,7 +65,7 @@ public class NavMenuViewController {
             AnchorPane.setLeftAnchor(view, 0.0);
             AnchorPane.setRightAnchor(view, 0.0);
         } else {
-            System.err.println("Error: contentArea is null. Check FXML file for fx:id='contentArea'.");
+            System.err.println("Error: contentArea is null. Check FXML file for fx:id=\'contentArea\'.");
         }
     }
 
@@ -123,7 +74,7 @@ public class NavMenuViewController {
         if (pageNameLabel != null) {
             pageNameLabel.setText(title);
         } else {
-            System.err.println("Error: pageTitleLabel1 is null. Check FXML file for fx:id='pageTitleLabel1'.");
+            System.err.println("Error: pageNameLabel is null. Check FXML file for fx:id=\'pageTitleLabel1\'.");
         }
     }
 
@@ -140,6 +91,62 @@ public class NavMenuViewController {
             setPageTitle(title);
         } catch (IOException e) {
             e.printStackTrace();
+        }
+    }
+
+    public void initData(User loggedInUser) {
+        if (userNameLabel != null) {
+            userNameLabel.setText("Welcome, " + loggedInUser.getName());
+        }
+
+
+        if (systemAdminMenu != null) systemAdminMenu.setVisible(false);
+        if (commandantMenu != null) commandantMenu.setVisible(false);
+        if (cadetMenu != null) cadetMenu.setVisible(false);
+        if (cadetSupervisorMenu != null) cadetSupervisorMenu.setVisible(false);
+        if (trainingInstructorMenu != null) trainingInstructorMenu.setVisible(false);
+        if (logisticsOfficerMenu != null) logisticsOfficerMenu.setVisible(false);
+        if (medicalOfficerMenu != null) medicalOfficerMenu.setVisible(false);
+        if (messOfficerMenu != null) messOfficerMenu.setVisible(false);
+
+        switch (loggedInUser.getRole()) {
+            case "System Admin":
+                if (systemAdminMenu != null) systemAdminMenu.setVisible(true);
+                loadView("shanin/systemAdminDashboardView.fxml", "Dashboard");
+                break;
+            case "Commandant":
+                if (commandantMenu != null) commandantMenu.setVisible(true);
+                loadView("shanin/CommandantDashboardView.fxml", "Dashboard");
+                break;
+            case "Cadet":
+                if (cadetMenu != null) cadetMenu.setVisible(true);
+                loadView("afifa/cadetDashboardView.fxml", "Dashboard");
+                break;
+            case "Cadet Supervisor":
+                if (cadetSupervisorMenu != null) cadetSupervisorMenu.setVisible(true);
+                loadView("afifa/cadetSupervisorDashboardView.fxml", "Dashboard");
+                break;
+            case "Training Instructor":
+                if (trainingInstructorMenu != null) trainingInstructorMenu.setVisible(true);
+                loadView("fatema/trainingInstructorDashboardView.fxml", "Dashboard");
+                break;
+            case "Logistic Officer":
+                if (logisticsOfficerMenu != null) logisticsOfficerMenu.setVisible(true);
+                loadView("fatema/logisticOfficerDashboardView.fxml", "Dashboard");
+                break;
+            case "Medical Officer":
+                if (medicalOfficerMenu != null) medicalOfficerMenu.setVisible(true);
+                loadView("zumar/medicalOfficerDashboardView.fxml", "Dashboard");
+                break;
+            case "Mess Officer":
+                if (messOfficerMenu != null) messOfficerMenu.setVisible(true);
+                loadView("zumar/messOfficerDashboardView.fxml", "Dashboard");
+                break;
+            default:
+
+                if (systemAdminMenu != null) systemAdminMenu.setVisible(true);
+                loadView("shanin/systemAdminDashboardView.fxml", "Dashboard");
+                break;
         }
     }
 

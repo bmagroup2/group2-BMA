@@ -1,9 +1,10 @@
 package bmasec2.bmaapplication.model;
 
+import java.io.Serializable;
 import java.util.Date;
 
 
-public class AuditLog {
+public class AuditLog implements Serializable {
     private String logId;
     private String userId;
     private String action;
@@ -38,5 +39,22 @@ public class AuditLog {
 
     public String getDetails() {
         return details;
+    }
+
+    public void setLogId(String logId) { this.logId = logId; }
+    public void setUserId(String userId) { this.userId = userId; }
+    public void setAction(String action) { this.action = action; }
+    public void setTimestamp(Date timestamp) { this.timestamp = timestamp; }
+    public void setDetails(String details) { this.details = details; }
+
+    @Override
+    public String toString() {
+        return "AuditLog{" +
+                "logId='" + logId + '\'' +
+                ", userId='" + userId + '\'' +
+                ", action='" + action + '\'' +
+                ", timestamp=" + timestamp +
+                ", details='" + details + '\'' +
+                '}';
     }
 }

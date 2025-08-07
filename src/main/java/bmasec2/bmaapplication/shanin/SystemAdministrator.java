@@ -5,11 +5,12 @@ import bmasec2.bmaapplication.afifa.Cadet;
 import bmasec2.bmaapplication.model.AuditLog;
 import bmasec2.bmaapplication.model.Report;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-public class SystemAdministrator extends User {
+public class SystemAdministrator extends User implements Serializable {
     private int adminLevel;
     private List<String> accessRights;
 
@@ -46,4 +47,9 @@ public class SystemAdministrator extends User {
         System.out.println(this.name + " is generating reports for role: " + role);
         return new ArrayList<>();
     }
+
+    public int getAdminLevel() { return adminLevel; }
+    public void setAdminLevel(int adminLevel) { this.adminLevel = adminLevel; }
+    public List<String> getAccessRights() { return accessRights; }
+    public void setAccessRights(List<String> accessRights) { this.accessRights = accessRights; }
 }

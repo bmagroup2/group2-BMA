@@ -1,10 +1,11 @@
 package bmasec2.bmaapplication;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.Map;
 
 
-public abstract class User {
+public abstract class User implements Serializable {
 
     protected String userId;
     protected String name;
@@ -60,8 +61,25 @@ public abstract class User {
         System.out.println("Password has been reset for " + this.name);
     }
 
+    public boolean verifyPassword(String password) {
+        return this.password.equals(password);
+    }
+
 
     public String getUserId() { return userId; }
     public String getName() { return name; }
     public String getRole() { return role; }
+
+    public String getEmail() { return email; }
+    public String getPassword() { return password; }
+    public Date getLastLogin() { return lastLogin; }
+    public String getStatus() { return status; }
+
+    public void setUserId(String userId) { this.userId = userId; }
+    public void setName(String name) { this.name = name; }
+    public void setEmail(String email) { this.email = email; }
+    public void setRole(String role) { this.role = role; }
+    public void setPassword(String password) { this.password = password; }
+    public void setLastLogin(Date lastLogin) { this.lastLogin = lastLogin; }
+    public void setStatus(String status) { this.status = status; }
 }

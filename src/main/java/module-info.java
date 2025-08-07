@@ -17,4 +17,6 @@ module bmasec2.bmaapplication {
     opens bmasec2.bmaapplication.zumar to javafx.fxml;
     opens bmasec2.bmaapplication.fatema to javafx.fxml;
     opens bmasec2.bmaapplication.system to javafx.fxml;
+    exports bmasec2.bmaapplication.model;
+    opens bmasec2.bmaapplication.model to javafx.fxml;
 }

@@ -39,9 +39,7 @@
             <columns>
                 <TableColumn fx:id="timestampColumn" prefWidth="150.0" text="Timestamp" />
                 <TableColumn fx:id="userColumn" prefWidth="150.0" text="User" />
-                <TableColumn fx:id="roleColumn" prefWidth="120.0" text="Role" />
                 <TableColumn fx:id="actionPerformedColumn" prefWidth="300.0" text="Action Performed" />
-                <TableColumn fx:id="ipAddressColumn" prefWidth="130.0" text="IP Address" />
             </columns>
             <columnResizePolicy>
                 <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
