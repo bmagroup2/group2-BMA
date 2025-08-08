@@ -9,19 +9,19 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="547.0" prefWidth="920.0" style="-fx-background-color: #f4f4f9;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bmasec2.bmaapplication.fatema.postAnnouncementController">
+<AnchorPane prefHeight="547.0" prefWidth="920.0" style="-fx-background-color: #f4f4f9;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bmasec2.bmaapplication.fatema.postAnnouncementController">
     <children>
         <Label layoutX="30.0" layoutY="25.0" text="Post Training Announcement" textFill="#1a237e"><font><Font name="System Bold" size="24.0" /></font></Label>
         <Label layoutX="30.0" layoutY="55.0" text="Send a message or announcement to your cadets." textFill="#546e7a"><font><Font size="14.0" /></font></Label>
         <VBox layoutX="30.0" layoutY="120.0" prefWidth="600.0" spacing="10.0">
             <children>
                 <Label text="Target Audience"><font><Font name="System Bold" size="14.0" /></font></Label>
-                <ComboBox prefWidth="600.0" promptText="Select target batch or all my cadets..." />
+                <ComboBox fx:id="targetAudienceComboBox" prefWidth="600.0" promptText="Select target batch or all my cadets..." />
                 <Label text="Announcement Title"><font><Font name="System Bold" size="14.0" /></font></Label>
-                <TextField promptText="Enter a title for the announcement" />
+                <TextField fx:id="announcementTitleTextField" promptText="Enter a title for the announcement" />
                 <Label text="Message"><font><Font name="System Bold" size="14.0" /></font></Label>
-                <TextArea prefHeight="150.0" prefWidth="600.0" promptText="Type your message here..." wrapText="true" />
-                <Button mnemonicParsing="false" prefHeight="40.0" prefWidth="200.0" style="-fx-background-color: #1a237e;" text="Post Announcement" textFill="WHITE"><font><Font name="System Bold" size="14.0" /></font></Button>
+                <TextArea fx:id="messageTextArea" prefHeight="150.0" prefWidth="600.0" promptText="Type your message here..." wrapText="true" />
+                <Button mnemonicParsing="false" onAction="#postAnnouncementButtonOnAction" prefHeight="40.0" prefWidth="200.0" style="-fx-background-color: #1a237e;" text="Post Announcement" textFill="WHITE"><font><Font name="System Bold" size="14.0" /></font></Button>
             </children>
         </VBox>
     </children>

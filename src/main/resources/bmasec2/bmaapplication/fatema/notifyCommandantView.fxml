@@ -8,17 +8,17 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="547.0" prefWidth="920.0" style="-fx-background-color: #f4f4f9;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bmasec2.bmaapplication.fatema.notifyCommandantViewController">
+<AnchorPane prefHeight="547.0" prefWidth="920.0" style="-fx-background-color: #f4f4f9;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bmasec2.bmaapplication.fatema.notifyCommandantViewController">
     <children>
         <Label layoutX="30.0" layoutY="25.0" text="Notify Commandant of Critical Shortages" textFill="#1a237e"><font><Font name="System Bold" size="24.0" /></font></Label>
         <Label layoutX="30.0" layoutY="55.0" text="Send an urgent alert regarding critical inventory shortages." textFill="#546e7a"><font><Font size="14.0" /></font></Label>
         <VBox layoutX="30.0" layoutY="120.0" prefWidth="600.0" spacing="10.0">
             <children>
                 <Label text="Select Critical Item from Shortage List"><font><Font name="System Bold" size="14.0" /></font></Label>
-                <ComboBox prefWidth="600.0" promptText="Choose an item..." />
+                <ComboBox fx:id="chooseAnItemComboBox" prefWidth="600.0" promptText="Choose an item..." />
                 <Label text="Message / Remarks"><font><Font name="System Bold" size="14.0" /></font></Label>
-                <TextArea prefHeight="200.0" promptText="Explain the urgency and impact of the shortage..." wrapText="true" />
-                <Button mnemonicParsing="false" prefHeight="40.0" prefWidth="200.0" style="-fx-background-color: #c62828;" text="Send Urgent Alert" textFill="WHITE"><font><Font name="System Bold" size="14.0" /></font></Button>
+                <TextArea fx:id="messsageTextArea" prefHeight="200.0" promptText="Explain the urgency and impact of the shortage..." wrapText="true" />
+                <Button mnemonicParsing="false" onAction="#sendUrgentAlertButtonOnAction" prefHeight="40.0" prefWidth="200.0" style="-fx-background-color: #c62828;" text="Send Urgent Alert" textFill="WHITE"><font><Font name="System Bold" size="14.0" /></font></Button>
             </children>
         </VBox>
     </children>

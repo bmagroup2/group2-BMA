@@ -21,7 +21,7 @@
                     <effect><DropShadow height="20.0" radius="9.5" width="20.0"><color><Color opacity="0.1" /></color></DropShadow></effect>
                     <children>
                         <Label text="Next Session" textFill="#546e7a"><font><Font name="System Bold" size="14.0" /></font></Label>
-                        <Label text="10:00 - Marksmanship (Batch A )" textFill="#1a237e"><font><Font name="System Bold" size="20.0" /></font></Label>
+                        <Label fx:id="nextSessionLabel" text="10:00 - Marksmanship (Batch A )" textFill="#1a237e"><font><Font name="System Bold" size="20.0" /></font></Label>
                     </children>
                 </VBox>
                 <VBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="350.0" spacing="5.0" style="-fx-background-color: #ffffff; -fx-background-radius: 10;">
@@ -29,7 +29,7 @@
                     <effect><DropShadow height="20.0" radius="9.5" width="20.0"><color><Color opacity="0.1" /></color></DropShadow></effect>
                     <children>
                         <Label text="Attendance Status" textFill="#546e7a"><font><Font name="System Bold" size="14.0" /></font></Label>
-                        <Label text="Pending for 09:00 Session" textFill="#c62828"><font><Font name="System Bold" size="22.0" /></font></Label>
+                        <Label fx:id="attendanceStatusLabel" text="Pending for 09:00 Session" textFill="#c62828"><font><Font name="System Bold" size="22.0" /></font></Label>
                     </children>
                 </VBox>
             </children>
@@ -39,7 +39,7 @@
             <effect><DropShadow height="20.0" radius="9.5" width="20.0"><color><Color opacity="0.1" /></color></DropShadow></effect>
             <children>
                 <Label text="Today's Scheduled Sessions"><font><Font name="System Bold" size="16.0" /></font></Label>
-                <ListView prefHeight="230.0" VBox.vgrow="ALWAYS" />
+                <ListView fx:id="todaysScheduleSessionListView" prefHeight="230.0" VBox.vgrow="ALWAYS" />
             </children>
         </VBox>
     </children>
