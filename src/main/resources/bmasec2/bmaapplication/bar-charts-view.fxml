@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.chart.BarChart?>
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.NumberAxis?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+
+
+<AnchorPane prefHeight="400.0" prefWidth="686.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bmasec2.bmaapplication.BarChartsViewController">
+   <children>
+      <TextField fx:id="gradeTF" layoutX="14.0" layoutY="25.0" promptText="Grade" />
+      <TextField fx:id="countTF" layoutX="14.0" layoutY="70.0" promptText="Count" />
+      <Button layoutX="63.0" layoutY="115.0" mnemonicParsing="false" onAction="#addBtnOnAction" text="Add" />
+      <TableView fx:id="tableViewScene" layoutX="14.0" layoutY="148.0" prefHeight="238.0" prefWidth="200.0">
+        <columns>
+          <TableColumn fx:id="gradeCol" prefWidth="75.0" text="Grade" />
+          <TableColumn fx:id="countCol" prefWidth="75.0" text="Count" />
+        </columns>
+         <columnResizePolicy>
+            <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+         </columnResizePolicy>
+      </TableView>
+      <BarChart fx:id="barChart" layoutX="224.0" layoutY="15.0" prefHeight="267.0" prefWidth="436.0">
+        <xAxis>
+          <CategoryAxis fx:id="yAxis" side="BOTTOM" />
+        </xAxis>
+        <yAxis>
+          <NumberAxis side="LEFT" fx:id="xAxis" />
+        </yAxis>
+      </BarChart>
+      <Button layoutX="423.0" layoutY="292.0" mnemonicParsing="false" onAction="#generateBtnOnAction" text="Generate Chart" />
+      <Label layoutX="374.0" layoutY="334.0" prefHeight="17.0" prefWidth="200.0" />
+      <Button layoutX="247.0" layoutY="292.0" mnemonicParsing="false" onAction="#deleteBtnOnAction" prefHeight="25.0" prefWidth="89.0" text="Delete" />
+   </children>
+</AnchorPane>
