@@ -23,6 +23,9 @@ public class Announcement implements Serializable {
         this.status = "Pending";
     }
 
+    public Announcement(String announcementId, String title, String content, String createdBy, Date date, String targetAudience, String pendingApproval) {
+    }
+
 
     public String getAnnouncementId() { return announcementId; }
     public String getTitle() { return title; }

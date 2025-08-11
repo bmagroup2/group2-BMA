@@ -29,6 +29,9 @@ public class Evaluation implements Serializable {
         this.status = "Pending";
     }
 
+    public Evaluation(String evaluationId, String cadetId, String evaluatorId, String evaluationType, double score, double maxScore, String comments) {
+    }
+
 
     public String getEvalId() { return evalId; }
     public String getCadetId() { return cadetId; }
@@ -64,5 +67,17 @@ public class Evaluation implements Serializable {
                 ", notes='" + notes + '\'' +
                 ", status='" + status + '\'' +
                 '}';
+    }
+
+    public double getScore() {
+        return 0;
+    }
+
+    public Object getSessionId() {
+        return null;
+    }
+
+    public Object getEvaluatorId() {
+        return null;
     }
 }

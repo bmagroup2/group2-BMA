@@ -38,7 +38,7 @@ public class LoginViewController {
 
         List<User> users = DataPersistenceManager.loadObjects(USERS_FILE);
         if (users.isEmpty()) {
-
+            users.add(new bmasec2.bmaapplication.shanin.SystemAdministrator("admin", "Admin", "admin@gmail.com", "admin1234",2));
             users.add(new bmasec2.bmaapplication.shanin.Commandant("CMD-001", "Cmdt User", "cmd@bma.com", "commandant1234", "CMD-001", "0987654321"));
             users.add(new bmasec2.bmaapplication.afifa.Cadet("C-001", "Cadet John", "john@bma.com", "cadet1234", "Batch A", "Junior"));
 

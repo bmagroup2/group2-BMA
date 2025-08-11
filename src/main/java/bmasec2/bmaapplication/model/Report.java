@@ -34,6 +34,9 @@ public class Report implements Serializable {
         this.generatedBy = "System";
     }
 
+    public Report(String reportId, String logistics, String generatedBy, String text) {
+    }
+
 
     public String getReportId() {
         return reportId;
