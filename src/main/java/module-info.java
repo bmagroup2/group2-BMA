@@ -1,6 +1,7 @@
 module bmasec2.bmaapplication {
     requires javafx.controls;
     requires javafx.fxml;
+    requires com.github.librepdf.openpdf;
 
 
     opens bmasec2.bmaapplication to javafx.fxml;

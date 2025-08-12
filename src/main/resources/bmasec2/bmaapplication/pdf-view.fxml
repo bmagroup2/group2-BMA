@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="563.0" prefWidth="366.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bmasec2.bmaapplication.PdfViewController">
+   <children>
+      <VBox alignment="TOP_CENTER" prefHeight="471.0" prefWidth="366.0">
+         <children>
+            <Label text="IUB Cafeteria">
+               <VBox.margin>
+                  <Insets top="2.0" />
+               </VBox.margin>
+               <padding>
+                  <Insets top="20.0" />
+               </padding>
+               <font>
+                  <Font size="29.0" />
+               </font>
+            </Label>
+            <Label layoutX="110.0" layoutY="12.0" text="Independent University, Bangladesh">
+               <padding>
+                  <Insets top="5.0" />
+               </padding>
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <Label layoutX="82.0" layoutY="75.0" text="Plot-16, Aftab Uddin Ahmed Road, Block B">
+               <padding>
+                  <Insets top="5.0" />
+               </padding>
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <Label layoutX="62.0" layoutY="100.0" text="Bashundhara, R/A, Dhaka">
+               <padding>
+                  <Insets top="5.0" />
+               </padding>
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <Label fx:id="tokenNoLabel" layoutX="110.0" layoutY="12.0" prefHeight="63.0" prefWidth="148.0" text="Token No.:">
+               <padding>
+                  <Insets bottom="10.0" top="10.0" />
+               </padding>
+               <font>
+                  <Font size="29.0" />
+               </font>
+            </Label>
+            <TableView fx:id="tableView" prefHeight="200.0" prefWidth="341.0">
+              <columns>
+                <TableColumn fx:id="serialNoColumn" prefWidth="43.0" text="#" />
+                <TableColumn fx:id="itemNameColumn" prefWidth="163.0" text="Item Name" />
+                  <TableColumn fx:id="qtyColumn" prefWidth="51.0" text="Qty" />
+                  <TableColumn fx:id="priceColumn" prefWidth="107.0" text="Price" />
+              </columns>
+            </TableView>
+            <Label fx:id="subTotalLabel" layoutX="82.0" layoutY="75.0" prefHeight="25.0" prefWidth="290.0" text="SubTotal:">
+               <padding>
+                  <Insets top="5.0" />
+               </padding>
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <Label fx:id="vatLabel" layoutX="62.0" layoutY="100.0" prefHeight="25.0" prefWidth="282.0" text="Vat:">
+               <padding>
+                  <Insets top="5.0" />
+               </padding>
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <Label fx:id="discountLabel" layoutX="115.0" layoutY="125.0" prefHeight="25.0" prefWidth="282.0" text="Discount">
+               <padding>
+                  <Insets top="5.0" />
+               </padding>
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <Label fx:id="totalLabel" layoutX="166.0" layoutY="463.0" prefHeight="25.0" prefWidth="281.0" text="Total:">
+               <padding>
+                  <Insets top="5.0" />
+               </padding>
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+         </children>
+      </VBox>
+      <Label fx:id="dateLabel" layoutX="14.0" layoutY="487.0" prefHeight="17.0" prefWidth="109.0" text="Date:" />
+      <Label fx:id="timeLabel" layoutX="201.0" layoutY="487.0" prefHeight="17.0" prefWidth="119.0" text="Time" />
+      <Button layoutX="31.0" layoutY="524.0" mnemonicParsing="false" onAction="#printBtnOnAction" prefHeight="25.0" prefWidth="307.0" text="Print" />
+   </children>
+</AnchorPane>
