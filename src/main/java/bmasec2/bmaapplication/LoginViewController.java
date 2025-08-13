@@ -2,94 +2,144 @@ package bmasec2.bmaapplication;
 
 import bmasec2.bmaapplication.system.DataPersistenceManager;
 import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 import java.util.Optional;
 
 public class LoginViewController {
 
-    @javafx.fxml.FXML
-    private PasswordField passwordTextField;
-    @javafx.fxml.FXML
-    private ComboBox<String> roleComboBox;
-    @javafx.fxml.FXML
-    private TextField usernameTextField;
+    @FXML private PasswordField passwordTextField;
+    @FXML private ComboBox<String> roleComboBox;
+    @FXML private TextField usernameTextField;
 
-    public static String enteredUsername ;
+    public static String enteredUsername;
     public static String enteredPassword;
     public static String selectedRole;
 
     private static final String USERS_FILE = "users.bin";
+    private static final String APP_TITLE = "BMA Application";
 
-    @javafx.fxml.FXML
+    @FXML
     public void initialize() {
-        roleComboBox.getItems().addAll("System Admin", "Commandant", "Cadet", "Cadet Supervisor", "Training Instructor", "Logistic Officer", "Medical Officer", "Mess Officer");
+        setupRoleComboBox();
+        initializeDefaultUsers();
+    }
 
+    private void setupRoleComboBox() {
+        roleComboBox.getItems().addAll(
+                "System Admin", "Commandant", "Cadet", "Cadet Supervisor",
+                "Training Instructor", "Logistic Officer", "Medical Officer", "Mess Officer"
+        );
+    }
 
-        List<User> users = DataPersistenceManager.loadObjects(USERS_FILE);
-        if (users.isEmpty()) {
-            users.add(new bmasec2.bmaapplication.shanin.SystemAdministrator("admin", "Admin", "admin@gmail.com", "admin1234",2));
-            users.add(new bmasec2.bmaapplication.shanin.Commandant("CMD-001", "Cmdt User", "cmd@bma.com", "commandant1234", "CMD-001", "0987654321"));
-            users.add(new bmasec2.bmaapplication.afifa.Cadet("C-001", "Cadet John", "john@bma.com", "cadet1234", "Batch A", "Junior"));
+    private void initializeDefaultUsers() {
+        try {
 
-            DataPersistenceManager.saveObjects(users, USERS_FILE);
+            List<User> users = DataPersistenceManager.loadObjects(USERS_FILE);
+            if (users == null) {
+                users = new ArrayList<>();
+            }
+
+            if (users.isEmpty()) {
+                createDefaultUsers(users);
+                DataPersistenceManager.saveObjects(users, USERS_FILE);
+            }
+        } catch (Exception e) {
+            showAlert(Alert.AlertType.ERROR, "Initialization Error",
+                    "Failed to initialize user data: " + e.getMessage());
         }
     }
 
-    @javafx.fxml.FXML
-    public void signInBtnOnAction(ActionEvent actionEvent) throws IOException {
-        enteredUsername = usernameTextField.getText();
+    private void createDefaultUsers(List<User> users) {
+        users.add(new bmasec2.bmaapplication.shanin.SystemAdministrator(
+                "admin", "Admin", "admin@gmail.com", "admin1234", 2));
+        users.add(new bmasec2.bmaapplication.shanin.Commandant(
+                "commandant", "Cmdt User", "cmd@bma.com", "commandant1234", "CMD-001", "0987654321"));
+        users.add(new bmasec2.bmaapplication.afifa.Cadet(
+                "cadet", "Cadet", "cadet@bma.com", "cadet1234", "Batch A", "Junior"));
+        users.add(new bmasec2.bmaapplication.afifa.CadetSupervisor(
+                "cadetsupervisor", "Cadet Supervisor", "cadetsupervisor@bma.com", "cadetsupervisor", "CSV-001","N/A"));
+    }
+
+    @FXML
+    public void signInBtnOnAction(ActionEvent actionEvent) {
+        if (!validateInputs()) {
+            return;
+        }
+
+        try {
+            List<User> allUsers = DataPersistenceManager.loadObjects(USERS_FILE);
+            if (allUsers == null) {
+                allUsers = new ArrayList<>();
+            }
+
+            Optional<User> authenticatedUser = authenticateUser(allUsers);
+
+            if (authenticatedUser.isPresent()) {
+                handleSuccessfulLogin(actionEvent, authenticatedUser.get(), allUsers);
+            } else {
+                showAlert(Alert.AlertType.ERROR, "Login Failed",
+                        "Invalid username, password, or role.");
+            }
+        } catch (Exception e) {
+            showAlert(Alert.AlertType.ERROR, "Login Error",
+                    "An error occurred during login: " + e.getMessage());
+        }
+    }
+
+    private boolean validateInputs() {
+        enteredUsername = usernameTextField.getText().trim();
         enteredPassword = passwordTextField.getText();
         selectedRole = roleComboBox.getValue();
 
         if (enteredUsername.isEmpty() || enteredPassword.isEmpty() || selectedRole == null) {
-            showAlert(Alert.AlertType.ERROR, "Missing Information", "Please fill in all fields.");
-            return;
+            showAlert(Alert.AlertType.ERROR, "Missing Information",
+                    "Please fill in all fields.");
+            return false;
         }
+        return true;
+    }
 
-        List<User> allUsers = DataPersistenceManager.loadObjects(USERS_FILE);
-        Optional<User> authenticatedUser = allUsers.stream()
+    private Optional<User> authenticateUser(List<User> allUsers) {
+        return allUsers.stream()
                 .filter(user -> (user.getName().equalsIgnoreCase(enteredUsername) ||
                         user.getEmail().equalsIgnoreCase(enteredUsername) ||
                         user.getUserId().equalsIgnoreCase(enteredUsername)) &&
                         user.getPassword().equals(enteredPassword) &&
-                        user.getRole().equals(selectedRole))
+                        user.getRole().equalsIgnoreCase(selectedRole))
                 .findFirst();
+    }
 
-        if (authenticatedUser.isPresent()) {
-            User loggedInUser = authenticatedUser.get();
-            loggedInUser.login(enteredUsername, enteredPassword);
-            DataPersistenceManager.saveObjects(allUsers, USERS_FILE);
+    private void handleSuccessfulLogin(ActionEvent actionEvent, User loggedInUser, List<User> allUsers) throws IOException {
+        loggedInUser.login(enteredUsername, enteredPassword, selectedRole);
+        DataPersistenceManager.saveObjects(allUsers, USERS_FILE);
+        openMainMenu(actionEvent, loggedInUser);
+    }
 
-            Node source = (Node) actionEvent.getSource();
-            Stage loginStage = (Stage) source.getScene().getWindow();
+    private void openMainMenu(ActionEvent actionEvent, User loggedInUser) throws IOException {
+        Node source = (Node) actionEvent.getSource();
+        Stage loginStage = (Stage) source.getScene().getWindow();
 
-            FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("nav-menu-view.fxml"));
-            Scene scene = new Scene(fxmlLoader.load());
+        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("nav-menu-view.fxml"));
+        Scene scene = new Scene(fxmlLoader.load());
 
-            NavMenuViewController controller = fxmlLoader.getController();
+        NavMenuViewController controller = fxmlLoader.getController();
+        controller.initData(loggedInUser);
 
-            controller.initData(loggedInUser);
+        Stage newStage = new Stage();
+        newStage.setTitle(APP_TITLE);
+        newStage.setScene(scene);
+        newStage.show();
 
-            Stage newStage = new Stage();
-            newStage.setTitle("BMA Application");
-            newStage.setScene(scene);
-            newStage.show();
-
-            loginStage.close();
-        } else {
-            showAlert(Alert.AlertType.ERROR, "Login Failed", "Invalid username, password, or role.");
-        }
+        loginStage.close();
     }
 
     private void showAlert(Alert.AlertType type, String title, String message) {

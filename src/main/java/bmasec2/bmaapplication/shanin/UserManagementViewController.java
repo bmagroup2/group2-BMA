@@ -71,7 +71,7 @@ public class UserManagementViewController {
         statusColumn.setCellValueFactory(new PropertyValueFactory<>("status"));
 
         roleComboBox.getItems().addAll("System Admin", "Commandant", "Cadet", "Cadet Supervisor", "Training Instructor", "Logistic Officer", "Medical Officer", "Mess Officer");
-        filterByRoleComboBox.getItems().addAll("All", "System Admin", "Commandant", "Cadet", "Cadet SuperVisor", "Training Instructor", "Logistic Officer", "Medical Officer", "Mess Officer");
+        filterByRoleComboBox.getItems().addAll("All", "System Admin", "Commandant", "Cadet", "Cadet Supervisor", "Training Instructor", "Logistic Officer", "Medical Officer", "Mess Officer");
         filterByRoleComboBox.setValue("All");
         statusComboBox.getItems().addAll("Active", "Inactive");
 
@@ -104,7 +104,7 @@ public class UserManagementViewController {
 
         if (authenticatedUser.isPresent()) {
             User loggedInUser = authenticatedUser.get();
-            loggedInUser.login(enteredUsername, enteredPassword);
+            loggedInUser.login(enteredUsername, enteredPassword, selectedRole);
             currentUserId = loggedInUser.getUserId();
         }
     }

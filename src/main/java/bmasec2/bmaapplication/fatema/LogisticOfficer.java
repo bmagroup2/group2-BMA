@@ -12,14 +12,14 @@ public class LogisticOfficer extends User {
     private String contactNumber;
 
     public LogisticOfficer(String userId, String name, String email, String password, String officerId, String contactNumber) {
-        super(userId, name, email, "Logistics Officer", password);
+        super(userId, name, email, "Logistic Officer", password);
         this.officerId = officerId;
         this.contactNumber = contactNumber;
         this.department = "Logistics";
     }
 
     public LogisticOfficer(String userId, String name, String email, String password, String officerId, String department, String contactNumber) {
-        super(userId, name, email, "Logistics Officer", password);
+        super(userId, name, email, "Logistic Officer", password);
         this.officerId = officerId;
         this.department = department;
         this.contactNumber = contactNumber;

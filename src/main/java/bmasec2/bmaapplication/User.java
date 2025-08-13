@@ -27,7 +27,7 @@ public abstract class User implements Serializable {
 
 
 
-    public boolean login(String username, String password) {
+    public boolean login(String username, String password, String selectedRole) {
         if ((this.name.equals(username) || this.email.equals(username)) && this.password.equals(password)) {
             this.lastLogin = new Date();
             System.out.println(this.name + " logged in successfully.");
