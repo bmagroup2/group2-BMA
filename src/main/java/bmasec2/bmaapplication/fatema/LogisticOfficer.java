@@ -18,25 +18,15 @@ public class LogisticOfficer extends User {
         this.department = "Logistics";
     }
 
-    public LogisticOfficer(String userId, String name, String email, String password, String officerId, String department, String contactNumber) {
-        super(userId, name, email, "Logistic Officer", password);
-        this.officerId = officerId;
-        this.department = department;
-        this.contactNumber = contactNumber;
-    }
 
 
     public boolean manageInventory(InventoryItem item, String action) {
-        switch (action.toLowerCase()) {
-            case "add":
-                return item.addItem(1);
-            case "update":
-                return item.updateStock(item.getQuantity());
-            case "remove":
-                return item.updateStock(0);
-            default:
-                return false;
-        }
+        return switch (action.toLowerCase()) {
+            case "add" -> item.addItem(1);
+            case "update" -> item.updateStock(item.getQuantity());
+            case "remove" -> item.updateStock(0);
+            default -> false;
+        };
     }
 
     public List<InventoryItem> viewStock(String category) {

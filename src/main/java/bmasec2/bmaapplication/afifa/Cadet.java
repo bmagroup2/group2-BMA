@@ -59,4 +59,22 @@ public class Cadet extends User implements Serializable {
     public void setBatch(String batch) { this.batch = batch; }
     public String getRank() { return rank; }
     public void setRank(String rank) { this.rank = rank; }
+
+    @Override
+    public String toString() {
+        return "Cadet{" +
+                "batch='" + batch + '\'' +
+                ", rank='" + rank + '\'' +
+                ", joinDate=" + joinDate +
+                ", performanceScore=" + performanceScore +
+                ", medicalStatus='" + medicalStatus + '\'' +
+                ", userId='" + userId + '\'' +
+                ", name='" + name + '\'' +
+                ", email='" + email + '\'' +
+                ", role='" + role + '\'' +
+                ", password='" + password + '\'' +
+                ", lastLogin=" + lastLogin +
+                ", status='" + status + '\'' +
+                '}';
+    }
 }

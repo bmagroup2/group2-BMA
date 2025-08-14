@@ -9,7 +9,7 @@ public class CadetSupervisor extends User {
     private String department;
 
     public CadetSupervisor(String userId, String name, String email, String password, String supervisorId, String department) {
-        super(userId, name, email, password, "Cadet Supervisor");
+        super(userId, name, email,"Cadet Supervisor", password );
         this.supervisorId = supervisorId;
         this.department = department;
     }

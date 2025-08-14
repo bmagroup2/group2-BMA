@@ -1,6 +1,13 @@
 package bmasec2.bmaapplication;
 
+import bmasec2.bmaapplication.afifa.Cadet;
+import bmasec2.bmaapplication.afifa.CadetSupervisor;
+import bmasec2.bmaapplication.fatema.LogisticOfficer;
+import bmasec2.bmaapplication.shanin.Commandant;
+import bmasec2.bmaapplication.shanin.SystemAdministrator;
 import bmasec2.bmaapplication.system.DataPersistenceManager;
+import bmasec2.bmaapplication.zumar.MedicalOfficer;
+import bmasec2.bmaapplication.zumar.MessOfficer;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -26,9 +33,11 @@ public class LoginViewController {
 
     private static final String USERS_FILE = "users.bin";
     private static final String APP_TITLE = "BMA Application";
-
+    List<User> allUsers;
     @FXML
     public void initialize() {
+        allUsers = DataPersistenceManager.loadObjects(USERS_FILE);
+        System.out.println(allUsers);
         setupRoleComboBox();
         initializeDefaultUsers();
     }
@@ -59,14 +68,21 @@ public class LoginViewController {
     }
 
     private void createDefaultUsers(List<User> users) {
-        users.add(new bmasec2.bmaapplication.shanin.SystemAdministrator(
+        users.add(new SystemAdministrator(
                 "admin", "Admin", "admin@gmail.com", "admin1234", 2));
-        users.add(new bmasec2.bmaapplication.shanin.Commandant(
-                "commandant", "Cmdt User", "cmd@bma.com", "commandant1234", "CMD-001", "0987654321"));
-        users.add(new bmasec2.bmaapplication.afifa.Cadet(
+        users.add(new Commandant(
+                "commandant", "Cmdt User", "cmd@bma.com", "commandant1234", "CMD-001", "01987654321"));
+        users.add(new Cadet(
                 "cadet", "Cadet", "cadet@bma.com", "cadet1234", "Batch A", "Junior"));
-        users.add(new bmasec2.bmaapplication.afifa.CadetSupervisor(
+        users.add(new CadetSupervisor(
                 "cadetsupervisor", "Cadet Supervisor", "cadetsupervisor@bma.com", "cadetsupervisor", "CSV-001","N/A"));
+        users.add(new LogisticOfficer(
+                "logisticofficer", "Logistic Officer", "logisticofficer@bma.com", "logisticofficer1234", "LOF-001","0192231211221" ));
+        users.add(new bmasec2.bmaapplication.fatema.TrainingInstructor(
+                "trofficer", "Training Officer", "trofficer@bma.com", "trofficer1234", "TRO-001", "N/A"));
+        users.add(new MedicalOfficer("medicalofficer","Medical Officer","medicalofficer@bma.com","medicalofficer1234","MOF-001","BMD-0012"));
+        users.add(new MessOfficer(
+                "messofficer","Mess Officer","messofficer@bma.com","messofficer1234","MEO-001","Day"));
     }
 
     @FXML
@@ -76,7 +92,7 @@ public class LoginViewController {
         }
 
         try {
-            List<User> allUsers = DataPersistenceManager.loadObjects(USERS_FILE);
+
             if (allUsers == null) {
                 allUsers = new ArrayList<>();
             }

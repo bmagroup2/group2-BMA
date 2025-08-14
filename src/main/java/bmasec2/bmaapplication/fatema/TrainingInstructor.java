@@ -25,14 +25,6 @@ public class TrainingInstructor extends User {
         this.yearsOfExperience = 0;
     }
 
-    public TrainingInstructor(String userId, String name, String email, String password, String instructorId, String specialization, String department, int yearsOfExperience) {
-        super(userId, name, email, "Training Instructor", password);
-        this.instructorId = instructorId;
-        this.specialization = specialization;
-        this.department = department;
-        this.yearsOfExperience = yearsOfExperience;
-    }
-
 
     public boolean takeAttendance(String sessionId, Map<String, String> attendanceData) {
         System.out.println("Attendance taken for session: " + sessionId);

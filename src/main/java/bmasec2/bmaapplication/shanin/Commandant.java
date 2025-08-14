@@ -61,4 +61,20 @@ public class Commandant extends User implements Serializable {
     public void setTenureStart(Date tenureStart) { this.tenureStart = tenureStart; }
     public String getContactNumber() { return contactNumber; }
     public void setContactNumber(String contactNumber) { this.contactNumber = contactNumber; }
+
+    @Override
+    public String toString() {
+        return "Commandant{" +
+                "commandantId='" + commandantId + '\'' +
+                ", tenureStart=" + tenureStart +
+                ", contactNumber='" + contactNumber + '\'' +
+                ", userId='" + userId + '\'' +
+                ", name='" + name + '\'' +
+                ", email='" + email + '\'' +
+                ", role='" + role + '\'' +
+                ", password='" + password + '\'' +
+                ", lastLogin=" + lastLogin +
+                ", status='" + status + '\'' +
+                '}';
+    }
 }

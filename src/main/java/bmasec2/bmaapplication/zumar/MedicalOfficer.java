@@ -9,12 +9,12 @@ public class MedicalOfficer extends User {
     private String medicalLicense;
 
     public MedicalOfficer(String userId, String name, String email, String password, String officerId, String medicalLicense) {
-        super(userId, name, email, password, "Medical Officer");
+        super(userId, name, email,"Medical Officer", password );
         this.officerId = officerId;
         this.medicalLicense = medicalLicense;
     }
 
-    // Getters and Setters
+
     public String getOfficerId() {
         return officerId;
     }

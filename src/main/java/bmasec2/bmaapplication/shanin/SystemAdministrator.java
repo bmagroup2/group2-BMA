@@ -52,4 +52,19 @@ public class SystemAdministrator extends User implements Serializable {
     public void setAdminLevel(int adminLevel) { this.adminLevel = adminLevel; }
     public List<String> getAccessRights() { return accessRights; }
     public void setAccessRights(List<String> accessRights) { this.accessRights = accessRights; }
+
+    @Override
+    public String toString() {
+        return "SystemAdministrator{" +
+                "adminLevel=" + adminLevel +
+                ", accessRights=" + accessRights +
+                ", userId='" + userId + '\'' +
+                ", name='" + name + '\'' +
+                ", email='" + email + '\'' +
+                ", role='" + role + '\'' +
+                ", password='" + password + '\'' +
+                ", lastLogin=" + lastLogin +
+                ", status='" + status + '\'' +
+                '}';
+    }
 }

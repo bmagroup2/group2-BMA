@@ -9,12 +9,12 @@ public class MessOfficer extends User {
     private String shift;
 
     public MessOfficer(String userId, String name, String email, String password, String officerId, String shift) {
-        super(userId, name, email, password, "Mess Officer");
+        super(userId, name, email,"Mess Officer", password );
         this.officerId = officerId;
         this.shift = shift;
     }
 
-    // Getters and Setters
+
     public String getOfficerId() {
         return officerId;
     }
@@ -34,11 +34,11 @@ public class MessOfficer extends User {
     @Override
     public String toString() {
         return "MessOfficer{" +
-                "officerId=\'" + officerId + '\'' +
-                ", shift=\'" + shift + '\'' +
-                ", userId=\'" + getUserId() + '\'' +
-                ", name=\'" + getName() + '\'' +
-                ", role=\'" + getRole() + '\'' +
+                "officerId='" + officerId + '\'' +
+                ", shift='" + shift + '\'' +
+                ", userId='" + getUserId() + '\'' +
+                ", name='" + getName() + '\'' +
+                ", role='" + getRole() + '\'' +
                 '}';
     }
 }
