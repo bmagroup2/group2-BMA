@@ -80,7 +80,8 @@ public class LoginViewController {
                 "logisticofficer", "Logistic Officer", "logisticofficer@bma.com", "logisticofficer1234", "LOF-001","0192231211221" ));
         users.add(new bmasec2.bmaapplication.fatema.TrainingInstructor(
                 "trofficer", "Training Officer", "trofficer@bma.com", "trofficer1234", "TRO-001", "N/A"));
-        users.add(new MedicalOfficer("medicalofficer","Medical Officer","medicalofficer@bma.com","medicalofficer1234","MOF-001","BMD-0012"));
+        users.add(new MedicalOfficer(
+                "medicalofficer","Medical Officer","medicalofficer@bma.com","medicalofficer1234","MOF-001","BMD-0012"));
         users.add(new MessOfficer(
                 "messofficer","Mess Officer","messofficer@bma.com","messofficer1234","MEO-001","Day"));
     }
