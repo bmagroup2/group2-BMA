@@ -103,11 +103,21 @@ public class SystemAdminReportsViewController {
         long totalUsers = users.size();
         long systemAdmins = users.stream().filter(u -> u.getRole().equals("System Admin")).count();
         long cadets = users.stream().filter(u -> u.getRole().equals("Cadet")).count();
+        long cadetsupervisers = users.stream().filter(u -> u.getRole().equals("Cadet Supervisor")).count();
+        long trainingofficers = users.stream().filter(u -> u.getRole().equals("Training Instructor ")).count();
+        long logisticofficers = users.stream().filter(u -> u.getRole().equals("Logistic Officer")).count();
+        long medicalofficers = users.stream().filter(u -> u.getRole().equals("Medical Officer")).count();
+        long messofficers = users.stream().filter(u -> u.getRole().equals("Mess Officer")).count();
 
         Map<String, Object> content = Map.of(
                 "Total Users", totalUsers,
                 "System Admins", systemAdmins,
                 "Cadets", cadets,
+                "Cadet Supervisors", cadetsupervisers,
+                "Training Officers", trainingofficers,
+                "Logistic Officers", logisticofficers,
+                "Medical Officers", medicalofficers,
+                "Mess Officers", messofficers,
                 "Report Period Start", startDate,
                 "Report Period End", endDate
         );
@@ -127,7 +137,6 @@ public class SystemAdminReportsViewController {
 
         Map<String, Object> content = Map.of(
                 "Total Logs in Period", filteredLogs.size(),
-                "Filtered Logs", filteredLogs,
                 "Report Period Start", startDate,
                 "Report Period End", endDate
         );
