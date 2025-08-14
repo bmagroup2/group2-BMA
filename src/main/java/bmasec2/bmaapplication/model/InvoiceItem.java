@@ -1,4 +1,4 @@
-package bmasec2.bmaapplication;
+package bmasec2.bmaapplication.model;
 
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
@@ -17,7 +17,7 @@ public class InvoiceItem {
         this.price = new SimpleDoubleProperty(price);
     }
 
-    // Getters
+    
     public int getSerialNo() {
         return serialNo.get();
     }
@@ -34,7 +34,7 @@ public class InvoiceItem {
         return price.get();
     }
 
-    // Property getters (needed for TableView binding)
+    
     public SimpleIntegerProperty serialNoProperty() {
         return serialNo;
     }
@@ -51,7 +51,7 @@ public class InvoiceItem {
         return price;
     }
 
-    // Setters
+    
     public void setSerialNo(int serialNo) {
         this.serialNo.set(serialNo);
     }
@@ -66,5 +66,15 @@ public class InvoiceItem {
 
     public void setPrice(double price) {
         this.price.set(price);
+    }
+
+    @Override
+    public String toString() {
+        return "InvoiceItem{" +
+                "serialNo=" + serialNo +
+                ", itemName=" + itemName +
+                ", quantity=" + quantity +
+                ", price=" + price +
+                '}';
     }
 }

@@ -3,6 +3,7 @@ package bmasec2.bmaapplication.zumar;
 import bmasec2.bmaapplication.model.MedicalRecord;
 import bmasec2.bmaapplication.system.DataPersistenceManager;
 import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.chart.BarChart;
@@ -31,7 +32,7 @@ public class monthlyMedicalReportViewController {
     public void initialize() {
         populateReportTypes();
         monthDatePicker.setValue(LocalDate.now());
-        // Optionally generate report on initialization
+
         generateReport();
     }
 
@@ -42,7 +43,7 @@ public class monthlyMedicalReportViewController {
                 "Cases by Month"
         );
         reportTypeComboBox.setItems(reportTypes);
-        reportTypeComboBox.setValue("Cases by Diagnosis"); // Default selection
+        reportTypeComboBox.setValue("Cases by Diagnosis");
     }
 
     @FXML

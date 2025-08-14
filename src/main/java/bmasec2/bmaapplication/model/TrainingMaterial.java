@@ -24,7 +24,7 @@ public class TrainingMaterial implements Serializable {
         this.uploadedByUserId = uploadedByUserId;
     }
 
-    // Getters
+    
     public String getMaterialId() {
         return materialId;
     }
@@ -57,7 +57,7 @@ public class TrainingMaterial implements Serializable {
         return uploadedByUserId;
     }
 
-    // Setters
+    
     public void setMaterialId(String materialId) {
         this.materialId = materialId;
     }

@@ -18,7 +18,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.UUID;
 import java.util.stream.Collectors;
-//
+
 public class returnLogController {
 
     @FXML
@@ -41,10 +41,10 @@ public class returnLogController {
     private ObservableList<bmasec2.bmaapplication.model.ReturnLogEntry> returnLogEntries;
     private ObservableList<InventoryItem> inventoryItems;
     private ObservableList<User> users;
-//
+
     @FXML
     public void initialize() {
-        // Initialize table columns
+        
         dateTableColumn.setCellValueFactory(cellData -> {
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
             return javafx.beans.binding.Bindings.createStringBinding(() -> cellData.getValue().getLogDate().format(formatter));
@@ -122,7 +122,7 @@ public class returnLogController {
         alert.showAndWait();
     }
 }
-//
-//
+
+
 
 

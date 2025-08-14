@@ -25,7 +25,7 @@ public class TrainingSession implements Serializable {
         this.maxParticipants = maxParticipants;
     }
 
-    // Getters
+    
     public String getSessionId() {
         return sessionId;
     }
@@ -58,7 +58,7 @@ public class TrainingSession implements Serializable {
         return maxParticipants;
     }
 
-    // Setters
+    
     public void setSessionId(String sessionId) {
         this.sessionId = sessionId;
     }
@@ -94,13 +94,13 @@ public class TrainingSession implements Serializable {
     @Override
     public String toString() {
         return "TrainingSession{" +
-                "sessionId=\'" + sessionId + '\'' +
-                ", topic=\'" + topic + '\'' +
+                "sessionId='" + sessionId + '\'' +
+                ", topic='" + topic + '\'' +
                 ", date=" + date +
                 ", time=" + time +
-                ", location=\'" + location + '\'' +
-                ", instructorId=\'" + instructorId + '\'' +
-                ", cadetBatch=\'" + cadetBatch + '\'' +
+                ", location='" + location + '\'' +
+                ", instructorId='" + instructorId + '\'' +
+                ", cadetBatch='" + cadetBatch + '\'' +
                 ", maxParticipants=" + maxParticipants +
                 '}' +
                 ';';

@@ -35,9 +35,9 @@ public class BarChartsViewController
 
     @javafx.fxml.FXML
     public void addBtnOnAction(ActionEvent actionEvent) {
-//        String l = gradeTF.getText();
-//        int c = Integer.parseInt(countTF.getText());
-//        tableViewScene.getItems().addAll(l,c);
+
+
+
     }
 
     @javafx.fxml.FXML
@@ -74,7 +74,7 @@ public class BarChartsViewController
 
     }
 
-//    private List<XYChart.Data> getData () {
-//
-//    }
+
+
+
 }

@@ -35,6 +35,8 @@
                     <TextField fx:id="drilltimetextfield" />
                     <Label text="Activity" />
                     <TextField fx:id="drillactivitytextfield" />
+               <Label layoutX="10.0" layoutY="231.0" text="Location" />
+               <TextField fx:id="drilllocationtextfield" layoutX="10.0" layoutY="258.0" />
                     <Button mnemonicParsing="false" onAction="#drillsaveschedulonaction" style="-fx-background-color: #4CAF50;" text="Save Schedule" textFill="WHITE" />
                 </children>
             </VBox>

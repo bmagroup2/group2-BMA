@@ -33,21 +33,24 @@ public class AttendenceMonitorViewController {
     @FXML
     private TableColumn<Attendance, String> attendencecadetnamecolumn;
 
-    private ObservableList<Attendance> attendanceList = FXCollections.observableArrayList();
+    private final ObservableList<Attendance> attendanceList = FXCollections.observableArrayList();
 
     @FXML
     public void initialize() {
         attendencedatecolumn.setCellValueFactory(new PropertyValueFactory<>("date"));
         attendenceceactivitycolumn.setCellValueFactory(new PropertyValueFactory<>("sessionId"));
         attendencestatuscolumn.setCellValueFactory(new PropertyValueFactory<>("status"));
-        attendencecadetnamecolumn.setCellValueFactory(new PropertyValueFactory<>("cadetId")); // Assuming cadetId is used for name
+        attendencecadetnamecolumn.setCellValueFactory(new PropertyValueFactory<>("cadetId")); 
 
-        // Load cadets for the combobox (placeholder for actual cadet loading)
-        // In a real application, you would load actual cadet names/IDs here
-        List<Cadet> cadets = DataPersistenceManager.loadObjects("cadets.dat");
+        
+        
+        List<Cadet> users = DataPersistenceManager.loadObjects("users.dat");
         ObservableList<String> cadetNames = FXCollections.observableArrayList();
-        for (Cadet cadet : cadets) {
-            cadetNames.add(cadet.getName());
+        for (Object user : users) {
+            if (user instanceof Cadet) {
+                Cadet cadet = (Cadet) user;
+                cadetNames.add(cadet.getName());
+            }
         }
         attendencecadetcombobox.setItems(cadetNames);
 
@@ -67,7 +70,7 @@ public class AttendenceMonitorViewController {
 
         List<Attendance> filteredAttendance = allAttendance.stream()
                 .filter(attendance -> {
-                    boolean matchesCadet = (selectedCadetName == null || selectedCadetName.isEmpty()) || attendance.getCadetId().equals(selectedCadetName); // Assuming cadetId is name
+                    boolean matchesCadet = (selectedCadetName == null || selectedCadetName.isEmpty()) || attendance.getCadetId().equals(selectedCadetName); 
                     boolean matchesDate = (selectedDate == null) || attendance.getDate().equals(selectedDate);
                     return matchesCadet && matchesDate;
                 })

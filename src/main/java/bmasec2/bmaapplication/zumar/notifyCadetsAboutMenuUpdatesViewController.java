@@ -19,7 +19,7 @@ public class notifyCadetsAboutMenuUpdatesViewController {
 
     @FXML
     public void initialize() {
-        // Initialization logic if needed
+
     }
 
     @FXML
@@ -37,7 +37,7 @@ public class notifyCadetsAboutMenuUpdatesViewController {
             String title = notificationTitleTextField.getText().trim();
             String message = messageTextArea.getText().trim();
 
-            // Create an announcement for menu updates
+            
             String announcementId = UUID.randomUUID().toString();
             String content = "MENU UPDATE: " + message;
 
@@ -45,8 +45,8 @@ public class notifyCadetsAboutMenuUpdatesViewController {
                     announcementId,
                     title,
                     content,
-                    "Mess Officer", // Created by
-                    "All Cadets" // Target audience
+                    "Mess Officer",
+                    "All Cadets"
             );
 
             DataPersistenceManager.addAnnouncementAndSave(menuUpdate);

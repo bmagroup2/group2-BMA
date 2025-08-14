@@ -1,6 +1,6 @@
 package bmasec2.bmaapplication.zumar;
 
-import bmasec2.bmaapplication.model.InventoryItem;
+import bmasec2.bmaapplication.model.FoodStock;
 import bmasec2.bmaapplication.system.DataPersistenceManager;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -18,69 +18,67 @@ import java.util.stream.Collectors;
 public class foodStockSummaryViewController {
 
     @FXML
-    private TableColumn<InventoryItem, String> statusColn;
+    private TableColumn<FoodStock, String> statusColn;
     @FXML
-    private TableColumn<InventoryItem, Integer> currentStockColn;
+    private TableColumn<FoodStock, Integer> currentStockColn;
     @FXML
     private ComboBox<String> filterByCategoryComboBox;
     @FXML
     private TextField searchItemTextField;
     @FXML
-    private TableColumn<InventoryItem, String> categoryColn;
+    private TableColumn<FoodStock, String> categoryColn;
     @FXML
-    private TableView<InventoryItem> foodStockInventoryTableView;
+    private TableView<FoodStock> foodStockInventoryTableView;
     @FXML
-    private TableColumn<InventoryItem, String> itemNameColn;
+    private TableColumn<FoodStock, String> itemNameColn;
 
-    private ObservableList<InventoryItem> masterInventoryList;
+    private ObservableList<FoodStock> masterInventoryList;
 
     @FXML
     public void initialize() {
-        // Initialize table columns
+
         itemNameColn.setCellValueFactory(new PropertyValueFactory<>("itemName"));
         currentStockColn.setCellValueFactory(new PropertyValueFactory<>("quantity"));
         categoryColn.setCellValueFactory(new PropertyValueFactory<>("category"));
         statusColn.setCellValueFactory(cellData -> {
             int quantity = cellData.getValue().getQuantity();
-            int minStock = cellData.getValue().getMinStockLevel();
-            if (quantity <= minStock) {
+            if (quantity <= 10) {
                 return new javafx.beans.property.SimpleStringProperty("Low Stock");
             } else {
                 return new javafx.beans.property.SimpleStringProperty("Sufficient");
             }
         });
 
-        // Load all inventory items
-        masterInventoryList = FXCollections.observableArrayList(DataPersistenceManager.loadObjects("inventory_items.dat"));
+        masterInventoryList = FXCollections.observableArrayList(DataPersistenceManager.loadObjects("food_stocks.dat"));
         foodStockInventoryTableView.setItems(masterInventoryList);
 
-        // Populate category filter combo box
+
         populateCategoryFilter();
 
-        // Add listener for search text field
+
         searchItemTextField.textProperty().addListener((observable, oldValue, newValue) -> filterItems());
 
-        // Add listener for category combo box
+
         filterByCategoryComboBox.valueProperty().addListener((observable, oldValue, newValue) -> filterItems());
     }
 
     private void populateCategoryFilter() {
         ObservableList<String> categories = FXCollections.observableArrayList();
-        categories.add("All Categories"); // Option to view all
+        categories.add("All Categories");
         masterInventoryList.stream()
-                .map(InventoryItem::getCategory)
+                .map(FoodStock::getCategory)
                 .distinct()
                 .sorted()
                 .forEach(categories::add);
         filterByCategoryComboBox.setItems(categories);
-        filterByCategoryComboBox.setValue("All Categories"); // Default selection
+        filterByCategoryComboBox.setValue("All Categories");
     }
 
     private void filterItems() {
         String searchText = searchItemTextField.getText().toLowerCase();
         String selectedCategory = filterByCategoryComboBox.getValue();
 
-        List<InventoryItem> filteredList = masterInventoryList.stream()
+        List<FoodStock> filteredList = masterInventoryList.stream()
                 .filter(item -> {
                     boolean matchesSearch = searchText.isEmpty() || item.getItemName().toLowerCase().contains(searchText);
                     boolean matchesCategory = selectedCategory == null || selectedCategory.equals("All Categories") || item.getCategory().equals(selectedCategory);

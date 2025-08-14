@@ -39,13 +39,13 @@ public class sendHealthAdvisoryViewController
             "Medical Staff Only"
         );
         recipientGroupComboBox.setItems(recipientOptions);
-        recipientGroupComboBox.setValue("All Cadets"); // Default selection
+        recipientGroupComboBox.setValue("All Cadets");
     }
 
     @javafx.fxml.FXML
     public void broadcastMessageOnActionButton(ActionEvent actionEvent) {
         try {
-            // Validate inputs
+            
             if (advisoryTitleTextField.getText().trim().isEmpty()) {
                 showAlert("Error", "Please enter advisory title.");
                 return;
@@ -61,12 +61,12 @@ public class sendHealthAdvisoryViewController
                 return;
             }
             
-            // Get form data
+
             String title = advisoryTitleTextField.getText().trim();
             String message = messageTextArea.getText().trim();
             String recipientGroup = recipientGroupComboBox.getValue();
             
-            // Create health advisory announcement
+
             String announcementId = UUID.randomUUID().toString();
             String content = "HEALTH ADVISORY\n\n" + message + "\n\nTarget Group: " + recipientGroup;
             
@@ -74,17 +74,17 @@ public class sendHealthAdvisoryViewController
                 announcementId,
                 "Health Advisory: " + title,
                 content,
-                "Medical Officer", // Created by
-                recipientGroup // Target audience
+                "Medical Officer",
+                recipientGroup
             );
             
-            // Save to data persistence
+
             DataPersistenceManager.addAnnouncementAndSave(healthAdvisory);
             
-            // Show success message
+
             showAlert("Success", "Health advisory broadcasted successfully to " + recipientGroup + "!");
             
-            // Clear form
+
             clearForm();
             
         } catch (Exception e) {

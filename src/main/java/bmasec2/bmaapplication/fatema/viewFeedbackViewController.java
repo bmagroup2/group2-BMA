@@ -37,7 +37,7 @@ public class viewFeedbackViewController {
         loadData();
         populateSessionComboBox();
 
-        // Listen for selection changes in the feedback list view
+        
         filterBySessionListView.getSelectionModel().selectedItemProperty().addListener(
                 (observable, oldValue, newValue) -> {
                     if (newValue != null) {
@@ -75,12 +75,12 @@ public class viewFeedbackViewController {
             }
         });
 
-        // Add listener to filter feedback when a session is selected
+        
         selectTrainingSrssionComboBox.valueProperty().addListener((obs, oldVal, newVal) -> {
             if (newVal != null) {
                 filterFeedbackBySession(newVal.getSessionId());
             } else {
-                filterBySessionListView.setItems(FXCollections.observableArrayList()); // Clear list if no session selected
+                filterBySessionListView.setItems(FXCollections.observableArrayList()); 
             }
         });
     }

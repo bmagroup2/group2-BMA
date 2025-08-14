@@ -99,7 +99,7 @@ public class restockRequestViewController {
 
         showAlert(Alert.AlertType.INFORMATION, "Success", "Restock request submitted successfully!");
 
-        // Clear form and refresh list
+        
         quantityToRequestTextField.clear();
         remarksTextArea.clear();
         itemNameLabel.setText("Item: [Selected Item Name]");

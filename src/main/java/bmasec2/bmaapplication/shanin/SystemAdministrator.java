@@ -58,13 +58,13 @@ public class SystemAdministrator extends User implements Serializable {
         return "SystemAdministrator{" +
                 "adminLevel=" + adminLevel +
                 ", accessRights=" + accessRights +
-                ", userId=\'" + userId + '\'' +
-                ", name=\'" + name + '\'' +
-                ", email=\'" + email + '\'' +
-                ", role=\'" + role + '\'' +
-                ", password=\'" + password + '\'' +
+                ", userId='" + userId + '\'' +
+                ", name='" + name + '\'' +
+                ", email='" + email + '\'' +
+                ", role='" + role + '\'' +
+                ", password='" + password + '\'' +
                 ", lastLogin=" + lastLogin +
-                ", status=\'" + status + '\'' +
+                ", status='" + status + '\'' +
                 '}' +
                 '\n';
     }

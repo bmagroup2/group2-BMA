@@ -76,7 +76,7 @@ public class SystemSettingsViewController {
     public void saveChangesBtnOnAction(ActionEvent actionEvent) {
         currentSettings.setApplicationName(applicationNameTextField.getText());
 
-        // Save the updated settings
+        
         DataPersistenceManager.saveObjects(List.of(currentSettings), SETTINGS_FILE);
         showAlert(Alert.AlertType.INFORMATION, "Settings Saved", "System settings updated successfully.");
     }

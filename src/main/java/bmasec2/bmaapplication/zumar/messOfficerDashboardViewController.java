@@ -27,17 +27,17 @@ public class messOfficerDashboardViewController
     }
     
     private void loadDashboardData() {
-        // Load menus to display today's menu
+
         List<Menu> menus = DataPersistenceManager.loadObjects("meal_menus.dat");
         
-        // Set default values
+
         lunchAttendanceLabel.setText("145 / 150");
         lowFoodStockItemsLabel.setText("3 Items");
         
-        // Populate today's menu list
+
         ObservableList<String> menuItems = FXCollections.observableArrayList();
         
-        // Add sample menu items for today
+
         menuItems.add("Breakfast: Rice, Dal, Vegetables");
         menuItems.add("Lunch: Biriyani, Chicken Curry, Salad");
         menuItems.add("Dinner: Rice, Fish Curry, Mixed Vegetables");

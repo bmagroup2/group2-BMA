@@ -66,7 +66,7 @@ public class addInventoryViewController {
         }
 
         String itemId = UUID.randomUUID().toString();
-        InventoryItem newItem = new InventoryItem(itemId, itemName, initialQuantity, unitOfMeasurement, category, 0); // Assuming minStockLevel is 0 initially
+        InventoryItem newItem = new InventoryItem(itemId, itemName, initialQuantity, unitOfMeasurement, category, 0); 
         inventoryItems.add(newItem);
         DataPersistenceManager.saveObjects(inventoryItems, INVENTORY_FILE);
 

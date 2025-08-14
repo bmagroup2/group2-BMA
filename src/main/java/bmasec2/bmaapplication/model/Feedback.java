@@ -118,4 +118,8 @@ public class Feedback implements Serializable {
     public Object getCadetName() {
         return null;
     }
+
+    public Date getDate() {
+        return null;
+    }
 }

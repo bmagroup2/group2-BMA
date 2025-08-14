@@ -1,6 +1,6 @@
 package bmasec2.bmaapplication.zumar;
 
-import bmasec2.bmaapplication.Cadet;
+import bmasec2.bmaapplication.afifa.Cadet;
 import bmasec2.bmaapplication.model.SpecialMealRequest;
 import bmasec2.bmaapplication.system.DataPersistenceManager;
 import javafx.collections.FXCollections;
@@ -45,11 +45,12 @@ public class specialMealRequestsViewController {
     }
 
     private void loadCadets() {
-        List<Cadet> cadets = DataPersistenceManager.loadObjects("users.dat");
+        List<bmasec2.bmaapplication.User> users = DataPersistenceManager.loadObjects("users.dat");
         ObservableList<String> cadetOptions = FXCollections.observableArrayList();
 
-        for (Cadet cadet : cadets) {
-            if (cadet instanceof Cadet) {
+        for (bmasec2.bmaapplication.User user : users) {
+            if (user instanceof Cadet) {
+                Cadet cadet = (Cadet) user;
                 cadetOptions.add(cadet.getUserId() + " - " + cadet.getName());
             }
         }
@@ -119,3 +120,4 @@ public class specialMealRequestsViewController {
         alert.showAndWait();
     }
 }
+

@@ -29,7 +29,7 @@ public class CadetSupervisorDashboardViewController {
 
     @FXML
     public void initialize() {
-        // Placeholder for attendance issues
+        
         supattendenceissuelabel.setText("Attendance Issues: None");
     }
 
@@ -43,7 +43,7 @@ public class CadetSupervisorDashboardViewController {
     }
 
     private void loadMyCadets() {
-        // In a real application, this would filter cadets assigned to this supervisor
+        
         List<Cadet> allCadets = DataPersistenceManager.loadObjects("cadets.dat");
         ObservableList<String> cadetNames = FXCollections.observableArrayList();
         for (Cadet cadet : allCadets) {

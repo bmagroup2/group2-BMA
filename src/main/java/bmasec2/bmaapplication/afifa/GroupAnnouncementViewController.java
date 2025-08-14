@@ -28,7 +28,7 @@ public class GroupAnnouncementViewController {
 
     @FXML
     public void initialize() {
-        // Populate target group combobox (placeholder)
+        
         ObservableList<String> targetGroups = FXCollections.observableArrayList(
                 "All Cadets", "Alpha Company", "Bravo Company", "Charlie Company", "Delta Company"
         );
@@ -50,7 +50,7 @@ public class GroupAnnouncementViewController {
             return;
         }
 
-        // Create a unique announcement ID
+        
         String announcementId = UUID.randomUUID().toString();
 
         Announcement newAnnouncement = new Announcement(

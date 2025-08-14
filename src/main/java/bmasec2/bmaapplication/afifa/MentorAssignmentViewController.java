@@ -64,7 +64,7 @@ public class MentorAssignmentViewController {
         }
 
 
-        selectedNewCadet.setMedicalStatus("Mentored by " + selectedMentor.getName()); // Placeholder for actual mentor assignment
+        selectedNewCadet.setMedicalStatus("Mentored by " + selectedMentor.getName()); 
 
 
         List<Cadet> allCadets = DataPersistenceManager.loadObjects("cadets.dat");

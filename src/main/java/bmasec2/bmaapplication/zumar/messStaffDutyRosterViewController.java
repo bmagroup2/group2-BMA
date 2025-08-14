@@ -40,7 +40,7 @@ public class messStaffDutyRosterViewController {
         List<User> users = DataPersistenceManager.loadObjects("users.dat");
         ObservableList<String> staffMembers = FXCollections.observableArrayList();
         users.stream()
-                .filter(user -> user.getRole().equals("Mess Staff")) // Assuming a 'Mess Staff' role exists
+                .filter(user -> user.getRole().equals("Mess Staff"))
                 .forEach(user -> staffMembers.add(user.getUserId() + " - " + user.getName()));
 
         if (staffMembers.isEmpty()) {
@@ -51,8 +51,7 @@ public class messStaffDutyRosterViewController {
     }
 
     private void loadDutyRoster() {
-        // For simplicity, we'll store duty rosters as SystemSettings or similar
-        // In a real app, you'd have a dedicated DutyRoster model
+
         List<SystemSettings> dutyRosters = DataPersistenceManager.loadObjects("system_settings.dat");
         ObservableList<String> rosterEntries = FXCollections.observableArrayList();
 
@@ -90,11 +89,11 @@ public class messStaffDutyRosterViewController {
             String remarks = remarksTextField.getText().trim();
 
             String rosterEntry = String.format("Date: %s, Staff: %s, Time: %s, Remarks: %s",
-                    localDate.toString(), selectedStaff, dutyTime, remarks.isEmpty() ? "N/A" : remarks);
+                    localDate, selectedStaff, dutyTime, remarks.isEmpty() ? "N/A" : remarks);
 
-            // Save as a SystemSetting for simplicity
+
             SystemSettings newDuty = new SystemSettings(
-                    "DutyRoster_" + UUID.randomUUID().toString(),
+                    "DutyRoster_" + UUID.randomUUID(),
                     "DutyRosterEntry",
                     rosterEntry,
                     "Mess Officer"

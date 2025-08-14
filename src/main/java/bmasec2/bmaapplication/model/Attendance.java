@@ -11,7 +11,7 @@ public class Attendance implements Serializable {
     private String sessionId;
     private String sessionName;
     private LocalDate date;
-    private String status; // Present, Absent, Late
+    private String status; 
     private String reason;
 
     public Attendance(String attendanceId, String cadetId, String cadetName, String sessionId, String sessionName, LocalDate date, String status) {
@@ -45,7 +45,11 @@ public class Attendance implements Serializable {
         this.date = LocalDate.now();
     }
 
-    // Getters and Setters
+    public Attendance(String attendanceId, String userId, Date attendanceDate, String absent, String mealType) {
+        this.date = null;
+    }
+
+
     public String getAttendanceId() {
         return attendanceId;
     }
@@ -113,14 +117,14 @@ public class Attendance implements Serializable {
     @Override
     public String toString() {
         return "Attendance{" +
-                "attendanceId=\'" + attendanceId + '\'' +
-                ", cadetId=\'" + cadetId + '\'' +
-                ", cadetName=\'" + cadetName + '\'' +
-                ", sessionId=\'" + sessionId + '\'' +
-                ", sessionName=\'" + sessionName + '\'' +
+                "attendanceId='" + attendanceId + '\'' +
+                ", cadetId='" + cadetId + '\'' +
+                ", cadetName='" + cadetName + '\'' +
+                ", sessionId='" + sessionId + '\'' +
+                ", sessionName='" + sessionName + '\'' +
                 ", date=" + date +
-                ", status=\'" + status + '\'' +
-                ", reason=\'" + reason + '\'' +
+                ", status='" + status + '\'' +
+                ", reason='" + reason + '\'' +
                 '}';
     }
 }

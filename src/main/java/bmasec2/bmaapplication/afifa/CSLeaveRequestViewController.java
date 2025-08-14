@@ -27,7 +27,7 @@ public class CSLeaveRequestViewController {
     @FXML
     private Label leavecadetnamelabel;
 
-    private ObservableList<Leave> pendingLeaveRequests = FXCollections.observableArrayList();
+    private final ObservableList<Leave> pendingLeaveRequests = FXCollections.observableArrayList();
     private CadetSupervisor loggedInSupervisor;
 
     @FXML
@@ -92,7 +92,7 @@ public class CSLeaveRequestViewController {
 
     private void saveLeaveRequests() {
         List<Leave> allLeaveRequests = DataPersistenceManager.loadObjects("leave_requests.dat");
-        // Update the status of the modified leave request
+        
         Optional<Leave> existingLeave = allLeaveRequests.stream()
                 .filter(l -> l.getLeaveId().equals(cadetleavependingrequestlistview.getSelectionModel().getSelectedItem().getLeaveId()))
                 .findFirst();

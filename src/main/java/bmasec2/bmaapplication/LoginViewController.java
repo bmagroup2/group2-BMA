@@ -35,10 +35,11 @@ public class LoginViewController {
 
     private static final String USERS_FILE = "users.dat";
     private static final String APP_TITLE = "BMA Application";
-    private List<User> allUsers;
+    private List<User> allUsers = DataPersistenceManager.loadObjects(USERS_FILE);
 
     @FXML
     public void initialize() {
+        System.out.println(allUsers);
         setupRoleComboBox();
         loadUserData();
     }
@@ -52,37 +53,12 @@ public class LoginViewController {
 
     private void loadUserData() {
         try {
-            allUsers = DataPersistenceManager.loadObjects(USERS_FILE);
-            if (allUsers == null || allUsers.isEmpty()) {
-                allUsers = createDefaultUsers();
-                DataPersistenceManager.saveObjects(allUsers, USERS_FILE);
-            }
+
         } catch (Exception e) {
             showAlert(Alert.AlertType.ERROR, "Initialization Error",
                     "Failed to initialize user data: " + e.getMessage());
             allUsers = new ArrayList<>();
         }
-    }
-
-    private List<User> createDefaultUsers() {
-        List<User> defaultUsers = new ArrayList<>();
-        defaultUsers.add(new SystemAdministrator(
-                "admin", "Admin", "admin@gmail.com", "admin1234", 2));
-        defaultUsers.add(new Commandant(
-                "commandant", "Cmdt User", "cmd@bma.com", "commandant1234", "CMD-001", "01987654321"));
-        defaultUsers.add(new Cadet(
-                "cadet", "Cadet", "cadet@bma.com", "cadet1234", "Batch A", "Junior"));
-        defaultUsers.add(new CadetSupervisor(
-                "cadetsupervisor", "Cadet Supervisor", "cadetsupervisor@bma.com", "cadetsupervisor", "CSV-001", "N/A"));
-        defaultUsers.add(new LogisticOfficer(
-                "logisticofficer", "Logistic Officer", "logisticofficer@bma.com", "logisticofficer1234", "LOF-001", "0192231211221"));
-        defaultUsers.add(new TrainingInstructor(
-                "trofficer", "Training Officer", "trofficer@bma.com", "trofficer1234", "TRO-001", "N/A"));
-        defaultUsers.add(new MedicalOfficer(
-                "medicalofficer", "Medical Officer", "medicalofficer@bma.com", "medicalofficer1234", "MOF-001", "BMD-0012"));
-        defaultUsers.add(new MessOfficer(
-                "messofficer", "Mess Officer", "messofficer@bma.com", "messofficer1234", "MEO-001", "Day"));
-        return defaultUsers;
     }
 
     @FXML
@@ -160,3 +136,4 @@ public class LoginViewController {
         alert.showAndWait();
     }
 }
+

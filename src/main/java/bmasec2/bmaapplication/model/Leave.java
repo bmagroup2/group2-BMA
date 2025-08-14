@@ -77,5 +77,7 @@ public class Leave implements Serializable {
     public void setApprovedBy(String approvedBy) {
         this.approvedBy = approvedBy;
     }
+
+
 }
 

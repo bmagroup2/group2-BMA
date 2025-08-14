@@ -27,7 +27,7 @@ public class monthlyFoodUsageReportViewController {
     @FXML
     public void initialize() {
         selectMonthDatePicker.setValue(LocalDate.now());
-        // Optionally generate report on initialization with current month
+
         generateReport();
     }
 
@@ -44,13 +44,13 @@ public class monthlyFoodUsageReportViewController {
             }
 
             LocalDate selectedMonth = selectMonthDatePicker.getValue();
-            // For simplicity, we'll assume usage is tracked by decreasing inventory items
-            // In a real system, you'd have dedicated usage logs
+            
+            
 
             List<InventoryItem> allItems = DataPersistenceManager.loadObjects("inventory_items.dat");
 
-            // Group by category and sum up a dummy 'usage' (e.g., initial quantity - current quantity)
-            // This is a placeholder. Actual usage tracking would be more complex.
+            
+            
             Map<String, Double> usageByCategory = allItems.stream()
                     .collect(Collectors.groupingBy(InventoryItem::getCategory,
                             Collectors.summingDouble(item -> item.getInitialQuantity() - item.getQuantity())));

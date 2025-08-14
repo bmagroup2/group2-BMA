@@ -18,6 +18,8 @@ import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
+import static bmasec2.bmaapplication.LoginViewController.enteredUsername;
+
 public class LeaveRequestViewController {
     @FXML
     private ComboBox<String> leavetypecombobox;
@@ -29,6 +31,7 @@ public class LeaveRequestViewController {
     private TextArea reasontextarea;
 
     private Cadet loggedInCadet;
+    String currentuser = enteredUsername;
 
     @FXML
     public void initialize() {
@@ -38,9 +41,7 @@ public class LeaveRequestViewController {
         leavetypecombobox.setItems(leaveTypes);
     }
 
-    public void initData(Cadet cadet) {
-        this.loggedInCadet = cadet;
-    }
+
 
     @FXML
     public void submitonaction(ActionEvent actionEvent) {
@@ -62,7 +63,7 @@ public class LeaveRequestViewController {
 
         List<Leave> existingLeaves = DataPersistenceManager.loadObjects("leave_requests.dat");
         boolean hasOverlap = existingLeaves.stream()
-                .filter(leave -> leave.getCadetId().equals(loggedInCadet.getUserId()))
+                .filter(leave -> leave.getCadetId().equals(currentuser))
                 .anyMatch(leave -> {
                     LocalDate existingStartDate = leave.getStartDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
                     LocalDate existingEndDate = leave.getEndDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
@@ -75,10 +76,11 @@ public class LeaveRequestViewController {
             return;
         }
 
+
         String leaveId = UUID.randomUUID().toString();
         Leave newLeave = new Leave(
                 leaveId,
-                loggedInCadet.getUserId(),
+                currentuser,
                 Date.from(startDate.atStartOfDay(ZoneId.systemDefault()).toInstant()),
                 Date.from(endDate.atStartOfDay(ZoneId.systemDefault()).toInstant()),
                 reason
@@ -88,7 +90,7 @@ public class LeaveRequestViewController {
         DataPersistenceManager.saveObjects(existingLeaves, "leave_requests.dat");
 
         showAlert(AlertType.INFORMATION, "Success", "Leave request submitted for approval.");
-        // In a real application, notify supervisor here
+        
         System.out.println("Notification: Leave request submitted by " + loggedInCadet.getName() + " for supervisor approval.");
         clearForm();
     }

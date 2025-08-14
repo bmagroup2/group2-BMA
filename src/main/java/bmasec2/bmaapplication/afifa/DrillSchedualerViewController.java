@@ -41,7 +41,7 @@ public class DrillSchedualerViewController {
 
     @FXML
     public void initialize() {
-        // Populate cadet group combobox (placeholder)
+        
         ObservableList<String> cadetGroups = FXCollections.observableArrayList(
                 "Alpha Company", "Bravo Company", "Charlie Company", "Delta Company"
         );
@@ -61,7 +61,11 @@ public class DrillSchedualerViewController {
         LocalDate drillDate = drilldatepicker.getValue();
         String drillActivity = drillactivitytextfield.getText();
         String drillTime = drilltimetextfield.getText();
-        String drillLocation = drilllocationtextfield.getText();
+        String drillLocation = drilllocationtextfield.getText() ;
+
+        if (drillLocation.isEmpty()) {
+            drillLocation = "Dhaka";
+        }
 
         if (cadetGroup == null || drillDate == null || drillActivity.isEmpty() || drillTime.isEmpty() || drillLocation.isEmpty()) {
             showAlert(AlertType.ERROR, "Form Error", "Please fill in all fields.");

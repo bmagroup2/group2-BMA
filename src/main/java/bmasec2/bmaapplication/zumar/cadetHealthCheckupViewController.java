@@ -1,6 +1,6 @@
 package bmasec2.bmaapplication.zumar;
 
-import bmasec2.bmaapplication.Cadet;
+import bmasec2.bmaapplication.afifa.Cadet;
 import bmasec2.bmaapplication.model.MedicalRecord;
 import bmasec2.bmaapplication.system.DataPersistenceManager;
 import javafx.collections.FXCollections;
@@ -9,6 +9,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.Date;
@@ -37,10 +38,11 @@ public class cadetHealthCheckupViewController {
     }
 
     private void loadCadetBatches() {
-        List<Cadet> cadets = DataPersistenceManager.loadObjects("users.dat");
+        List<bmasec2.bmaapplication.User> users = DataPersistenceManager.loadObjects("users.dat");
         ObservableList<String> batches = FXCollections.observableArrayList();
-        cadets.stream()
-                .map(Cadet::getBatch)
+        users.stream()
+                .filter(user -> user instanceof Cadet)
+                .map(user -> ((Cadet) user).getBatch())
                 .distinct()
                 .sorted()
                 .forEach(batches::add);
@@ -94,7 +96,7 @@ public class cadetHealthCheckupViewController {
             String time = healthCheckupTimeTextField.getText().trim();
             String room = healthCheckupRoomTextField.getText().trim();
 
-            // Create a dummy medical record for scheduling purposes
+
             String recordId = UUID.randomUUID().toString();
             String diagnosis = "Scheduled Checkup for Batch " + batch;
             String treatment = "Time: " + time + ", Room: " + room;
@@ -102,7 +104,7 @@ public class cadetHealthCheckupViewController {
 
             MedicalRecord newSchedule = new MedicalRecord(
                     recordId,
-                    "Batch-" + batch, // Using batch as cadetId for scheduling record
+                    "Batch-" + batch,
                     checkupDate,
                     diagnosis,
                     treatment,

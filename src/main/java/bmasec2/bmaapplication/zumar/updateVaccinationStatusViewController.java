@@ -1,6 +1,6 @@
 package bmasec2.bmaapplication.zumar;
 
-import bmasec2.bmaapplication.Cadet;
+import bmasec2.bmaapplication.afifa.Cadet;
 import bmasec2.bmaapplication.model.MedicalRecord;
 import bmasec2.bmaapplication.system.DataPersistenceManager;
 import javafx.collections.FXCollections;
@@ -29,17 +29,18 @@ public class updateVaccinationStatusViewController
     @javafx.fxml.FXML
     public void initialize() {
         loadCadets();
-        // Set default date to today
+
         dateAdministeredDatePicker.setValue(LocalDate.now());
     }
 
     private void loadCadets() {
-        // Load cadets from data persistence
-        List<Cadet> cadets = DataPersistenceManager.loadObjects("users.dat");
+
+        List<bmasec2.bmaapplication.User> users = DataPersistenceManager.loadObjects("users.dat");
         ObservableList<String> cadetOptions = FXCollections.observableArrayList();
         
-        for (Cadet cadet : cadets) {
-            if (cadet instanceof Cadet) {
+        for (bmasec2.bmaapplication.User user : users) {
+            if (user instanceof Cadet) {
+                Cadet cadet = (Cadet) user;
                 cadetOptions.add(cadet.getUserId() + " - " + cadet.getName());
             }
         }
@@ -54,7 +55,7 @@ public class updateVaccinationStatusViewController
     @javafx.fxml.FXML
     public void saveVaccinationOnActionButton(ActionEvent actionEvent) {
         try {
-            // Validate inputs
+
             if (selectCadetComboBox.getValue() == null || selectCadetComboBox.getValue().equals("No cadets found")) {
                 showAlert("Error", "Please select a cadet.");
                 return;
@@ -70,19 +71,19 @@ public class updateVaccinationStatusViewController
                 return;
             }
             
-            // Extract cadet ID from combo box selection
+
             String selectedCadet = selectCadetComboBox.getValue();
             String cadetId = selectedCadet.split(" - ")[0];
             
-            // Get form data
+
             String vaccineName = vaccineNameTextField.getText().trim();
             LocalDate adminDate = dateAdministeredDatePicker.getValue();
             Date vaccinationDate = Date.from(adminDate.atStartOfDay(ZoneId.systemDefault()).toInstant());
             
-            // Create new medical record for vaccination
+
             String recordId = UUID.randomUUID().toString();
             String diagnosis = "Vaccination Record";
-            String treatment = "Administered: " + vaccineName + " on " + adminDate.toString();
+            String treatment = "Administered: " + vaccineName + " on " + adminDate;
             String notes = "Vaccination status updated for " + vaccineName;
             
             MedicalRecord vaccinationRecord = new MedicalRecord(
@@ -94,13 +95,13 @@ public class updateVaccinationStatusViewController
                 notes
             );
             
-            // Save to data persistence
+
             DataPersistenceManager.addMedicalRecordAndSave(vaccinationRecord);
             
-            // Show success message
+
             showAlert("Success", "Vaccination status updated successfully!");
             
-            // Clear form
+
             clearForm();
             
         } catch (Exception e) {

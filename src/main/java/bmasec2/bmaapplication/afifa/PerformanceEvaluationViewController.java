@@ -24,11 +24,11 @@ public class PerformanceEvaluationViewController {
 
     @FXML
     public void initialize() {
-        // Initialize chart axes if not already done in FXML
-        // CategoryAxis xAxis = (CategoryAxis) myperformancescorebarchart.getXAxis();
-        // NumberAxis yAxis = (NumberAxis) myperformancescorebarchart.getYAxis();
-        // xAxis.setLabel("Evaluation Type");
-        // yAxis.setLabel("Score");
+        
+        
+        
+        
+        
 
         myperformaceevaluationcombobox.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue != null) {
@@ -77,7 +77,7 @@ public class PerformanceEvaluationViewController {
             }
             myperformancescorebarchart.getData().add(series);
         } else {
-            // Handle case where no data is found for the selected evaluation type
+            
             System.out.println("No evaluation data found for " + loggedInCadet.getName() + " for " + evaluationType);
         }
     }

@@ -29,7 +29,7 @@ public class CsSubmitPerformanceReportViewController {
 
     @FXML
     public void initialize() {
-        // Populate cadet combobox
+        
         List<Cadet> cadets = DataPersistenceManager.loadObjects("cadets.dat");
         ObservableList<String> cadetNames = FXCollections.observableArrayList();
         for (Cadet cadet : cadets) {
@@ -37,7 +37,7 @@ public class CsSubmitPerformanceReportViewController {
         }
         performancecadetcombobox.setItems(cadetNames);
 
-        // Populate evaluation type combobox
+        
         ObservableList<String> evaluationTypes = FXCollections.observableArrayList(
                 "Discipline", "Academics", "Drills", "Overall"
         );

@@ -12,6 +12,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextArea;
 
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.Date;
@@ -35,7 +36,7 @@ public class recordFeedbackonMealsViewController {
     public void initialize() {
         filterByDateDatePicker.setValue(LocalDate.now());
         loadAllFeedbacks();
-        filterOnActionButton(null); // Load feedback for today on startup
+        filterOnActionButton(null); 
 
         mealFeedbackListView.getSelectionModel().selectedItemProperty().addListener(
             (observable, oldValue, newValue) -> {
@@ -51,12 +52,12 @@ public class recordFeedbackonMealsViewController {
     }
 
     private void displayFeedbackDetails(String selectedFeedbackString) {
-        // Parse the selected string to find the actual Feedback object
-        // This assumes the string format is "Date: [date], Cadet: [cadetId], Rating: [rating]"
-        // A more robust solution would be to store Feedback objects directly in the ListView
-        // or use a custom CellFactory.
         
-        // For simplicity, let's try to find the feedback by matching parts of the string
+        
+        
+        
+        
+        
         Feedback selectedFeedback = allFeedbacks.stream()
                 .filter(feedback -> selectedFeedbackString.contains(feedback.getCadetId()) &&
                                      selectedFeedbackString.contains(String.valueOf(feedback.getRating())))

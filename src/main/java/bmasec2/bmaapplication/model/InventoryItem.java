@@ -21,7 +21,7 @@ public class InventoryItem implements Serializable {
         this.quantity = quantity;
         this.unit = unit;
         this.category = category;
-        this.minStockLevel = 10; // Default minimum stock level
+        this.minStockLevel = 10; 
         this.lastUpdated = new Date();
         this.type = "General";
     }
@@ -37,7 +37,7 @@ public class InventoryItem implements Serializable {
         this.type = "General";
     }
 
-    // Business methods
+    
     public boolean addItem(int additionalQuantity) {
         if (additionalQuantity > 0) {
             this.quantity += additionalQuantity;
@@ -84,7 +84,7 @@ public class InventoryItem implements Serializable {
         return this.quantity <= this.minStockLevel;
     }
 
-    // Getters and Setters
+    
     public String getItemId() {
         return itemId;
     }
@@ -166,6 +166,20 @@ public class InventoryItem implements Serializable {
         this.type = type;
     }
 
+
+
+    public String getItemName() {
+        return "";
+    }
+
+    public boolean isBelowMinStock() {
+        return false;
+    }
+
+    public double getInitialQuantity() {
+        return 0;
+    }
+
     @Override
     public String toString() {
         return "InventoryItem{" +
@@ -178,13 +192,5 @@ public class InventoryItem implements Serializable {
                 ", lastUpdated=" + lastUpdated +
                 ", isLowStock=" + isLowStock() +
                 '}';
-    }
-
-    public String getItemName() {
-        return "";
-    }
-
-    public boolean isBelowMinStock() {
-        return false;
     }
 }

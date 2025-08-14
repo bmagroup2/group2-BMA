@@ -53,13 +53,13 @@ public class MissionEventsViewController {
         masterEventList = FXCollections.observableArrayList(loadedEvents);
         upcomingAndPastEventsTableView.setItems(masterEventList);
 
-        // Add dummy data if the file is empty for testing
+        
         if (masterEventList.isEmpty()) {
             masterEventList.add(new MissionEvent(UUID.randomUUID().toString(), "Annual Drill Competition", LocalDate.of(2025, 9, 15), "Inter-batch drill competition."));
             masterEventList.add(new MissionEvent(UUID.randomUUID().toString(), "Cadet Induction Ceremony", LocalDate.of(2025, 8, 1), "Official welcome for new cadets."));
             masterEventList.add(new MissionEvent(UUID.randomUUID().toString(), "Leadership Workshop", LocalDate.of(2025, 10, 5), "Workshop for senior cadets."));
             DataPersistenceManager.saveObjects(masterEventList.stream().collect(Collectors.toList()), EVENTS_FILE);
-            upcomingAndPastEventsTableView.setItems(masterEventList); // Refresh table after adding dummy data
+            upcomingAndPastEventsTableView.setItems(masterEventList); 
         }
     }
 
@@ -98,7 +98,7 @@ public class MissionEventsViewController {
         MissionEvent selectedEvent = upcomingAndPastEventsTableView.getSelectionModel().getSelectedItem();
 
         if (selectedEvent == null) {
-            // Add new event
+            
             String newEventId = UUID.randomUUID().toString();
             MissionEvent newEvent = new MissionEvent(newEventId, eventName, eventDate, description);
             masterEventList.add(newEvent);

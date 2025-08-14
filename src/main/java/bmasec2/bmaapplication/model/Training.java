@@ -26,7 +26,7 @@ public class Training implements Serializable {
         this.status = "Scheduled";
     }
 
-    // Business methods
+    
     public boolean register(String cadetId) {
         if (registeredCadets.size() < maxParticipants && !registeredCadets.contains(cadetId)) {
             registeredCadets.add(cadetId);
@@ -45,7 +45,7 @@ public class Training implements Serializable {
         return true;
     }
 
-    // Getters and Setters
+    
     public String getSessionId() {
         return sessionId;
     }

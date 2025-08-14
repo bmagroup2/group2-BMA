@@ -39,7 +39,7 @@ public class SubmitProgressReportViewController {
             return;
         }
 
-        // Validate word limit (example: max 500 words)
+        
         if (reportContent.split("\\s+").length > 500) {
             showAlert(AlertType.WARNING, "Input Warning", "Report exceeds word limit (500 words).");
             return;

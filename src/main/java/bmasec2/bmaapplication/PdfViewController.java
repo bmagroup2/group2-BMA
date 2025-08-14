@@ -1,5 +1,6 @@
 package bmasec2.bmaapplication;
 
+import bmasec2.bmaapplication.model.InvoiceItem;
 import com.lowagie.text.Document;
 import com.lowagie.text.Element;
 import com.lowagie.text.Font;
@@ -14,9 +15,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.stage.FileChooser;
 
-import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.time.LocalDateTime;
@@ -38,7 +37,7 @@ public class PdfViewController {
     @FXML private Label dateLabel;
     @FXML private Label timeLabel;
 
-    private ObservableList<InvoiceItem> invoiceItems = FXCollections.observableArrayList();
+    private final ObservableList<InvoiceItem> invoiceItems = FXCollections.observableArrayList();
 
     @FXML
     public void initialize() {
@@ -89,82 +88,78 @@ public class PdfViewController {
 
     @FXML
     public void printBtnOnAction(ActionEvent event) throws FileNotFoundException {
-        try {
 
-            Document document = new Document();
-            PdfWriter.getInstance(document, new FileOutputStream("file.pdf"));
-            document.open();
-
-
-            Font headerFont = FontFactory.getFont(FontFactory.HELVETICA_BOLD, 24);
-            Paragraph header = new Paragraph("IUB Cafeteria", headerFont);
-            header.setAlignment(Element.ALIGN_CENTER);
-            document.add(header);
-
-            Font subHeaderFont = FontFactory.getFont(FontFactory.HELVETICA, 12);
-            Paragraph subHeader1 = new Paragraph("Independent University, Bangladesh", subHeaderFont);
-            Paragraph subHeader2 = new Paragraph("Plot-16, Aftab Uddin Ahmed Road, Block B", subHeaderFont);
-            Paragraph subHeader3 = new Paragraph("Bashundhara, R/A, Dhaka", subHeaderFont);
-            subHeader1.setAlignment(Element.ALIGN_CENTER);
-            subHeader2.setAlignment(Element.ALIGN_CENTER);
-            subHeader3.setAlignment(Element.ALIGN_CENTER);
-            document.add(subHeader1);
-            document.add(subHeader2);
-            document.add(subHeader3);
+        Document document = new Document();
+        PdfWriter.getInstance(document, new FileOutputStream("file.pdf"));
+        document.open();
 
 
-            Font detailFont = FontFactory.getFont(FontFactory.HELVETICA_BOLD, 16);
-            Paragraph token = new Paragraph("\n" + tokenNoLabel.getText(), detailFont);
-            token.setAlignment(Element.ALIGN_CENTER);
-            document.add(token);
+        Font headerFont = FontFactory.getFont(FontFactory.HELVETICA_BOLD, 24);
+        Paragraph header = new Paragraph("IUB Cafeteria", headerFont);
+        header.setAlignment(Element.ALIGN_CENTER);
+        document.add(header);
+
+        Font subHeaderFont = FontFactory.getFont(FontFactory.HELVETICA, 12);
+        Paragraph subHeader1 = new Paragraph("Independent University, Bangladesh", subHeaderFont);
+        Paragraph subHeader2 = new Paragraph("Plot-16, Aftab Uddin Ahmed Road, Block B", subHeaderFont);
+        Paragraph subHeader3 = new Paragraph("Bashundhara, R/A, Dhaka", subHeaderFont);
+        subHeader1.setAlignment(Element.ALIGN_CENTER);
+        subHeader2.setAlignment(Element.ALIGN_CENTER);
+        subHeader3.setAlignment(Element.ALIGN_CENTER);
+        document.add(subHeader1);
+        document.add(subHeader2);
+        document.add(subHeader3);
 
 
-            Font dateTimeFont = FontFactory.getFont(FontFactory.HELVETICA, 12);
-            Paragraph dateTime = new Paragraph(dateLabel.getText() + "   " + timeLabel.getText(), dateTimeFont);
-            dateTime.setAlignment(Element.ALIGN_CENTER);
-            document.add(dateTime);
+        Font detailFont = FontFactory.getFont(FontFactory.HELVETICA_BOLD, 16);
+        Paragraph token = new Paragraph("\n" + tokenNoLabel.getText(), detailFont);
+        token.setAlignment(Element.ALIGN_CENTER);
+        document.add(token);
 
 
-            PdfPTable pdfTable = new PdfPTable(4);
-            pdfTable.setWidthPercentage(100);
-            pdfTable.setSpacingBefore(20);
-            pdfTable.setSpacingAfter(20);
+        Font dateTimeFont = FontFactory.getFont(FontFactory.HELVETICA, 12);
+        Paragraph dateTime = new Paragraph(dateLabel.getText() + "   " + timeLabel.getText(), dateTimeFont);
+        dateTime.setAlignment(Element.ALIGN_CENTER);
+        document.add(dateTime);
 
 
-            pdfTable.addCell(new Phrase("#", FontFactory.getFont(FontFactory.HELVETICA_BOLD)));
-            pdfTable.addCell(new Phrase("Item Name", FontFactory.getFont(FontFactory.HELVETICA_BOLD)));
-            pdfTable.addCell(new Phrase("Qty", FontFactory.getFont(FontFactory.HELVETICA_BOLD)));
-            pdfTable.addCell(new Phrase("Price", FontFactory.getFont(FontFactory.HELVETICA_BOLD)));
+        PdfPTable pdfTable = new PdfPTable(4);
+        pdfTable.setWidthPercentage(100);
+        pdfTable.setSpacingBefore(20);
+        pdfTable.setSpacingAfter(20);
 
 
-            for (InvoiceItem item : invoiceItems) {
-                pdfTable.addCell(String.valueOf(item.getSerialNo()));
-                pdfTable.addCell(item.getItemName());
-                pdfTable.addCell(String.valueOf(item.getQuantity()));
-                pdfTable.addCell(String.format("%.2f", item.getPrice()));
-            }
-
-            document.add(pdfTable);
+        pdfTable.addCell(new Phrase("#", FontFactory.getFont(FontFactory.HELVETICA_BOLD)));
+        pdfTable.addCell(new Phrase("Item Name", FontFactory.getFont(FontFactory.HELVETICA_BOLD)));
+        pdfTable.addCell(new Phrase("Qty", FontFactory.getFont(FontFactory.HELVETICA_BOLD)));
+        pdfTable.addCell(new Phrase("Price", FontFactory.getFont(FontFactory.HELVETICA_BOLD)));
 
 
-            Font totalFont = FontFactory.getFont(FontFactory.HELVETICA, 12);
-            document.add(new Paragraph(subTotalLabel.getText(), totalFont));
-            document.add(new Paragraph(vatLabel.getText(), totalFont));
-            document.add(new Paragraph(discountLabel.getText(), totalFont));
-            document.add(new Paragraph(totalLabel.getText(), FontFactory.getFont(FontFactory.HELVETICA_BOLD, 14)));
-
-
-            Paragraph footer = new Paragraph("\nThank you for dining with us!",
-                    FontFactory.getFont(FontFactory.HELVETICA_OBLIQUE, 12));
-            footer.setAlignment(Element.ALIGN_CENTER);
-            document.add(footer);
-
-            document.close();
-
-
-        } finally {
-
+        for (InvoiceItem item : invoiceItems) {
+            pdfTable.addCell(String.valueOf(item.getSerialNo()));
+            pdfTable.addCell(item.getItemName());
+            pdfTable.addCell(String.valueOf(item.getQuantity()));
+            pdfTable.addCell(String.format("%.2f", item.getPrice()));
         }
+
+        document.add(pdfTable);
+
+
+        Font totalFont = FontFactory.getFont(FontFactory.HELVETICA, 12);
+        document.add(new Paragraph(subTotalLabel.getText(), totalFont));
+        document.add(new Paragraph(vatLabel.getText(), totalFont));
+        document.add(new Paragraph(discountLabel.getText(), totalFont));
+        document.add(new Paragraph(totalLabel.getText(), FontFactory.getFont(FontFactory.HELVETICA_BOLD, 14)));
+
+
+        Paragraph footer = new Paragraph("\nThank you for dining with us!",
+                FontFactory.getFont(FontFactory.HELVETICA_OBLIQUE, 12));
+        footer.setAlignment(Element.ALIGN_CENTER);
+        document.add(footer);
+
+        document.close();
+
+
     }
 
 }

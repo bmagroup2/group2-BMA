@@ -28,10 +28,10 @@ public class MedicalOfficerDashboardViewController
     }
 
     private void loadDashboardData() {
-        // Load medical records to calculate pending cases
+
         List<MedicalRecord> medicalRecords = DataPersistenceManager.loadObjects("medical_records.dat");
         
-        // Count pending health cases (records with no treatment or incomplete diagnosis)
+
         long pendingCases = medicalRecords.stream()
                 .filter(record -> record.getTreatment() == null || record.getTreatment().isEmpty() || 
                                 record.getDiagnosis() == null || record.getDiagnosis().isEmpty())
@@ -39,11 +39,11 @@ public class MedicalOfficerDashboardViewController
         
         pendingHealthCasesLable.setText(pendingCases + " Cases");
         
-        // Get today's date
+
         LocalDate today = LocalDate.now();
         Date todayDate = Date.from(today.atStartOfDay(ZoneId.systemDefault()).toInstant());
         
-        // Filter today's checkups (medical records created today)
+
         List<MedicalRecord> todaysCheckups = medicalRecords.stream()
                 .filter(record -> {
                     LocalDate recordDate = record.getDate().toInstant()
@@ -54,7 +54,7 @@ public class MedicalOfficerDashboardViewController
         
         todaysCheckupsAppointmentLabel.setText(todaysCheckups.size() + " Appointments");
         
-        // Populate today's checkups list
+        
         ObservableList<String> checkupsList = FXCollections.observableArrayList();
         for (MedicalRecord record : todaysCheckups) {
             String checkupInfo = "Cadet ID: " + record.getCadetId() + 

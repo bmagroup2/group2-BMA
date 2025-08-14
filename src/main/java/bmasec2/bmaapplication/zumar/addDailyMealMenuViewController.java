@@ -1,7 +1,7 @@
 package bmasec2.bmaapplication.zumar;
 
 import bmasec2.bmaapplication.system.DataPersistenceManager;
-import bmasec2.bmaapplication.system.Menu;
+import bmasec2.bmaapplication.model.Menu;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Alert;
 import javafx.scene.control.DatePicker;
@@ -24,14 +24,14 @@ public class addDailyMealMenuViewController
 
     @javafx.fxml.FXML
     public void initialize() {
-        // Set default date to today
+
         dailyMenuDatePicker.setValue(LocalDate.now());
     }
 
     @javafx.fxml.FXML
     public void saveDailyMenuButtonOnAction(ActionEvent actionEvent) {
         try {
-            // Validate inputs
+            
             if (dailyMenuDatePicker.getValue() == null) {
                 showAlert("Error", "Please select a date.");
                 return;
@@ -44,40 +44,28 @@ public class addDailyMealMenuViewController
                 return;
             }
             
-            // Get selected date
+
             LocalDate selectedDate = dailyMenuDatePicker.getValue();
             Date menuDate = Date.from(selectedDate.atStartOfDay(ZoneId.systemDefault()).toInstant());
             
-            // Create menu content
-            StringBuilder menuContent = new StringBuilder();
+
+            String menuId = "MENU_" + selectedDate.toString().replace("-", "");
             
-            if (!breakfastMenuTextArea.getText().trim().isEmpty()) {
-                menuContent.append("Breakfast: ").append(breakfastMenuTextArea.getText().trim()).append("\n");
-            }
+            Menu newMenu = new Menu(
+                menuId,
+                menuDate,
+                breakfastMenuTextArea.getText().trim(),
+                lunchMenuTextArea.getText().trim(),
+                DinnerMenuTextArea.getText().trim(),
+                "Daily menu for " + selectedDate
+            );
             
-            if (!lunchMenuTextArea.getText().trim().isEmpty()) {
-                menuContent.append("Lunch: ").append(lunchMenuTextArea.getText().trim()).append("\n");
-            }
+            DataPersistenceManager.addMenuAndSave(newMenu);
             
-            if (!DinnerMenuTextArea.getText().trim().isEmpty()) {
-                menuContent.append("Dinner: ").append(DinnerMenuTextArea.getText().trim()).append("\n");
-            }
-            
-            // Create a simple menu object (using Menu class as data container)
-            // Note: Since Menu class is for UI navigation, we'll save the menu data directly
-            // In a real implementation, you'd create a proper MealMenu model class
-            
-            // For now, we'll create a simple data structure and save it
-            String menuData = "Date: " + selectedDate.toString() + "\n" + menuContent.toString();
-            
-            // Save menu data (simplified approach)
-            // In a proper implementation, you'd have a MealMenu model class
-            System.out.println("Saving menu data: " + menuData);
-            
-            // Show success message
+
             showAlert("Success", "Daily meal menu saved successfully!");
             
-            // Clear form
+
             clearForm();
             
         } catch (Exception e) {

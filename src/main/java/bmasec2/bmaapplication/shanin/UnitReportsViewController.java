@@ -64,7 +64,7 @@ public class UnitReportsViewController {
                                 .filter(report -> {
                                     boolean unitMatch = selectedUnit.equals("All Units") || report.getUnit().equals(selectedUnit);
 
-                                    // Convert Date to LocalDate for comparison
+                                    
                                     LocalDate reportLocalDate = report.getReportDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
                                     boolean dateMatch = !reportLocalDate.isBefore(startDate) && !reportLocalDate.isAfter(endDate);
 
@@ -80,14 +80,14 @@ public class UnitReportsViewController {
                 reportContent.append("Date: ").append(report.getReportDate()).append("\n");
                 reportContent.append("Unit: ").append(report.getUnit()).append("\n");
                 reportContent.append("Title: ").append(report.getTitle()).append("\n");
-                reportContent.append("Content: ").append(report.getContentString()).append("\n"); // Use getContentString()
+                reportContent.append("Content: ").append(report.getContentString()).append("\n"); 
                 reportContent.append("-----------------------------------\n");
             }
         }
 
         reportContentDisplayTextArea.setText(reportContent.toString());
 
-        // Example: Add some dummy reports if the file is empty for testing
+        
         if (allReports.isEmpty()) {
             allReports.add(new Report("RPT-001", "Alpha Unit", new Date(), "Monthly Performance", "Alpha Unit performed well this month."));
             allReports.add(new Report("RPT-002", "Bravo Unit", Date.from(LocalDate.now().minusWeeks(2).atStartOfDay(ZoneId.systemDefault()).toInstant()), "Weekly Attendance", "Bravo Unit had 95% attendance."));

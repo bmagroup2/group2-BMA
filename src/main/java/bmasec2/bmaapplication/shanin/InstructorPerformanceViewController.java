@@ -69,7 +69,7 @@ public class InstructorPerformanceViewController {
         series.setName(selectedInstructor.getName() + " Performance");
 
         Random rand = new Random();
-        series.getData().add(new XYChart.Data<>("Teaching Quality", rand.nextInt(50) + 50)); // 50-99
+        series.getData().add(new XYChart.Data<>("Teaching Quality", rand.nextInt(50) + 50)); 
         series.getData().add(new XYChart.Data<>("Cadet Engagement", rand.nextInt(50) + 50));
         series.getData().add(new XYChart.Data<>("Subject Mastery", rand.nextInt(50) + 50));
         series.getData().add(new XYChart.Data<>("Discipline", rand.nextInt(50) + 50));

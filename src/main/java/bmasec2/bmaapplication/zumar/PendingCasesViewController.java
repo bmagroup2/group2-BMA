@@ -28,7 +28,7 @@ public class PendingCasesViewController
     @javafx.fxml.FXML
     private TableColumn<PendingCase, String> issueColn;
 
-    private ObservableList<PendingCase> pendingCases = FXCollections.observableArrayList();
+    private final ObservableList<PendingCase> pendingCases = FXCollections.observableArrayList();
 
     @javafx.fxml.FXML
     public void initialize() {
@@ -55,10 +55,10 @@ public class PendingCasesViewController
     }
 
     private void loadPendingCases() {
-        // Load medical records to find pending cases
+        
         List<MedicalRecord> medicalRecords = DataPersistenceManager.loadObjects("medical_records.dat");
         
-        // Filter pending cases (records with no treatment or incomplete diagnosis)
+        
         List<MedicalRecord> pendingRecords = medicalRecords.stream()
                 .filter(record -> record.getTreatment() == null || record.getTreatment().isEmpty() || 
                                 record.getTreatment().equals("Pending") ||
@@ -100,7 +100,7 @@ public class PendingCasesViewController
             return;
         }
         
-        // Update the medical record with resolution
+        
         List<MedicalRecord> medicalRecords = DataPersistenceManager.loadObjects("medical_records.dat");
         
         for (MedicalRecord record : medicalRecords) {
@@ -118,12 +118,12 @@ public class PendingCasesViewController
             }
         }
         
-        // Save updated records
+        
         DataPersistenceManager.saveObjects(medicalRecords, "medical_records.dat");
         
         showAlert("Success", "Case marked as resolved successfully!");
         
-        // Refresh the table
+        
         loadPendingCases();
         statusRemarkTextArea.clear();
         caseDetailsLabel.setText("Case Details");
@@ -137,7 +137,7 @@ public class PendingCasesViewController
         alert.showAndWait();
     }
 
-    // Inner class for table data
+    
     public static class PendingCase {
         private final SimpleStringProperty cadetId;
         private final SimpleStringProperty issue;

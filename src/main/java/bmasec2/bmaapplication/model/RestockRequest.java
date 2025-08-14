@@ -10,7 +10,7 @@ public class RestockRequest implements Serializable {
     private int requestedQuantity;
     private String reason;
     private LocalDateTime requestDate;
-    private String status; // e.g., Pending, Approved, Rejected, Fulfilled
+    private String status; 
 
     public RestockRequest(String requestId, String itemId, String itemName, int requestedQuantity, String reason) {
         this.requestId = requestId;
@@ -22,7 +22,7 @@ public class RestockRequest implements Serializable {
         this.status = "Pending";
     }
 
-    // Getters
+    
     public String getRequestId() {
         return requestId;
     }
@@ -51,7 +51,7 @@ public class RestockRequest implements Serializable {
         return status;
     }
 
-    // Setters
+    
     public void setRequestId(String requestId) {
         this.requestId = requestId;
     }

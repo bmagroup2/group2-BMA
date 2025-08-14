@@ -1,6 +1,6 @@
 package bmasec2.bmaapplication.zumar;
 
-import bmasec2.bmaapplication.Cadet;
+import bmasec2.bmaapplication.afifa.Cadet;
 import bmasec2.bmaapplication.model.Attendance;
 import bmasec2.bmaapplication.system.DataPersistenceManager;
 import javafx.collections.FXCollections;
@@ -43,24 +43,25 @@ public class mealAttendanceViewController {
 
     private void setupTableColumns() {
         cadetIdColn.setCellValueFactory(new PropertyValueFactory<>("cadetId"));
-        // Assuming Cadet object has a getName() method, or you need to map it
+
         cadetNameColn.setCellValueFactory(cellData -> {
             String cadetId = cellData.getValue().getCadetId();
-            List<Cadet> cadets = DataPersistenceManager.loadObjects("users.dat");
-            Cadet cadet = cadets.stream()
-                    .filter(c -> c.getUserId().equals(cadetId))
+            List<bmasec2.bmaapplication.User> users = DataPersistenceManager.loadObjects("users.dat");
+            bmasec2.bmaapplication.User user = users.stream()
+                    .filter(u -> u instanceof Cadet && u.getUserId().equals(cadetId))
                     .findFirst()
                     .orElse(null);
-            return new javafx.beans.property.SimpleStringProperty(cadet != null ? cadet.getName() : "Unknown");
+            return new javafx.beans.property.SimpleStringProperty(user instanceof Cadet ? user.getName() : "Unknown");
         });
         statusColn.setCellValueFactory(new PropertyValueFactory<>("status"));
     }
 
     private void loadCadetBatches() {
-        List<Cadet> cadets = DataPersistenceManager.loadObjects("users.dat");
+        List<bmasec2.bmaapplication.User> users = DataPersistenceManager.loadObjects("users.dat");
         ObservableList<String> batches = FXCollections.observableArrayList();
-        cadets.stream()
-                .map(Cadet::getBatch)
+        users.stream()
+                .filter(user -> user instanceof Cadet)
+                .map(user -> ((Cadet) user).getBatch())
                 .distinct()
                 .sorted()
                 .forEach(batches::add);
@@ -73,7 +74,7 @@ public class mealAttendanceViewController {
     private void populateMealTypes() {
         ObservableList<String> mealTypes = FXCollections.observableArrayList("Breakfast", "Lunch", "Dinner");
         selectMealComboBox.setItems(mealTypes);
-        selectMealComboBox.setValue("Lunch"); // Default selection
+        selectMealComboBox.setValue("Lunch");
     }
 
     @FXML
@@ -98,7 +99,8 @@ public class mealAttendanceViewController {
             String mealType = selectMealComboBox.getValue();
 
             List<Attendance> allAttendances = DataPersistenceManager.loadObjects("attendance.dat");
-            List<Cadet> cadetsInBatch = DataPersistenceManager.loadObjects("users.dat").stream()
+            List<bmasec2.bmaapplication.User> allUsers = DataPersistenceManager.loadObjects("users.dat");
+            List<Cadet> cadetsInBatch = allUsers.stream()
                     .filter(user -> user instanceof Cadet && ((Cadet) user).getBatch().equals(selectedBatch))
                     .map(user -> (Cadet) user)
                     .collect(Collectors.toList());
@@ -106,18 +108,18 @@ public class mealAttendanceViewController {
             ObservableList<Attendance> mealAttendances = FXCollections.observableArrayList();
 
             for (Cadet cadet : cadetsInBatch) {
-                // Check if attendance record exists for this cadet, date, and meal type
+
                 Attendance existingAttendance = allAttendances.stream()
                         .filter(att -> att.getCadetId().equals(cadet.getUserId()) &&
                                 att.getDate().equals(attendanceDate) &&
-                                att.getSessionId().equals(mealType)) // Using sessionId to store meal type
+                                att.getSessionId().equals(mealType))
                         .findFirst()
                         .orElse(null);
 
                 if (existingAttendance != null) {
                     mealAttendances.add(existingAttendance);
                 } else {
-                    // If no record, assume absent or not yet marked
+
                     mealAttendances.add(new Attendance("N/A", cadet.getUserId(), attendanceDate, "Absent", mealType));
                 }
             }

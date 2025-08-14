@@ -41,7 +41,7 @@ public class manageInventoryViewController {
 
     @FXML
     public void initialize() {
-        // Initialize table columns
+        
         itemIdTableColumn.setCellValueFactory(new PropertyValueFactory<>("itemId"));
         itemNameTableColumn.setCellValueFactory(new PropertyValueFactory<>("itemName"));
         categoryTableColumn.setCellValueFactory(new PropertyValueFactory<>("category"));

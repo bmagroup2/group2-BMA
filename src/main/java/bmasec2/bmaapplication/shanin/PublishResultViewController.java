@@ -40,14 +40,14 @@ public class PublishResultViewController {
 
         selectSemesterComboBox.getItems().addAll("Semester 1", "Semester 2", "Semester 3");
 
-        // For demonstration, load a dummy commandant
+        
         Optional<User> commandantOptional = allUsers.stream()
                 .filter(user -> user.getRole().equals("Commandant"))
                 .findFirst();
         if (commandantOptional.isPresent()) {
             loggedInCommandant = (Commandant) commandantOptional.get();
         } else {
-            // Create a dummy commandant if none exists for testing
+            
             loggedInCommandant = new Commandant("CMD-001", "Dummy Commandant", "cmd@bma.com", "password", "CMD-001", "1234567890");
             allUsers.add(loggedInCommandant);
             DataPersistenceManager.saveObjects(allUsers, USERS_FILE);
@@ -62,7 +62,7 @@ public class PublishResultViewController {
         String selectedSemester = selectSemesterComboBox.getValue();
 
         if (selectedBatch != null && selectedSemester != null) {
-            // Simulate fetching results data
+            
             String results = "--- Results for " + selectedBatch + " - " + selectedSemester + " ---\n\n";
             results += "Cadet ID | Name | Score | Status\n";
             results += "-------------------------------------\n";

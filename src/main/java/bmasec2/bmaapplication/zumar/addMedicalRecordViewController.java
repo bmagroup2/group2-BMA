@@ -1,6 +1,6 @@
 package bmasec2.bmaapplication.zumar;
 
-import bmasec2.bmaapplication.Cadet;
+import bmasec2.bmaapplication.afifa.Cadet;
 import bmasec2.bmaapplication.model.MedicalRecord;
 import bmasec2.bmaapplication.system.DataPersistenceManager;
 import javafx.collections.FXCollections;
@@ -32,12 +32,13 @@ public class addMedicalRecordViewController
     }
 
     private void loadCadets() {
-        // Load cadets from data persistence
-        List<Cadet> cadets = DataPersistenceManager.loadObjects("users.dat");
+
+        List<Cadet> users = DataPersistenceManager.loadObjects("users.dat");
         ObservableList<String> cadetOptions = FXCollections.observableArrayList();
         
-        for (Cadet cadet : cadets) {
-            if (cadet instanceof Cadet) {
+        for (Object user : users) {
+            if (user instanceof Cadet) {
+                Cadet cadet = (Cadet) user;
                 cadetOptions.add(cadet.getUserId() + " - " + cadet.getName());
             }
         }
@@ -52,7 +53,7 @@ public class addMedicalRecordViewController
     @javafx.fxml.FXML
     public void medicalRecordSaveOnActionButton(ActionEvent actionEvent) {
         try {
-            // Validate inputs
+
             if (selectCadetComboBox.getValue() == null || selectCadetComboBox.getValue().equals("No cadets found")) {
                 showAlert("Error", "Please select a cadet.");
                 return;
@@ -63,17 +64,17 @@ public class addMedicalRecordViewController
                 return;
             }
             
-            // Extract cadet ID from combo box selection
+
             String selectedCadet = selectCadetComboBox.getValue();
             String cadetId = selectedCadet.split(" - ")[0];
             
-            // Create new medical record
+
             String recordId = UUID.randomUUID().toString();
             String healthData = healthDataTextField.getText().trim();
             String vaccinationStatus = vaccinationStatusTextField.getText().trim();
             String notes = notesTextArea.getText().trim();
             
-            // Combine health data and vaccination status as diagnosis
+
             String diagnosis = "Health Data: " + healthData;
             if (!vaccinationStatus.isEmpty()) {
                 diagnosis += " | Vaccination: " + vaccinationStatus;
@@ -84,17 +85,17 @@ public class addMedicalRecordViewController
                 cadetId,
                 new Date(),
                 diagnosis,
-                "Pending", // Default treatment status
+                "Pending",
                 notes
             );
             
-            // Save to data persistence
+
             DataPersistenceManager.addMedicalRecordAndSave(newRecord);
             
-            // Show success message
+
             showAlert("Success", "Medical record saved successfully!");
             
-            // Clear form
+
             clearForm();
             
         } catch (Exception e) {

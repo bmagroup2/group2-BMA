@@ -115,10 +115,34 @@ public class DataPersistenceManager {
         saveObjects(medicalRecords, "medical_records.dat");
     }
 
-    public static void addMenuAndSave(Menu newMenu) {
-        List<Menu> menus = loadObjects("meal_menus.dat");
+    public static void addMenuAndSave(bmasec2.bmaapplication.model.Menu newMenu) {
+        List<bmasec2.bmaapplication.model.Menu> menus = loadObjects("meal_menus.dat");
         menus.add(newMenu);
         saveObjects(menus, "meal_menus.dat");
+    }
+
+    public static void addFoodStockAndSave(FoodStock newStock) {
+        List<FoodStock> foodStocks = loadObjects("food_stocks.dat");
+        foodStocks.add(newStock);
+        saveObjects(foodStocks, "food_stocks.dat");
+    }
+
+    public static void addMealAttendanceAndSave(MealAttendance newAttendance) {
+        List<MealAttendance> mealAttendances = loadObjects("meal_attendances.dat");
+        mealAttendances.add(newAttendance);
+        saveObjects(mealAttendances, "meal_attendances.dat");
+    }
+
+    public static void addVaccinationRecordAndSave(VaccinationRecord newRecord) {
+        List<VaccinationRecord> vaccinationRecords = loadObjects("vaccination_records.dat");
+        vaccinationRecords.add(newRecord);
+        saveObjects(vaccinationRecords, "vaccination_records.dat");
+    }
+
+    public static void addSpecialMealRequestAndSave(SpecialMealRequest newRequest) {
+        List<SpecialMealRequest> mealRequests = loadObjects("special_meal_requests.dat");
+        mealRequests.add(newRequest);
+        saveObjects(mealRequests, "special_meal_requests.dat");
     }
 }
 

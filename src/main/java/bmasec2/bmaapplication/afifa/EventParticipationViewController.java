@@ -89,7 +89,7 @@ public class EventParticipationViewController {
         alert.showAndWait();
     }
 
-    // Helper class for TableView
+    
     public static class CadetParticipation {
         private final String cadetName;
         private final String cadetId;

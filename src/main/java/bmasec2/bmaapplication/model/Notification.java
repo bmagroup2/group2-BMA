@@ -7,12 +7,12 @@ public class Notification implements Serializable {
     private String notificationId;
     private String senderId;
     private String senderName;
-    private String recipientRole; // e.g., Commandant
+    private String recipientRole; 
     private String subject;
     private String message;
     private LocalDateTime sentDate;
     private boolean isRead;
-    private String relatedItemId; // Optional: for inventory shortages
+    private String relatedItemId; 
 
     public Notification(String notificationId, String senderId, String senderName, String recipientRole, String subject, String message, String relatedItemId) {
         this.notificationId = notificationId;
@@ -26,7 +26,7 @@ public class Notification implements Serializable {
         this.relatedItemId = relatedItemId;
     }
 
-    // Getters
+    
     public String getNotificationId() {
         return notificationId;
     }
@@ -63,7 +63,7 @@ public class Notification implements Serializable {
         return relatedItemId;
     }
 
-    // Setters
+    
     public void setNotificationId(String notificationId) {
         this.notificationId = notificationId;
     }

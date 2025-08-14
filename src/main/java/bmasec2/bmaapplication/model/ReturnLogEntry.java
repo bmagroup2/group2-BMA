@@ -4,13 +4,13 @@ import java.io.Serializable;
 import java.time.LocalDateTime;
 
 public class ReturnLogEntry implements Serializable {
-    private String logId;
-    private String itemId;
-    private String itemName;
-    private String returnedByUserId;
-    private String returnedByUserName;
-    private String reason;
-    private LocalDateTime logDate;
+    private final String logId;
+    private final String itemId;
+    private final String itemName;
+    private final String returnedByUserId;
+    private final String returnedByUserName;
+    private final String reason;
+    private final LocalDateTime logDate;
 
     public ReturnLogEntry(String logId, String itemId, String itemName, String returnedByUserId, String returnedByUserName, String reason) {
         this.logId = logId;
@@ -22,7 +22,7 @@ public class ReturnLogEntry implements Serializable {
         this.logDate = LocalDateTime.now();
     }
 
-    // Getters
+    
     public String getLogId() {
         return logId;
     }

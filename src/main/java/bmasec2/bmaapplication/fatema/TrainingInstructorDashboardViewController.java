@@ -53,9 +53,9 @@ public class TrainingInstructorDashboardViewController {
         sessionIdColumn.setCellValueFactory(new PropertyValueFactory<>("sessionId"));
         topicColumn.setCellValueFactory(new PropertyValueFactory<>("topic"));
         locationColumn.setCellValueFactory(new PropertyValueFactory<>("location"));
-        participantsColumn.setCellValueFactory(new PropertyValueFactory<>("maxParticipants")); // Assuming maxParticipants represents total participants
+        participantsColumn.setCellValueFactory(new PropertyValueFactory<>("maxParticipants")); 
 
-        // Custom cell factory for dateTimeColumn
+        
         dateTimeColumn.setCellValueFactory(cellData -> {
             TrainingSession session = cellData.getValue();
             DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
@@ -77,13 +77,13 @@ public class TrainingInstructorDashboardViewController {
         LocalDate today = LocalDate.now();
         LocalTime now = LocalTime.now();
 
-        // Filter for today\\'s sessions
+        
         List<TrainingSession> todaysSessions = allTrainingSessions.stream()
                 .filter(session -> session.getDate().equals(today))
                 .sorted((s1, s2) -> s1.getTime().compareTo(s2.getTime()))
                 .collect(Collectors.toList());
 
-        // Update Today\\'s Scheduled Sessions ListView
+        
         todaysScheduleSessionListView.setItems(FXCollections.observableArrayList(todaysSessions));
         todaysScheduleSessionListView.setCellFactory(param -> new javafx.scene.control.ListCell<TrainingSession>() {
             public void updateItem(TrainingSession item, boolean empty) {
@@ -99,7 +99,7 @@ public class TrainingInstructorDashboardViewController {
             }
         });
 
-        // Update Next Session Label
+        
         TrainingSession nextSession = todaysSessions.stream()
                 .filter(session -> session.getTime().isAfter(now))
                 .findFirst()
@@ -116,7 +116,7 @@ public class TrainingInstructorDashboardViewController {
 
         TrainingSession mostRecentPastSession = todaysSessions.stream()
                 .filter(session -> session.getTime().isBefore(now))
-                .reduce((first, second) -> second) // Get the last element
+                .reduce((first, second) -> second) 
                 .orElse(null);
 
         if (mostRecentPastSession != null) {
@@ -124,10 +124,10 @@ public class TrainingInstructorDashboardViewController {
                     .anyMatch(a -> a.getSessionId().equals(mostRecentPastSession.getSessionId()) && a.getDate().equals(today));
             if (attendanceTaken) {
                 attendanceStatusLabel.setText("Attendance recorded for " + mostRecentPastSession.getTime().format(DateTimeFormatter.ofPattern("HH:mm")) + " Session");
-                attendanceStatusLabel.setStyle("-fx-text-fill: #4CAF50;"); // Green color
+                attendanceStatusLabel.setStyle("-fx-text-fill: #4CAF50;"); 
             } else {
                 attendanceStatusLabel.setText("Pending for " + mostRecentPastSession.getTime().format(DateTimeFormatter.ofPattern("HH:mm")) + " Session");
-                attendanceStatusLabel.setStyle("-fx-text-fill: #c62828;"); // Red color
+                attendanceStatusLabel.setStyle("-fx-text-fill: #c62828;"); 
             }
         } else {
             attendanceStatusLabel.setText("No past sessions today");

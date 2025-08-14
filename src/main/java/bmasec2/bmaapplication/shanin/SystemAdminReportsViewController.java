@@ -92,7 +92,7 @@ public class SystemAdminReportsViewController {
 
         masterReportList.addAll(generatedReports);
         DataPersistenceManager.saveObjects(masterReportList.stream().collect(Collectors.toList()), REPORTS_FILE);
-        reportTableView.setItems(FXCollections.observableArrayList(generatedReports)); // Show only newly generated
+        reportTableView.setItems(FXCollections.observableArrayList(generatedReports)); 
     }
 
     private List<Report> generateUserReports(Date startDate, Date endDate) {

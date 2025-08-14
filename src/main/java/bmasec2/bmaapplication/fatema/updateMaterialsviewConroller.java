@@ -96,7 +96,7 @@ public class updateMaterialsviewConroller {
                     uploadedByUserId
             );
 
-            // Load existing materials, add new one, and save
+            
             List<bmasec2.bmaapplication.model.TrainingMaterial> trainingMaterials = DataPersistenceManager.loadObjects(TRAINING_MATERIALS_FILE);
             trainingMaterials.add(newMaterial);
             DataPersistenceManager.saveObjects(trainingMaterials, TRAINING_MATERIALS_FILE);

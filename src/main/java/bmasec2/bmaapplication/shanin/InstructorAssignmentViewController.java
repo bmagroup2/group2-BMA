@@ -36,7 +36,7 @@ public class InstructorAssignmentViewController {
         loadInstructors();
         loadCadetBatches();
 
-        // Dummy data for testing if files are empty
+        
         if (instructors.isEmpty()) {
             instructors.addAll(
                     new Instructor("INS-001", "Mr. Smith", "Drill"),
