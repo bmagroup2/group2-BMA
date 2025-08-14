@@ -15,7 +15,6 @@
     <children>
 
         <Label layoutX="30.0" layoutY="25.0" text="Drill Scheduler" textFill="#1a237e"><font><Font name="System Bold" size="24.0" /></font></Label>
-        <Label layoutX="30.0" layoutY="55.0" text="Schedule weekly drill sessions for your cadet groups." textFill="#546e7a"><font><Font size="14.0" /></font></Label>
 
 
         <HBox layoutX="30.0" layoutY="100.0" spacing="20.0" AnchorPane.bottomAnchor="30.0" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="30.0">
@@ -33,9 +32,9 @@
                     <Label text="Date" />
                     <DatePicker fx:id="drilldatepicker" prefWidth="350.0" />
                     <Label text="Time (e.g., 14:00 )" />
-                    <TextField fx:id="drilltimetextfield" promptText="Enter time" />
+                    <TextField fx:id="drilltimetextfield" />
                     <Label text="Activity" />
-                    <TextField fx:id="drillactivitytextfield" promptText="e.g., Parade Ground Drill" />
+                    <TextField fx:id="drillactivitytextfield" />
                     <Button mnemonicParsing="false" onAction="#drillsaveschedulonaction" style="-fx-background-color: #4CAF50;" text="Save Schedule" textFill="WHITE" />
                 </children>
             </VBox>

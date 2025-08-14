@@ -13,7 +13,6 @@
     <children>
 
         <Label layoutX="30.0" layoutY="25.0" text="Cadet Leave Requests" textFill="#1a237e"><font><Font name="System Bold" size="24.0" /></font></Label>
-        <Label layoutX="30.0" layoutY="55.0" text="Review and approve or reject pending leave requests." textFill="#546e7a"><font><Font size="14.0" /></font></Label>
 
 
         <HBox layoutX="30.0" layoutY="100.0" spacing="20.0" AnchorPane.bottomAnchor="30.0" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="30.0">

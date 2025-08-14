@@ -1,41 +1,112 @@
 package bmasec2.bmaapplication.afifa;
 
+import bmasec2.bmaapplication.model.Leave;
+import bmasec2.bmaapplication.system.DataPersistenceManager;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextArea;
 
-public class CSLeaveRequestViewController
-{
+import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
-    @javafx.fxml.FXML
+public class CSLeaveRequestViewController {
+
+    @FXML
     private Label leavereasonlabel;
-    @javafx.fxml.FXML
+    @FXML
     private Label leavedaterangelabel;
-    @javafx.fxml.FXML
-    private ListView cadetleavependingrequestlistview;
-    @javafx.fxml.FXML
+    @FXML
+    private ListView<Leave> cadetleavependingrequestlistview;
+    @FXML
     private TextArea leaverequesttextarea;
-    @javafx.fxml.FXML
+    @FXML
     private Label leavecadetnamelabel;
 
-    @javafx.fxml.FXML
+    private ObservableList<Leave> pendingLeaveRequests = FXCollections.observableArrayList();
+    private CadetSupervisor loggedInSupervisor;
+
+    @FXML
     public void initialize() {
+        loadPendingLeaveRequests();
+
+        cadetleavependingrequestlistview.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue != null) {
+                displayLeaveRequestDetails(newValue);
+            }
+        });
     }
 
-    @Deprecated
-    public void rejectonaction(ActionEvent actionEvent) {
+    public void initData(CadetSupervisor supervisor) {
+        this.loggedInSupervisor = supervisor;
+        loadPendingLeaveRequests();
     }
 
-    @Deprecated
-    public void approveonaction(ActionEvent actionEvent) {
+    private void loadPendingLeaveRequests() {
+        List<Leave> allLeaveRequests = DataPersistenceManager.loadObjects("leave_requests.dat");
+        pendingLeaveRequests.setAll(allLeaveRequests.stream()
+                .filter(leave -> leave.getStatus().equals("Pending"))
+                // In a real application, filter by cadets supervised by this supervisor
+                .collect(Collectors.toList()));
+        cadetleavependingrequestlistview.setItems(pendingLeaveRequests);
     }
 
-    @javafx.fxml.FXML
+    private void displayLeaveRequestDetails(Leave leave) {
+        leavecadetnamelabel.setText("Cadet: " + leave.getCadetId());
+        leavedaterangelabel.setText("Date: " + leave.getStartDate() + " to " + leave.getEndDate());
+        leavereasonlabel.setText("Reason: " + leave.getReason());
+        leaverequesttextarea.setText(leave.getReason()); // Display full reason in textarea
+    }
+
+    @FXML
     public void leaveapproveonaction(ActionEvent actionEvent) {
+        Leave selectedLeave = cadetleavependingrequestlistview.getSelectionModel().getSelectedItem();
+        if (selectedLeave != null) {
+            selectedLeave.setStatus("Approved");
+            if (loggedInSupervisor != null) {
+                selectedLeave.setApprovedBy(loggedInSupervisor.getName());
+            }
+            saveLeaveRequests();
+            loadPendingLeaveRequests(); // Refresh list
+            clearDetails();
+        }
     }
 
-    @javafx.fxml.FXML
+    @FXML
     public void leaverejectonaction(ActionEvent actionEvent) {
+        Leave selectedLeave = cadetleavependingrequestlistview.getSelectionModel().getSelectedItem();
+        if (selectedLeave != null) {
+            selectedLeave.setStatus("Rejected");
+            if (loggedInSupervisor != null) {
+                selectedLeave.setApprovedBy(loggedInSupervisor.getName());
+            }
+            saveLeaveRequests();
+            loadPendingLeaveRequests(); // Refresh list
+            clearDetails();
+        }
+    }
+
+    private void saveLeaveRequests() {
+        List<Leave> allLeaveRequests = DataPersistenceManager.loadObjects("leave_requests.dat");
+        // Update the status of the modified leave request
+        Optional<Leave> existingLeave = allLeaveRequests.stream()
+                .filter(l -> l.getLeaveId().equals(cadetleavependingrequestlistview.getSelectionModel().getSelectedItem().getLeaveId()))
+                .findFirst();
+        existingLeave.ifPresent(leave -> leave.setStatus(cadetleavependingrequestlistview.getSelectionModel().getSelectedItem().getStatus()));
+
+        DataPersistenceManager.saveObjects(allLeaveRequests, "leave_requests.dat");
+    }
+
+    private void clearDetails() {
+        leavecadetnamelabel.setText("Cadet:");
+        leavedaterangelabel.setText("Date:");
+        leavereasonlabel.setText("Reason:");
+        leaverequesttextarea.clear();
     }
 }
+
+

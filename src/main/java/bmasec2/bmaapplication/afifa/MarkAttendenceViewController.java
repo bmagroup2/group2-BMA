@@ -1,21 +1,125 @@
 package bmasec2.bmaapplication.afifa;
 
+import bmasec2.bmaapplication.model.Attendance;
+import bmasec2.bmaapplication.model.Training;
+import bmasec2.bmaapplication.system.DataPersistenceManager;
 import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 
-public class MarkAttendenceViewController
-{
+import java.util.Date;
+import java.util.List;
+import java.util.UUID;
+import java.time.LocalDate;
+import java.time.ZoneId;
 
-    @javafx.fxml.FXML
+public class MarkAttendenceViewController {
+
+    @FXML
     private Label marktraningtypelabel;
-    @javafx.fxml.FXML
+    @FXML
     private Label markstatuslabel;
 
-    @javafx.fxml.FXML
+    private Cadet loggedInCadet;
+    private String currentSessionId; // This would typically be passed from the previous view
+    private Training currentTrainingSession;
+
+    @FXML
     public void initialize() {
+        // Initial state
+        markstatuslabel.setText("Ready to mark attendance.");
     }
 
-    @javafx.fxml.FXML
+    public void initData(Cadet cadet, String sessionId) {
+        this.loggedInCadet = cadet;
+        this.currentSessionId = sessionId;
+        loadTrainingSessionDetails();
+    }
+
+    private void loadTrainingSessionDetails() {
+        if (currentSessionId != null) {
+            List<Training> allTrainings = DataPersistenceManager.loadObjects("trainings.dat");
+            currentTrainingSession = allTrainings.stream()
+                    .filter(t -> t.getSessionId().equals(currentSessionId))
+                    .findFirst()
+                    .orElse(null);
+
+            if (currentTrainingSession != null) {
+                marktraningtypelabel.setText("Training: " + currentTrainingSession.getTopic() + " (" + currentTrainingSession.getLocation() + ")");
+            } else {
+                marktraningtypelabel.setText("Training session not found.");
+            }
+        } else {
+            marktraningtypelabel.setText("No training session selected.");
+        }
+    }
+
+    @FXML
     public void markaspresentonaction(ActionEvent actionEvent) {
+        markAttendance("Present");
+    }
+
+    @FXML
+    public void markaslateonaction(ActionEvent actionEvent) {
+        markAttendance("Late");
+    }
+
+    @FXML
+    public void markasabsentonaction(ActionEvent actionEvent) {
+        markAttendance("Absent");
+    }
+
+    private void markAttendance(String status) {
+        if (loggedInCadet == null || currentTrainingSession == null) {
+            showAlert(AlertType.ERROR, "Error", "Cadet or training session not loaded.");
+            return;
+        }
+
+        // Check if attendance session is active and cadet is eligible (simplified check)
+        LocalDate today = LocalDate.now();
+        LocalDate sessionDate = currentTrainingSession.getDateTime().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+
+        if (!sessionDate.isEqual(today)) {
+            showAlert(AlertType.WARNING, "Attendance Error", "Attendance can only be marked for today's sessions.");
+            return;
+        }
+
+        List<Attendance> attendances = DataPersistenceManager.loadObjects("attendance.dat");
+
+        // Check if attendance already marked for this session and cadet
+        boolean alreadyMarked = attendances.stream()
+                .anyMatch(a -> a.getCadetId().equals(loggedInCadet.getUserId()) && a.getSessionId().equals(currentSessionId));
+
+        if (alreadyMarked) {
+            showAlert(AlertType.INFORMATION, "Already Marked", "Your attendance for this session has already been recorded.");
+            return;
+        }
+
+        String attendanceId = UUID.randomUUID().toString();
+        Attendance newAttendance = new Attendance(
+                attendanceId,
+                loggedInCadet.getUserId(),
+                currentSessionId,
+                new Date(), // Current date
+                status
+        );
+
+        attendances.add(newAttendance);
+        DataPersistenceManager.saveObjects(attendances, "attendance.dat");
+
+        markstatuslabel.setText("Attendance marked as " + status + ".");
+        showAlert(AlertType.INFORMATION, "Success", "Attendance recorded successfully as " + status + ".");
+    }
+
+    private void showAlert(AlertType type, String title, String message) {
+        Alert alert = new Alert(type);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();
     }
 }
+
+
