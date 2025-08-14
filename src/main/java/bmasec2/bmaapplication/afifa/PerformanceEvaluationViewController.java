@@ -1,16 +1,86 @@
 package bmasec2.bmaapplication.afifa;
 
+import bmasec2.bmaapplication.model.Evaluation;
+import bmasec2.bmaapplication.system.DataPersistenceManager;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.fxml.FXML;
 import javafx.scene.chart.BarChart;
+import javafx.scene.chart.XYChart;
 import javafx.scene.control.ComboBox;
 
-public class PerformanceEvaluationViewController
-{
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
-    @javafx.fxml.FXML
-    private ComboBox myperformaceevaluationcombobox;
-    @javafx.fxml.FXML
-    private BarChart myperformancescorebarchart;
+public class PerformanceEvaluationViewController {
 
-    @javafx.fxml.FXML
+    @FXML
+    private ComboBox<String> myperformaceevaluationcombobox;
+    @FXML
+    private BarChart<String, Number> myperformancescorebarchart;
+
+    private Cadet loggedInCadet;
+
+    @FXML
     public void initialize() {
-    }}
+        // Initialize chart axes if not already done in FXML
+        // CategoryAxis xAxis = (CategoryAxis) myperformancescorebarchart.getXAxis();
+        // NumberAxis yAxis = (NumberAxis) myperformancescorebarchart.getYAxis();
+        // xAxis.setLabel("Evaluation Type");
+        // yAxis.setLabel("Score");
+
+        myperformaceevaluationcombobox.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue != null) {
+                displayPerformance(newValue);
+            }
+        });
+    }
+
+    public void initData(Cadet cadet) {
+        this.loggedInCadet = cadet;
+        if (loggedInCadet != null) {
+            loadEvaluationTypes();
+        }
+    }
+
+    private void loadEvaluationTypes() {
+//        List<Evaluation> allEvaluations = DataPersistenceManager.loadObjects("evaluations.dat");
+//        ObservableList<String> evaluationTypes = FXCollections.observableArrayList();
+//
+//        allEvaluations.stream()
+//                .filter(eval -> eval.getCadetId().equals(loggedInCadet.getUserId()))
+//                .map(Evaluation::getEvaluationType)
+//                .distinct()
+//                .forEach(evaluationTypes::add);
+//
+//        myperformaceevaluationcombobox.setItems(evaluationTypes);
+//        if (!evaluationTypes.isEmpty()) {
+//            myperformaceevaluationcombobox.getSelectionModel().selectFirst();
+//        }
+    }
+
+    private void displayPerformance(String evaluationType) {
+        myperformancescorebarchart.getData().clear();
+
+//        List<Evaluation> allEvaluations = DataPersistenceManager.loadObjects("evaluations.dat");
+//        List<Evaluation> cadetEvaluations = allEvaluations.stream()
+//                .filter(eval -> eval.getCadetId().equals(loggedInCadet.getUserId()) && eval.getEvaluationType().equals(evaluationType))
+//                .collect(Collectors.toList());
+
+//        if (!cadetEvaluations.isEmpty()) {
+//            XYChart.Series<String, Number> series = new XYChart.Series<>();
+//            series.setName(evaluationType + " Scores");
+//
+//            for (Evaluation eval : cadetEvaluations) {
+//                series.getData().add(new XYChart.Data<>(eval.getEvaluationType(), eval.getScore()));
+//            }
+//            myperformancescorebarchart.getData().add(series);
+//        } else {
+//            // Handle case where no data is found for the selected evaluation type
+//            System.out.println("No evaluation data found for " + loggedInCadet.getName() + " for " + evaluationType);
+//        }
+    }
+}
+
+

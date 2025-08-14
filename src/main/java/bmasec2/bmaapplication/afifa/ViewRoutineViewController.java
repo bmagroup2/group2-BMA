@@ -1,29 +1,87 @@
 package bmasec2.bmaapplication.afifa;
 
+import bmasec2.bmaapplication.model.Training;
+import bmasec2.bmaapplication.system.DataPersistenceManager;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 
-public class ViewRoutineViewController
-{
-    @javafx.fxml.FXML
-    private TableColumn tranningactivitycolumn;
-    @javafx.fxml.FXML
-    private TableView trainingscheduletableview;
-    @javafx.fxml.FXML
-    private TableColumn traninglocationcolumn;
-    @javafx.fxml.FXML
-    private TableColumn tranningtimecolumn;
+import java.time.DayOfWeek;
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.util.List;
+import java.util.stream.Collectors;
 
-    @javafx.fxml.FXML
+public class ViewRoutineViewController {
+    @FXML
+    private TableColumn<Training, String> tranningactivitycolumn;
+    @FXML
+    private TableView<Training> trainingscheduletableview;
+    @FXML
+    private TableColumn<Training, String> traninglocationcolumn;
+    @FXML
+    private TableColumn<Training, String> tranningtimecolumn;
+
+    private Cadet loggedInCadet;
+    private ObservableList<Training> routineList = FXCollections.observableArrayList();
+
+    @FXML
     public void initialize() {
+        tranningactivitycolumn.setCellValueFactory(new PropertyValueFactory<>("topic"));
+        traninglocationcolumn.setCellValueFactory(new PropertyValueFactory<>("location"));
+        tranningtimecolumn.setCellValueFactory(new PropertyValueFactory<>("dateTime"));
+
+        trainingscheduletableview.setItems(routineList);
     }
 
-    @javafx.fxml.FXML
+    public void initData(Cadet cadet) {
+        this.loggedInCadet = cadet;
+        // Load today's routine by default when the view is initialized with cadet data
+        loadDailyRoutine();
+    }
+
+    @FXML
     public void todayroutineonaction(ActionEvent actionEvent) {
+        loadDailyRoutine();
     }
 
-    @javafx.fxml.FXML
+    @FXML
     public void weeklyroutineonaction(ActionEvent actionEvent) {
+        loadWeeklyRoutine();
+    }
+
+    private void loadDailyRoutine() {
+        List<Training> allTrainings = DataPersistenceManager.loadObjects("trainings.dat");
+        LocalDate today = LocalDate.now();
+
+        List<Training> dailyRoutine = allTrainings.stream()
+                .filter(training -> training.getDateTime().toInstant().atZone(ZoneId.systemDefault()).toLocalDate().equals(today))
+                // In a real application, filter by cadet's batch/assigned trainings
+                .collect(Collectors.toList());
+
+        routineList.setAll(dailyRoutine);
+    }
+
+    private void loadWeeklyRoutine() {
+        List<Training> allTrainings = DataPersistenceManager.loadObjects("trainings.dat");
+        LocalDate today = LocalDate.now();
+        LocalDate startOfWeek = today.with(DayOfWeek.MONDAY);
+        LocalDate endOfWeek = today.with(DayOfWeek.SUNDAY);
+
+        List<Training> weeklyRoutine = allTrainings.stream()
+                .filter(training -> {
+                    LocalDate trainingDate = training.getDateTime().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+                    return (trainingDate.isAfter(startOfWeek.minusDays(1)) && trainingDate.isBefore(endOfWeek.plusDays(1)));
+                })
+                // In a real application, filter by cadet's batch/assigned trainings
+                .collect(Collectors.toList());
+
+        routineList.setAll(weeklyRoutine);
     }
 }
+
+

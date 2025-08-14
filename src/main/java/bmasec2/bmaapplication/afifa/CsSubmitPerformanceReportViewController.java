@@ -1,27 +1,103 @@
 package bmasec2.bmaapplication.afifa;
 
+import bmasec2.bmaapplication.model.Report;
+import bmasec2.bmaapplication.system.DataPersistenceManager;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextArea;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 
-public class CsSubmitPerformanceReportViewController
-{
-    @javafx.fxml.FXML
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.UUID;
+
+public class CsSubmitPerformanceReportViewController {
+    @FXML
     private TextArea performancetextarea;
-    @javafx.fxml.FXML
-    private ComboBox performancecadetcombobox;
-    @javafx.fxml.FXML
-    private ComboBox performanceevaluationcombobox;
+    @FXML
+    private ComboBox<String> performancecadetcombobox;
+    @FXML
+    private ComboBox<String> performanceevaluationcombobox;
 
-    @javafx.fxml.FXML
+    private CadetSupervisor loggedInSupervisor;
+
+
+    @FXML
     public void initialize() {
+        // Populate cadet combobox
+        List<Cadet> cadets = DataPersistenceManager.loadObjects("cadets.dat");
+        ObservableList<String> cadetNames = FXCollections.observableArrayList();
+        for (Cadet cadet : cadets) {
+            cadetNames.add(cadet.getName());
+        }
+        performancecadetcombobox.setItems(cadetNames);
+
+        // Populate evaluation type combobox
+        ObservableList<String> evaluationTypes = FXCollections.observableArrayList(
+                "Discipline", "Academics", "Drills", "Overall"
+        );
+        performanceevaluationcombobox.setItems(evaluationTypes);
     }
 
-    @Deprecated
-    public void submitreportonaction(ActionEvent actionEvent) {
+    public void initData(CadetSupervisor supervisor) {
+        this.loggedInSupervisor = supervisor;
     }
 
-    @javafx.fxml.FXML
+    @FXML
     public void persubmitreportonaction(ActionEvent actionEvent) {
+        String selectedCadet = performancecadetcombobox.getValue();
+        String evaluationType = performanceevaluationcombobox.getValue();
+        String reportContent = performancetextarea.getText();
+
+        if (selectedCadet == null || selectedCadet.isEmpty() || evaluationType == null || evaluationType.isEmpty() || reportContent.isEmpty()) {
+            showAlert(AlertType.ERROR, "Form Error", "Please fill in all fields.");
+            return;
+        }
+
+        // Create a unique report ID
+        String reportId = UUID.randomUUID().toString();
+
+        // Assuming the report content is a simple string for now. In a more complex system, this could be structured data.
+        Map<String, String> contentMap = new HashMap<>();
+        contentMap.put("cadetName", selectedCadet);
+        contentMap.put("evaluationType", evaluationType);
+        contentMap.put("reportDetails", reportContent);
+
+//        Report newReport = new Report(
+//                reportId,
+//                "Performance Report",
+//
+//                loggedInSupervisor != null ? loggedInSupervisor.getName() : "Unknown Supervisor",
+//                contentMap
+//        );
+
+        List<Report> reports = DataPersistenceManager.loadObjects("reports.dat");
+//        reports.add(newReport);
+        DataPersistenceManager.saveObjects(reports, "reports.dat");
+
+        showAlert(AlertType.INFORMATION, "Submission Successful", "Performance report submitted for " + selectedCadet + ".");
+        clearForm();
+    }
+
+    private void showAlert(AlertType type, String title, String message) {
+        Alert alert = new Alert(type);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();
+    }
+
+    private void clearForm() {
+        performancecadetcombobox.getSelectionModel().clearSelection();
+        performanceevaluationcombobox.getSelectionModel().clearSelection();
+        performancetextarea.clear();
     }
 }
+
+

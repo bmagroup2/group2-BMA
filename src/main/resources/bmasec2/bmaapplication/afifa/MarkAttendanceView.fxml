@@ -10,7 +10,6 @@
     <children>
 
         <Label layoutX="30.0" layoutY="25.0" text="Mark Attendance" textFill="#1a237e"><font><Font name="System Bold" size="24.0" /></font></Label>
-        <Label layoutX="30.0" layoutY="55.0" text="Mark your attendance for the current active session." textFill="#546e7a"><font><Font size="14.0" /></font></Label>
 
         <VBox alignment="CENTER" layoutX="260.0" layoutY="150.0" prefHeight="250.0" prefWidth="400.0" spacing="20.0" style="-fx-background-color: white; -fx-border-color: #e0e0e0; -fx-border-radius: 10;">
             <children>
