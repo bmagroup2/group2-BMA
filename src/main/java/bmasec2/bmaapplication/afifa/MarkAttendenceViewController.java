@@ -23,12 +23,12 @@ public class MarkAttendenceViewController {
     private Label markstatuslabel;
 
     private Cadet loggedInCadet;
-    private String currentSessionId; // This would typically be passed from the previous view
+    private String currentSessionId;
     private Training currentTrainingSession;
 
     @FXML
     public void initialize() {
-        // Initial state
+
         markstatuslabel.setText("Ready to mark attendance.");
     }
 
@@ -40,7 +40,7 @@ public class MarkAttendenceViewController {
 
     private void loadTrainingSessionDetails() {
         if (currentSessionId != null) {
-            List<Training> allTrainings = DataPersistenceManager.loadObjects("trainings.dat");
+            List<Training> allTrainings = DataPersistenceManager.loadObjects("trainings.bin");
             currentTrainingSession = allTrainings.stream()
                     .filter(t -> t.getSessionId().equals(currentSessionId))
                     .findFirst()
@@ -77,7 +77,7 @@ public class MarkAttendenceViewController {
             return;
         }
 
-        // Check if attendance session is active and cadet is eligible (simplified check)
+
         LocalDate today = LocalDate.now();
         LocalDate sessionDate = currentTrainingSession.getDateTime().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
 
@@ -86,9 +86,9 @@ public class MarkAttendenceViewController {
             return;
         }
 
-        List<Attendance> attendances = DataPersistenceManager.loadObjects("attendance.dat");
+        List<Attendance> attendances = DataPersistenceManager.loadObjects("attendance.bin");
 
-        // Check if attendance already marked for this session and cadet
+
         boolean alreadyMarked = attendances.stream()
                 .anyMatch(a -> a.getCadetId().equals(loggedInCadet.getUserId()) && a.getSessionId().equals(currentSessionId));
 
@@ -102,12 +102,12 @@ public class MarkAttendenceViewController {
                 attendanceId,
                 loggedInCadet.getUserId(),
                 currentSessionId,
-                new Date(), // Current date
+                new Date(),
                 status
         );
 
         attendances.add(newAttendance);
-        DataPersistenceManager.saveObjects(attendances, "attendance.dat");
+        DataPersistenceManager.saveObjects(attendances, "attendance.bin");
 
         markstatuslabel.setText("Attendance marked as " + status + ".");
         showAlert(AlertType.INFORMATION, "Success", "Attendance recorded successfully as " + status + ".");

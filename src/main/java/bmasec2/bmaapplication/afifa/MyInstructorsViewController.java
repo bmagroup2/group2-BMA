@@ -38,11 +38,10 @@ public class MyInstructorsViewController {
     }
 
     private void loadInstructors() {
-        List<Instructor> allInstructors = DataPersistenceManager.loadObjects("instructors.dat");
+        List<Instructor> allInstructors = DataPersistenceManager.loadObjects("instructors.bin");
         ObservableList<Instructor> instructors = FXCollections.observableArrayList();
 
-        // In a real application, you would filter instructors based on the loggedInCadet's batch or assigned instructors.
-        // For now, displaying all instructors.
+
         instructors.addAll(allInstructors);
 
         instructorstableview.setItems(instructors);

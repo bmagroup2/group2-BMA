@@ -45,41 +45,41 @@ public class PerformanceEvaluationViewController {
     }
 
     private void loadEvaluationTypes() {
-//        List<Evaluation> allEvaluations = DataPersistenceManager.loadObjects("evaluations.dat");
-//        ObservableList<String> evaluationTypes = FXCollections.observableArrayList();
-//
-//        allEvaluations.stream()
-//                .filter(eval -> eval.getCadetId().equals(loggedInCadet.getUserId()))
-//                .map(Evaluation::getEvaluationType)
-//                .distinct()
+        List<Evaluation> allEvaluations = DataPersistenceManager.loadObjects("evaluations.dat");
+        ObservableList<String> evaluationTypes = FXCollections.observableArrayList();
+
+        allEvaluations.stream()
+                .filter(eval -> eval.getCadetId().equals(loggedInCadet.getUserId()))
+                .map(Evaluation::getEvaluationType)
+                .distinct();
 //                .forEach(evaluationTypes::add);
-//
-//        myperformaceevaluationcombobox.setItems(evaluationTypes);
-//        if (!evaluationTypes.isEmpty()) {
-//            myperformaceevaluationcombobox.getSelectionModel().selectFirst();
-//        }
+
+        myperformaceevaluationcombobox.setItems(evaluationTypes);
+        if (!evaluationTypes.isEmpty()) {
+            myperformaceevaluationcombobox.getSelectionModel().selectFirst();
+        }
     }
 
     private void displayPerformance(String evaluationType) {
         myperformancescorebarchart.getData().clear();
 
-//        List<Evaluation> allEvaluations = DataPersistenceManager.loadObjects("evaluations.dat");
-//        List<Evaluation> cadetEvaluations = allEvaluations.stream()
-//                .filter(eval -> eval.getCadetId().equals(loggedInCadet.getUserId()) && eval.getEvaluationType().equals(evaluationType))
-//                .collect(Collectors.toList());
+        List<Evaluation> allEvaluations = DataPersistenceManager.loadObjects("evaluations.dat");
+        List<Evaluation> cadetEvaluations = allEvaluations.stream()
+                .filter(eval -> eval.getCadetId().equals(loggedInCadet.getUserId()) && eval.getEvaluationType().equals(evaluationType))
+                .collect(Collectors.toList());
 
-//        if (!cadetEvaluations.isEmpty()) {
-//            XYChart.Series<String, Number> series = new XYChart.Series<>();
-//            series.setName(evaluationType + " Scores");
-//
-//            for (Evaluation eval : cadetEvaluations) {
+        if (!cadetEvaluations.isEmpty()) {
+            XYChart.Series<String, Number> series = new XYChart.Series<>();
+            series.setName(evaluationType + " Scores");
+
+            for (Evaluation eval : cadetEvaluations) {
 //                series.getData().add(new XYChart.Data<>(eval.getEvaluationType(), eval.getScore()));
-//            }
-//            myperformancescorebarchart.getData().add(series);
-//        } else {
-//            // Handle case where no data is found for the selected evaluation type
-//            System.out.println("No evaluation data found for " + loggedInCadet.getName() + " for " + evaluationType);
-//        }
+            }
+            myperformancescorebarchart.getData().add(series);
+        } else {
+            // Handle case where no data is found for the selected evaluation type
+            System.out.println("No evaluation data found for " + loggedInCadet.getName() + " for " + evaluationType);
+        }
     }
 }
 

@@ -69,20 +69,20 @@ public class DrillSchedualerViewController {
         }
 
         try {
-            LocalTime time = LocalTime.parse(drillTime); // Assumes HH:mm format
+            LocalTime time = LocalTime.parse(drillTime);
             LocalDateTime dateTime = LocalDateTime.of(drillDate, time);
             Date scheduledDateTime = Date.from(dateTime.atZone(ZoneId.systemDefault()).toInstant());
 
-            // Create a unique session ID for the drill
+
             String sessionId = UUID.randomUUID().toString();
 
             Training newDrill = new Training(
                     sessionId,
-                    drillActivity, // topic
+                    drillActivity,
                     scheduledDateTime,
-                    drillLocation, // location
-                    loggedInSupervisor != null ? loggedInSupervisor.getName() : "Unknown Supervisor", // instructorId
-                    0 // maxParticipants (can be updated later if needed)
+                    drillLocation,
+                    loggedInSupervisor != null ? loggedInSupervisor.getName() : "Unknown Supervisor",
+                    0
             );
 
             List<Training> trainings = DataPersistenceManager.loadObjects("trainings.dat");
@@ -104,7 +104,7 @@ public class DrillSchedualerViewController {
 
         List<Training> scheduledDrills = allTrainings.stream()
                 .filter(training -> training.getTopic().toLowerCase().contains("drill"))
-                .collect(Collectors.toList());
+                .toList();
 
         if (scheduledDrills.isEmpty()) {
             drills.add("No drills scheduled.");

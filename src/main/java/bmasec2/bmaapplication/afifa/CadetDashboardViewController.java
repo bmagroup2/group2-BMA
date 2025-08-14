@@ -43,11 +43,10 @@ public class CadetDashboardViewController {
     }
 
     private void loadAnnouncements() {
-        List<Announcement> allAnnouncements = DataPersistenceManager.loadObjects("announcements.dat");
+        List<Announcement> allAnnouncements = DataPersistenceManager.loadObjects("announcements.bin");
         ObservableList<String> recentAnnouncements = FXCollections.observableArrayList();
 
-        // Filter announcements relevant to cadets (assuming targetAudience field exists and is used)
-        // For simplicity, showing all announcements here.
+
         for (Announcement ann : allAnnouncements) {
             recentAnnouncements.add(ann.getTitle() + ": " + ann.getContent());
         }
@@ -55,15 +54,15 @@ public class CadetDashboardViewController {
     }
 
     private void loadDailyRoutine() {
-        List<Training> allTrainings = DataPersistenceManager.loadObjects("trainings.dat");
+        List<Training> allTrainings = DataPersistenceManager.loadObjects("trainings.bin");
         ObservableList<String> todayRoutine = FXCollections.observableArrayList();
 
         LocalDate today = LocalDate.now();
 
         List<Training> cadetsTrainingsToday = allTrainings.stream()
                 .filter(training -> training.getDateTime().toInstant().atZone(ZoneId.systemDefault()).toLocalDate().equals(today))
-                .filter(training -> training.getMaxParticipants() > 0) // Assuming maxParticipants > 0 means it's a scheduled training
-                .collect(Collectors.toList());
+                .filter(training -> training.getMaxParticipants() > 0)
+                .toList();
 
         if (cadetsTrainingsToday.isEmpty()) {
             todayRoutine.add("No scheduled activities for today.");

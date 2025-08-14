@@ -4,7 +4,7 @@ import bmasec2.bmaapplication.User;
 
 import java.util.Date;
 
-public class CadetSupervisor extends User {
+public abstract class CadetSupervisor extends User {
     private String supervisorId;
     private String department;
 

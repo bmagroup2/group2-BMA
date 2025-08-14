@@ -3,6 +3,7 @@ package bmasec2.bmaapplication.model;
 import java.io.Serial;
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.Collection;
 
 public class MissionEvent implements Serializable {
     @Serial
@@ -39,5 +40,9 @@ public class MissionEvent implements Serializable {
                 ", eventDate=" + eventDate +
                 ", description='" + description + '\'' +
                 '}';
+    }
+
+    public Collection<Object> getParticipants() {
+        return java.util.List.of();
     }
 }

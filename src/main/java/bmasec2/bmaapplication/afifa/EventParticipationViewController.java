@@ -36,8 +36,8 @@ public class EventParticipationViewController {
         participationidcolumn.setCellValueFactory(new PropertyValueFactory<>("cadetId"));
         participationstatuscolumn.setCellValueFactory(new PropertyValueFactory<>("status"));
 
-        // Populate event combobox
-        List<MissionEvent> events = DataPersistenceManager.loadObjects("mission_events.dat");
+
+        List<MissionEvent> events = DataPersistenceManager.loadObjects("mission_events.bin");
         ObservableList<String> eventNames = FXCollections.observableArrayList();
         for (MissionEvent event : events) {
             eventNames.add(event.getEventName());
@@ -58,7 +58,7 @@ public class EventParticipationViewController {
             return;
         }
 
-        List<MissionEvent> allEvents = DataPersistenceManager.loadObjects("mission_events.dat");
+        List<MissionEvent> allEvents = DataPersistenceManager.loadObjects("mission_events.bin");
         MissionEvent selectedEvent = allEvents.stream()
                 .filter(event -> event.getEventName().equals(selectedEventName))
                 .findFirst()
@@ -69,13 +69,13 @@ public class EventParticipationViewController {
             return;
         }
 
-        List<Cadet> allCadets = DataPersistenceManager.loadObjects("cadets.dat");
+        List<Cadet> allCadets = DataPersistenceManager.loadObjects("cadets.bin");
         ObservableList<CadetParticipation> participationList = FXCollections.observableArrayList();
 
         for (Cadet cadet : allCadets) {
-//            String status = selectedEvent.getParticipants().contains(cadet.getUserId()) ? "Present" : "Absent";
-            // In a real application, you might have a more complex logic to determine status (e.g., late, excused)
-//            participationList.add(new CadetParticipation(cadet.getName(), cadet.getUserId(), status));
+            String status = selectedEvent.getParticipants().contains(cadet.getUserId()) ? "Present" : "Absent";
+
+            participationList.add(new CadetParticipation(cadet.getName(), cadet.getUserId(), status));
         }
 
         participanttableview.setItems(participationList);

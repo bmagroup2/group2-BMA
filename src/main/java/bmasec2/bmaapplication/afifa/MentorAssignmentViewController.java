@@ -33,20 +33,17 @@ public class MentorAssignmentViewController {
     }
 
     private void loadCadetsWithoutMentors() {
-//        List<Cadet> allCadets = DataPersistenceManager.loadObjects("cadets.dat");
-//        // Assuming a cadet without a mentor has a specific status or a null mentor field
-//        // For simplicity, let's assume a new cadet has a default status or a flag indicating no mentor
-//        // In a real system, you'd have a 'mentorId' field in Cadet, and filter where it's null
-//        ObservableList<Cadet> newCadets = FXCollections.observableArrayList(allCadets.stream()
-//////                .filter(cadet -> cadet.getMedicalStatus().equals("Fit")) // Placeholder: assuming 'Fit' means new and no mentor assigned yet
-////                .collect(Collectors.toList()));
-//        mentornewcadetlistview.setItems(newCadets);
+        List<Cadet> allCadets = DataPersistenceManager.loadObjects("cadets.bin");
+
+        ObservableList<Cadet> newCadets = FXCollections.observableArrayList(allCadets.stream()
+                .filter(cadet -> cadet.getMedicalStatus().equals("Fit"))
+                .collect(Collectors.toList()));
+        mentornewcadetlistview.setItems(newCadets);
     }
 
     private void loadPotentialMentors() {
-        List<Cadet> allCadets = DataPersistenceManager.loadObjects("cadets.dat");
-        // Potential mentors could be senior cadets or even other supervisors
-        // For simplicity, let's allow all existing cadets to be potential mentors
+        List<Cadet> allCadets = DataPersistenceManager.loadObjects("cadets.bin");
+
         ObservableList<Cadet> potentialMentors = FXCollections.observableArrayList(allCadets);
         mentorslistview.setItems(potentialMentors);
     }
@@ -66,23 +63,21 @@ public class MentorAssignmentViewController {
             return;
         }
 
-        // Perform the assignment (update the cadet object with mentor information)
-        // This is a placeholder. In a real system, you'd have a dedicated field for mentor ID in Cadet class.
-        // For now, let's just simulate the assignment.
-//        selectedNewCadet.setMedicalStatus("Mentored by " + selectedMentor.getName()); // Placeholder for actual mentor assignment
 
-        // Save updated cadet data
-        List<Cadet> allCadets = DataPersistenceManager.loadObjects("cadets.dat");
+        selectedNewCadet.setMedicalStatus("Mentored by " + selectedMentor.getName()); // Placeholder for actual mentor assignment
+
+
+        List<Cadet> allCadets = DataPersistenceManager.loadObjects("cadets.bin");
         for (int i = 0; i < allCadets.size(); i++) {
             if (allCadets.get(i).getUserId().equals(selectedNewCadet.getUserId())) {
                 allCadets.set(i, selectedNewCadet);
                 break;
             }
         }
-        DataPersistenceManager.saveObjects(allCadets, "cadets.dat");
+        DataPersistenceManager.saveObjects(allCadets, "cadets.bin");
 
         showAlert(AlertType.INFORMATION, "Success", selectedMentor.getName() + " has been assigned as mentor to " + selectedNewCadet.getName() + ".");
-        loadCadetsWithoutMentors(); // Refresh the list of new cadets
+        loadCadetsWithoutMentors();
     }
 
     private void showAlert(AlertType type, String title, String message) {

@@ -23,7 +23,7 @@ public class SubmitProgressReportViewController {
 
     @FXML
     public void initialize() {
-        // Initialization logic if needed
+
     }
 
     public void initData(Cadet cadet) {
@@ -45,7 +45,7 @@ public class SubmitProgressReportViewController {
             return;
         }
 
-        // Create a unique report ID
+
         String reportId = UUID.randomUUID().toString();
 
         Map<String, String> contentMap = new HashMap<>();
@@ -53,16 +53,16 @@ public class SubmitProgressReportViewController {
         contentMap.put("cadetId", loggedInCadet != null ? loggedInCadet.getUserId() : "Unknown");
         contentMap.put("reportDetails", reportContent);
 
-//        Report newReport = new Report(
-//                reportId,
-//                "Progress Report",
-//                loggedInCadet != null ? loggedInCadet.getName() : "Unknown Cadet",
-//                contentMap
-//        );
+        Report newReport = new Report(
+                reportId,
+                "Progress Report",
+                loggedInCadet != null ? loggedInCadet.getName() : "Unknown Cadet",
+                contentMap.toString()
+        );
 
-        List<Report> reports = DataPersistenceManager.loadObjects("reports.dat");
-//        reports.add(newReport);
-        DataPersistenceManager.saveObjects(reports, "reports.dat");
+        List<Report> reports = DataPersistenceManager.loadObjects("reports.bin");
+        reports.add(newReport);
+        DataPersistenceManager.saveObjects(reports, "reports.bin");
 
         showAlert(AlertType.INFORMATION, "Submission Successful", "Weekly progress report submitted successfully.");
         submitweeklyreporttextare.clear();

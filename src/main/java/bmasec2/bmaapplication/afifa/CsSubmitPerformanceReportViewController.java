@@ -27,7 +27,6 @@ public class CsSubmitPerformanceReportViewController {
 
     private CadetSupervisor loggedInSupervisor;
 
-
     @FXML
     public void initialize() {
         // Populate cadet combobox
@@ -60,26 +59,25 @@ public class CsSubmitPerformanceReportViewController {
             return;
         }
 
-        // Create a unique report ID
+
         String reportId = UUID.randomUUID().toString();
 
-        // Assuming the report content is a simple string for now. In a more complex system, this could be structured data.
+
         Map<String, String> contentMap = new HashMap<>();
         contentMap.put("cadetName", selectedCadet);
         contentMap.put("evaluationType", evaluationType);
         contentMap.put("reportDetails", reportContent);
 
-//        Report newReport = new Report(
-//                reportId,
-//                "Performance Report",
-//
-//                loggedInSupervisor != null ? loggedInSupervisor.getName() : "Unknown Supervisor",
-//                contentMap
-//        );
+        Report newReport = new Report(
+                reportId,
+                "Performance Report",
+                loggedInSupervisor != null ? loggedInSupervisor.getName() : "Unknown Supervisor",
+                contentMap.toString()
+        );
 
-        List<Report> reports = DataPersistenceManager.loadObjects("reports.dat");
-//        reports.add(newReport);
-        DataPersistenceManager.saveObjects(reports, "reports.dat");
+        List<Report> reports = DataPersistenceManager.loadObjects("reports.bin");
+        reports.add(newReport);
+        DataPersistenceManager.saveObjects(reports, "reports.bin");
 
         showAlert(AlertType.INFORMATION, "Submission Successful", "Performance report submitted for " + selectedCadet + ".");
         clearForm();

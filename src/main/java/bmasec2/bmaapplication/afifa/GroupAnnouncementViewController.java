@@ -12,7 +12,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 
-import java.util.Date;
+
 import java.util.List;
 import java.util.UUID;
 
@@ -53,17 +53,16 @@ public class GroupAnnouncementViewController {
         // Create a unique announcement ID
         String announcementId = UUID.randomUUID().toString();
 
-//        Announcement newAnnouncement = new Announcement(
-//                announcementId,
-//                title,
-//                message,
-//                loggedInSupervisor != null ? loggedInSupervisor.getName() : "Unknown Supervisor",
-//                targetAudience
-//        );
+        Announcement newAnnouncement = new Announcement(
+                announcementId,
+                title,
+                message,
+                loggedInSupervisor != null ? loggedInSupervisor.getName() : "Unknown Supervisor"
+        );
 
-        List<Announcement> announcements = DataPersistenceManager.loadObjects("announcements.dat");
-//        announcements.add(newAnnouncement);
-//        DataPersistenceManager.saveObjects(announcements, "announcements.dat");
+        List<Announcement> announcements = DataPersistenceManager.loadObjects("announcements.bin");
+        announcements.add(newAnnouncement);
+        DataPersistenceManager.saveObjects(announcements, "announcements.bin");
 
         showAlert(AlertType.INFORMATION, "Success", "Announcement broadcasted successfully!");
         clearForm();

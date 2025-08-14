@@ -80,4 +80,8 @@ public class Evaluation implements Serializable {
     public Object getEvaluatorId() {
         return null;
     }
+
+    public Object getEvaluationType() {
+        return null;
+    }
 }

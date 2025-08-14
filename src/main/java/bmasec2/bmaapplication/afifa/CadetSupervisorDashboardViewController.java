@@ -59,9 +59,9 @@ public class CadetSupervisorDashboardViewController {
         LocalDate today = LocalDate.now();
 
         List<Training> drills = allTrainings.stream()
-                .filter(training -> training.getTopic().toLowerCase().contains("drill")) // Assuming drills have 'drill' in topic
+                .filter(training -> training.getTopic().toLowerCase().contains("drill"))
                 .filter(training -> training.getDateTime().toInstant().atZone(ZoneId.systemDefault()).toLocalDate().isAfter(today) || training.getDateTime().toInstant().atZone(ZoneId.systemDefault()).toLocalDate().isEqual(today))
-                .collect(Collectors.toList());
+                .toList();
 
         if (drills.isEmpty()) {
             upcomingDrills.add("No upcoming drills scheduled.");
@@ -74,10 +74,10 @@ public class CadetSupervisorDashboardViewController {
     }
 
     private void loadPendingLeaveRequests() {
-        List<Leave> allLeaveRequests = DataPersistenceManager.loadObjects("leave_requests.dat");
+        List<Leave> allLeaveRequests = DataPersistenceManager.loadObjects("leave_requests.bin");
         long pendingCount = allLeaveRequests.stream()
                 .filter(leave -> leave.getStatus().equals("Pending"))
-                // In a real application, filter by cadets supervised by this supervisor
+
                 .count();
         suppendingrequestlabel.setText("Pending Leave Requests: " + pendingCount);
     }

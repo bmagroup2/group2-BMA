@@ -38,8 +38,8 @@ public class RegisterTrainingViewController {
         registertraningsessioncolumn.setCellValueFactory(new PropertyValueFactory<>("topic"));
         registerinstructorcolumn.setCellValueFactory(new PropertyValueFactory<>("instructorId"));
         registertraningdatecolumn.setCellValueFactory(new PropertyValueFactory<>("dateTime"));
-        registerslotscolumn.setCellValueFactory(new PropertyValueFactory<>("maxParticipants")); // Assuming this represents available slots
-        registerstatuscolumn.setCellValueFactory(new PropertyValueFactory<>("status")); // Need to add a status property to Training class or derive it
+        registerslotscolumn.setCellValueFactory(new PropertyValueFactory<>("maxParticipants"));
+        registerstatuscolumn.setCellValueFactory(new PropertyValueFactory<>("status"));
 
         loadAvailableTrainings();
     }
@@ -50,11 +50,11 @@ public class RegisterTrainingViewController {
     }
 
     private void loadAvailableTrainings() {
-        List<Training> allTrainings = DataPersistenceManager.loadObjects("trainings.dat");
-        // Filter for trainings that have available slots and are not in the past
+        List<Training> allTrainings = DataPersistenceManager.loadObjects("trainings.bin");
+
         availableTrainings.setAll(allTrainings.stream()
-                .filter(training -> training.getMaxParticipants() > 0) // Assuming maxParticipants > 0 means slots available
-                .filter(training -> training.getDateTime().after(new java.util.Date())) // Only future trainings
+                .filter(training -> training.getMaxParticipants() > 0)
+                .filter(training -> training.getDateTime().after(new java.util.Date()))
                 .collect(Collectors.toList()));
         registerttraningtableview.setItems(availableTrainings);
     }
@@ -73,22 +73,21 @@ public class RegisterTrainingViewController {
             return;
         }
 
-        // Simulate registration: decrease available slots and add cadet to participants (if Training class had a participants list)
-        // For now, just decrease maxParticipants as a proxy for registration
+
         selectedTraining.setMaxParticipants(selectedTraining.getMaxParticipants() - 1);
 
-        // Save updated training data
-        List<Training> allTrainings = DataPersistenceManager.loadObjects("trainings.dat");
+
+        List<Training> allTrainings = DataPersistenceManager.loadObjects("trainings.bin");
         for (int i = 0; i < allTrainings.size(); i++) {
             if (allTrainings.get(i).getSessionId().equals(selectedTraining.getSessionId())) {
                 allTrainings.set(i, selectedTraining);
                 break;
             }
         }
-        DataPersistenceManager.saveObjects(allTrainings, "trainings.dat");
+        DataPersistenceManager.saveObjects(allTrainings, "trainings.bin");
 
         showAlert(AlertType.INFORMATION, "Registration Successful", "You have successfully registered for " + selectedTraining.getTopic() + ".");
-        loadAvailableTrainings(); // Refresh the table
+        loadAvailableTrainings();
     }
 
     private void showAlert(AlertType type, String title, String message) {
@@ -99,9 +98,6 @@ public class RegisterTrainingViewController {
         alert.showAndWait();
     }
 
-    // Helper method to set status (e.g., "Available", "Full") - requires a 'status' property in Training class
-    // For now, this is a placeholder. You might need to modify the Training class.
-    // public String getStatus() { return getMaxParticipants() > 0 ? "Available" : "Full"; }
 }
 
 

@@ -40,7 +40,7 @@ public class ViewRoutineViewController {
 
     public void initData(Cadet cadet) {
         this.loggedInCadet = cadet;
-        // Load today's routine by default when the view is initialized with cadet data
+
         loadDailyRoutine();
     }
 
@@ -55,19 +55,18 @@ public class ViewRoutineViewController {
     }
 
     private void loadDailyRoutine() {
-        List<Training> allTrainings = DataPersistenceManager.loadObjects("trainings.dat");
+        List<Training> allTrainings = DataPersistenceManager.loadObjects("trainings.bin");
         LocalDate today = LocalDate.now();
 
         List<Training> dailyRoutine = allTrainings.stream()
                 .filter(training -> training.getDateTime().toInstant().atZone(ZoneId.systemDefault()).toLocalDate().equals(today))
-                // In a real application, filter by cadet's batch/assigned trainings
                 .collect(Collectors.toList());
 
         routineList.setAll(dailyRoutine);
     }
 
     private void loadWeeklyRoutine() {
-        List<Training> allTrainings = DataPersistenceManager.loadObjects("trainings.dat");
+        List<Training> allTrainings = DataPersistenceManager.loadObjects("trainings.bin");
         LocalDate today = LocalDate.now();
         LocalDate startOfWeek = today.with(DayOfWeek.MONDAY);
         LocalDate endOfWeek = today.with(DayOfWeek.SUNDAY);
@@ -77,7 +76,6 @@ public class ViewRoutineViewController {
                     LocalDate trainingDate = training.getDateTime().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
                     return (trainingDate.isAfter(startOfWeek.minusDays(1)) && trainingDate.isBefore(endOfWeek.plusDays(1)));
                 })
-                // In a real application, filter by cadet's batch/assigned trainings
                 .collect(Collectors.toList());
 
         routineList.setAll(weeklyRoutine);

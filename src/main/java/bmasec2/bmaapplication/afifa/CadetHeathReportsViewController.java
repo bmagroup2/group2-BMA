@@ -22,8 +22,8 @@ public class CadetHeathReportsViewController {
 
     @FXML
     public void initialize() {
-        // Load cadets for the combobox (placeholder for actual cadet loading)
-        List<Cadet> cadets = DataPersistenceManager.loadObjects("cadets.dat");
+
+        List<Cadet> cadets = DataPersistenceManager.loadObjects("cadets.bin");
         ObservableList<String> cadetNames = FXCollections.observableArrayList();
         for (Cadet cadet : cadets) {
             cadetNames.add(cadet.getName());
@@ -33,17 +33,17 @@ public class CadetHeathReportsViewController {
 
     public void initData(CadetSupervisor supervisor) {
         this.loggedInSupervisor = supervisor;
-        // Optionally filter cadets based on supervisor's assigned cadets
+
     }
 
     @FXML
     public void heathsummaryonaction(ActionEvent actionEvent) {
         String selectedCadetName = cadethealthcombobox.getValue();
         if (selectedCadetName != null && !selectedCadetName.isEmpty()) {
-            List<MedicalRecord> allMedicalRecords = DataPersistenceManager.loadObjects("medical_records.dat");
+            List<MedicalRecord> allMedicalRecords = DataPersistenceManager.loadObjects("medical_records.bin");
             List<MedicalRecord> cadetRecords = allMedicalRecords.stream()
-                    .filter(record -> record.getCadetId().equals(selectedCadetName)) // Assuming cadetId is name
-                    .collect(Collectors.toList());
+                    .filter(record -> record.getCadetId().equals(selectedCadetName))
+                    .toList();
 
             if (cadetRecords.isEmpty()) {
                 healthsummarytextarea.setText("No medical records found for " + selectedCadetName + ".");

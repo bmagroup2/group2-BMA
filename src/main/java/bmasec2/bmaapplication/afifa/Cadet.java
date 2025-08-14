@@ -8,7 +8,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
-public class Cadet extends User implements Serializable {
+public abstract class Cadet extends User implements Serializable {
 
     private String batch;
     private String rank;
@@ -57,9 +57,17 @@ public class Cadet extends User implements Serializable {
 
     public String getBatch() { return batch; }
 
+    public String getMedicalStatus() {
+        return medicalStatus = "fit";
+    }
+
     public void setBatch(String batch) { this.batch = batch; }
     public String getRank() { return rank; }
     public void setRank(String rank) { this.rank = rank; }
+
+    public void setMedicalStatus(String medicalStatus) {
+        this.medicalStatus = medicalStatus;
+    }
 
     @Override
     public String toString() {
@@ -78,4 +86,6 @@ public class Cadet extends User implements Serializable {
                 ", status='" + status + '\'' +
                 '}';
     }
+
+
 }

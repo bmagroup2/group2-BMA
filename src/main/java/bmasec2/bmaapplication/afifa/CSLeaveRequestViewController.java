@@ -47,10 +47,10 @@ public class CSLeaveRequestViewController {
     }
 
     private void loadPendingLeaveRequests() {
-        List<Leave> allLeaveRequests = DataPersistenceManager.loadObjects("leave_requests.dat");
+        List<Leave> allLeaveRequests = DataPersistenceManager.loadObjects("leave_requests.bin");
         pendingLeaveRequests.setAll(allLeaveRequests.stream()
                 .filter(leave -> leave.getStatus().equals("Pending"))
-                // In a real application, filter by cadets supervised by this supervisor
+
                 .collect(Collectors.toList()));
         cadetleavependingrequestlistview.setItems(pendingLeaveRequests);
     }
@@ -59,7 +59,7 @@ public class CSLeaveRequestViewController {
         leavecadetnamelabel.setText("Cadet: " + leave.getCadetId());
         leavedaterangelabel.setText("Date: " + leave.getStartDate() + " to " + leave.getEndDate());
         leavereasonlabel.setText("Reason: " + leave.getReason());
-        leaverequesttextarea.setText(leave.getReason()); // Display full reason in textarea
+        leaverequesttextarea.setText(leave.getReason());
     }
 
     @FXML
@@ -71,7 +71,7 @@ public class CSLeaveRequestViewController {
                 selectedLeave.setApprovedBy(loggedInSupervisor.getName());
             }
             saveLeaveRequests();
-            loadPendingLeaveRequests(); // Refresh list
+            loadPendingLeaveRequests();
             clearDetails();
         }
     }
@@ -85,20 +85,20 @@ public class CSLeaveRequestViewController {
                 selectedLeave.setApprovedBy(loggedInSupervisor.getName());
             }
             saveLeaveRequests();
-            loadPendingLeaveRequests(); // Refresh list
+            loadPendingLeaveRequests();
             clearDetails();
         }
     }
 
     private void saveLeaveRequests() {
-        List<Leave> allLeaveRequests = DataPersistenceManager.loadObjects("leave_requests.dat");
+        List<Leave> allLeaveRequests = DataPersistenceManager.loadObjects("leave_requests.bin");
         // Update the status of the modified leave request
         Optional<Leave> existingLeave = allLeaveRequests.stream()
                 .filter(l -> l.getLeaveId().equals(cadetleavependingrequestlistview.getSelectionModel().getSelectedItem().getLeaveId()))
                 .findFirst();
         existingLeave.ifPresent(leave -> leave.setStatus(cadetleavependingrequestlistview.getSelectionModel().getSelectedItem().getStatus()));
 
-        DataPersistenceManager.saveObjects(allLeaveRequests, "leave_requests.dat");
+        DataPersistenceManager.saveObjects(allLeaveRequests, "leave_requests.bin");
     }
 
     private void clearDetails() {
