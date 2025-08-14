@@ -1,4 +1,4 @@
-package bmasec2.bmaapplication.fatema;
+package bmasec2.bmaapplication.model;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;

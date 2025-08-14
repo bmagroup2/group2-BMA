@@ -48,7 +48,7 @@ public class SubmitProgressReportViewController {
 
         String reportId = UUID.randomUUID().toString();
 
-        Map<String, String> contentMap = new HashMap<>();
+        Map<String, Object> contentMap = new HashMap<>();
         contentMap.put("reportType", "Weekly Progress");
         contentMap.put("cadetId", loggedInCadet != null ? loggedInCadet.getUserId() : "Unknown");
         contentMap.put("reportDetails", reportContent);
@@ -57,12 +57,12 @@ public class SubmitProgressReportViewController {
                 reportId,
                 "Progress Report",
                 loggedInCadet != null ? loggedInCadet.getName() : "Unknown Cadet",
-                contentMap.toString()
+                contentMap
         );
 
-        List<Report> reports = DataPersistenceManager.loadObjects("reports.bin");
+        List<Report> reports = DataPersistenceManager.loadObjects("reports.dat");
         reports.add(newReport);
-        DataPersistenceManager.saveObjects(reports, "reports.bin");
+        DataPersistenceManager.saveObjects(reports, "reports.dat");
 
         showAlert(AlertType.INFORMATION, "Submission Successful", "Weekly progress report submitted successfully.");
         submitweeklyreporttextare.clear();

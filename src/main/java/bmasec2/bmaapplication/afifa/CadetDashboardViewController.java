@@ -29,7 +29,7 @@ public class CadetDashboardViewController {
 
     @FXML
     public void initialize() {
-        // Placeholder for drill practice and pending progress
+
         cddrillpracticelabel.setText("Next Drill: 07:00 AM - Parade Ground");
         cdpendingprogresslabel.setText("Pending Reports: 1");
     }
@@ -43,7 +43,7 @@ public class CadetDashboardViewController {
     }
 
     private void loadAnnouncements() {
-        List<Announcement> allAnnouncements = DataPersistenceManager.loadObjects("announcements.bin");
+        List<Announcement> allAnnouncements = DataPersistenceManager.loadObjects("announcements.dat");
         ObservableList<String> recentAnnouncements = FXCollections.observableArrayList();
 
 
@@ -54,7 +54,7 @@ public class CadetDashboardViewController {
     }
 
     private void loadDailyRoutine() {
-        List<Training> allTrainings = DataPersistenceManager.loadObjects("trainings.bin");
+        List<Training> allTrainings = DataPersistenceManager.loadObjects("trainings.dat");
         ObservableList<String> todayRoutine = FXCollections.observableArrayList();
 
         LocalDate today = LocalDate.now();
@@ -62,7 +62,7 @@ public class CadetDashboardViewController {
         List<Training> cadetsTrainingsToday = allTrainings.stream()
                 .filter(training -> training.getDateTime().toInstant().atZone(ZoneId.systemDefault()).toLocalDate().equals(today))
                 .filter(training -> training.getMaxParticipants() > 0)
-                .toList();
+                .collect(Collectors.toList());
 
         if (cadetsTrainingsToday.isEmpty()) {
             todayRoutine.add("No scheduled activities for today.");

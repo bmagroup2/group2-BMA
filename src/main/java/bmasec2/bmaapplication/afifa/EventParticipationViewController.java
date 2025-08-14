@@ -37,7 +37,7 @@ public class EventParticipationViewController {
         participationstatuscolumn.setCellValueFactory(new PropertyValueFactory<>("status"));
 
 
-        List<MissionEvent> events = DataPersistenceManager.loadObjects("mission_events.bin");
+        List<MissionEvent> events = DataPersistenceManager.loadObjects("mission_events.dat");
         ObservableList<String> eventNames = FXCollections.observableArrayList();
         for (MissionEvent event : events) {
             eventNames.add(event.getEventName());
@@ -58,7 +58,7 @@ public class EventParticipationViewController {
             return;
         }
 
-        List<MissionEvent> allEvents = DataPersistenceManager.loadObjects("mission_events.bin");
+        List<MissionEvent> allEvents = DataPersistenceManager.loadObjects("mission_events.dat");
         MissionEvent selectedEvent = allEvents.stream()
                 .filter(event -> event.getEventName().equals(selectedEventName))
                 .findFirst()
@@ -69,7 +69,7 @@ public class EventParticipationViewController {
             return;
         }
 
-        List<Cadet> allCadets = DataPersistenceManager.loadObjects("cadets.bin");
+        List<Cadet> allCadets = DataPersistenceManager.loadObjects("cadets.dat");
         ObservableList<CadetParticipation> participationList = FXCollections.observableArrayList();
 
         for (Cadet cadet : allCadets) {

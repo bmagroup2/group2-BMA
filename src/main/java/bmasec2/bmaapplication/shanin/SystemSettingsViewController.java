@@ -22,7 +22,7 @@ public class SystemSettingsViewController {
     @FXML private ImageView applicationLogoImageView;
 
     private SystemSettings currentSettings;
-    private static final String SETTINGS_FILE = "system_settings.bin";
+    private static final String SETTINGS_FILE = "system_settings.dat";
 
     @FXML
     public void initialize() {
@@ -31,7 +31,7 @@ public class SystemSettingsViewController {
         if (loadedSettings.isEmpty()) {
             currentSettings = new SystemSettings();
         } else {
-            currentSettings = loadedSettings.getFirst();
+            currentSettings = loadedSettings.get(0);
         }
 
 

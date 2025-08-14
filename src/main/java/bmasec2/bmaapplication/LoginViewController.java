@@ -3,6 +3,7 @@ package bmasec2.bmaapplication;
 import bmasec2.bmaapplication.afifa.Cadet;
 import bmasec2.bmaapplication.afifa.CadetSupervisor;
 import bmasec2.bmaapplication.fatema.LogisticOfficer;
+import bmasec2.bmaapplication.fatema.TrainingInstructor;
 import bmasec2.bmaapplication.shanin.Commandant;
 import bmasec2.bmaapplication.shanin.SystemAdministrator;
 import bmasec2.bmaapplication.system.DataPersistenceManager;
@@ -17,6 +18,7 @@ import javafx.scene.control.*;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -31,15 +33,14 @@ public class LoginViewController {
     public static String enteredPassword;
     public static String selectedRole;
 
-    private static final String USERS_FILE = "users.bin";
+    private static final String USERS_FILE = "users.dat";
     private static final String APP_TITLE = "BMA Application";
-    List<User> allUsers;
+    private List<User> allUsers;
+
     @FXML
     public void initialize() {
-        allUsers = DataPersistenceManager.loadObjects(USERS_FILE);
-        System.out.println(allUsers);
         setupRoleComboBox();
-        initializeDefaultUsers();
+        loadUserData();
     }
 
     private void setupRoleComboBox() {
@@ -49,41 +50,39 @@ public class LoginViewController {
         );
     }
 
-    private void initializeDefaultUsers() {
+    private void loadUserData() {
         try {
-
-            List<User> users = DataPersistenceManager.loadObjects(USERS_FILE);
-            if (users == null) {
-                users = new ArrayList<>();
-            }
-
-            if (users.isEmpty()) {
-                createDefaultUsers(users);
-                DataPersistenceManager.saveObjects(users, USERS_FILE);
+            allUsers = DataPersistenceManager.loadObjects(USERS_FILE);
+            if (allUsers == null || allUsers.isEmpty()) {
+                allUsers = createDefaultUsers();
+                DataPersistenceManager.saveObjects(allUsers, USERS_FILE);
             }
         } catch (Exception e) {
             showAlert(Alert.AlertType.ERROR, "Initialization Error",
                     "Failed to initialize user data: " + e.getMessage());
+            allUsers = new ArrayList<>();
         }
     }
 
-    private void createDefaultUsers(List<User> users) {
-        users.add(new SystemAdministrator(
+    private List<User> createDefaultUsers() {
+        List<User> defaultUsers = new ArrayList<>();
+        defaultUsers.add(new SystemAdministrator(
                 "admin", "Admin", "admin@gmail.com", "admin1234", 2));
-        users.add(new Commandant(
+        defaultUsers.add(new Commandant(
                 "commandant", "Cmdt User", "cmd@bma.com", "commandant1234", "CMD-001", "01987654321"));
-        users.add(new Cadet(
+        defaultUsers.add(new Cadet(
                 "cadet", "Cadet", "cadet@bma.com", "cadet1234", "Batch A", "Junior"));
-        users.add(new CadetSupervisor(
-                "cadetsupervisor", "Cadet Supervisor", "cadetsupervisor@bma.com", "cadetsupervisor", "CSV-001","N/A"));
-        users.add(new LogisticOfficer(
-                "logisticofficer", "Logistic Officer", "logisticofficer@bma.com", "logisticofficer1234", "LOF-001","0192231211221" ));
-        users.add(new bmasec2.bmaapplication.fatema.TrainingInstructor(
+        defaultUsers.add(new CadetSupervisor(
+                "cadetsupervisor", "Cadet Supervisor", "cadetsupervisor@bma.com", "cadetsupervisor", "CSV-001", "N/A"));
+        defaultUsers.add(new LogisticOfficer(
+                "logisticofficer", "Logistic Officer", "logisticofficer@bma.com", "logisticofficer1234", "LOF-001", "0192231211221"));
+        defaultUsers.add(new TrainingInstructor(
                 "trofficer", "Training Officer", "trofficer@bma.com", "trofficer1234", "TRO-001", "N/A"));
-        users.add(new MedicalOfficer(
-                "medicalofficer","Medical Officer","medicalofficer@bma.com","medicalofficer1234","MOF-001","BMD-0012"));
-        users.add(new MessOfficer(
-                "messofficer","Mess Officer","messofficer@bma.com","messofficer1234","MEO-001","Day"));
+        defaultUsers.add(new MedicalOfficer(
+                "medicalofficer", "Medical Officer", "medicalofficer@bma.com", "medicalofficer1234", "MOF-001", "BMD-0012"));
+        defaultUsers.add(new MessOfficer(
+                "messofficer", "Mess Officer", "messofficer@bma.com", "messofficer1234", "MEO-001", "Day"));
+        return defaultUsers;
     }
 
     @FXML
@@ -93,15 +92,10 @@ public class LoginViewController {
         }
 
         try {
-
-            if (allUsers == null) {
-                allUsers = new ArrayList<>();
-            }
-
             Optional<User> authenticatedUser = authenticateUser(allUsers);
 
             if (authenticatedUser.isPresent()) {
-                handleSuccessfulLogin(actionEvent, authenticatedUser.get(), allUsers);
+                handleSuccessfulLogin(actionEvent, authenticatedUser.get());
             } else {
                 showAlert(Alert.AlertType.ERROR, "Login Failed",
                         "Invalid username, password, or role.");
@@ -125,19 +119,18 @@ public class LoginViewController {
         return true;
     }
 
-    private Optional<User> authenticateUser(List<User> allUsers) {
-        return allUsers.stream()
+    private Optional<User> authenticateUser(List<User> users) {
+        return users.stream()
                 .filter(user -> (user.getName().equalsIgnoreCase(enteredUsername) ||
                         user.getEmail().equalsIgnoreCase(enteredUsername) ||
-                        user.getUserId().equalsIgnoreCase(enteredUsername)) &&
-                        user.getPassword().equals(enteredPassword) &&
-                        user.getRole().equalsIgnoreCase(selectedRole))
+                        user.getUserId().equalsIgnoreCase(enteredUsername)))
+                .filter(user -> user.getPassword().equals(enteredPassword))
+                .filter(user -> user.getRole().equalsIgnoreCase(selectedRole))
                 .findFirst();
     }
 
-    private void handleSuccessfulLogin(ActionEvent actionEvent, User loggedInUser, List<User> allUsers) throws IOException {
+    private void handleSuccessfulLogin(ActionEvent actionEvent, User loggedInUser) throws IOException {
         loggedInUser.login(enteredUsername, enteredPassword, selectedRole);
-        DataPersistenceManager.saveObjects(allUsers, USERS_FILE);
         openMainMenu(actionEvent, loggedInUser);
     }
 

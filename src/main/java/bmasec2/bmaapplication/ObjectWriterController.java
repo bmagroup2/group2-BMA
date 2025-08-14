@@ -25,7 +25,7 @@ public class ObjectWriterController
     @javafx.fxml.FXML
     private TableView<UserTest> userTestTableView;
     private String username, password;
-    public final static String filename = "data.bin";
+    public final static String filename = "data.dat";
     @javafx.fxml.FXML
     private Label labelSave;
 

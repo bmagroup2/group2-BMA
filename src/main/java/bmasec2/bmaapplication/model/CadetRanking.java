@@ -1,10 +1,9 @@
 package bmasec2.bmaapplication.model;
 
-import java.io.Serial;
 import java.io.Serializable;
 
 public class CadetRanking implements Serializable {
-    @Serial
+
     private static final long serialVersionUID = 1L;
     private String cadetId;
     private String cadetName;
@@ -37,11 +36,13 @@ public class CadetRanking implements Serializable {
     @Override
     public String toString() {
         return "CadetRanking{" +
-                "cadetId='" + cadetId + '\'' +
-                ", cadetName='" + cadetName + '\'' +
+                "cadetId=\'" + cadetId + '\'' +
+                ", cadetName=\'" + cadetName + '\'' +
                 ", overallScore=" + overallScore +
-                ", rank='" + rank + '\'' +
-                ", recommendedFor='" + recommendedFor + '\'' +
-                '}';
+                ", rank=\'" + rank + '\'' +
+                ", recommendedFor=\'" + recommendedFor + '\'' +
+                '}' +
+                ';';
     }
 }
+

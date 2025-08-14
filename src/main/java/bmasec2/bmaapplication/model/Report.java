@@ -34,9 +34,6 @@ public class Report implements Serializable {
         this.generatedBy = "System";
     }
 
-    public Report(String reportId, String logistics, String generatedBy, String text) {
-    }
-
 
     public String getReportId() {
         return reportId;
@@ -77,14 +74,15 @@ public class Report implements Serializable {
     @Override
     public String toString() {
         return "Report{" +
-                "reportId='" + reportId + '\'' +
-                ", type='" + type + '\'' +
-                ", generatedBy='" + generatedBy + '\'' +
+                "reportId=\'" + reportId + '\'' +
+                ", type=\'" + type + '\'' +
+                ", generatedBy=\'" + generatedBy + '\'' +
                 ", date=" + date +
                 ", content=" + content +
-                ", unit='" + unit + '\'' +
-                ", title='" + title + '\'' +
-                '}';
+                ", unit=\'" + unit + '\'' +
+                ", title=\'" + title + '\'' +
+                '}' +
+                ';';
     }
 
     public String getContentString() {
@@ -94,3 +92,4 @@ public class Report implements Serializable {
         return "";
     }
 }
+

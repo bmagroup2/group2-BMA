@@ -60,7 +60,7 @@ public class LeaveRequestViewController {
         }
 
 
-        List<Leave> existingLeaves = DataPersistenceManager.loadObjects("leave_requests.bin");
+        List<Leave> existingLeaves = DataPersistenceManager.loadObjects("leave_requests.dat");
         boolean hasOverlap = existingLeaves.stream()
                 .filter(leave -> leave.getCadetId().equals(loggedInCadet.getUserId()))
                 .anyMatch(leave -> {
@@ -85,7 +85,7 @@ public class LeaveRequestViewController {
         );
 
         existingLeaves.add(newLeave);
-        DataPersistenceManager.saveObjects(existingLeaves, "leave_requests.bin");
+        DataPersistenceManager.saveObjects(existingLeaves, "leave_requests.dat");
 
         showAlert(AlertType.INFORMATION, "Success", "Leave request submitted for approval.");
         // In a real application, notify supervisor here

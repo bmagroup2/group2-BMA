@@ -65,16 +65,18 @@ public class Commandant extends User implements Serializable {
     @Override
     public String toString() {
         return "Commandant{" +
-                "commandantId='" + commandantId + '\'' +
+                "commandantId=\'" + commandantId + '\'' +
                 ", tenureStart=" + tenureStart +
-                ", contactNumber='" + contactNumber + '\'' +
-                ", userId='" + userId + '\'' +
-                ", name='" + name + '\'' +
-                ", email='" + email + '\'' +
-                ", role='" + role + '\'' +
-                ", password='" + password + '\'' +
+                ", contactNumber=\'" + contactNumber + '\'' +
+                ", userId=\'" + userId + '\'' +
+                ", name=\'" + name + '\'' +
+                ", email=\'" + email + '\'' +
+                ", role=\'" + role + '\'' +
+                ", password=\'" + password + '\'' +
                 ", lastLogin=" + lastLogin +
-                ", status='" + status + '\'' +
-                '}';
+                ", status=\'" + status + '\'' +
+                '}'+
+                '\n';
     }
 }
+

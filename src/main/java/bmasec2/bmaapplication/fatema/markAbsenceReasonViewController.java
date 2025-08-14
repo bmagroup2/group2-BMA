@@ -33,12 +33,12 @@ public class markAbsenceReasonViewController {
     @FXML
     private TextArea reasonForAbsenceTextArea;
 
-    private static final String ATTENDANCE_FILE = "attendance.ser";
+    private static final String ATTENDANCE_FILE = "attendance.dat";
     private ObservableList<Attendance> unexplainedAbsences;
 
     @FXML
     public void initialize() {
-        // Initialize table columns
+
         dateTableColumn.setCellValueFactory(new PropertyValueFactory<>("date"));
         cadetNameTableColumn.setCellValueFactory(new PropertyValueFactory<>("cadetName"));
         sessionTableColumn.setCellValueFactory(new PropertyValueFactory<>("sessionName"));
@@ -46,20 +46,20 @@ public class markAbsenceReasonViewController {
         loadUnexplainedAbsences();
         rercentUnexplainedAbsencesTableView.setItems(unexplainedAbsences);
 
-        // Listen for selection changes in the table view
-//        rercentUnexplainedAbsencesTableView.getSelectionModel().selectedItemProperty().addListener(
-//                (observable, oldValue, newValue) -> {
-//                    if (newValue != null) {
-//                        absenceDetailsLabel.setText(String.format("Absence: %s on %s for %s",
-////                                newValue.getName(),
-////                                newValue.getDate().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")),
-////                                newValue.getSessionName()));
-////                        reasonForAbsenceTextArea.setText(newValue.getReason() != null ? newValue.getReason() : "");
-//                    } else {
-//                        absenceDetailsLabel.setText("Absence: [Cadet Name] on [Date]");
-//                        reasonForAbsenceTextArea.clear();
-//                    }
-//                });
+
+        rercentUnexplainedAbsencesTableView.getSelectionModel().selectedItemProperty().addListener(
+                (observable, oldValue, newValue) -> {
+                    if (newValue != null) {
+                        absenceDetailsLabel.setText(String.format("Absence: %s on %s for %s",
+                                newValue.getCadetName(),
+                                newValue.getDate().toString(),
+                                newValue.getSessionName()));
+                        reasonForAbsenceTextArea.setText(newValue.getReason() != null ? newValue.getReason() : "");
+                    } else {
+                        absenceDetailsLabel.setText("Absence: [Cadet Name] on [Date]");
+                        reasonForAbsenceTextArea.clear();
+                    }
+                });
     }
 
     private void loadUnexplainedAbsences() {
@@ -84,13 +84,13 @@ public class markAbsenceReasonViewController {
             return;
         }
 
-        // Update the selected attendance record
-        selectedAbsence.setReason(reason);
-        selectedAbsence.setStatus("Excused"); // Or another appropriate status like "Absent (Reason Provided)"
 
-        // Save the updated list back to persistence
+        selectedAbsence.setReason(reason);
+        selectedAbsence.setStatus("Excused");
+
+
         List<Attendance> allAttendance = DataPersistenceManager.loadObjects(ATTENDANCE_FILE);
-        // Find and replace the updated attendance object
+
         for (int i = 0; i < allAttendance.size(); i++) {
             if (allAttendance.get(i).getAttendanceId().equals(selectedAbsence.getAttendanceId())) {
                 allAttendance.set(i, selectedAbsence);
@@ -101,7 +101,6 @@ public class markAbsenceReasonViewController {
 
         showAlert(Alert.AlertType.INFORMATION, "Success", "Absence reason saved successfully!");
 
-        // Refresh the list of unexplained absences
         loadUnexplainedAbsences();
         rercentUnexplainedAbsencesTableView.setItems(unexplainedAbsences);
         reasonForAbsenceTextArea.clear();

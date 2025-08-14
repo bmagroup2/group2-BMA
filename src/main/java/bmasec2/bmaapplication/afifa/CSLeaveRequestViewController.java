@@ -47,7 +47,7 @@ public class CSLeaveRequestViewController {
     }
 
     private void loadPendingLeaveRequests() {
-        List<Leave> allLeaveRequests = DataPersistenceManager.loadObjects("leave_requests.bin");
+        List<Leave> allLeaveRequests = DataPersistenceManager.loadObjects("leave_requests.dat");
         pendingLeaveRequests.setAll(allLeaveRequests.stream()
                 .filter(leave -> leave.getStatus().equals("Pending"))
 
@@ -91,14 +91,14 @@ public class CSLeaveRequestViewController {
     }
 
     private void saveLeaveRequests() {
-        List<Leave> allLeaveRequests = DataPersistenceManager.loadObjects("leave_requests.bin");
+        List<Leave> allLeaveRequests = DataPersistenceManager.loadObjects("leave_requests.dat");
         // Update the status of the modified leave request
         Optional<Leave> existingLeave = allLeaveRequests.stream()
                 .filter(l -> l.getLeaveId().equals(cadetleavependingrequestlistview.getSelectionModel().getSelectedItem().getLeaveId()))
                 .findFirst();
         existingLeave.ifPresent(leave -> leave.setStatus(cadetleavependingrequestlistview.getSelectionModel().getSelectedItem().getStatus()));
 
-        DataPersistenceManager.saveObjects(allLeaveRequests, "leave_requests.bin");
+        DataPersistenceManager.saveObjects(allLeaveRequests, "leave_requests.dat");
     }
 
     private void clearDetails() {

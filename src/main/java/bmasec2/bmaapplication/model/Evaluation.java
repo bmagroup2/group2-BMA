@@ -1,11 +1,10 @@
 package bmasec2.bmaapplication.model;
 
-import java.io.Serial;
 import java.io.Serializable;
 import java.util.Date;
 
 public class Evaluation implements Serializable {
-    @Serial
+
     private static final long serialVersionUID = 1L;
     private String evalId;
     private String cadetId;
@@ -17,9 +16,9 @@ public class Evaluation implements Serializable {
     private String notes;
     private String status;
 
-    public Evaluation(String evalId, String cadetId, String cadetName, String batch, String instructorId, String scoreBreakdown, String notes) {
+    public Evaluation(String evalId, Object cadetId, String cadetName, String batch, String instructorId, String scoreBreakdown, String notes) {
         this.evalId = evalId;
-        this.cadetId = cadetId;
+        this.cadetId = cadetId.toString();
         this.cadetName = cadetName;
         this.batch = batch;
         this.instructorId = instructorId;
@@ -29,8 +28,7 @@ public class Evaluation implements Serializable {
         this.status = "Pending";
     }
 
-    public Evaluation(String evaluationId, String cadetId, String evaluatorId, String evaluationType, double score, double maxScore, String comments) {
-    }
+
 
 
     public String getEvalId() { return evalId; }
@@ -57,16 +55,17 @@ public class Evaluation implements Serializable {
     @Override
     public String toString() {
         return "Evaluation{" +
-                "evalId='" + evalId + '\'' +
-                ", cadetId='" + cadetId + '\'' +
-                ", cadetName='" + cadetName + '\'' +
-                ", batch='" + batch + '\'' +
-                ", instructorId='" + instructorId + '\'' +
+                "evalId=\'" + evalId + '\'' +
+                ", cadetId=\'" + cadetId + '\'' +
+                ", cadetName=\'" + cadetName + '\'' +
+                ", batch=\'" + batch + '\'' +
+                ", instructorId=\'" + instructorId + '\'' +
                 ", evaluationDate=" + evaluationDate +
-                ", scoreBreakdown='" + scoreBreakdown + '\'' +
-                ", notes='" + notes + '\'' +
-                ", status='" + status + '\'' +
-                '}';
+                ", scoreBreakdown=\'" + scoreBreakdown + '\'' +
+                ", notes=\'" + notes + '\'' +
+                ", status=\'" + status + '\'' +
+                '}' +
+                ';';
     }
 
     public double getScore() {
@@ -85,3 +84,4 @@ public class Evaluation implements Serializable {
         return null;
     }
 }
+

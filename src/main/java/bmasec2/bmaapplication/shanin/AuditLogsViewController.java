@@ -30,7 +30,7 @@ public class AuditLogsViewController {
     @FXML private TableColumn<AuditLog, Date> timestampColumn;
 
     private ObservableList<AuditLog> masterAuditLogList;
-    private static final String AUDIT_LOGS_FILE = "auditlogs.bin";
+    private static final String AUDIT_LOGS_FILE = "auditlogs.dat";
 
     @FXML
     public void initialize() {
@@ -84,3 +84,4 @@ public class AuditLogsViewController {
         alert.showAndWait();
     }
 }
+

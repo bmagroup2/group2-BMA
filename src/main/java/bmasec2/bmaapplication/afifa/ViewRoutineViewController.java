@@ -55,7 +55,7 @@ public class ViewRoutineViewController {
     }
 
     private void loadDailyRoutine() {
-        List<Training> allTrainings = DataPersistenceManager.loadObjects("trainings.bin");
+        List<Training> allTrainings = DataPersistenceManager.loadObjects("trainings.dat");
         LocalDate today = LocalDate.now();
 
         List<Training> dailyRoutine = allTrainings.stream()
@@ -66,7 +66,7 @@ public class ViewRoutineViewController {
     }
 
     private void loadWeeklyRoutine() {
-        List<Training> allTrainings = DataPersistenceManager.loadObjects("trainings.bin");
+        List<Training> allTrainings = DataPersistenceManager.loadObjects("trainings.dat");
         LocalDate today = LocalDate.now();
         LocalDate startOfWeek = today.with(DayOfWeek.MONDAY);
         LocalDate endOfWeek = today.with(DayOfWeek.SUNDAY);

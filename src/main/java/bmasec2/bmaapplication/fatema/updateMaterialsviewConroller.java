@@ -30,14 +30,14 @@ public class updateMaterialsviewConroller {
 
     private File selectedFile;
 
-    private static final String TRAINING_MATERIALS_FILE = "training_materials.ser";
-    private static final String TRAINING_SESSIONS_FILE = "training_sessions.ser"; // Assuming a file for training sessions
-    private static final String CADETS_FILE = "cadets.ser"; // Assuming a file for cadets to get batches
+    private static final String TRAINING_MATERIALS_FILE = "training_materials.dat";
+    private static final String TRAINING_SESSIONS_FILE = "training_sessions.dat";
+    private static final String CADETS_FILE = "cadets.dat";
     private static final String UPLOAD_DIR = "uploads/training_materials";
 
     @FXML
     public void initialize() {
-        // Ensure upload directory exists
+
         new File(UPLOAD_DIR).mkdirs();
 
         populateTrainingSessions();
@@ -45,15 +45,13 @@ public class updateMaterialsviewConroller {
     }
 
     private void populateTrainingSessions() {
-        // In a real application, you would load actual training sessions
-        // For now, populate with dummy data or load from a file if available
+
         ObservableList<String> sessions = FXCollections.observableArrayList("Session 1: Marksmanship", "Session 2: First Aid", "Session 3: Navigation");
         trainingSessionComboBox.setItems(sessions);
     }
 
     private void populateTargetBatches() {
-        // In a real application, you would load actual cadet batches
-        // For now, populate with dummy data or load from a file if available
+
         ObservableList<String> batches = FXCollections.observableArrayList("Batch A", "Batch B", "Batch C");
         targetBtachComboBox.setItems(batches);
     }
@@ -79,18 +77,18 @@ public class updateMaterialsviewConroller {
         }
 
         try {
-            // Save the file to the uploads directory
+
             Path destinationPath = Paths.get(UPLOAD_DIR, selectedFile.getName());
             Files.copy(selectedFile.toPath(), destinationPath, StandardCopyOption.REPLACE_EXISTING);
 
-            // Create a new TrainingMaterial object
+
             String materialId = UUID.randomUUID().toString();
-            // Assuming a dummy user for now. In a real app, this would be the logged-in instructor.
+
             String uploadedByUserId = "instructor123"; 
 
-            TrainingMaterial newMaterial = new TrainingMaterial(
+            bmasec2.bmaapplication.model.TrainingMaterial newMaterial = new bmasec2.bmaapplication.model.TrainingMaterial(
                     materialId,
-                    trainingTopic, // Using topic as session ID for simplicity, adjust if actual session IDs are available
+                    trainingTopic,
                     trainingTopic,
                     targetBatch,
                     selectedFile.getName(),
@@ -99,13 +97,13 @@ public class updateMaterialsviewConroller {
             );
 
             // Load existing materials, add new one, and save
-            List<TrainingMaterial> trainingMaterials = DataPersistenceManager.loadObjects(TRAINING_MATERIALS_FILE);
+            List<bmasec2.bmaapplication.model.TrainingMaterial> trainingMaterials = DataPersistenceManager.loadObjects(TRAINING_MATERIALS_FILE);
             trainingMaterials.add(newMaterial);
             DataPersistenceManager.saveObjects(trainingMaterials, TRAINING_MATERIALS_FILE);
 
             showAlert(Alert.AlertType.INFORMATION, "Success", "Training material uploaded successfully!");
 
-            // Clear form fields
+
             trainingSessionComboBox.getSelectionModel().clearSelection();
             targetBtachComboBox.getSelectionModel().clearSelection();
             selectFileTextField.clear();

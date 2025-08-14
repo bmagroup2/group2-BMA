@@ -1,4 +1,4 @@
-package bmasec2.bmaapplication.fatema;
+package bmasec2.bmaapplication.model;
 
 import java.io.Serializable;
 import java.time.LocalDate;
@@ -13,7 +13,6 @@ public class TrainingSession implements Serializable {
     private String instructorId;
     private String cadetBatch;
     private int maxParticipants;
-    private String status; // e.g., Scheduled, Completed, Cancelled
 
     public TrainingSession(String sessionId, String topic, LocalDate date, LocalTime time, String location, String instructorId, String cadetBatch, int maxParticipants) {
         this.sessionId = sessionId;
@@ -24,7 +23,6 @@ public class TrainingSession implements Serializable {
         this.instructorId = instructorId;
         this.cadetBatch = cadetBatch;
         this.maxParticipants = maxParticipants;
-        this.status = "Scheduled";
     }
 
     // Getters
@@ -60,10 +58,6 @@ public class TrainingSession implements Serializable {
         return maxParticipants;
     }
 
-    public String getStatus() {
-        return status;
-    }
-
     // Setters
     public void setSessionId(String sessionId) {
         this.sessionId = sessionId;
@@ -97,8 +91,19 @@ public class TrainingSession implements Serializable {
         this.maxParticipants = maxParticipants;
     }
 
-    public void setStatus(String status) {
-        this.status = status;
+    @Override
+    public String toString() {
+        return "TrainingSession{" +
+                "sessionId=\'" + sessionId + '\'' +
+                ", topic=\'" + topic + '\'' +
+                ", date=" + date +
+                ", time=" + time +
+                ", location=\'" + location + '\'' +
+                ", instructorId=\'" + instructorId + '\'' +
+                ", cadetBatch=\'" + cadetBatch + '\'' +
+                ", maxParticipants=" + maxParticipants +
+                '}' +
+                ';';
     }
 }
 

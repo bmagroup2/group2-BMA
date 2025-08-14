@@ -50,7 +50,7 @@ public class RegisterTrainingViewController {
     }
 
     private void loadAvailableTrainings() {
-        List<Training> allTrainings = DataPersistenceManager.loadObjects("trainings.bin");
+        List<Training> allTrainings = DataPersistenceManager.loadObjects("trainings.dat");
 
         availableTrainings.setAll(allTrainings.stream()
                 .filter(training -> training.getMaxParticipants() > 0)
@@ -77,14 +77,14 @@ public class RegisterTrainingViewController {
         selectedTraining.setMaxParticipants(selectedTraining.getMaxParticipants() - 1);
 
 
-        List<Training> allTrainings = DataPersistenceManager.loadObjects("trainings.bin");
+        List<Training> allTrainings = DataPersistenceManager.loadObjects("trainings.dat");
         for (int i = 0; i < allTrainings.size(); i++) {
             if (allTrainings.get(i).getSessionId().equals(selectedTraining.getSessionId())) {
                 allTrainings.set(i, selectedTraining);
                 break;
             }
         }
-        DataPersistenceManager.saveObjects(allTrainings, "trainings.bin");
+        DataPersistenceManager.saveObjects(allTrainings, "trainings.dat");
 
         showAlert(AlertType.INFORMATION, "Registration Successful", "You have successfully registered for " + selectedTraining.getTopic() + ".");
         loadAvailableTrainings();

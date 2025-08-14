@@ -26,8 +26,8 @@ public class CommandantDashboardView {
     @FXML private TableColumn<Announcement, String> pendingAnnouncementSubmittedByColumn;
     @FXML private PieChart performanceDistributionPieChart;
 
-    private static final String USERS_FILE = "users.bin";
-    private static final String ANNOUNCEMENTS_FILE = "announcements.bin";
+    private static final String USERS_FILE = "users.dat";
+    private static final String ANNOUNCEMENTS_FILE = "announcements.dat";
 
     @FXML
     public void initialize() {

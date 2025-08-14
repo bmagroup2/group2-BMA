@@ -4,7 +4,7 @@ import bmasec2.bmaapplication.User;
 
 import java.util.Date;
 
-public abstract class CadetSupervisor extends User {
+public class CadetSupervisor extends User {
     private String supervisorId;
     private String department;
 
@@ -33,11 +33,13 @@ public abstract class CadetSupervisor extends User {
     @Override
     public String toString() {
         return "CadetSupervisor{" +
-                "supervisorId='" + supervisorId + '\'' +
-                ", department='" + department + '\'' +
-                ", userId='" + getUserId() + '\'' +
-                ", name='" + getName() + '\'' +
-                ", role='" + getRole() + '\'' +
-                '}';
+                "supervisorId=\'" + supervisorId + '\'' +
+                ", department=\'" + department + '\'' +
+                ", userId=\'" + getUserId() + '\'' +
+                ", name=\'" + getName() + '\'' +
+                ", role=\'" + getRole() + '\'' +
+                '}'+
+                '\n';
     }
 }
+

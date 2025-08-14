@@ -27,7 +27,7 @@ public class CadetRankingViewController {
     @FXML private ComboBox<String> filterBySemesterComboBox;
 
     private ObservableList<CadetRanking> masterRankingList;
-    private static final String RANKINGS_FILE = "cadet_rankings.bin";
+    private static final String RANKINGS_FILE = "cadet_rankings.dat";
 
     @FXML
     public void initialize() {

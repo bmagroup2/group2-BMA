@@ -30,9 +30,9 @@ public class SystemAdminReportsViewController {
     @FXML private TableColumn<Report, Map<String, Object>> reportContentColumn;
 
     private ObservableList<Report> masterReportList;
-    private static final String REPORTS_FILE = "reports.bin";
-    private static final String AUDIT_LOGS_FILE = "auditlogs.bin";
-    private static final String USERS_FILE = "users.bin";
+    private static final String REPORTS_FILE = "reports.dat";
+    private static final String AUDIT_LOGS_FILE = "auditlogs.dat";
+    private static final String USERS_FILE = "users.dat";
     @FXML
     private TableView reportTableView;
 

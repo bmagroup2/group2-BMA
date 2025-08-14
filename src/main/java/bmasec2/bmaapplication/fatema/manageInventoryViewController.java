@@ -13,6 +13,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.Alert;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -35,7 +36,7 @@ public class manageInventoryViewController {
     @FXML
     private TableColumn<InventoryItem, String> statusTableColumn;
 
-    private static final String INVENTORY_FILE = "inventory.ser";
+    private static final String INVENTORY_FILE = "inventory.dat";
     private ObservableList<InventoryItem> masterInventoryList;
 
     @FXML
@@ -98,12 +99,11 @@ public class manageInventoryViewController {
     void updateSelectedStockOnAction(ActionEvent event) {
         InventoryItem selectedItem = manageInventoryTableView.getSelectionModel().getSelectedItem();
         if (selectedItem != null) {
-            // In a real application, this would open a new dialog/view to update the item
-            // For now, we'll just show an alert and simulate an update.
+
             showAlert(Alert.AlertType.INFORMATION, "Update Stock", "Simulating update for: " + selectedItem.getItemName() + ".\nIn a full application, a new window would open to modify stock.");
-            // Example: selectedItem.setQuantity(selectedItem.getQuantity() + 10); // Simulate adding 10 units
-            // DataPersistenceManager.saveObjects(masterInventoryList.stream().collect(Collectors.toList()), INVENTORY_FILE);
-            // populateTableView(masterInventoryList); // Refresh table
+
+             DataPersistenceManager.saveObjects(new ArrayList<>(masterInventoryList), INVENTORY_FILE);
+             populateTableView(masterInventoryList);
         } else {
             showAlert(Alert.AlertType.WARNING, "No Selection", "Please select an item to update.");
         }

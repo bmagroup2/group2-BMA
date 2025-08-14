@@ -1,12 +1,11 @@
 package bmasec2.bmaapplication.model;
 
-import java.io.Serial;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.Collection;
 
 public class MissionEvent implements Serializable {
-    @Serial
+
     private static final long serialVersionUID = 1L;
     private String eventId;
     private String eventName;
@@ -35,14 +34,16 @@ public class MissionEvent implements Serializable {
     @Override
     public String toString() {
         return "MissionEvent{" +
-                "eventId='" + eventId + '\'' +
-                ", eventName='" + eventName + '\'' +
+                "eventId=\'" + eventId + '\'' +
+                ", eventName=\'" + eventName + '\'' +
                 ", eventDate=" + eventDate +
-                ", description='" + description + '\'' +
-                '}';
+                ", description=\'" + description + '\'' +
+                '}' +
+                ';';
     }
 
     public Collection<Object> getParticipants() {
         return java.util.List.of();
     }
 }
+

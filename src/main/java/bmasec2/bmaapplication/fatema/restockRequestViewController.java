@@ -27,8 +27,8 @@ public class restockRequestViewController {
     @FXML
     private TextArea remarksTextArea;
 
-    private static final String INVENTORY_FILE = "inventory.ser";
-    private static final String RESTOCK_REQUESTS_FILE = "restock_requests.ser";
+    private static final String INVENTORY_FILE = "inventory.dat";
+    private static final String RESTOCK_REQUESTS_FILE = "restock_requests.dat";
 
     private ObservableList<InventoryItem> lowStockItems;
 
@@ -47,10 +47,10 @@ public class restockRequestViewController {
 
     private void loadLowStockItems() {
         List<InventoryItem> allItems = DataPersistenceManager.loadObjects(INVENTORY_FILE);
-//        lowStockItems = allItems.stream()
-//                .filter(InventoryItem::isBelowMinStock)
-//                .collect(Collectors.toCollection(FXCollections::observableArrayList));
-//        itemsWithLowStockListView.setItems(lowStockItems);
+        lowStockItems = allItems.stream()
+                .filter(InventoryItem::isBelowMinStock)
+                .collect(Collectors.toCollection(FXCollections::observableArrayList));
+        itemsWithLowStockListView.setItems(lowStockItems);
     }
 
     @FXML
@@ -83,7 +83,7 @@ public class restockRequestViewController {
 
         List<bmasec2.bmaapplication.fatema.RestockRequest> restockRequests = DataPersistenceManager.loadObjects(RESTOCK_REQUESTS_FILE);
 
-        // Check for existing pending request for the same item
+
         boolean existingRequest = restockRequests.stream()
                 .anyMatch(req -> req.getItemId().equals(selectedItem.getItemId()) && req.getStatus().equals("Pending"));
 
@@ -103,7 +103,7 @@ public class restockRequestViewController {
         quantityToRequestTextField.clear();
         remarksTextArea.clear();
         itemNameLabel.setText("Item: [Selected Item Name]");
-        loadLowStockItems(); // Refresh the list to reflect any changes
+        loadLowStockItems();
     }
 
     private void showAlert(Alert.AlertType alertType, String title, String message) {

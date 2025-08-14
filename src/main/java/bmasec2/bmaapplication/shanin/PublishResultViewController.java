@@ -20,8 +20,8 @@ public class PublishResultViewController {
     @FXML private ComboBox<String> selectBatchComboBox;
     @FXML private ComboBox<String> selectSemesterComboBox;
 
-    private static final String USERS_FILE = "users.bin";
-    private static final String RESULTS_FILE = "published_results.bin";
+    private static final String USERS_FILE = "users.dat";
+    private static final String RESULTS_FILE = "published_results.dat";
 
 
     private Commandant loggedInCommandant;
@@ -116,3 +116,4 @@ public class PublishResultViewController {
         alert.showAndWait();
     }
 }
+

@@ -111,13 +111,15 @@ public class TrainingInstructor extends User {
     @Override
     public String toString() {
         return "TrainingInstructor{" +
-                "instructorId='" + instructorId + '\'' +
-                ", specialization='" + specialization + '\'' +
-                ", department='" + department + '\'' +
+                "instructorId=\'" + instructorId + '\'' +
+                ", specialization=\'" + specialization + '\'' +
+                ", department=\'" + department + '\'' +
                 ", yearsOfExperience=" + yearsOfExperience +
-                ", userId='" + getUserId() + '\'' +
-                ", name='" + getName() + '\'' +
-                ", role='" + getRole() + '\'' +
-                '}';
+                ", userId=\'" + getUserId() + '\'' +
+                ", name=\'" + getName() + '\'' +
+                ", role=\'" + getRole() + '\'' +
+                '}'+
+                '\n';
     }
 }
+

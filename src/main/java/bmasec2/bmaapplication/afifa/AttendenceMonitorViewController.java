@@ -68,7 +68,7 @@ public class AttendenceMonitorViewController {
         List<Attendance> filteredAttendance = allAttendance.stream()
                 .filter(attendance -> {
                     boolean matchesCadet = (selectedCadetName == null || selectedCadetName.isEmpty()) || attendance.getCadetId().equals(selectedCadetName); // Assuming cadetId is name
-                    boolean matchesDate = (selectedDate == null) || attendance.getDate().toInstant().atZone(java.time.ZoneId.systemDefault()).toLocalDate().equals(selectedDate);
+                    boolean matchesDate = (selectedDate == null) || attendance.getDate().equals(selectedDate);
                     return matchesCadet && matchesDate;
                 })
                 .collect(Collectors.toList());

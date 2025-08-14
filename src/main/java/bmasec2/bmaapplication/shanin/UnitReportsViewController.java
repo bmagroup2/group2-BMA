@@ -23,7 +23,7 @@ public class UnitReportsViewController {
     @FXML private ComboBox<String> chooseUnitComboBox;
     @FXML private DatePicker startDateDatePicker;
 
-    private static final String REPORTS_FILE = "reports.bin";
+    private static final String REPORTS_FILE = "reports.dat";
 
     @FXML
     public void initialize() {

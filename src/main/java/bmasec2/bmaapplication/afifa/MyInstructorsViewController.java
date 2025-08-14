@@ -38,7 +38,7 @@ public class MyInstructorsViewController {
     }
 
     private void loadInstructors() {
-        List<Instructor> allInstructors = DataPersistenceManager.loadObjects("instructors.bin");
+        List<Instructor> allInstructors = DataPersistenceManager.loadObjects("instructors.dat");
         ObservableList<Instructor> instructors = FXCollections.observableArrayList();
 
 

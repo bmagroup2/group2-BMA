@@ -183,4 +183,8 @@ public class InventoryItem implements Serializable {
     public String getItemName() {
         return "";
     }
+
+    public boolean isBelowMinStock() {
+        return false;
+    }
 }

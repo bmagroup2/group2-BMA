@@ -33,17 +33,17 @@ public class trainingHistoryViewController {
     @FXML
     private TableColumn<Evaluation, Double> scoreTableColumn;
 
-    private static final String CADETS_FILE = "cadets.ser";
-    private static final String EVALUATIONS_FILE = "evaluations.ser";
+    private static final String CADETS_FILE = "cadets.dat";
+    private static final String EVALUATIONS_FILE = "evaluations.dat";
 
     private ObservableList<Cadet> allCadets;
     private ObservableList<Evaluation> allEvaluations;
 
     @FXML
     public void initialize() {
-        // Initialize table columns
+
         dateTableColumn.setCellValueFactory(new PropertyValueFactory<>("evaluationDate"));
-        trainingSessionTableColumn.setCellValueFactory(new PropertyValueFactory<>("evaluationType")); // Using evaluationType as training session/topic
+        trainingSessionTableColumn.setCellValueFactory(new PropertyValueFactory<>("evaluationType"));
         instructorTableColumn.setCellValueFactory(new PropertyValueFactory<>("evaluatorName"));
         scoreTableColumn.setCellValueFactory(new PropertyValueFactory<>("score"));
 

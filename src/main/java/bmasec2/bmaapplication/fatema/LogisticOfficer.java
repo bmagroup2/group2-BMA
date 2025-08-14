@@ -18,15 +18,17 @@ public class LogisticOfficer extends User {
         this.department = "Logistics";
     }
 
-
-
     public boolean manageInventory(InventoryItem item, String action) {
-        return switch (action.toLowerCase()) {
-            case "add" -> item.addItem(1);
-            case "update" -> item.updateStock(item.getQuantity());
-            case "remove" -> item.updateStock(0);
-            default -> false;
-        };
+        switch (action.toLowerCase()) {
+            case "add":
+                return item.addItem(1);
+            case "update":
+                return item.updateStock(item.getQuantity());
+            case "remove":
+                return item.updateStock(0);
+            default:
+                return false;
+        }
     }
 
     public List<InventoryItem> viewStock(String category) {
@@ -89,12 +91,14 @@ public class LogisticOfficer extends User {
     @Override
     public String toString() {
         return "LogisticOfficer{" +
-                "officerId='" + officerId + '\'' +
-                ", department='" + department + '\'' +
-                ", contactNumber='" + contactNumber + '\'' +
-                ", userId='" + getUserId() + '\'' +
-                ", name='" + getName() + '\'' +
-                ", role='" + getRole() + '\'' +
-                '}';
+                "officerId=\'" + officerId + '\'' +
+                ", department=\'" + department + '\'' +
+                ", contactNumber=\'" + contactNumber + '\'' +
+                ", userId=\'" + getUserId() + '\'' +
+                ", name=\'" + getName() + '\'' +
+                ", role=\'" + getRole() + '\'' +
+                '}' +
+                '\n';
     }
 }
+

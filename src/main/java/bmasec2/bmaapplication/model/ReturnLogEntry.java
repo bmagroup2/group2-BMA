@@ -1,4 +1,4 @@
-package bmasec2.bmaapplication.fatema;
+package bmasec2.bmaapplication.model;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
@@ -7,7 +7,7 @@ public class ReturnLogEntry implements Serializable {
     private String logId;
     private String itemId;
     private String itemName;
-    private String returnedByUserId; // Assuming a user returns it
+    private String returnedByUserId;
     private String returnedByUserName;
     private String reason;
     private LocalDateTime logDate;

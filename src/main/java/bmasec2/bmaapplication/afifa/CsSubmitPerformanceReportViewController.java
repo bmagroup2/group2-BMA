@@ -63,7 +63,7 @@ public class CsSubmitPerformanceReportViewController {
         String reportId = UUID.randomUUID().toString();
 
 
-        Map<String, String> contentMap = new HashMap<>();
+        Map<String, Object> contentMap = new HashMap<>();
         contentMap.put("cadetName", selectedCadet);
         contentMap.put("evaluationType", evaluationType);
         contentMap.put("reportDetails", reportContent);
@@ -72,12 +72,12 @@ public class CsSubmitPerformanceReportViewController {
                 reportId,
                 "Performance Report",
                 loggedInSupervisor != null ? loggedInSupervisor.getName() : "Unknown Supervisor",
-                contentMap.toString()
+                contentMap
         );
 
-        List<Report> reports = DataPersistenceManager.loadObjects("reports.bin");
+        List<Report> reports = DataPersistenceManager.loadObjects("reports.dat");
         reports.add(newReport);
-        DataPersistenceManager.saveObjects(reports, "reports.bin");
+        DataPersistenceManager.saveObjects(reports, "reports.dat");
 
         showAlert(AlertType.INFORMATION, "Submission Successful", "Performance report submitted for " + selectedCadet + ".");
         clearForm();

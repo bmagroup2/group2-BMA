@@ -24,9 +24,9 @@ public class InstructorAssignmentViewController {
     private ObservableList<Instructor> instructors;
     private ObservableList<String> batches;
 
-    private static final String INSTRUCTORS_FILE = "instructors.bin";
-    private static final String USERS_FILE = "users.bin";
-    private static final String ASSIGNMENTS_FILE = "assignments.bin";
+    private static final String INSTRUCTORS_FILE = "instructors.dat";
+    private static final String USERS_FILE = "users.dat";
+    private static final String ASSIGNMENTS_FILE = "assignments.dat";
 
     @FXML
     public void initialize() {

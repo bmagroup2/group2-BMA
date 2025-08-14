@@ -104,7 +104,7 @@ public class DrillSchedualerViewController {
 
         List<Training> scheduledDrills = allTrainings.stream()
                 .filter(training -> training.getTopic().toLowerCase().contains("drill"))
-                .toList();
+                .collect(Collectors.toList());
 
         if (scheduledDrills.isEmpty()) {
             drills.add("No drills scheduled.");

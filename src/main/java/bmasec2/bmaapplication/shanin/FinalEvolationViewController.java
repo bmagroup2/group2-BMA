@@ -9,6 +9,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -23,7 +24,7 @@ public class FinalEvolationViewController {
     @FXML private Label cadetNameLabel;
 
     private ObservableList<Evaluation> masterEvaluationList;
-    private static final String EVALUATIONS_FILE = "evaluations.bin";
+    private static final String EVALUATIONS_FILE = "evaluations.dat";
 
     @FXML
     public void initialize() {
@@ -60,14 +61,14 @@ public class FinalEvolationViewController {
     private void loadEvaluations() {
         List<Evaluation> loadedEvals = DataPersistenceManager.loadObjects(EVALUATIONS_FILE);
         masterEvaluationList = FXCollections.observableArrayList(loadedEvals);
-        filterEvaluations(); // Apply initial filter
+        filterEvaluations();
 
-        // Example: Add some dummy data if the file is empty
+
         if (masterEvaluationList.isEmpty()) {
             masterEvaluationList.add(new Evaluation("EVAL-001", "C-001", "John Doe", "Batch A", "I-001", "Drill: 85, Academics: 90", "Good overall performance."));
             masterEvaluationList.add(new Evaluation("EVAL-002", "C-002", "Jane Smith", "Batch B", "I-002", "Drill: 70, Academics: 75", "Needs improvement in drill."));
             masterEvaluationList.add(new Evaluation("EVAL-003", "C-003", "Peter Jones", "Batch A", "I-001", "Drill: 95, Academics: 88", "Excellent performance."));
-            DataPersistenceManager.saveObjects(masterEvaluationList.stream().collect(Collectors.toList()), EVALUATIONS_FILE);
+            DataPersistenceManager.saveObjects(new ArrayList<>(masterEvaluationList), EVALUATIONS_FILE);
             filterEvaluations();
         }
     }

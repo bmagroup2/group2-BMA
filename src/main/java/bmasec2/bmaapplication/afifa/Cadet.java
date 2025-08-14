@@ -8,7 +8,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
-public abstract class Cadet extends User implements Serializable {
+public class Cadet extends User implements Serializable {
 
     private String batch;
     private String rank;
@@ -72,20 +72,26 @@ public abstract class Cadet extends User implements Serializable {
     @Override
     public String toString() {
         return "Cadet{" +
-                "batch='" + batch + '\'' +
-                ", rank='" + rank + '\'' +
+                "batch=\'" + batch + '\'' +
+                ", rank=\'" + rank + '\'' +
                 ", joinDate=" + joinDate +
                 ", performanceScore=" + performanceScore +
-                ", medicalStatus='" + medicalStatus + '\'' +
-                ", userId='" + userId + '\'' +
-                ", name='" + name + '\'' +
-                ", email='" + email + '\'' +
-                ", role='" + role + '\'' +
-                ", password='" + password + '\'' +
+                ", medicalStatus=\'" + medicalStatus + '\'' +
+                ", userId=\'" + userId + '\'' +
+                ", name=\'" + name + '\'' +
+                ", email=\'" + email + '\'' +
+                ", role=\'" + role + '\'' +
+                ", password=\'" + password + '\'' +
                 ", lastLogin=" + lastLogin +
-                ", status='" + status + '\'' +
-                '}';
+                ", status=\'" + status + '\'' +
+                '}' +
+                '\n';
     }
 
 
+    public String getCadetId() {
+        return this.getUserId();
+    }
 }
+
+

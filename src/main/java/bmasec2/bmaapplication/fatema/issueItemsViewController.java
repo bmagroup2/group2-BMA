@@ -2,6 +2,7 @@ package bmasec2.bmaapplication.fatema;
 
 import bmasec2.bmaapplication.User;
 import bmasec2.bmaapplication.model.InventoryItem;
+import bmasec2.bmaapplication.model.IssuedItem;
 import bmasec2.bmaapplication.system.DataPersistenceManager;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -12,6 +13,7 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
@@ -27,9 +29,9 @@ public class issueItemsViewController {
     @FXML
     private TextArea purposeTextArea;
 
-    private static final String INVENTORY_FILE = "inventory.ser";
-    private static final String ISSUED_ITEMS_FILE = "issued_items.ser";
-    private static final String USERS_FILE = "users.ser"; // Assuming a users file exists
+    private static final String INVENTORY_FILE = "inventory.dat";
+    private static final String ISSUED_ITEMS_FILE = "issued_items.dat";
+    private static final String USERS_FILE = "users.dat";
 
     private ObservableList<InventoryItem> inventoryList;
     private ObservableList<User> userList;
@@ -108,23 +110,23 @@ public class issueItemsViewController {
             return;
         }
 
-        // Update inventory
-        selectedItem.setQuantity(selectedItem.getQuantity() - quantityToIssue);
-        DataPersistenceManager.saveObjects(inventoryList.stream().collect(Collectors.toList()), INVENTORY_FILE);
 
-        // Record issued item
+        selectedItem.setQuantity(selectedItem.getQuantity() - quantityToIssue);
+        DataPersistenceManager.saveObjects(new ArrayList<>(inventoryList), INVENTORY_FILE);
+
+
         String issueId = UUID.randomUUID().toString();
-        bmasec2.bmaapplication.fatema.IssuedItem issuedItem = new bmasec2.bmaapplication.fatema.IssuedItem(issueId, selectedItem.getItemId(), selectedItem.getItemName(),
+        IssuedItem issuedItem = new IssuedItem(issueId, selectedItem.getItemId(), selectedItem.getItemName(),
                 selectedUser.getUserId(), selectedUser.getName(), quantityToIssue, selectedItem.getUnit(), purpose);
 
-        List<bmasec2.bmaapplication.fatema.IssuedItem> issuedItems = DataPersistenceManager.loadObjects(ISSUED_ITEMS_FILE);
+        List<IssuedItem> issuedItems = DataPersistenceManager.loadObjects(ISSUED_ITEMS_FILE);
         issuedItems.add(issuedItem);
         DataPersistenceManager.saveObjects(issuedItems, ISSUED_ITEMS_FILE);
 
         showAlert(Alert.AlertType.INFORMATION, "Success", "Item issued successfully!");
 
-        // Refresh UI
-        loadData(); // Reload data to update quantities in combo box
+
+        loadData();
         populateComboBoxes();
         quantityToIssueTextField.clear();
         purposeTextArea.clear();

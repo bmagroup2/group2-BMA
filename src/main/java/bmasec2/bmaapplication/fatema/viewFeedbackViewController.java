@@ -1,5 +1,7 @@
 package bmasec2.bmaapplication.fatema;
 
+import bmasec2.bmaapplication.model.Feedback;
+import bmasec2.bmaapplication.model.TrainingSession;
 import bmasec2.bmaapplication.system.DataPersistenceManager;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -40,10 +42,10 @@ public class viewFeedbackViewController {
                 (observable, oldValue, newValue) -> {
                     if (newValue != null) {
                         cadetIDLabel.setText(String.format("From: %s (%s)", newValue.getCadetName(), newValue.getCadetId()));
-                        feedBackDetailsTextArea.setText(String.format("Rating: %d/5\nComments: %s\nSubmitted: %s",
-                                newValue.getRating(),
+                        feedBackDetailsTextArea.setText(String.join("Rating: %d/5\nComments: %s\nSubmitted: %s",
+                                newValue.toString(),
                                 newValue.getComments(),
-                                newValue.getSubmissionDate().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"))));
+                                newValue.getSubmissionDate().toString()));
                     } else {
                         cadetIDLabel.setText("From: [Cadet ID]");
                         feedBackDetailsTextArea.clear();

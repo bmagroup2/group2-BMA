@@ -1,11 +1,10 @@
 package bmasec2.bmaapplication.model;
 
-import java.io.Serial;
 import java.io.Serializable;
 import java.util.Date;
 
 public class Announcement implements Serializable {
-    @Serial
+
     private static final long serialVersionUID = 1L;
     private String announcementId;
     private String title;
@@ -42,3 +41,4 @@ public class Announcement implements Serializable {
     public void setCreationDate(Date creationDate) { this.creationDate = creationDate; }
     public void setStatus(String status) { this.status = status; }
 }
+

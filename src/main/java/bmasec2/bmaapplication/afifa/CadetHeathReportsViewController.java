@@ -23,7 +23,7 @@ public class CadetHeathReportsViewController {
     @FXML
     public void initialize() {
 
-        List<Cadet> cadets = DataPersistenceManager.loadObjects("cadets.bin");
+        List<Cadet> cadets = DataPersistenceManager.loadObjects("cadets.dat");
         ObservableList<String> cadetNames = FXCollections.observableArrayList();
         for (Cadet cadet : cadets) {
             cadetNames.add(cadet.getName());
@@ -40,10 +40,10 @@ public class CadetHeathReportsViewController {
     public void heathsummaryonaction(ActionEvent actionEvent) {
         String selectedCadetName = cadethealthcombobox.getValue();
         if (selectedCadetName != null && !selectedCadetName.isEmpty()) {
-            List<MedicalRecord> allMedicalRecords = DataPersistenceManager.loadObjects("medical_records.bin");
+            List<MedicalRecord> allMedicalRecords = DataPersistenceManager.loadObjects("medical_records.dat");
             List<MedicalRecord> cadetRecords = allMedicalRecords.stream()
                     .filter(record -> record.getCadetId().equals(selectedCadetName))
-                    .toList();
+                    .collect(Collectors.toList());
 
             if (cadetRecords.isEmpty()) {
                 healthsummarytextarea.setText("No medical records found for " + selectedCadetName + ".");

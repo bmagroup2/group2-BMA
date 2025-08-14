@@ -1,6 +1,7 @@
 package bmasec2.bmaapplication.fatema;
 
 import bmasec2.bmaapplication.model.InventoryItem;
+import bmasec2.bmaapplication.model.Notification;
 import bmasec2.bmaapplication.system.DataPersistenceManager;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -21,8 +22,8 @@ public class notifyCommandantViewController {
     @FXML
     private TextArea messsageTextArea;
 
-    private static final String INVENTORY_FILE = "inventory.ser";
-    private static final String NOTIFICATIONS_FILE = "notifications.ser";
+    private static final String INVENTORY_FILE = "inventory.dat";
+    private static final String NOTIFICATIONS_FILE = "notifications.dat";
 
     private ObservableList<InventoryItem> lowStockItems;
 
@@ -34,9 +35,9 @@ public class notifyCommandantViewController {
 
     private void loadLowStockItems() {
         List<InventoryItem> allItems = DataPersistenceManager.loadObjects(INVENTORY_FILE);
-//        lowStockItems = allItems.stream()
-//                .filter(InventoryItem::isBelowMinStock)
-//                .collect(Collectors.toCollection(FXCollections::observableArrayList));
+        lowStockItems = allItems.stream()
+                .filter(InventoryItem::isBelowMinStock)
+                .collect(Collectors.toCollection(FXCollections::observableArrayList));
     }
 
     private void populateComboBox() {
@@ -67,24 +68,23 @@ public class notifyCommandantViewController {
             return;
         }
 
-        // Assuming the logged-in user is a LogisticOfficer for sender details
-        // In a real application, this would come from a session or global state
+
         String senderId = "logisticOfficer123"; 
         String senderName = "Logistic Officer"; 
         String recipientRole = "Commandant";
         String subject = "URGENT: Critical Stock Shortage - " + selectedItem.getItemName();
 
         String notificationId = UUID.randomUUID().toString();
-        bmasec2.bmaapplication.fatema.Notification newNotification = new bmasec2.bmaapplication.fatema.Notification(
+        Notification newNotification = new Notification(
                 notificationId, senderId, senderName, recipientRole, subject, message, selectedItem.getItemId());
 
-        List<bmasec2.bmaapplication.fatema.Notification> notifications = DataPersistenceManager.loadObjects(NOTIFICATIONS_FILE);
+        List<Notification> notifications = DataPersistenceManager.loadObjects(NOTIFICATIONS_FILE);
         notifications.add(newNotification);
         DataPersistenceManager.saveObjects(notifications, NOTIFICATIONS_FILE);
 
         showAlert(Alert.AlertType.INFORMATION, "Success", "Urgent alert sent to Commandant successfully!");
 
-        // Clear form fields
+
         chooseAnItemComboBox.getSelectionModel().clearSelection();
         messsageTextArea.clear();
     }

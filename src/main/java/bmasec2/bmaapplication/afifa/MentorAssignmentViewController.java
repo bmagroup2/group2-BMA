@@ -33,7 +33,7 @@ public class MentorAssignmentViewController {
     }
 
     private void loadCadetsWithoutMentors() {
-        List<Cadet> allCadets = DataPersistenceManager.loadObjects("cadets.bin");
+        List<Cadet> allCadets = DataPersistenceManager.loadObjects("cadets.dat");
 
         ObservableList<Cadet> newCadets = FXCollections.observableArrayList(allCadets.stream()
                 .filter(cadet -> cadet.getMedicalStatus().equals("Fit"))
@@ -42,7 +42,7 @@ public class MentorAssignmentViewController {
     }
 
     private void loadPotentialMentors() {
-        List<Cadet> allCadets = DataPersistenceManager.loadObjects("cadets.bin");
+        List<Cadet> allCadets = DataPersistenceManager.loadObjects("cadets.dat");
 
         ObservableList<Cadet> potentialMentors = FXCollections.observableArrayList(allCadets);
         mentorslistview.setItems(potentialMentors);
@@ -67,14 +67,14 @@ public class MentorAssignmentViewController {
         selectedNewCadet.setMedicalStatus("Mentored by " + selectedMentor.getName()); // Placeholder for actual mentor assignment
 
 
-        List<Cadet> allCadets = DataPersistenceManager.loadObjects("cadets.bin");
+        List<Cadet> allCadets = DataPersistenceManager.loadObjects("cadets.dat");
         for (int i = 0; i < allCadets.size(); i++) {
             if (allCadets.get(i).getUserId().equals(selectedNewCadet.getUserId())) {
                 allCadets.set(i, selectedNewCadet);
                 break;
             }
         }
-        DataPersistenceManager.saveObjects(allCadets, "cadets.bin");
+        DataPersistenceManager.saveObjects(allCadets, "cadets.dat");
 
         showAlert(AlertType.INFORMATION, "Success", selectedMentor.getName() + " has been assigned as mentor to " + selectedNewCadet.getName() + ".");
         loadCadetsWithoutMentors();

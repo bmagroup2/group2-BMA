@@ -25,7 +25,7 @@ public class InstructorPerformanceViewController {
     @FXML private NumberAxis yAxis;
 
     private ObservableList<Instructor> instructors;
-    private static final String INSTRUCTORS_FILE = "instructors.bin";
+    private static final String INSTRUCTORS_FILE = "instructors.dat";
 
     @FXML
     public void initialize() {

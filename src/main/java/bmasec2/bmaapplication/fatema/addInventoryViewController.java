@@ -21,11 +21,11 @@ public class addInventoryViewController {
     @FXML
     private TextField unitOfMeasurementTextField;
 
-    private static final String INVENTORY_FILE = "inventory.ser";
+    private static final String INVENTORY_FILE = "inventory.dat";
 
     @FXML
     public void initialize() {
-        // Populate category combo box
+
         categoryComboBox.getItems().addAll("Uniform", "Equipment", "Ration", "Medical Supplies", "Ammunition", "Vehicle Parts", "Other");
     }
 
@@ -55,15 +55,15 @@ public class addInventoryViewController {
 
         List<InventoryItem> inventoryItems = DataPersistenceManager.loadObjects(INVENTORY_FILE);
 
-        // Check if item already exists (simple check by name and category)
+
         boolean itemExists = false;
-//        for (InventoryItem item : inventoryItems) {
-//            if (item.getItemName().equalsIgnoreCase(itemName) && item.getCategory().equalsIgnoreCase(category)) {
-//                itemExists = true;
-//                showAlert(Alert.AlertType.WARNING, "Duplicate Item", "An item with this name and category already exists. Consider updating existing stock.");
-//                return;
-//            }
-//        }
+        for (InventoryItem item : inventoryItems) {
+            if (item.getItemName().equalsIgnoreCase(itemName) && item.getCategory().equalsIgnoreCase(category)) {
+                itemExists = true;
+                showAlert(Alert.AlertType.WARNING, "Duplicate Item", "An item with this name and category already exists. Consider updating existing stock.");
+                return;
+            }
+        }
 
         String itemId = UUID.randomUUID().toString();
         InventoryItem newItem = new InventoryItem(itemId, itemName, initialQuantity, unitOfMeasurement, category, 0); // Assuming minStockLevel is 0 initially
@@ -72,7 +72,7 @@ public class addInventoryViewController {
 
         showAlert(Alert.AlertType.INFORMATION, "Success", "Inventory item added successfully!");
 
-        // Clear form fields
+
         itemNameTextField.clear();
         categoryComboBox.getSelectionModel().clearSelection();
         initialQuantityTextField.clear();

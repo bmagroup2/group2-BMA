@@ -20,7 +20,7 @@
                 <VBox spacing="10.0" HBox.hgrow="ALWAYS">
                     <children>
                         <Label text="Log History"><font><Font name="System Bold" size="16.0" /></font></Label>
-                        <TableView onSort="#logHistoryTableView" prefHeight="380.0">
+                        <TableView fx:id="logHistoryTableView" prefHeight="380.0">
                             <columns>
                                 <TableColumn fx:id="dateTableColumn" prefWidth="150.0" text="Date" />
                                 <TableColumn fx:id="itemNameTableColumn" prefWidth="250.0" text="Item Name" />

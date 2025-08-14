@@ -24,7 +24,7 @@ public class SystemAdminProfileViewController {
     @FXML private TextField emailAddressTextField;
 
     private SystemAdministrator loggedInAdmin;
-    private static final String USERS_FILE = "users.bin";
+    private static final String USERS_FILE = "users.dat";
 
     @FXML
     public void initialize() {

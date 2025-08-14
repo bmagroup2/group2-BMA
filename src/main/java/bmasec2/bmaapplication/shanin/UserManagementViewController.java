@@ -53,8 +53,8 @@ public class UserManagementViewController {
     private String currentUserId;
 
     private ObservableList<User> masterUserList;
-    private static final String USERS_FILE = "users.bin";
-    private static final String AUDIT_LOGS_FILE = "auditlogs.bin";
+    private static final String USERS_FILE = "users.dat";
+    private static final String AUDIT_LOGS_FILE = "auditlogs.dat";
 
     @FXML
     private TextField passwordTextField;
@@ -274,3 +274,4 @@ public class UserManagementViewController {
         filterUsers();
     }
 }
+

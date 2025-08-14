@@ -1,5 +1,7 @@
 package bmasec2.bmaapplication.fatema;
 
+import bmasec2.bmaapplication.model.Attendance;
+import bmasec2.bmaapplication.model.TrainingSession;
 import bmasec2.bmaapplication.system.DataPersistenceManager;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -9,6 +11,7 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.beans.property.SimpleStringProperty;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -46,7 +49,7 @@ public class TrainingInstructorDashboardViewController {
 
     @FXML
     public void initialize() {
-        // Initialize table columns for upcomingSessionsTableView
+
         sessionIdColumn.setCellValueFactory(new PropertyValueFactory<>("sessionId"));
         topicColumn.setCellValueFactory(new PropertyValueFactory<>("topic"));
         locationColumn.setCellValueFactory(new PropertyValueFactory<>("location"));
@@ -58,7 +61,7 @@ public class TrainingInstructorDashboardViewController {
             DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
             DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HH:mm");
             String dateTime = session.getDate().format(dateFormatter) + " " + session.getTime().format(timeFormatter);
-            return new javafx.beans.binding.SimpleStringProperty(dateTime);
+            return new SimpleStringProperty(dateTime);
         });
 
         loadData();
@@ -74,17 +77,16 @@ public class TrainingInstructorDashboardViewController {
         LocalDate today = LocalDate.now();
         LocalTime now = LocalTime.now();
 
-        // Filter for today's sessions
+        // Filter for today\\'s sessions
         List<TrainingSession> todaysSessions = allTrainingSessions.stream()
                 .filter(session -> session.getDate().equals(today))
                 .sorted((s1, s2) -> s1.getTime().compareTo(s2.getTime()))
                 .collect(Collectors.toList());
 
-        // Update Today's Scheduled Sessions ListView
+        // Update Today\\'s Scheduled Sessions ListView
         todaysScheduleSessionListView.setItems(FXCollections.observableArrayList(todaysSessions));
         todaysScheduleSessionListView.setCellFactory(param -> new javafx.scene.control.ListCell<TrainingSession>() {
-            @Override
-            protected void updateItem(TrainingSession item, boolean empty) {
+            public void updateItem(TrainingSession item, boolean empty) {
                 super.updateItem(item, empty);
                 if (empty || item == null) {
                     setText(null);
@@ -112,8 +114,6 @@ public class TrainingInstructorDashboardViewController {
             nextSessionLabel.setText("No upcoming sessions today");
         }
 
-        // Update Attendance Status Label
-        // This is a simplified check. In a real app, you'd check if attendance has been taken for the most recent past session.
         TrainingSession mostRecentPastSession = todaysSessions.stream()
                 .filter(session -> session.getTime().isBefore(now))
                 .reduce((first, second) -> second) // Get the last element
@@ -134,7 +134,7 @@ public class TrainingInstructorDashboardViewController {
             attendanceStatusLabel.setStyle("-fx-text-fill: #546e7a;");
         }
 
-        // Update Upcoming Sessions TableView (excluding today's sessions)
+
         List<TrainingSession> futureSessions = allTrainingSessions.stream()
                 .filter(session -> session.getDate().isAfter(today))
                 .sorted((s1, s2) -> {

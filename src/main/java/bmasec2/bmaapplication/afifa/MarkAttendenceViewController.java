@@ -40,7 +40,7 @@ public class MarkAttendenceViewController {
 
     private void loadTrainingSessionDetails() {
         if (currentSessionId != null) {
-            List<Training> allTrainings = DataPersistenceManager.loadObjects("trainings.bin");
+            List<Training> allTrainings = DataPersistenceManager.loadObjects("trainings.dat");
             currentTrainingSession = allTrainings.stream()
                     .filter(t -> t.getSessionId().equals(currentSessionId))
                     .findFirst()
@@ -86,7 +86,7 @@ public class MarkAttendenceViewController {
             return;
         }
 
-        List<Attendance> attendances = DataPersistenceManager.loadObjects("attendance.bin");
+        List<Attendance> attendances = DataPersistenceManager.loadObjects("attendance.dat");
 
 
         boolean alreadyMarked = attendances.stream()
@@ -101,13 +101,15 @@ public class MarkAttendenceViewController {
         Attendance newAttendance = new Attendance(
                 attendanceId,
                 loggedInCadet.getUserId(),
-                currentSessionId,
-                new Date(),
+                loggedInCadet.getName(),
+                currentTrainingSession.getSessionId(),
+                currentTrainingSession.getTopic(),
+                today,
                 status
         );
 
         attendances.add(newAttendance);
-        DataPersistenceManager.saveObjects(attendances, "attendance.bin");
+        DataPersistenceManager.saveObjects(attendances, "attendance.dat");
 
         markstatuslabel.setText("Attendance marked as " + status + ".");
         showAlert(AlertType.INFORMATION, "Success", "Attendance recorded successfully as " + status + ".");

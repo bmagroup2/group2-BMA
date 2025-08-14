@@ -34,12 +34,14 @@ public class MessOfficer extends User {
     @Override
     public String toString() {
         return "MessOfficer{" +
-                "officerId='" + officerId + '\'' +
-                ", shift='" + shift + '\'' +
-                ", userId='" + getUserId() + '\'' +
-                ", name='" + getName() + '\'' +
-                ", role='" + getRole() + '\'' +
-                '}';
+                "officerId=\'" + officerId + '\'' +
+                ", shift=\'" + shift + '\'' +
+                ", userId=\'" + getUserId() + '\'' +
+                ", name=\'" + getName() + '\'' +
+                ", role=\'" + getRole() + '\'' +
+                '}' +
+                '\n';
     }
 }
+
 

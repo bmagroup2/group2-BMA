@@ -114,4 +114,8 @@ public class Feedback implements Serializable {
                 ", feedbackType='" + feedbackType + '\'' +
                 '}';
     }
+
+    public Object getCadetName() {
+        return null;
+    }
 }

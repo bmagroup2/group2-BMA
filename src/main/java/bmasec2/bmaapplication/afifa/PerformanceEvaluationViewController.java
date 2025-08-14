@@ -50,9 +50,9 @@ public class PerformanceEvaluationViewController {
 
         allEvaluations.stream()
                 .filter(eval -> eval.getCadetId().equals(loggedInCadet.getUserId()))
-                .map(Evaluation::getEvaluationType)
-                .distinct();
-//                .forEach(evaluationTypes::add);
+                .map(eval -> (String) eval.getEvaluationType())
+                .distinct()
+                .forEach(evaluationTypes::add);
 
         myperformaceevaluationcombobox.setItems(evaluationTypes);
         if (!evaluationTypes.isEmpty()) {
@@ -73,7 +73,7 @@ public class PerformanceEvaluationViewController {
             series.setName(evaluationType + " Scores");
 
             for (Evaluation eval : cadetEvaluations) {
-//                series.getData().add(new XYChart.Data<>(eval.getEvaluationType(), eval.getScore()));
+                series.getData().add(new XYChart.Data<>(eval.getEvalId(), eval.getScore()));
             }
             myperformancescorebarchart.getData().add(series);
         } else {

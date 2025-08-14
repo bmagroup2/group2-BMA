@@ -37,7 +37,7 @@ public class CadetManagementViewController {
     @FXML private TableColumn<Cadet, String> rankColumn;
 
     private ObservableList<Cadet> masterCadetList;
-    private static final String USERS_FILE = "users.bin";
+    private static final String USERS_FILE = "users.dat";
     @FXML
     private Pane cadetPane;
 
@@ -212,3 +212,4 @@ public class CadetManagementViewController {
         alert.showAndWait();
     }
 }
+

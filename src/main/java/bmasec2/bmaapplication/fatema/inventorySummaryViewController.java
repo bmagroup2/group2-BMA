@@ -3,6 +3,7 @@ package bmasec2.bmaapplication.fatema;
 import bmasec2.bmaapplication.model.InventoryItem;
 import bmasec2.bmaapplication.system.DataPersistenceManager;
 
+import javafx.beans.binding.Bindings;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -38,16 +39,12 @@ public class inventorySummaryViewController {
 
     @FXML
     public void initialize() {
-        // Initialize table columns
+
         itemNameColumn.setCellValueFactory(new PropertyValueFactory<>("itemName"));
         quantityColumn.setCellValueFactory(new PropertyValueFactory<>("quantity"));
-        lastUpdateColumn.setCellValueFactory(cellData -> {
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
-//            return javafx.beans.binding.Bindings.createStringBinding(() -> cellData.getValue().getLastUpdated().format(formatter));
-            return null;
-        });
+        lastUpdateColumn.setCellValueFactory(cellData -> Bindings.createStringBinding(() -> cellData.getValue().getLastUpdated().toString()));
 
-        // Load data and populate UI
+
         loadInventoryData();
         populateCategoriesComboBox();
         populateTableView(masterInventoryList);
@@ -61,13 +58,13 @@ public class inventorySummaryViewController {
 
     private void populateCategoriesComboBox() {
         allCategoriesComboBox.getItems().clear();
-        allCategoriesComboBox.getItems().add("All Categories"); // Option to view all
+        allCategoriesComboBox.getItems().add("All Categories");
         masterInventoryList.stream()
                 .map(InventoryItem::getCategory)
                 .distinct()
                 .sorted()
                 .forEach(category -> allCategoriesComboBox.getItems().add(category));
-        allCategoriesComboBox.getSelectionModel().selectFirst(); // Select 'All Categories' by default
+        allCategoriesComboBox.getSelectionModel().selectFirst();
     }
 
     private void populateTableView(ObservableList<InventoryItem> items) {

@@ -60,9 +60,9 @@ public class GroupAnnouncementViewController {
                 loggedInSupervisor != null ? loggedInSupervisor.getName() : "Unknown Supervisor"
         );
 
-        List<Announcement> announcements = DataPersistenceManager.loadObjects("announcements.bin");
+        List<Announcement> announcements = DataPersistenceManager.loadObjects("announcements.dat");
         announcements.add(newAnnouncement);
-        DataPersistenceManager.saveObjects(announcements, "announcements.bin");
+        DataPersistenceManager.saveObjects(announcements, "announcements.dat");
 
         showAlert(AlertType.INFORMATION, "Success", "Announcement broadcasted successfully!");
         clearForm();

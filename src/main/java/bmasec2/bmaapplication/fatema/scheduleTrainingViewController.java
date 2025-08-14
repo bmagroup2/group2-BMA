@@ -1,5 +1,6 @@
 package bmasec2.bmaapplication.fatema;
 
+import bmasec2.bmaapplication.model.TrainingSession;
 import bmasec2.bmaapplication.system.DataPersistenceManager;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -14,6 +15,7 @@ import javafx.scene.control.TextField;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeParseException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
@@ -21,7 +23,7 @@ import java.util.stream.Collectors;
 public class scheduleTrainingViewController {
 
     @FXML
-    private ListView<bmasec2.bmaapplication.fatema.TrainingSession> upcomingschedulesessionListView;
+    private ListView<TrainingSession> upcomingschedulesessionListView;
     @FXML
     private ComboBox<String> cadetgroupComboBox;
     @FXML
@@ -31,10 +33,10 @@ public class scheduleTrainingViewController {
     @FXML
     private TextField timeTextField;
 
-    private static final String TRAINING_SESSIONS_FILE = "training_sessions.ser";
-    private static final String CADETS_FILE = "cadets.ser"; // Assuming a file for cadets to get batches
+    private static final String TRAINING_SESSIONS_FILE = "training_sessions.dat";
+    private static final String CADETS_FILE = "cadets.dat";
 
-    private ObservableList<bmasec2.bmaapplication.fatema.TrainingSession> trainingSessions;
+    private ObservableList<TrainingSession> trainingSessions;
 
     @FXML
     public void initialize() {
@@ -44,20 +46,19 @@ public class scheduleTrainingViewController {
     }
 
     private void loadTrainingSessions() {
-        List<bmasec2.bmaapplication.fatema.TrainingSession> loadedSessions = DataPersistenceManager.loadObjects(TRAINING_SESSIONS_FILE);
+        List<TrainingSession> loadedSessions = DataPersistenceManager.loadObjects(TRAINING_SESSIONS_FILE);
         trainingSessions = FXCollections.observableArrayList(loadedSessions);
     }
 
     private void populateCadetGroups() {
-        // In a real application, load actual cadet batches from cadets.ser or a similar source
-        // For now, using dummy data
+
         ObservableList<String> batches = FXCollections.observableArrayList("Batch A", "Batch B", "Batch C", "All Cadets");
         cadetgroupComboBox.setItems(batches);
     }
 
     private void populateListView() {
-        // Filter for upcoming sessions and sort them
-        ObservableList<bmasec2.bmaapplication.fatema.TrainingSession> upcoming = trainingSessions.stream()
+
+        ObservableList<TrainingSession> upcoming = trainingSessions.stream()
                 .filter(session -> session.getDate().isAfter(LocalDate.now().minusDays(1)))
                 .sorted((s1, s2) -> {
                     int dateCompare = s1.getDate().compareTo(s2.getDate());
@@ -69,21 +70,20 @@ public class scheduleTrainingViewController {
                 .collect(Collectors.toCollection(FXCollections::observableArrayList));
         upcomingschedulesessionListView.setItems(upcoming);
 
-//        upcomingschedulesessionListView.setCellFactory(param -> new javafx.scene.control.ListCell<TrainingSession>() {
-//            @Override
-//            protected void updateItem(TrainingSession item, boolean empty) {
-//                super.updateItem(item, empty);
-//                if (empty || item == null) {
-//                    setText(null);
-//                } else {
-//                    setText(String.format("%s - %s at %s (%s)",
-//                            item.getDate().toString(),
-//                            item.getTopic(),
-//                            item.getTime().toString(),
-//                            item.getCadetBatch()));
-//                }
-//            }
-//        });
+        upcomingschedulesessionListView.setCellFactory(param -> new javafx.scene.control.ListCell<TrainingSession>() {
+            public void updateItem(TrainingSession item, boolean empty) {
+                super.updateItem(item, empty);
+                if (empty || item == null) {
+                    setText(null);
+                } else {
+                    setText(String.format("%s - %s at %s (%s)",
+                            item.getDate().toString(),
+                            item.getTopic(),
+                            item.getTime().toString(),
+                            item.getCadetBatch()));
+                }
+            }
+        });
     }
 
     @FXML
@@ -106,21 +106,21 @@ public class scheduleTrainingViewController {
             return;
         }
 
-        // Assuming a dummy instructor ID and location for now
+
         String instructorId = "instructor123";
         String location = "BMA Training Ground";
-        int maxParticipants = 50; // Default value
+        int maxParticipants = 50;
 
         String sessionId = UUID.randomUUID().toString();
-        bmasec2.bmaapplication.fatema.TrainingSession newSession = new bmasec2.bmaapplication.fatema.TrainingSession(
+        TrainingSession newSession = new TrainingSession(
                 sessionId, topic, date, time, location, instructorId, cadetGroup, maxParticipants);
 
         trainingSessions.add(newSession);
-        DataPersistenceManager.saveObjects(trainingSessions.stream().collect(Collectors.toList()), TRAINING_SESSIONS_FILE);
+        DataPersistenceManager.saveObjects(new ArrayList<>(trainingSessions), TRAINING_SESSIONS_FILE);
 
         showAlert(Alert.AlertType.INFORMATION, "Success", "Training session scheduled successfully!");
 
-        // Clear form and refresh list
+
         cadetgroupComboBox.getSelectionModel().clearSelection();
         topicTextField.clear();
         dateDatePicker.setValue(null);

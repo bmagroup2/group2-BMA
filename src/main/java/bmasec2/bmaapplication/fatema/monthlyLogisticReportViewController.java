@@ -1,6 +1,7 @@
 package bmasec2.bmaapplication.fatema;
 
 import bmasec2.bmaapplication.model.InventoryItem;
+import bmasec2.bmaapplication.model.IssuedItem;
 import bmasec2.bmaapplication.system.DataPersistenceManager;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -29,14 +30,14 @@ public class monthlyLogisticReportViewController {
     @FXML
     private PieChart itemUsageBycategoryPieChart;
 
-    private static final String INVENTORY_FILE = "inventory.ser";
-    private static final String ISSUED_ITEMS_FILE = "issued_items.ser";
+    private static final String INVENTORY_FILE = "inventory.dat";
+    private static final String ISSUED_ITEMS_FILE = "issued_items.dat";
 
     @FXML
     public void initialize() {
         reportTypeComboBox.getItems().addAll("Usage", "Stock", "Issuance");
-        reportTypeComboBox.getSelectionModel().selectFirst(); // Select 'Usage' by default
-        reportSummaryLabel.setText("Report Summary"); // Initial text
+        reportTypeComboBox.getSelectionModel().selectFirst();
+        reportSummaryLabel.setText("Report Summary");
     }
 
     @FXML
@@ -70,10 +71,10 @@ public class monthlyLogisticReportViewController {
     }
 
     private void generateUsageReport(int month, int year) {
-        List<bmasec2.bmaapplication.fatema.IssuedItem> issuedItems = DataPersistenceManager.loadObjects(ISSUED_ITEMS_FILE);
+        List<IssuedItem> issuedItems = DataPersistenceManager.loadObjects(ISSUED_ITEMS_FILE);
         Map<String, Integer> usageByCategory = issuedItems.stream()
                 .filter(item -> item.getIssueDate().getMonthValue() == month && item.getIssueDate().getYear() == year)
-                .collect(Collectors.groupingBy(bmasec2.bmaapplication.fatema.IssuedItem::getItemName, Collectors.summingInt(bmasec2.bmaapplication.fatema.IssuedItem::getQuantity)));
+                .collect(Collectors.groupingBy(IssuedItem::getItemName, Collectors.summingInt(IssuedItem::getQuantity)));
 
         ObservableList<PieChart.Data> pieChartData = FXCollections.observableArrayList();
         usageByCategory.forEach((itemName, totalQuantity) -> {
@@ -97,10 +98,10 @@ public class monthlyLogisticReportViewController {
     }
 
     private void generateIssuanceReport(int month, int year) {
-        List<bmasec2.bmaapplication.fatema.IssuedItem> issuedItems = DataPersistenceManager.loadObjects(ISSUED_ITEMS_FILE);
+        List<IssuedItem> issuedItems = DataPersistenceManager.loadObjects(ISSUED_ITEMS_FILE);
         Map<String, Long> issuanceByRecipient = issuedItems.stream()
                 .filter(item -> item.getIssueDate().getMonthValue() == month && item.getIssueDate().getYear() == year)
-                .collect(Collectors.groupingBy(bmasec2.bmaapplication.fatema.IssuedItem::getIssuedToUserName, Collectors.counting()));
+                .collect(Collectors.groupingBy(IssuedItem::getIssuedToUserName, Collectors.counting()));
 
         ObservableList<PieChart.Data> pieChartData = FXCollections.observableArrayList();
         issuanceByRecipient.forEach((recipient, count) -> {

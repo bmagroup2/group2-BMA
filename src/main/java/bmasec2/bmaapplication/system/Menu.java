@@ -7,9 +7,10 @@ import javafx.scene.Parent;
 import javafx.scene.control.Button;
 
 import java.io.IOException;
+import java.io.Serializable;
 import java.net.URL;
 
-public class Menu {
+public class Menu implements Serializable {
 
 
     public static void switchMenu(ActionEvent event, NavMenuViewController controller) {
@@ -20,7 +21,7 @@ public class Menu {
         String pageTitle = clickedButton.getText();
 
         if (fxmlPath == null || fxmlPath.isEmpty()) {
-            System.err.println("Error: FXML path is not set in the button's userData.");
+            System.err.println("Error: FXML path is not set in the button\'s userData.");
             return;
         }
 
@@ -47,3 +48,5 @@ public class Menu {
         }
     }
 }
+
+

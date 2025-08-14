@@ -20,7 +20,7 @@ public class AnnouncementApprovalViewController {
     @FXML private TextArea announcementContentTextArea;
 
     private ObservableList<Announcement> pendingAnnouncements;
-    private static final String ANNOUNCEMENTS_FILE = "announcements.bin";
+    private static final String ANNOUNCEMENTS_FILE = "announcements.dat";
 
     @FXML
     public void initialize() {
@@ -95,3 +95,4 @@ public class AnnouncementApprovalViewController {
         alert.showAndWait();
     }
 }
+

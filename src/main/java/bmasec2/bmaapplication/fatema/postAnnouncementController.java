@@ -23,11 +23,11 @@ public class postAnnouncementController {
     @FXML
     private TextArea messageTextArea;
 
-    private static final String ANNOUNCEMENTS_FILE = "announcements.ser";
+    private static final String ANNOUNCEMENTS_FILE = "announcements.dat";
 
     @FXML
     public void initialize() {
-        // Populate target audience combo box
+
         targetAudienceComboBox.getItems().addAll("All Cadets", "Batch A", "Batch B", "Batch C", "My Assigned Cadets");
     }
 
@@ -42,21 +42,20 @@ public class postAnnouncementController {
             return;
         }
 
-        // Assuming the logged-in user is a TrainingInstructor for createdBy details
-        // In a real application, this would come from a session or global state
+
         String createdByUserId = "trainingInstructor123"; 
 
         String announcementId = UUID.randomUUID().toString();
-//        Announcement newAnnouncement = new Announcement(
-//                announcementId, title, message, createdByUserId, targetAudience);
+        Announcement newAnnouncement = new Announcement(
+                announcementId, title, message, createdByUserId);
 
         List<Announcement> announcements = DataPersistenceManager.loadObjects(ANNOUNCEMENTS_FILE);
-//        announcements.add(newAnnouncement);
+        announcements.add(newAnnouncement);
         DataPersistenceManager.saveObjects(announcements, ANNOUNCEMENTS_FILE);
 
         showAlert(Alert.AlertType.INFORMATION, "Success", "Announcement posted successfully! It will be reviewed by the Commandant.");
 
-        // Clear form fields
+
         targetAudienceComboBox.getSelectionModel().clearSelection();
         announcementTitleTextField.clear();
         messageTextArea.clear();

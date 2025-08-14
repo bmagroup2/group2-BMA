@@ -39,6 +39,9 @@ public class MedicalOfficer extends User {
                 ", userId=\'" + getUserId() + '\'' +
                 ", name=\'" + getName() + '\'' +
                 ", role=\'" + getRole() + '\'' +
-                '}';
+                '}' +
+                '\n';
     }
 }
+
+

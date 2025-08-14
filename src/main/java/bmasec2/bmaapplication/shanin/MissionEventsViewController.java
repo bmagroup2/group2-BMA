@@ -26,7 +26,7 @@ public class MissionEventsViewController {
     @FXML private TextField descriptionTextField;
 
     private ObservableList<MissionEvent> masterEventList;
-    private static final String EVENTS_FILE = "mission_events.bin";
+    private static final String EVENTS_FILE = "mission_events.dat";
 
     @FXML
     public void initialize() {

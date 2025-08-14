@@ -30,8 +30,8 @@ public class SystemAdminDashBoardViewController {
     @FXML private TableView<AuditLog> recentActivityTable;
     @FXML private TableColumn<AuditLog, Date> timestampColumn;
 
-    private static final String USERS_FILE = "users.bin";
-    private static final String AUDIT_LOGS_FILE = "auditlogs.bin";
+    private static final String USERS_FILE = "users.dat";
+    private static final String AUDIT_LOGS_FILE = "auditlogs.dat";
 
     @FXML
     public void initialize() {

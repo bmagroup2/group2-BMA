@@ -1,6 +1,7 @@
 package bmasec2.bmaapplication.fatema;
 
 import bmasec2.bmaapplication.model.InventoryItem;
+import bmasec2.bmaapplication.model.IssuedItem;
 import bmasec2.bmaapplication.system.DataPersistenceManager;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -31,28 +32,28 @@ public class logisticOfficerDashboardViewController {
     }
 
     private void updateDashboard() {
-        // Update Low Stock Items
-        List<InventoryItem> inventoryItems = DataPersistenceManager.loadObjects(INVENTORY_FILE);
-//        long lowStockCount = inventoryItems.stream()
-//                .filter(InventoryItem::isBelowMinStock)
-//                .count();
-//        itemsLowStockLabel.setText(lowStockCount + " Items");
 
-        // Update Pending Restock Requests
+        List<InventoryItem> inventoryItems = DataPersistenceManager.loadObjects(INVENTORY_FILE);
+        long lowStockCount = inventoryItems.stream()
+                .filter(InventoryItem::isBelowMinStock)
+                .count();
+        itemsLowStockLabel.setText(lowStockCount + " Items");
+
+
         List<bmasec2.bmaapplication.fatema.RestockRequest> restockRequests = DataPersistenceManager.loadObjects(RESTOCK_REQUESTS_FILE);
         long pendingRequestsCount = restockRequests.stream()
                 .filter(request -> request.getStatus().equals("Pending"))
                 .count();
         pendingRequestLabel.setText(pendingRequestsCount + " Requests");
 
-        // Update Recent Inventory Activity (assuming Issued Items are recent activity)
-        List<bmasec2.bmaapplication.fatema.IssuedItem> issuedItems = DataPersistenceManager.loadObjects(ISSUED_ITEMS_FILE);
+
+        List<IssuedItem> issuedItems = DataPersistenceManager.loadObjects(ISSUED_ITEMS_FILE);
         ObservableList<String> activityList = FXCollections.observableArrayList();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
 
         issuedItems.stream()
-                .sorted((i1, i2) -> i2.getIssueDate().compareTo(i1.getIssueDate())) // Sort by most recent
-                .limit(10) // Display top 10 recent activities
+                .sorted((i1, i2) -> i2.getIssueDate().compareTo(i1.getIssueDate()))
+                .limit(10)
                 .forEach(item -> activityList.add(String.format("%s issued %d %s of %s to %s",
                         item.getIssueDate().format(formatter),
                         item.getQuantity(),
