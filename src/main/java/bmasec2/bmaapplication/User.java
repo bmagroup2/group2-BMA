@@ -37,6 +37,8 @@ public abstract class User implements Serializable {
     }
 
 
+    public abstract boolean login(String username, String password);
+
     public void logout() {
         System.out.println(this.name + " has logged out.");
 

@@ -56,6 +56,7 @@ public class Cadet extends User implements Serializable {
     }
 
     public String getBatch() { return batch; }
+
     public void setBatch(String batch) { this.batch = batch; }
     public String getRank() { return rank; }
     public void setRank(String rank) { this.rank = rank; }

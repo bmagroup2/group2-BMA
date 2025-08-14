@@ -7,8 +7,8 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
-import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 
@@ -17,138 +17,102 @@ import java.util.UUID;
 import java.util.stream.Collectors;
 
 public class restockRequestViewController {
+
     @FXML
-    private ComboBox<String> itemComboBox;
+    private ListView<InventoryItem> itemsWithLowStockListView;
     @FXML
-    private TextField requestedQuantityTextField;
+    private Label itemNameLabel;
+    @FXML
+    private TextField quantityToRequestTextField;
     @FXML
     private TextArea remarksTextArea;
-    @FXML
-    private Label currentStockLabel;
-    @FXML
-    private Label minStockLevelLabel;
 
-    private List<InventoryItem> inventoryItems;
+    private static final String INVENTORY_FILE = "inventory.ser";
+    private static final String RESTOCK_REQUESTS_FILE = "restock_requests.ser";
+
+    private ObservableList<InventoryItem> lowStockItems;
 
     @FXML
     public void initialize() {
-        loadInventoryItems();
-
-        itemComboBox.getSelectionModel().selectedItemProperty().addListener(
+        loadLowStockItems();
+        itemsWithLowStockListView.getSelectionModel().selectedItemProperty().addListener(
                 (observable, oldValue, newValue) -> {
-                    updateStockInfo();
-                }
-        );
+                    if (newValue != null) {
+                        itemNameLabel.setText("Item: " + newValue.getItemName());
+                    } else {
+                        itemNameLabel.setText("Item: [Selected Item Name]");
+                    }
+                });
     }
 
-    private void loadInventoryItems() {
-        inventoryItems = DataPersistenceManager.loadObjects("inventory_items.bin");
-        ObservableList<String> itemOptions = FXCollections.observableArrayList();
-
-        for (InventoryItem item : inventoryItems) {
-            if (item.isLowStock() || item.getQuantity() == 0) {
-                itemOptions.add(item.getItemId() + " - " + item.getName() + " (Current: " + item.getQuantity() + ")");
-            }
-        }
-
-        itemComboBox.setItems(itemOptions);
-    }
-
-    private void updateStockInfo() {
-        String selectedItem = itemComboBox.getValue();
-        if (selectedItem != null) {
-            String itemId = selectedItem.split(" - ")[0];
-
-            for (InventoryItem item : inventoryItems) {
-                if (item.getItemId().equals(itemId)) {
-                    currentStockLabel.setText("Current Stock: " + item.getQuantity() + " " + item.getUnit());
-                    minStockLevelLabel.setText("Min Stock Level: " + item.getMinStockLevel() + " " + item.getUnit());
-                    return;
-                }
-            }
-        }
-        currentStockLabel.setText("Current Stock: N/A");
-        minStockLevelLabel.setText("Min Stock Level: N/A");
+    private void loadLowStockItems() {
+        List<InventoryItem> allItems = DataPersistenceManager.loadObjects(INVENTORY_FILE);
+//        lowStockItems = allItems.stream()
+//                .filter(InventoryItem::isBelowMinStock)
+//                .collect(Collectors.toCollection(FXCollections::observableArrayList));
+//        itemsWithLowStockListView.setItems(lowStockItems);
     }
 
     @FXML
-    public void submitRequestButtonOnAction(ActionEvent actionEvent) {
-        if (!validateInputs()) {
+    void submitRestockRequestButtonOnAction(ActionEvent event) {
+        InventoryItem selectedItem = itemsWithLowStockListView.getSelectionModel().getSelectedItem();
+        String quantityStr = quantityToRequestTextField.getText();
+        String remarks = remarksTextArea.getText();
+
+        if (selectedItem == null) {
+            showAlert(Alert.AlertType.ERROR, "Selection Error", "Please select an item from the low stock list.");
             return;
         }
 
+        if (quantityStr.isEmpty() || remarks.isEmpty()) {
+            showAlert(Alert.AlertType.ERROR, "Form Error", "Please fill in all fields.");
+            return;
+        }
+
+        int requestedQuantity;
         try {
-            String selectedItem = itemComboBox.getValue();
-            String itemId = selectedItem.split(" - ")[0];
-            int requestedQuantity = Integer.parseInt(requestedQuantityTextField.getText().trim());
-            String remarks = remarksTextArea.getText().trim();
-
-
-            InventoryItem itemToRestock = null;
-            for (InventoryItem item : inventoryItems) {
-                if (item.getItemId().equals(itemId)) {
-                    itemToRestock = item;
-                    break;
-                }
-            }
-
-            if (itemToRestock == null) {
-                showAlert("Error", "Selected item not found.");
+            requestedQuantity = Integer.parseInt(quantityStr);
+            if (requestedQuantity <= 0) {
+                showAlert(Alert.AlertType.ERROR, "Invalid Input", "Quantity to request must be a positive number.");
                 return;
             }
-
-
-            itemToRestock.setQuantity(itemToRestock.getQuantity() + requestedQuantity);
-            DataPersistenceManager.saveObjects(inventoryItems, "inventory_items.bin");
-
-            showAlert("Success", "Restock request submitted and stock updated for " + itemToRestock.getName() +
-                    "\nNew Quantity: " + itemToRestock.getQuantity() + " " + itemToRestock.getUnit());
-            clearForm();
-            loadInventoryItems();
-
-        } catch (Exception e) {
-            showAlert("Error", "Failed to submit restock request: " + e.getMessage());
-        }
-    }
-
-    @FXML
-    public void clearFormButtonOnAction(ActionEvent actionEvent) {
-        clearForm();
-    }
-
-    private boolean validateInputs() {
-        if (itemComboBox.getValue() == null) {
-            showAlert("Validation Error", "Please select an item to restock.");
-            return false;
-        }
-
-        try {
-            int quantity = Integer.parseInt(requestedQuantityTextField.getText().trim());
-            if (quantity <= 0) {
-                showAlert("Validation Error", "Requested quantity must be greater than 0.");
-                return false;
-            }
         } catch (NumberFormatException e) {
-            showAlert("Validation Error", "Please enter a valid numeric quantity.");
-            return false;
+            showAlert(Alert.AlertType.ERROR, "Invalid Input", "Quantity to request must be a valid number.");
+            return;
         }
 
-        return true;
-    }
+        List<bmasec2.bmaapplication.fatema.RestockRequest> restockRequests = DataPersistenceManager.loadObjects(RESTOCK_REQUESTS_FILE);
 
-    private void clearForm() {
-        itemComboBox.setValue(null);
-        requestedQuantityTextField.clear();
+        // Check for existing pending request for the same item
+        boolean existingRequest = restockRequests.stream()
+                .anyMatch(req -> req.getItemId().equals(selectedItem.getItemId()) && req.getStatus().equals("Pending"));
+
+        if (existingRequest) {
+            showAlert(Alert.AlertType.WARNING, "Existing Request", "A pending restock request for this item already exists.");
+            return;
+        }
+
+        String requestId = UUID.randomUUID().toString();
+        bmasec2.bmaapplication.fatema.RestockRequest newRequest = new bmasec2.bmaapplication.fatema.RestockRequest(requestId, selectedItem.getItemId(), selectedItem.getItemName(), requestedQuantity, remarks);
+        restockRequests.add(newRequest);
+        DataPersistenceManager.saveObjects(restockRequests, RESTOCK_REQUESTS_FILE);
+
+        showAlert(Alert.AlertType.INFORMATION, "Success", "Restock request submitted successfully!");
+
+        // Clear form and refresh list
+        quantityToRequestTextField.clear();
         remarksTextArea.clear();
-        currentStockLabel.setText("Current Stock: N/A");
-        minStockLevelLabel.setText("Min Stock Level: N/A");
+        itemNameLabel.setText("Item: [Selected Item Name]");
+        loadLowStockItems(); // Refresh the list to reflect any changes
     }
 
-    private void showAlert(String title, String message) {
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+    private void showAlert(Alert.AlertType alertType, String title, String message) {
+        Alert alert = new Alert(alertType);
         alert.setTitle(title);
         alert.setHeaderText(null);
         alert.setContentText(message);
         alert.showAndWait();
     }
 }
+
+

@@ -8,124 +8,60 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.stream.Collectors;
 
 public class logisticOfficerDashboardViewController {
-    @FXML
-    private Label pendingRequestLabel;
+
     @FXML
     private Label itemsLowStockLabel;
     @FXML
+    private Label pendingRequestLabel;
+    @FXML
     private ListView<String> recentInventoryActivityListView;
-    @FXML
-    private Label totalItemsLabel;
-    @FXML
-    private Label totalCategoriesLabel;
-    @FXML
-    private Label criticalStockLabel;
 
-    private ObservableList<String> recentActivitiesData = FXCollections.observableArrayList();
+    private static final String INVENTORY_FILE = "inventory.ser";
+    private static final String RESTOCK_REQUESTS_FILE = "restock_requests.ser";
+    private static final String ISSUED_ITEMS_FILE = "issued_items.ser";
 
     @FXML
     public void initialize() {
-        setupListView();
-        loadDashboardData();
+        updateDashboard();
     }
 
-    private void setupListView() {
-        recentInventoryActivityListView.setItems(recentActivitiesData);
-    }
+    private void updateDashboard() {
+        // Update Low Stock Items
+        List<InventoryItem> inventoryItems = DataPersistenceManager.loadObjects(INVENTORY_FILE);
+//        long lowStockCount = inventoryItems.stream()
+//                .filter(InventoryItem::isBelowMinStock)
+//                .count();
+//        itemsLowStockLabel.setText(lowStockCount + " Items");
 
-    private void loadDashboardData() {
-        loadInventoryStatistics();
-        loadRecentActivities();
-    }
-
-    private void loadInventoryStatistics() {
-        List<InventoryItem> inventory = DataPersistenceManager.loadObjects("inventory_items.bin");
-
-
-        totalItemsLabel.setText(String.valueOf(inventory.size()));
-
-
-        long categoriesCount = inventory.stream()
-                .map(InventoryItem::getCategory)
-                .distinct()
+        // Update Pending Restock Requests
+        List<bmasec2.bmaapplication.fatema.RestockRequest> restockRequests = DataPersistenceManager.loadObjects(RESTOCK_REQUESTS_FILE);
+        long pendingRequestsCount = restockRequests.stream()
+                .filter(request -> request.getStatus().equals("Pending"))
                 .count();
-        totalCategoriesLabel.setText(String.valueOf(categoriesCount));
+        pendingRequestLabel.setText(pendingRequestsCount + " Requests");
 
+        // Update Recent Inventory Activity (assuming Issued Items are recent activity)
+        List<bmasec2.bmaapplication.fatema.IssuedItem> issuedItems = DataPersistenceManager.loadObjects(ISSUED_ITEMS_FILE);
+        ObservableList<String> activityList = FXCollections.observableArrayList();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
 
-        long lowStockCount = inventory.stream()
-                .filter(InventoryItem::isLowStock)
-                .count();
-        itemsLowStockLabel.setText(String.valueOf(lowStockCount));
-
-
-        if (lowStockCount > 0) {
-            itemsLowStockLabel.setStyle("-fx-text-fill: red; -fx-font-weight: bold;");
-        } else {
-            itemsLowStockLabel.setStyle("-fx-text-fill: green; -fx-font-weight: bold;");
-        }
-
-
-        long criticalStockCount = inventory.stream()
-                .filter(item -> item.getQuantity() == 0)
-                .count();
-        criticalStockLabel.setText(String.valueOf(criticalStockCount));
-
-        if (criticalStockCount > 0) {
-            criticalStockLabel.setStyle("-fx-text-fill: red; -fx-font-weight: bold;");
-        } else {
-            criticalStockLabel.setStyle("-fx-text-fill: green; -fx-font-weight: bold;");
-        }
-
-
-        pendingRequestLabel.setText("3");
-    }
-
-    private void loadRecentActivities() {
-        recentActivitiesData.clear();
-
-
-        recentActivitiesData.addAll(
-                "Added new item: Combat Boots (50 pairs)",
-                "Issued 20 Uniforms to Batch 2024-A",
-                "Restocked Medical Supplies (100 units)",
-                "Updated minimum stock level for Weapons",
-                "Generated monthly logistics report",
-                "Processed return: Damaged Equipment (5 items)",
-                "Notified Commandant about critical shortage",
-                "Approved restock request for Training Materials"
-        );
-    }
-
-    @FXML
-    public void refreshDashboardButtonOnAction() {
-        loadDashboardData();
-        showNotification("Dashboard refreshed successfully!");
-    }
-
-    @FXML
-    public void viewLowStockButtonOnAction() {
-
-        showNotification("This would open the Low Stock Items view.");
-    }
-
-    @FXML
-    public void quickAddItemButtonOnAction() {
-
-        showNotification("This would open the Quick Add Item dialog.");
-    }
-
-    @FXML
-    public void generateReportButtonOnAction() {
-
-        showNotification("This would open the Report Generation view.");
-    }
-
-    private void showNotification(String message) {
-
-        System.out.println("Notification: " + message);
+        issuedItems.stream()
+                .sorted((i1, i2) -> i2.getIssueDate().compareTo(i1.getIssueDate())) // Sort by most recent
+                .limit(10) // Display top 10 recent activities
+                .forEach(item -> activityList.add(String.format("%s issued %d %s of %s to %s",
+                        item.getIssueDate().format(formatter),
+                        item.getQuantity(),
+                        item.getUnit(),
+                        item.getItemName(),
+                        item.getIssuedToUserName()))
+                );
+        recentInventoryActivityListView.setItems(activityList);
     }
 }
+
+

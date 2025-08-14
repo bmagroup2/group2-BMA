@@ -42,6 +42,8 @@ public class Attendance implements Serializable {
         return cadetId;
     }
 
+
+
     public void setCadetId(String cadetId) {
         this.cadetId = cadetId;
     }

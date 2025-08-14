@@ -1,230 +1,147 @@
 package bmasec2.bmaapplication.fatema;
 
-import bmasec2.bmaapplication.model.Evaluation;
+import bmasec2.bmaapplication.afifa.Cadet;
 import bmasec2.bmaapplication.system.DataPersistenceManager;
 import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
-import javafx.scene.control.*;
+import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
 
-import java.util.Date;
 import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 public class submitEvaluationViewController {
-    @javafx.fxml.FXML
-    private ComboBox<String> cadetComboBox;
-    @javafx.fxml.FXML
-    private ComboBox<String> sessionComboBox;
-    @javafx.fxml.FXML
+
+    @FXML
+    private ComboBox<bmasec2.bmaapplication.fatema.TrainingSession> selectTrainingSessionComboBox;
+    @FXML
+    private ComboBox<Cadet> selectCadetComboBox;
+    @FXML
     private TextField scoreTextField;
-    @javafx.fxml.FXML
-    private TextField maxScoreTextField;
-    @javafx.fxml.FXML
-    private TextArea commentsTextArea;
-    @javafx.fxml.FXML
-    private ComboBox<String> evaluationTypeComboBox;
-    @javafx.fxml.FXML
-    private Label scoreValidationLabel;
+    @FXML
+    private TextArea evaluationRemarksTextArea;
 
-    @javafx.fxml.FXML
-    public void initialize() {
-        evaluationTypeComboBox.setItems(FXCollections.observableArrayList(
-                "Physical Training", "Academic Performance", "Discipline",
-                "Leadership", "Teamwork", "Technical Skills", "Overall Performance"
-        ));
+    private static final String TRAINING_SESSIONS_FILE = "training_sessions.ser";
+    private static final String CADETS_FILE = "cadets.ser";
+    private static final String EVALUATIONS_FILE = "evaluations.ser";
 
+    private ObservableList<bmasec2.bmaapplication.fatema.TrainingSession> trainingSessions;
+    private ObservableList<Cadet> cadets;
 
-        cadetComboBox.setItems(FXCollections.observableArrayList(
-                "CDT-001 - John Smith", "CDT-002 - Jane Doe", "CDT-003 - Mike Johnson",
-                "CDT-004 - Sarah Wilson", "CDT-005 - David Brown"
-        ));
-
-
-        sessionComboBox.setItems(FXCollections.observableArrayList(
-                "TRN-001 - Physical Training", "TRN-002 - Weapons Training",
-                "TRN-003 - Leadership Workshop", "TRN-004 - Tactical Operations"
-        ));
-
-
-        maxScoreTextField.setText("100");
-
-
-        scoreTextField.textProperty().addListener((observable, oldValue, newValue) -> {
-            validateScore();
-        });
-
-        maxScoreTextField.textProperty().addListener((observable, oldValue, newValue) -> {
-            validateScore();
-        });
-    }
-
-    @javafx.fxml.FXML
-    public void submitEvaluationButtonOnAction(ActionEvent actionEvent) {
-        if (!validateInputs()) {
-            return;
-        }
-
-        try {
-
-            String cadetSelection = cadetComboBox.getValue();
-            String cadetId = cadetSelection.split(" - ")[0];
-
-            String sessionSelection = sessionComboBox.getValue();
-            String sessionId = sessionSelection.split(" - ")[0];
-
-            String evaluationType = evaluationTypeComboBox.getValue();
-            double score = Double.parseDouble(scoreTextField.getText().trim());
-            double maxScore = Double.parseDouble(maxScoreTextField.getText().trim());
-            String comments = commentsTextArea.getText().trim();
-
-
-            String evaluatorId = "INST-001";
-
-
-            String evaluationId = "EVAL-" + UUID.randomUUID().toString().substring(0, 8);
-            Evaluation evaluation = new Evaluation(
-                    evaluationId, cadetId, evaluatorId, evaluationType,
-                    score, maxScore, comments
-            );
-
-
-            List<Evaluation> evaluations = DataPersistenceManager.loadObjects("evaluations.bin");
-            evaluations.add(evaluation);
-            DataPersistenceManager.saveObjects(evaluations, "evaluations.bin");
-
-            showAlert("Success", "Evaluation submitted successfully!\nEvaluation ID: " + evaluationId);
-            clearForm();
-
-        } catch (Exception e) {
-            showAlert("Error", "Failed to submit evaluation: " + e.getMessage());
-        }
-    }
-
-    @javafx.fxml.FXML
-    public void clearFormButtonOnAction(ActionEvent actionEvent) {
-        clearForm();
-    }
-
-    @javafx.fxml.FXML
-    public void calculatePercentageButtonOnAction(ActionEvent actionEvent) {
-        try {
-            double score = Double.parseDouble(scoreTextField.getText().trim());
-            double maxScore = Double.parseDouble(maxScoreTextField.getText().trim());
-
-            if (maxScore > 0) {
-                double percentage = (score / maxScore) * 100;
-                String grade = getGrade(percentage);
-
-                showAlert("Score Calculation",
-                        String.format("Score: %.2f / %.2f\nPercentage: %.2f%%\nGrade: %s",
-                                score, maxScore, percentage, grade));
-            }
-        } catch (NumberFormatException e) {
-            showAlert("Error", "Please enter valid numeric values for score and max score.");
-        }
-    }
-
-    private String getGrade(double percentage) {
-        if (percentage >= 90) return "A+";
-        else if (percentage >= 85) return "A";
-        else if (percentage >= 80) return "A-";
-        else if (percentage >= 75) return "B+";
-        else if (percentage >= 70) return "B";
-        else if (percentage >= 65) return "B-";
-        else if (percentage >= 60) return "C+";
-        else if (percentage >= 55) return "C";
-        else if (percentage >= 50) return "C-";
-        else return "F";
-    }
-
-    private void validateScore() {
-        try {
-            if (!scoreTextField.getText().trim().isEmpty() && !maxScoreTextField.getText().trim().isEmpty()) {
-                double score = Double.parseDouble(scoreTextField.getText().trim());
-                double maxScore = Double.parseDouble(maxScoreTextField.getText().trim());
-
-                if (score < 0) {
-                    scoreValidationLabel.setText("Score cannot be negative");
-                    scoreValidationLabel.setStyle("-fx-text-fill: red;");
-                } else if (score > maxScore) {
-                    scoreValidationLabel.setText("Score cannot exceed max score");
-                    scoreValidationLabel.setStyle("-fx-text-fill: red;");
-                } else {
-                    double percentage = (score / maxScore) * 100;
-                    scoreValidationLabel.setText(String.format("%.1f%%", percentage));
-                    scoreValidationLabel.setStyle("-fx-text-fill: green;");
-                }
-            } else {
-                scoreValidationLabel.setText("");
-            }
-        } catch (NumberFormatException e) {
-            scoreValidationLabel.setText("Invalid number format");
-            scoreValidationLabel.setStyle("-fx-text-fill: red;");
-        }
-    }
-
-    private boolean validateInputs() {
-        if (cadetComboBox.getValue() == null) {
-            showAlert("Validation Error", "Please select a cadet.");
-            return false;
-        }
-
-        if (sessionComboBox.getValue() == null) {
-            showAlert("Validation Error", "Please select a training session.");
-            return false;
-        }
-
-        if (evaluationTypeComboBox.getValue() == null) {
-            showAlert("Validation Error", "Please select an evaluation type.");
-            return false;
-        }
-
-        try {
-            double score = Double.parseDouble(scoreTextField.getText().trim());
-            double maxScore = Double.parseDouble(maxScoreTextField.getText().trim());
-
-            if (score < 0) {
-                showAlert("Validation Error", "Score cannot be negative.");
-                return false;
-            }
-
-            if (maxScore <= 0) {
-                showAlert("Validation Error", "Max score must be greater than 0.");
-                return false;
-            }
-
-            if (score > maxScore) {
-                showAlert("Validation Error", "Score cannot exceed max score.");
-                return false;
-            }
-        } catch (NumberFormatException e) {
-            showAlert("Validation Error", "Please enter valid numeric values for score and max score.");
-            return false;
-        }
-
-        if (commentsTextArea.getText().trim().isEmpty()) {
-            showAlert("Validation Error", "Please provide evaluation comments.");
-            return false;
-        }
-
-        return true;
-    }
-
-    private void clearForm() {
-        cadetComboBox.setValue(null);
-        sessionComboBox.setValue(null);
-        evaluationTypeComboBox.setValue(null);
-        scoreTextField.clear();
-        maxScoreTextField.setText("100");
-        commentsTextArea.clear();
-        scoreValidationLabel.setText("");
-    }
-
-    private void showAlert(String title, String message) {
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle(title);
-        alert.setHeaderText(null);
-        alert.setContentText(message);
-        alert.showAndWait();
-    }
+//    @FXML
+//    public void initialize() {
+//        loadData();
+//        populateComboBoxes();
+//    }
+//
+//    private void loadData() {
+//        trainingSessions = FXCollections.observableArrayList(DataPersistenceManager.loadObjects(TRAINING_SESSIONS_FILE));
+//        cadets = FXCollections.observableArrayList(DataPersistenceManager.loadObjects(CADETS_FILE));
+//    }
+//
+//    private void populateComboBoxes() {
+//        selectTrainingSessionComboBox.setItems(trainingSessions);
+//        selectTrainingSessionComboBox.setConverter(new javafx.util.StringConverter<bmasec2.bmaapplication.fatema.TrainingSession>() {
+//            @Override
+//            public String toString(bmasec2.bmaapplication.fatema.TrainingSession session) {
+//                return session != null ? session.getTopic() + " (" + session.getDate() + ")" : "";
+//            }
+//
+//            @Override
+//            public bmasec2.bmaapplication.fatema.TrainingSession fromString(String string) {
+//                return trainingSessions.stream()
+//                        .filter(session -> (session.getTopic() + " (" + session.getDate() + ")").equals(string))
+//                        .findFirst()
+//                        .orElse(null);
+//            }
+//        });
+//
+//        // Populate cadets based on selected training session (or all if no session selected)
+//        selectTrainingSessionComboBox.valueProperty().addListener((obs, oldVal, newVal) -> {
+//            if (newVal != null) {
+//                // Filter cadets by batch if the session has a specific batch
+//                ObservableList<Cadet> filteredCadets = cadets.stream()
+//                        .filter(cadet -> newVal.getCadetBatch().equals("All Cadets") || cadet.getBatch().equals(newVal.getCadetBatch()))
+//                        .collect(Collectors.toCollection(FXCollections::observableArrayList));
+//                selectCadetComboBox.setItems(filteredCadets);
+//            } else {
+//                selectCadetComboBox.setItems(cadets); // Show all cadets if no session selected
+//            }
+//        });
+//
+//        selectCadetComboBox.setConverter(new javafx.util.StringConverter<Cadet>() {
+//            @Override
+//            public String toString(Cadet cadet) {
+//                return cadet != null ? cadet.getName() + " (" + cadet.getCadetId() + ")" : "";
+//            }
+//
+//            @Override
+//            public Cadet fromString(String string) {
+//                return cadets.stream()
+//                        .filter(cadet -> (cadet.getName() + " (" + cadet.getCadetId() + ")").equals(string))
+//                        .findFirst()
+//                        .orElse(null);
+//            }
+//        });
+//    }
+//
+//    @FXML
+//    void submitEvaluationButtonOnAction(ActionEvent event) {
+//        TrainingSession selectedSession = selectTrainingSessionComboBox.getSelectionModel().getSelectedItem();
+//        Cadet selectedCadet = selectCadetComboBox.getSelectionModel().getSelectedItem();
+//        String scoreStr = scoreTextField.getText();
+//        String remarks = evaluationRemarksTextArea.getText();
+//
+//        if (selectedSession == null || selectedCadet == null || scoreStr.isEmpty() || remarks.isEmpty()) {
+//            showAlert(Alert.AlertType.ERROR, "Form Error", "Please fill in all fields.");
+//            return;
+//        }
+//
+//        double score;
+//        try {
+//            score = Double.parseDouble(scoreStr);
+//            if (score < 0 || score > 100) {
+//                showAlert(Alert.AlertType.ERROR, "Invalid Input", "Score must be between 0 and 100.");
+//                return;
+//            }
+//        } catch (NumberFormatException e) {
+//            showAlert(Alert.AlertType.ERROR, "Invalid Input", "Score must be a valid number.");
+//            return;
+//        }
+//
+//        // Assuming the logged-in user is the evaluator
+//        String evaluatorId = "instructor123"; // Placeholder
+//        String evaluatorName = "Training Instructor"; // Placeholder
+//
+//        String evaluationId = UUID.randomUUID().toString();
+//        Evaluation newEvaluation = new Evaluation(
+//                evaluationId, selectedCadet.getCadetId(), selectedCadet.getName(),
+//                evaluatorId, evaluatorName, selectedSession.getTopic(), score, 100.0, remarks);
+//
+//        List<Evaluation> evaluations = DataPersistenceManager.loadObjects(EVALUATIONS_FILE);
+//        evaluations.add(newEvaluation);
+//        DataPersistenceManager.saveObjects(evaluations, EVALUATIONS_FILE);
+//
+//        showAlert(Alert.AlertType.INFORMATION, "Success", "Evaluation submitted successfully!");
+//
+//        // Clear form fields
+//        selectTrainingSessionComboBox.getSelectionModel().clearSelection();
+//        selectCadetComboBox.getSelectionModel().clearSelection();
+//        scoreTextField.clear();
+//        evaluationRemarksTextArea.clear();
+//    }
+//
+//    private void showAlert(Alert.AlertType alertType, String title, String message) {
+//        Alert alert = new Alert(alertType);
+//        alert.setTitle(title);
+//        alert.setHeaderText(null);
+//        alert.setContentText(message);
+//        alert.showAndWait();
+//    }
 }
+

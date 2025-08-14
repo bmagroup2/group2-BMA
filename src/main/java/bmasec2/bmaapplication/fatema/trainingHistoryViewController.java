@@ -1,6 +1,6 @@
 package bmasec2.bmaapplication.fatema;
 
-import bmasec2.bmaapplication.model.Training;
+import bmasec2.bmaapplication.afifa.Cadet;
 import bmasec2.bmaapplication.model.Evaluation;
 import bmasec2.bmaapplication.system.DataPersistenceManager;
 import javafx.collections.FXCollections;
@@ -11,160 +11,96 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
-import javafx.scene.control.TextArea;
 import javafx.scene.control.cell.PropertyValueFactory;
 
-import java.util.Date;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.stream.Collectors;
 
 public class trainingHistoryViewController {
-    @FXML
-    private ComboBox<String> cadetComboBox;
-    @FXML
-    private TableView<TrainingHistoryEntry> trainingHistoryTableView;
-    @FXML
-    private TableColumn<TrainingHistoryEntry, String> sessionIdColumn;
-    @FXML
-    private TableColumn<TrainingHistoryEntry, String> topicColumn;
-    @FXML
-    private TableColumn<TrainingHistoryEntry, Date> dateColumn;
-    @FXML
-    private TableColumn<TrainingHistoryEntry, String> locationColumn;
-    @FXML
-    private TableColumn<TrainingHistoryEntry, Double> scoreColumn;
-    @FXML
-    private TableColumn<TrainingHistoryEntry, String> evaluationStatusColumn;
-    @FXML
-    private TextArea detailsTextArea;
 
-    private ObservableList<TrainingHistoryEntry> trainingHistoryData = FXCollections.observableArrayList();
-    private List<Training> allTrainingSessions;
-    private List<Evaluation> allEvaluations;
+    @FXML
+    private ComboBox<Cadet> seelctCadetComboBox;
+    @FXML
+    private TableView<Evaluation> cadetTrainingHistoryTableView;
+    @FXML
+    private TableColumn<Evaluation, LocalDate> dateTableColumn;
+    @FXML
+    private TableColumn<Evaluation, String> trainingSessionTableColumn;
+    @FXML
+    private TableColumn<Evaluation, String> instructorTableColumn;
+    @FXML
+    private TableColumn<Evaluation, Double> scoreTableColumn;
+
+    private static final String CADETS_FILE = "cadets.ser";
+    private static final String EVALUATIONS_FILE = "evaluations.ser";
+
+    private ObservableList<Cadet> allCadets;
+    private ObservableList<Evaluation> allEvaluations;
 
     @FXML
     public void initialize() {
+        // Initialize table columns
+        dateTableColumn.setCellValueFactory(new PropertyValueFactory<>("evaluationDate"));
+        trainingSessionTableColumn.setCellValueFactory(new PropertyValueFactory<>("evaluationType")); // Using evaluationType as training session/topic
+        instructorTableColumn.setCellValueFactory(new PropertyValueFactory<>("evaluatorName"));
+        scoreTableColumn.setCellValueFactory(new PropertyValueFactory<>("score"));
 
-        sessionIdColumn.setCellValueFactory(new PropertyValueFactory<>("sessionId"));
-        topicColumn.setCellValueFactory(new PropertyValueFactory<>("topic"));
-        dateColumn.setCellValueFactory(new PropertyValueFactory<>("date"));
-        locationColumn.setCellValueFactory(new PropertyValueFactory<>("location"));
-        scoreColumn.setCellValueFactory(new PropertyValueFactory<>("score"));
-        evaluationStatusColumn.setCellValueFactory(new PropertyValueFactory<>("evaluationStatus"));
+        loadData();
+        populateCadetComboBox();
+    }
 
-        trainingHistoryTableView.setItems(trainingHistoryData);
+    private void loadData() {
+        allCadets = FXCollections.observableArrayList(DataPersistenceManager.loadObjects(CADETS_FILE));
+        allEvaluations = FXCollections.observableArrayList(DataPersistenceManager.loadObjects(EVALUATIONS_FILE));
+    }
 
+    private void populateCadetComboBox() {
+        seelctCadetComboBox.setItems(allCadets);
+        seelctCadetComboBox.setConverter(new javafx.util.StringConverter<Cadet>() {
+            @Override
+            public String toString(Cadet cadet) {
+                return cadet != null ? cadet.getName() + " (" + cadet.getCadetId() + ")" : "";
+            }
 
-        trainingHistoryTableView.getSelectionModel().selectedItemProperty().addListener(
-                (observable, oldValue, newValue) -> {
-                    if (newValue != null) {
-                        displayDetails(newValue);
-                    }
-                }
-        );
-
-
-        cadetComboBox.setItems(FXCollections.observableArrayList(
-                "CDT-001 - John Smith", "CDT-002 - Jane Doe", "CDT-003 - Mike Johnson"
-        ));
-
-
-        allTrainingSessions = DataPersistenceManager.loadObjects("training_sessions.bin");
-        allEvaluations = DataPersistenceManager.loadObjects("evaluations.bin");
+            @Override
+            public Cadet fromString(String string) {
+                return allCadets.stream()
+                        .filter(cadet -> (cadet.getName() + " (" + cadet.getCadetId() + ")").equals(string))
+                        .findFirst()
+                        .orElse(null);
+            }
+        });
     }
 
     @FXML
-    public void loadHistoryButtonOnAction(ActionEvent actionEvent) {
-        String selectedCadet = cadetComboBox.getValue();
+    void viewHistoryButtonOnAction(ActionEvent event) {
+        Cadet selectedCadet = seelctCadetComboBox.getSelectionModel().getSelectedItem();
+
         if (selectedCadet == null) {
-            showAlert("Error", "Please select a cadet first.");
+            showAlert(Alert.AlertType.ERROR, "Selection Error", "Please select a cadet to view their training history.");
             return;
         }
 
-        String cadetId = selectedCadet.split(" - ")[0];
-        trainingHistoryData.clear();
-        detailsTextArea.clear();
+        ObservableList<Evaluation> cadetEvaluations = allEvaluations.stream()
+                .filter(evaluation -> evaluation.getCadetId().equals(selectedCadet.getCadetId()))
+                .collect(Collectors.toCollection(FXCollections::observableArrayList));
 
+        cadetTrainingHistoryTableView.setItems(cadetEvaluations);
 
-        List<Training> cadetTrainings = allTrainingSessions.stream()
-                .filter(training -> training.getRegisteredCadets().contains(cadetId))
-                .collect(Collectors.toList());
-
-        if (cadetTrainings.isEmpty()) {
-            showAlert("Information", "No training history found for this cadet.");
-            return;
-        }
-
-        for (Training training : cadetTrainings) {
-
-            Evaluation evaluation = allEvaluations.stream()
-                    .filter(eval -> eval.getCadetId().equals(cadetId) && eval.getSessionId().equals(training.getSessionId()))
-                    .findFirst()
-                    .orElse(null);
-
-            double score = (evaluation != null) ? evaluation.getScore() : -1.0;
-            String evalStatus = (evaluation != null) ? evaluation.getStatus() : "N/A";
-
-            trainingHistoryData.add(new TrainingHistoryEntry(
-                    training.getSessionId(),
-                    training.getTopic(),
-                    training.getDateTime(),
-                    training.getLocation(),
-                    score,
-                    evalStatus
-            ));
-        }
-
-        if (trainingHistoryData.isEmpty()) {
-            showAlert("Information", "No training history found for this cadet.");
+        if (cadetEvaluations.isEmpty()) {
+            showAlert(Alert.AlertType.INFORMATION, "No History", "No training history found for the selected cadet.");
         }
     }
 
-    private void displayDetails(TrainingHistoryEntry entry) {
-        StringBuilder details = new StringBuilder();
-        details.append("Session ID: ").append(entry.getSessionId()).append("\n");
-        details.append("Topic: ").append(entry.getTopic()).append("\n");
-        details.append("Date: ").append(entry.getDate()).append("\n");
-        details.append("Location: ").append(entry.getLocation()).append("\n");
-        details.append("Score: ").append(entry.getScore() == -1.0 ? "N/A" : String.format("%.2f", entry.getScore())).append("\n");
-        details.append("Evaluation Status: ").append(entry.getEvaluationStatus()).append("\n");
-
-
-        detailsTextArea.setText(details.toString());
-    }
-
-    private void showAlert(String title, String message) {
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+    private void showAlert(Alert.AlertType alertType, String title, String message) {
+        Alert alert = new Alert(alertType);
         alert.setTitle(title);
         alert.setHeaderText(null);
         alert.setContentText(message);
         alert.showAndWait();
     }
-
-
-    public static class TrainingHistoryEntry {
-        private String sessionId;
-        private String topic;
-        private Date date;
-        private String location;
-        private double score;
-        private String evaluationStatus;
-
-        public TrainingHistoryEntry(String sessionId, String topic, Date date, String location, double score, String evaluationStatus) {
-            this.sessionId = sessionId;
-            this.topic = topic;
-            this.date = date;
-            this.location = location;
-            this.score = score;
-            this.evaluationStatus = evaluationStatus;
-        }
-
-
-        public String getSessionId() { return sessionId; }
-        public String getTopic() { return topic; }
-        public Date getDate() { return date; }
-        public String getLocation() { return location; }
-        public double getScore() { return score; }
-        public String getEvaluationStatus() { return evaluationStatus; }
-    }
 }
+
+

@@ -179,4 +179,8 @@ public class InventoryItem implements Serializable {
                 ", isLowStock=" + isLowStock() +
                 '}';
     }
+
+    public String getItemName() {
+        return "";
+    }
 }

@@ -6,119 +6,115 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.cell.PropertyValueFactory;
 
-import java.util.Date;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.stream.Collectors;
 
 public class markAbsenceReasonViewController {
+
+    @FXML
+    private TableView<Attendance> rercentUnexplainedAbsencesTableView;
+    @FXML
+    private TableColumn<Attendance, LocalDate> dateTableColumn;
+    @FXML
+    private TableColumn<Attendance, String> cadetNameTableColumn;
+    @FXML
+    private TableColumn<Attendance, String> sessionTableColumn;
     @FXML
     private Label absenceDetailsLabel;
     @FXML
     private TextArea reasonForAbsenceTextArea;
-    @FXML
-    private TableView<Attendance> recentUnexplainedAbsencesTableView;
-    @FXML
-    private TableColumn<Attendance, String> sessionTableColumn;
-    @FXML
-    private TableColumn<Attendance, Date> dateTableColumn;
-    @FXML
-    private TableColumn<Attendance, String> cadetNameTableColumn;
-    @FXML
-    private TableColumn<Attendance, String> cadetIdTableColumn;
 
-    private ObservableList<Attendance> unexplainedAbsences = FXCollections.observableArrayList();
-    private List<Attendance> allAttendanceRecords;
+    private static final String ATTENDANCE_FILE = "attendance.ser";
+    private ObservableList<Attendance> unexplainedAbsences;
 
     @FXML
     public void initialize() {
         // Initialize table columns
-        cadetIdTableColumn.setCellValueFactory(new PropertyValueFactory<>("cadetId"));
-        cadetNameTableColumn.setCellValueFactory(new PropertyValueFactory<>("cadetId")); // Placeholder, would need to fetch cadet name
-        sessionTableColumn.setCellValueFactory(new PropertyValueFactory<>("sessionId"));
         dateTableColumn.setCellValueFactory(new PropertyValueFactory<>("date"));
-
-        recentUnexplainedAbsencesTableView.setItems(unexplainedAbsences);
-
-        // Add table selection listener
-        recentUnexplainedAbsencesTableView.getSelectionModel().selectedItemProperty().addListener(
-                (observable, oldValue, newValue) -> {
-                    if (newValue != null) {
-                        displayAbsenceDetails(newValue);
-                    }
-                }
-        );
+        cadetNameTableColumn.setCellValueFactory(new PropertyValueFactory<>("cadetName"));
+        sessionTableColumn.setCellValueFactory(new PropertyValueFactory<>("sessionName"));
 
         loadUnexplainedAbsences();
+        rercentUnexplainedAbsencesTableView.setItems(unexplainedAbsences);
+
+        // Listen for selection changes in the table view
+//        rercentUnexplainedAbsencesTableView.getSelectionModel().selectedItemProperty().addListener(
+//                (observable, oldValue, newValue) -> {
+//                    if (newValue != null) {
+//                        absenceDetailsLabel.setText(String.format("Absence: %s on %s for %s",
+////                                newValue.getName(),
+////                                newValue.getDate().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")),
+////                                newValue.getSessionName()));
+////                        reasonForAbsenceTextArea.setText(newValue.getReason() != null ? newValue.getReason() : "");
+//                    } else {
+//                        absenceDetailsLabel.setText("Absence: [Cadet Name] on [Date]");
+//                        reasonForAbsenceTextArea.clear();
+//                    }
+//                });
     }
 
     private void loadUnexplainedAbsences() {
-        allAttendanceRecords = DataPersistenceManager.loadObjects("attendance.bin");
-        unexplainedAbsences.clear();
-
-
-        unexplainedAbsences.addAll(allAttendanceRecords.stream()
+        List<Attendance> allAttendance = DataPersistenceManager.loadObjects(ATTENDANCE_FILE);
+        unexplainedAbsences = allAttendance.stream()
                 .filter(a -> "Absent".equalsIgnoreCase(a.getStatus()) && (a.getReason() == null || a.getReason().isEmpty()))
-                .collect(Collectors.toList()));
-
-        if (unexplainedAbsences.isEmpty()) {
-            showAlert("Information", "No unexplained absences found.");
-        }
-    }
-
-    private void displayAbsenceDetails(Attendance attendance) {
-        absenceDetailsLabel.setText(
-                "Cadet ID: " + attendance.getCadetId() + "\n" +
-                        "Session ID: " + attendance.getSessionId() + "\n" +
-                        "Date: " + attendance.getDate() + "\n" +
-                        "Current Status: " + attendance.getStatus()
-        );
-        reasonForAbsenceTextArea.setText(attendance.getReason());
+                .collect(Collectors.toCollection(FXCollections::observableArrayList));
     }
 
     @FXML
-    public void saveReasonButtonOnAction(ActionEvent actionEvent) {
-        Attendance selectedAbsence = recentUnexplainedAbsencesTableView.getSelectionModel().getSelectedItem();
+    void saveReasonButtonOnAction(ActionEvent event) {
+        Attendance selectedAbsence = rercentUnexplainedAbsencesTableView.getSelectionModel().getSelectedItem();
+        String reason = reasonForAbsenceTextArea.getText();
+
         if (selectedAbsence == null) {
-            showAlert("Error", "Please select an absence record first.");
+            showAlert(Alert.AlertType.ERROR, "Selection Error", "Please select an absence from the list.");
             return;
         }
 
-        String newReason = reasonForAbsenceTextArea.getText().trim();
-        if (newReason.isEmpty()) {
-            showAlert("Validation Error", "Please enter a reason for absence.");
+        if (reason.isEmpty()) {
+            showAlert(Alert.AlertType.ERROR, "Input Error", "Please provide a reason for the absence.");
             return;
         }
 
+        // Update the selected attendance record
+        selectedAbsence.setReason(reason);
+        selectedAbsence.setStatus("Excused"); // Or another appropriate status like "Absent (Reason Provided)"
 
-        selectedAbsence.setReason(newReason);
+        // Save the updated list back to persistence
+        List<Attendance> allAttendance = DataPersistenceManager.loadObjects(ATTENDANCE_FILE);
+        // Find and replace the updated attendance object
+        for (int i = 0; i < allAttendance.size(); i++) {
+            if (allAttendance.get(i).getAttendanceId().equals(selectedAbsence.getAttendanceId())) {
+                allAttendance.set(i, selectedAbsence);
+                break;
+            }
+        }
+        DataPersistenceManager.saveObjects(allAttendance, ATTENDANCE_FILE);
 
+        showAlert(Alert.AlertType.INFORMATION, "Success", "Absence reason saved successfully!");
 
-        DataPersistenceManager.saveObjects(allAttendanceRecords, "attendance.bin");
-
-        showAlert("Success", "Absence reason saved successfully!");
-
-
+        // Refresh the list of unexplained absences
         loadUnexplainedAbsences();
+        rercentUnexplainedAbsencesTableView.setItems(unexplainedAbsences);
         reasonForAbsenceTextArea.clear();
-        absenceDetailsLabel.setText("");
+        absenceDetailsLabel.setText("Absence: [Cadet Name] on [Date]");
     }
 
-    @FXML
-    public void clearReasonButtonOnAction(ActionEvent actionEvent) {
-        reasonForAbsenceTextArea.clear();
-    }
-
-    private void showAlert(String title, String message) {
-        javafx.scene.control.Alert alert = new javafx.scene.control.Alert(javafx.scene.control.Alert.AlertType.INFORMATION);
+    private void showAlert(Alert.AlertType alertType, String title, String message) {
+        Alert alert = new Alert(alertType);
         alert.setTitle(title);
         alert.setHeaderText(null);
         alert.setContentText(message);
         alert.showAndWait();
     }
 }
+
+
